@@ -74,13 +74,14 @@
         <EditText
             android:id="@+id/mobileNoEt"
             android:layout_width="0dp"
+            android:maxLength="12"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="15dp"
             android:layout_marginTop="2dp"
             android:background="@drawable/edittext_round_corner_blue_bg"
 
             android:hint="Mobile No"
-            android:inputType="textPersonName"
+            android:inputType="number"
             android:padding="8dp"
             android:paddingStart="18dp"
             android:textColor="@color/white"

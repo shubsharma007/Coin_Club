@@ -16,6 +16,13 @@ public class ProfileActivity extends AppCompatActivity {
         binding=ActivityProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.appCompatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         binding.vpTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

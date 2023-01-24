@@ -12,6 +12,14 @@
         android:theme="@style/Theme.CoinClubApp"
         tools:targetApi="31">
         <activity
+            android:name=".KycDetailsActivity"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
@@ -33,7 +41,6 @@
         <activity
             android:name=".LoginActivity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -48,7 +55,6 @@
         <activity
             android:name=".Club_Activity"
             android:exported="true">
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -91,8 +97,6 @@
         <activity
             android:name=".ProfileActivity"
             android:exported="true">
-
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -100,21 +104,18 @@
         <activity
             android:name=".ClubJoiningFormTwoActivity"
             android:exported="true">
+
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".ClubJoiningFormOneActivity"
-            android:exported="true" >
-
-
-
-        </activity>
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
-
             <meta-data
                 android:name="preloaded_fonts"
                 android:resource="@array/preloaded_fonts" />

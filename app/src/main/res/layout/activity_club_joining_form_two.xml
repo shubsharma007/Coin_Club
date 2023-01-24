@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/fullNameTv"
+        android:id="@+id/amountTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
@@ -30,20 +30,20 @@
         android:textColor="@color/white"
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/fullNameEt"
-        app:layout_constraintStart_toStartOf="@+id/fullNameEt"
+        app:layout_constraintEnd_toEndOf="@+id/amountEt"
+        app:layout_constraintStart_toStartOf="@+id/amountEt"
         app:layout_constraintTop_toBottomOf="@+id/cjfTv" />
 
     <EditText
-        android:id="@+id/fullNameEt"
+        android:id="@+id/amountEt"
+        android:maxLength="8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/edittext_round_corner_blue_bg"
-
         android:hint="Amount"
-        android:inputType="textPersonName"
+        android:inputType="number"
         android:padding="8dp"
         android:paddingStart="18dp"
         android:textColor="@color/white"
@@ -52,10 +52,10 @@
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameTv" />
+        app:layout_constraintTop_toBottomOf="@+id/amountTv" />
 
     <TextView
-        android:id="@+id/mobileNoTv"
+        android:id="@+id/motivationTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
@@ -65,7 +65,7 @@
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/motivationLl"
-        app:layout_constraintTop_toBottomOf="@+id/fullNameEt" />
+        app:layout_constraintTop_toBottomOf="@+id/amountEt" />
 
     <LinearLayout
         android:id="@+id/motivationLl"
@@ -78,15 +78,17 @@
         android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mobileNoTv">
+        app:layout_constraintTop_toBottomOf="@+id/motivationTv">
 
         <RadioGroup
+            android:id="@+id/radioGroupMotivation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="horizontal">
 
             <RadioButton
+                android:id="@+id/rbSaving"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -96,6 +98,7 @@
                 android:textSize="@dimen/_12ssp" />
 
             <RadioButton
+                android:id="@+id/rbInvesting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -105,6 +108,7 @@
                 android:textSize="@dimen/_12ssp" />
 
             <RadioButton
+                android:id="@+id/rbBorrowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -120,7 +124,7 @@
 
 
     <TextView
-        android:id="@+id/genderTv"
+        android:id="@+id/monthlyIncomeTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="15dp"
@@ -133,8 +137,9 @@
         app:layout_constraintTop_toBottomOf="@+id/motivationLl" />
 
     <EditText
-        android:id="@+id/mhiEt"
+        android:id="@+id/incomeEt"
         android:layout_width="match_parent"
+        android:maxLength="8"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="2dp"
@@ -142,13 +147,14 @@
         android:fontFamily="@font/poppins_medium"
         android:hint="Income"
         android:paddingStart="18dp"
+        android:inputType="number"
         android:padding="8dp"
         android:textColor="@color/white"
         android:textSize="@dimen/_13ssp"
         android:textColorHint="#B3FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/genderTv"/>
+        app:layout_constraintTop_toBottomOf="@id/monthlyIncomeTv"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -167,8 +173,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mhiEt"
+        app:layout_constraintTop_toBottomOf="@id/incomeEt"
         app:layout_constraintVertical_bias="0.13" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

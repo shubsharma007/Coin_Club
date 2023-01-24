@@ -16,23 +16,24 @@ public class ViewProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityViewProfileBinding.inflate(getLayoutInflater());
+        binding = ActivityViewProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
         binding.editBtn.setOnClickListener(v -> {
-            Intent editImg=new Intent(Intent.ACTION_PICK);
+            Intent editImg = new Intent(Intent.ACTION_PICK);
             editImg.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-            startActivityForResult(editImg,123);
+            startActivityForResult(editImg, 123);
         });
 
-        binding.backBtn.setOnClickListener(v -> startActivity(new Intent(ViewProfileActivity.this,ProfileActivity.class)));
+        binding.backBtn.setOnClickListener(v ->
+                finish());
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode==RESULT_OK  && requestCode==123)
-        {
+        if (resultCode == RESULT_OK && requestCode == 123) {
             binding.dpImg.setImageURI(data.getData());
         }
     }
