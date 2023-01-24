@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".KycDetailsActivity">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/appCompatButton"
+        android:layout_width="@dimen/_33sdp"
+        android:layout_height="@dimen/_33sdp"
+        android:layout_marginStart="15dp"
+        android:background="@drawable/bg_ic_home"
+        android:drawableStart="@drawable/ic_back_black"
+        android:paddingStart="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/kycTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/kycTv" />
+
+    <TextView
+        android:id="@+id/kycTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:fontFamily="@font/poppins_medium"
+        android:text="KYC Details"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_16ssp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="40dp"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/kycTv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/piTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Personal Information"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/fnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Full Name"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/fnEt"
+                android:inputType="textPersonName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_profile"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your Full Name"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/mnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Mobile Number"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/mnEt"
+                android:inputType="phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_phone"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your Mobile Number"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/aTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Address"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/aEt"
+                android:inputType="textPostalAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_location"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your Address"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/mailTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Email Id"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/mailEt"
+                android:inputType="textEmailAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_sms"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your Email Id"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/iTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Identification"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/iRadioGroup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:orientation="vertical">
+
+                <RadioButton
+                    android:id="@+id/radio1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Adhar Card"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radio2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pan Card"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radio3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Passport"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/iEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_card"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your Card Number"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+
+            <TextView
+                android:id="@+id/idPhotosTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Upload Your Id Photos"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <LinearLayout
+                    android:id="@+id/verticalFront"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/_1sdp"
+                    android:orientation="vertical"
+                 >
+
+                    <ImageView
+                        android:id="@+id/frontImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:src="@drawable/ic_upload" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Front"
+                        android:layout_marginTop="2dp"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/verticalBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:padding="@dimen/_1sdp"
+                    android:orientation="vertical"
+                   >
+
+                    <ImageView
+                        android:id="@+id/backImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginHorizontal="20dp"
+                        android:layout_marginVertical="10dp"
+                        android:src="@drawable/ic_upload" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Back"
+                        android:layout_marginTop="2dp"
+                        android:textAlignment="center" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dlTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="30dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Driving License"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/lnTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="License Number"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/lnEt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:drawableStart="@drawable/ic_license"
+                android:drawablePadding="10dp"
+                android:hint="Enter Your License Number"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+            <TextView
+                android:id="@+id/ledTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="License Expiry Date"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/ledTv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/edittext_round_corner_white_bg"
+                android:clickable="true"
+                android:drawableStart="@drawable/ic_license"
+                android:drawableEnd="@drawable/ic_calendar"
+                android:drawablePadding="10dp"
+                android:hint="Enter Expiry Date"
+                android:inputType="date"
+                android:paddingVertical="8dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:textColor="@color/black"
+                android:textColorHint="#80000000"
+                android:textSize="@dimen/_14ssp" />
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/checkoutBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/edittext_round_corner_blue_bg"
+                android:text="CheckOut"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16ssp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
