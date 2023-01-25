@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import com.example.coinclubapp.databinding.ActivityLoginBinding;
@@ -30,6 +31,12 @@ public class LoginActivity extends AppCompatActivity {
                 binding.edPassword.requestFocus ();
             } else {
                 Intent i = new Intent (LoginActivity.this, ClubJoiningFormOneActivity.class);
+                String mobile=binding.edMobile.getText().toString();
+                String pw=binding.edPassword.getText().toString();
+                Log.i("USER_ENTERED",mobile);
+                Log.i("USER_ENTERED",pw);
+                i.putExtra("mobile",mobile);
+                i.putExtra("password",pw);
                 startActivity (i);
             }
         });

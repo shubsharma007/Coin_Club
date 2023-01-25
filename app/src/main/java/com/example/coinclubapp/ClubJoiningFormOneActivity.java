@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -13,20 +14,21 @@ import com.example.coinclubapp.databinding.ActivityClubJoiningFormOneBinding;
 public class ClubJoiningFormOneActivity extends AppCompatActivity {
 
     ActivityClubJoiningFormOneBinding binding;
+    Intent passIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityClubJoiningFormOneBinding.inflate (getLayoutInflater ());
         setContentView(binding.getRoot ());
-
+        String mobile=getIntent().getStringExtra("mobile");
+        binding.mobileNoEt.setText(mobile);
 
         binding.rbSalary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-
                     binding.rbStudent.setChecked(false);
                     binding.rbSelfEmployed.setChecked(false);
                     binding.rbHousewife.setChecked(false);
@@ -86,10 +88,10 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                     binding.fullNameEt.setError("enter your full name");
                     binding.fullNameEt.requestFocus();
                 }
-                else if(binding.mobileNoEt.getText().toString().trim().length()!=10){
-                    binding.mobileNoEt.setError("enter correct mobile no");
-                    binding.mobileNoEt.requestFocus();
-                }
+//                else if(binding.mobileNoEt.getText().toString().trim().length()!=10){
+//                    binding.mobileNoEt.setError("enter correct mobile no");
+//                    binding.mobileNoEt.requestFocus();
+//                }
                 else if(binding.cityEt.getText().toString().trim().isEmpty())
                 {
                     binding.cityEt.setError("enter city name");
@@ -110,10 +112,52 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    startActivity(new Intent(ClubJoiningFormOneActivity.this,ClubJoiningFormTwoActivity.class));
+                    passIntent = new Intent(ClubJoiningFormOneActivity.this, ClubJoiningFormTwoActivity.class);
+                    String name=binding.fullNameEt.getText().toString();
+                    passIntent.putExtra("full_name",name);
+                    Log.i("USER_ENTERED",name);
 
+                    String city=binding.cityEt.getText().toString();
+                    passIntent.putExtra("city", city);
+                    Log.i("USER_ENTERED",city);
+
+                    if (binding.rbMale.isChecked()) {
+                        passIntent.putExtra("gender", "male");
+                        Log.i("USER_ENTERED","male");
+                    } else {
+                        passIntent.putExtra("gender", "female");
+                        Log.i("USER_ENTERED","female");
+                    }
+
+
+                    if (binding.rbSalary.isChecked()) {
+                        passIntent.putExtra("occupation", "salaried professional");
+                        Log.i("USER_ENTERED","salaried");
+                    } else if (binding.rbStudent.isChecked()) {
+                        passIntent.putExtra("occupation", "student");
+                        Log.i("USER_ENTERED","student");
+                    } else if (binding.rbSelfEmployed.isChecked()) {
+                        passIntent.putExtra("occupation", "self employed");
+                        Log.i("USER_ENTERED","self");
+                    } else {
+                        passIntent.putExtra("occupation", "house wife");
+                        Log.i("USER_ENTERED","wife");
+                    }
+
+                    String noyo=binding.noyoEt.getText().toString();
+                    passIntent.putExtra("organization", noyo);
+                    Log.i("USER_ENTERED",noyo);
+
+                    String mobile=binding.mobileNoEt.getText().toString();
+                    passIntent.putExtra("mobile",mobile);
+                    Log.i("USER_ENTERED",mobile);
+
+                    String pw=getIntent().getStringExtra("password");
+                    passIntent.putExtra("password",pw);
+                    Log.i("USER_ENTERED",pw);
+
+                    startActivity(passIntent);
                 }
-
             }
         });
     }

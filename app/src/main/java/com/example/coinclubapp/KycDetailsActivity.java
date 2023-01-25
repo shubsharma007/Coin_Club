@@ -23,6 +23,10 @@ public class KycDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityKycDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        String name=getIntent().getStringExtra("full_name");
+        binding.fnEt.setText(name);
+        String mobile=getIntent().getStringExtra("mobile");
+        binding.mnEt.setText(mobile);
 
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +72,8 @@ public class KycDetailsActivity extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+
+
     }
 
     @Override
