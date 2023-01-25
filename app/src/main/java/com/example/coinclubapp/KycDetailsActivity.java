@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.DatePicker;
+import android.widget.Toast;
 
 import com.example.coinclubapp.databinding.ActivityKycDetailsBinding;
 
@@ -17,6 +18,8 @@ import java.util.Calendar;
 
 public class KycDetailsActivity extends AppCompatActivity {
     ActivityKycDetailsBinding binding;
+    private static boolean frontimg=false;
+    private static boolean backimg=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,77 @@ public class KycDetailsActivity extends AppCompatActivity {
         binding.checkoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(KycDetailsActivity.this,MainActivity.class));
+                String fullName=binding.fnEt.getText().toString().trim();
+                String[] arrOfStr = fullName.split(" ");
+                String fullAddress=binding.aEt.getText().toString().trim();
+                String[] arrOfStr2 = fullAddress.split(" ");
+                if(binding.fnEt.getText().toString().isEmpty())
+                {
+                    binding.fnEt.setError("enter your name");
+                    binding.fnEt.requestFocus();
+                }
+                else if(arrOfStr.length<2)
+                {
+                    binding.fnEt.setError("enter your full name");
+                    binding.fnEt.requestFocus();
+                }
+                else if(binding.mnEt.getText().toString().trim().length()!=10){
+                    binding.mnEt.setError("enter correct mobile no");
+                    binding.mnEt.requestFocus();
+                }
+                else if(binding.aEt.getText().toString().isEmpty())
+                {
+                    binding.aEt.setError("enter your Address");
+                    binding.aEt.requestFocus();
+                }
+                else if(arrOfStr2.length<2)
+                {
+                    binding.aEt.setError("enter your full Address");
+                    binding.aEt.requestFocus();
+                }
+                else if(binding.mailEt.getText().toString().isEmpty())
+                {
+                    binding.mailEt.setError("enter your Email Id");
+                    binding.mailEt.requestFocus();
+                }
+                else if(!binding.mailEt.getText().toString().contains(".") || !binding.mailEt.getText().toString().contains("@"))
+                {
+                    binding.mailEt.setError("enter full Email address");
+                    binding.mailEt.requestFocus();
+                }
+                else if(!binding.radio1.isChecked() && !binding.radio2.isChecked() && !binding.radio3.isChecked())
+                {
+                    Toast.makeText(KycDetailsActivity.this, "enter identification", Toast.LENGTH_SHORT).show();
+                }
+                else if(binding.iEt.getText().toString().isEmpty())
+                {
+                    binding.iEt.setError("enter identification number");
+                    binding.iEt.requestFocus();
+                }
+                else if(!frontimg || !backimg)
+                {
+                    Toast.makeText(KycDetailsActivity.this, "please upload images", Toast.LENGTH_SHORT).show();
+                }
+                else if(binding.lnEt.getText().toString().isEmpty())
+                {
+                    binding.lnEt.setError("enter license number");
+                    binding.lnEt.requestFocus();
+                }
+                else if(binding.ledTv2.getText().toString().isEmpty())
+                {
+                    Toast.makeText(KycDetailsActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
+                    startActivity(new Intent(KycDetailsActivity.this,MainActivity.class));
+                    Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+
+
+
+
+
             }
         });
 
@@ -79,13 +152,16 @@ public class KycDetailsActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if(resultCode==RESULT_OK  && requestCode==101)
         {
             binding.frontImage.setImageURI(data.getData());
+            frontimg=true;
         }
         else if(resultCode==RESULT_OK && requestCode==102)
         {
             binding.backImage.setImageURI(data.getData());
+            backimg=true;
         }
     }
 
