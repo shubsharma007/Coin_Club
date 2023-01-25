@@ -71,7 +71,7 @@
             app:layout_constraintStart_toStartOf="@+id/mobileNoEt"
             app:layout_constraintTop_toBottomOf="@+id/fullNameEt" />
 
-        <EditText
+        <TextView
             android:id="@+id/mobileNoEt"
             android:layout_width="0dp"
             android:maxLength="12"
