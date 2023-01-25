@@ -75,8 +75,9 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                                 Response resp = response.body();
                                 Result res = resp.getResult();
                                 int IdOfUserCreated=res.getId();
-                                Toast.makeText(ClubJoiningFormTwoActivity.this,String.valueOf(IdOfUserCreated), Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(ClubJoiningFormTwoActivity.this, KycDetailsActivity.class));
+                                Intent intent=new Intent(ClubJoiningFormTwoActivity.this,KycDetailsActivity.class);
+                                intent.putExtra("id",String.valueOf(IdOfUserCreated));
+                                startActivity(intent);
                                 finish();
                             } else {
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, response.code(), Toast.LENGTH_SHORT).show();
