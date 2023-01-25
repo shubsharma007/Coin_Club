@@ -156,7 +156,9 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                     passIntent.putExtra("password",pw);
                     Log.i("USER_ENTERED",pw);
 
+
                     startActivity(passIntent);
+                    finish();
                 }
             }
         });
