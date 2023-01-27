@@ -109,6 +109,8 @@ public class KycDetailsActivity extends AppCompatActivity {
                             finish();
                         } else {
 
+
+
                             Toast.makeText(KycDetailsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
