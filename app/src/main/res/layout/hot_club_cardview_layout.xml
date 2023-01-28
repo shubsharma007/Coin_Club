@@ -6,7 +6,7 @@
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
+        android:id="@+id/Club_layout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:background="@drawable/home_card_bg"
@@ -16,9 +16,9 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imageView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_margin="@dimen/_5sdp"
             android:src="@drawable/logo_money"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +34,8 @@
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/imageView4"
-            app:layout_constraintTop_toTopOf="@+id/imageView4" />
+            app:layout_constraintStart_toEndOf="@+id/logo"
+            app:layout_constraintTop_toTopOf="@+id/logo" />
 
         <TextView
             android:id="@+id/txtDesc"
@@ -62,6 +62,7 @@
 
         <TextView
             android:id="@+id/txtNextBid"
+            android:alpha="0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
@@ -96,7 +97,7 @@
             android:paddingBottom="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/appCompatButton3"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
+            app:layout_constraintStart_toStartOf="@+id/logo"
             app:layout_constraintTop_toBottomOf="@+id/txtDesc">
 
             <TextView

@@ -10,14 +10,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.coinclubapp.Adapters.HotClubAdapter;
+import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.InterFace.HotClubRecyclerView;
+import com.example.coinclubapp.Response.ClubResponse;
+import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityHotClubBinding;
 import com.example.coinclubapp.databinding.ActivityMainBinding;
+import com.example.coinclubapp.result.ClubResult;
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HotClubActivity extends AppCompatActivity implements HotClubRecyclerView {
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class HotClubActivity extends AppCompatActivity {
     ActivityHotClubBinding binding;
     RecyclerView.LayoutManager layoutManager;
 
@@ -26,13 +37,36 @@ public class HotClubActivity extends AppCompatActivity implements HotClubRecycle
         super.onCreate(savedInstanceState);
         binding = ActivityHotClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        binding.progressBar.setVisibility(View.VISIBLE);
 
         layoutManager = new LinearLayoutManager(HotClubActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(layoutManager);
-        binding.recyclerView.setAdapter(new HotClubAdapter(this, this));
 
 
-        binding.fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), HotClubActivity.class)));
+        ApiInterface apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
+        Call<ClubResponse> call=apiInterface.getClubs();
+        call.enqueue(new Callback<ClubResponse>() {
+            @Override
+            public void onResponse(Call<ClubResponse> call, Response<ClubResponse> response) {
+                binding.progressBar.setVisibility(View.GONE);
+                if(response.isSuccessful())
+                {
+                    ClubResponse clubResponse=response.body();
+                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,clubResponse));
+                }
+                else
+                {
+                    Toast.makeText(HotClubActivity.this, "no clubs available", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ClubResponse> call, Throwable t) {
+                Toast.makeText(HotClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.notification:
@@ -53,11 +87,11 @@ public class HotClubActivity extends AppCompatActivity implements HotClubRecycle
 
     }
 
-    @Override
-    public void onItemClick(int position) {
-
-        Intent intent = new Intent(this, Club_Activity.class);
-        startActivity(intent);
-
-    }
+//    @Override
+//    public void onItemClick(int position) {
+//
+//        Intent intent = new Intent(this, Club_Activity.class);
+//        startActivity(intent);
+//
+//    }
 }
