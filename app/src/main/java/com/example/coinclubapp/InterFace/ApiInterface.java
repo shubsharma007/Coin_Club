@@ -2,12 +2,14 @@ package com.example.coinclubapp.InterFace;
 
 import android.view.ViewDebug;
 
+import com.example.coinclubapp.Response.ClubResponse;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.Response;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface ApiInterface {
@@ -40,4 +42,7 @@ public interface ApiInterface {
             @Field("driving_licence_no") String driving_licence_no,
             @Field("licence_expiry_date") String licence_expiry_date
     );
+
+    @GET("club-data-get")
+    Call<ClubResponse> getClubs();
 }

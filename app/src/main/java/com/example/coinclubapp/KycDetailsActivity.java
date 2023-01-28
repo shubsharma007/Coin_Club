@@ -108,9 +108,6 @@ public class KycDetailsActivity extends AppCompatActivity {
                             Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
-
-
-
                             Toast.makeText(KycDetailsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
