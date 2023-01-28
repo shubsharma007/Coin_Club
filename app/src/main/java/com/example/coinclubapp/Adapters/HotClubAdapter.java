@@ -2,6 +2,7 @@ package com.example.coinclubapp.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.coinclubapp.Club_Activity;
-import com.example.coinclubapp.InterFace.HotClubRecyclerView;
 import com.example.coinclubapp.R;
 import com.example.coinclubapp.Response.ClubResponse;
 import com.example.coinclubapp.result.ClubResult;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHolder> {
@@ -26,6 +28,11 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     ClubResponse clubResponse;
     List<ClubResult> clubResultList;
     String baseUrlImg="";
+
+    private String DATE_TIME = "2023-01-31 10:30:00";
+    private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    Handler handler = new Handler();
+    Runnable runnable;
 
     public HotClubAdapter(Context context, ClubResponse clubResponse) {
         this.context = context;
@@ -47,10 +54,13 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     public void onBindViewHolder(@NonNull HotClubAdapter.MyViewHolder holder, int position) {
 
         ClubResult current=clubResultList.get(position);
+        countDownFunc(holder);
+
         holder.txtName.setText(current.getClub_name());
-        holder.txtDesc.setText("member contribution : " + current.getMember_contribution());
-        holder.txtRound.setText(current.getTotal_member());
-        holder.txtAmount.setText(current.getTotal_amount());
+        holder.txtDesc.setText("per head : " + current.getMember_contribution()  + " ₹ ");
+        holder.txtRound.setText("round 1 of " + current.getTotal_member());
+        holder.txtAmount.setText(current.getTotal_amount() + "₹");
+        holder.txtNextBid.setText("Next Bid : " + current.getStart_date());
         Glide.with(context)
                 .load(baseUrlImg+current.getLogo())
                 .centerCrop()
@@ -67,6 +77,35 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         });
     }
 
+    private void countDownFunc(MyViewHolder holder) {
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    handler.postDelayed(this, 1000);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+                    Date event_date = dateFormat.parse(DATE_TIME);
+                    Date current_date = new Date();
+                    long diff = event_date.getTime() - current_date.getTime();
+                    long Days = diff / (24 * 60 * 60 * 1000);
+                    long Hours = diff / (60 * 60 * 1000) % 24;
+                    long Minutes = diff / (60 * 1000) % 60;
+                    long Seconds = diff / 1000 % 60;
+                    //
+                    holder.tv_days.setText(String.format("%02d", Days));
+                    holder.tv_hour.setText(String.format("%02d", Hours));
+                    holder.tv_minute.setText(String.format("%02d", Minutes));
+                    holder.tv_second.setText(String.format("%02d", Seconds));
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 0);
+    }
+
     @Override
     public int getItemCount() {
         return clubResultList.size();
@@ -76,6 +115,8 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         TextView txtName, txtDesc, txtNextBid, txtRound, txtTime, txtAmount;
         ConstraintLayout Club_layout;
         ImageView logo;
+        TextView tv_days, tv_hour, tv_minute, tv_second;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -83,26 +124,15 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
             txtDesc = itemView.findViewById(R.id.txtDesc);
             txtNextBid = itemView.findViewById(R.id.txtNextBid);
             txtRound = itemView.findViewById(R.id.txtRound);
-            txtTime = itemView.findViewById(R.id.txtTime);
             txtAmount = itemView.findViewById(R.id.txtAmount);
             Club_layout=itemView.findViewById(R.id.Club_layout);
             logo=itemView.findViewById(R.id.logo);
+            tv_days = itemView.findViewById(R.id.tv_days);
+            tv_hour = itemView.findViewById(R.id.tv_hour);
+            tv_minute = itemView.findViewById(R.id.tv_minute);
+            tv_second = itemView.findViewById(R.id.tv_second);
 
 
-
-
-//            itemView.setOnClickListener(v -> {
-//
-//                if (hotClubRecyclerView != null) {
-//
-//                    int pos = getAdapterPosition();
-//
-//                    if (pos != RecyclerView.NO_POSITION) ;
-//                    hotClubRecyclerView.onItemClick(pos);
-//
-//                }
-//
-//            });
         }
 
     }

@@ -15,7 +15,7 @@
         android:layout_marginEnd="@dimen/_15sdp"
         android:background="@drawable/bg_ic_home"
         android:drawableEnd="@drawable/ic_back"
-        android:paddingEnd="@dimen/_9sdp"
+        android:paddingEnd="@dimen/_12sdp"
         app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView6" />

@@ -27,10 +27,10 @@ public class Club_Activity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.backBtn.setOnClickListener(v -> {
-            finish();
+            Intent i = new Intent (Club_Activity.this, HotClubActivity.class);
+            startActivity (i);
+            finish ();
         });
-        binding=ActivityClubBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
 
         binding.recyclerViewMember.setAdapter(new MemberAdapter());
         layoutManagerM=new LinearLayoutManager(Club_Activity.this,LinearLayoutManager.HORIZONTAL,false);

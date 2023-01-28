@@ -19,5 +19,9 @@ public class NotificationsActivity extends AppCompatActivity {
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new NotificationAdapter());
+
+        binding.backBtn.setOnClickListener (v -> {
+            finish ();
+        });
     }
 }

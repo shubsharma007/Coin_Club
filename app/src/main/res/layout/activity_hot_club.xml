@@ -57,12 +57,14 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
-            android:layout_marginTop="@dimen/_5sdp"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="70dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/hot_club_cardview_layout"/>
+            tools:listitem="@layout/hot_club_cardview_layout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -31,5 +31,9 @@ public class MyBankActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged ();
         adapter.getItemCount ();
         binding.transactionRecyclerView.setHasFixedSize (true);
+
+        binding.backBtn.setOnClickListener (v -> {
+            finish ();
+        });
     }
 }
