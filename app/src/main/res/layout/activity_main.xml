@@ -50,6 +50,7 @@
             android:layout_margin="@dimen/_15sdp"
             android:background="@drawable/home_card_bg"
             android:padding="10dp"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">

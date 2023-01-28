@@ -97,7 +97,6 @@ public class KycDetailsActivity extends AppCompatActivity {
                 String id = getIntent().getStringExtra("id");
 
                 ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-
                 Call<KycResponse> call = apiInterface.PostKycItems(id, name, mobile, fullAddress, id_name, id_number, email_id, urif.toString(), urib.toString(), dl, led);
                 call.enqueue(new Callback<KycResponse>() {
                     @Override

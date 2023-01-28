@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.LinearLayout;
 
@@ -39,5 +40,10 @@ public class Club_Activity extends AppCompatActivity {
         binding.recyclerViewRound.setAdapter(new RoundAdapter());
         layoutManagerR=new LinearLayoutManager(Club_Activity.this,LinearLayoutManager.HORIZONTAL,false);
         binding.recyclerViewRound.setLayoutManager(layoutManagerR);
+
+        binding.seeAllMember.setOnClickListener (v -> {
+            Intent i = new Intent (Club_Activity.this, MemberActivity.class);
+            startActivity (i);
+        });
     }
 }
