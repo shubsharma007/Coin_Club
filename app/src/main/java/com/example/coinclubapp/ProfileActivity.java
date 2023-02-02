@@ -45,5 +45,12 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        binding.uKycTv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ProfileActivity.this,UpdateKycActivity.class));
+            }
+        });
     }
 }

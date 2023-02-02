@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".KycDetailsActivity">
+    tools:context=".UpdateKycActivity">
+
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/appCompatButton"
@@ -344,8 +345,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:padding="@dimen/_1sdp"
-                    android:gravity="center"
                     android:orientation="vertical"
+                    android:gravity="center"
                     >
 
                     <ImageView
@@ -460,6 +461,19 @@
                 android:textColorHint="#80000000"
                 android:textSize="@dimen/_14ssp" />
 
+
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Yes , I Want To Update My Kyc Details"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_12ssp"
+                android:textStyle="bold"
+                android:layout_marginHorizontal="15dp"
+                android:layout_marginTop="10dp"
+                android:id="@+id/check"
+                />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/checkoutBtn"
                 android:layout_width="match_parent"
@@ -477,7 +491,6 @@
         </LinearLayout>
 
     </ScrollView>
-
 
 
 
