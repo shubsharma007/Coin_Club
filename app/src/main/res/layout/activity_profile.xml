@@ -84,126 +84,152 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dp_img">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+
             app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:paddingBottom="30dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/acTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Active Clubs"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/hcTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Historical Clubs"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/acTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Active Clubs"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/rneTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Refer and Earn"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/hcTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Historical Clubs"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/thTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Transaction History"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/rneTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Refer and Earn"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/mbaTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="My (Bank) Accounts"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/thTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Transaction History"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/cpTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Change Pin"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/mbaTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="My (Bank) Accounts"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/ppTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Privacy Policies"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/cpTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Change Pin"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/tncTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Terms And Conditions"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
+                <TextView
+                    android:id="@+id/ppTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Privacy Policies"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
 
-            <TextView
-                android:id="@+id/sTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="15dp"
-                android:layout_marginVertical="8dp"
-                android:fontFamily="@font/poppins_medium"
-                android:paddingStart="15dp"
-                android:text="Settings"
-                android:textColor="@color/black"
-                android:textSize="@dimen/_16ssp" />
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/tncTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Terms And Conditions"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/uKycTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Update Kyc"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+
+                <TextView
+                    android:id="@+id/sTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:layout_marginBottom="30dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Settings"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_16ssp" />
+            </LinearLayout>
+
+
+        </ScrollView>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

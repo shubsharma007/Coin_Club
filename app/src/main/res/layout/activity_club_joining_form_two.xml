@@ -7,6 +7,18 @@
     android:background="#323D94"
     tools:context=".ClubJoiningFormTwoActivity">
 
+    <ProgressBar
+        android:id="@id/progressBar"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5" />
+
     <TextView
         android:id="@+id/cjfTv"
         android:layout_width="wrap_content"
@@ -36,7 +48,6 @@
 
     <EditText
         android:id="@+id/amountEt"
-        android:maxLength="8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -44,6 +55,7 @@
         android:background="@drawable/edittext_round_corner_blue_bg"
         android:hint="Amount"
         android:inputType="number"
+        android:maxLength="8"
         android:padding="8dp"
         android:paddingStart="18dp"
         android:textColor="@color/white"
@@ -139,25 +151,26 @@
     <EditText
         android:id="@+id/incomeEt"
         android:layout_width="match_parent"
-        android:maxLength="8"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
         android:layout_marginTop="2dp"
         android:background="@drawable/edittext_round_corner_blue_bg"
         android:fontFamily="@font/poppins_medium"
         android:hint="Income"
-        android:paddingStart="18dp"
         android:inputType="number"
+        android:maxLength="8"
         android:padding="8dp"
+        android:paddingStart="18dp"
         android:textColor="@color/white"
-        android:textSize="@dimen/_13ssp"
         android:textColorHint="#B3FFFFFF"
+        android:textSize="@dimen/_13ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/monthlyIncomeTv"/>
+        app:layout_constraintTop_toBottomOf="@id/monthlyIncomeTv" />
 
 
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/submitBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="15dp"
@@ -167,7 +180,6 @@
         android:fontFamily="@font/poppins_medium"
         android:padding="3dp"
         android:text="Submit"
-        android:id="@+id/submitBtn"
         android:textColor="@color/white"
         android:textSize="@dimen/_13ssp"
         android:textStyle="bold"
