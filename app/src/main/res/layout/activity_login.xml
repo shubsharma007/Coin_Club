@@ -81,17 +81,28 @@
         app:layout_constraintTop_toBottomOf="@+id/ed_mobile" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/btnNewUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="new user ?"
+        android:textSize="@dimen/_13ssp"
+        android:textColor="@color/mainColour"
+        app:layout_constraintTop_toBottomOf="@+id/ed_password"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"/>
+
+    <TextView
+        android:id="@+id/btnSignUp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_15sdp"
-        android:layout_marginTop="@dimen/_15sdp"
         android:text="Sign up"
         android:textColor="@color/mainColour"
         android:textSize="@dimen/_22ssp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ed_password" />
+        app:layout_constraintTop_toBottomOf="@+id/btnNewUser" />
 
     <ImageButton
         android:id="@+id/goBtn"
@@ -101,7 +112,7 @@
         android:background="@drawable/bg_login_btn"
         android:src="@drawable/arrow_right"
         android:padding="@dimen/_10sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/textView5"
+        app:layout_constraintBottom_toBottomOf="@+id/btnSignUp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView5" />
+        app:layout_constraintTop_toTopOf="@+id/btnSignUp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

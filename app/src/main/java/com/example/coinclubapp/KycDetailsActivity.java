@@ -2,10 +2,14 @@ package com.example.coinclubapp;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -18,6 +22,7 @@ import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityKycDetailsBinding;
 
+
 import java.util.Calendar;
 
 import retrofit2.Call;
@@ -26,6 +31,7 @@ import retrofit2.Response;
 
 public class KycDetailsActivity extends AppCompatActivity {
     ActivityKycDetailsBinding binding;
+
     private static boolean frontaadhar = false;
     private static boolean backaadhar = false;
     private static boolean frontpan = false;
@@ -36,6 +42,7 @@ public class KycDetailsActivity extends AppCompatActivity {
     Uri panFront;
     Uri panBack;
 
+    Dialog adDialog;
     String uriafs, uriabs, uripfs, uripbs;
 
     @Override
@@ -43,6 +50,7 @@ public class KycDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityKycDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
 
         binding.checkoutBtn.setOnClickListener(v -> {
@@ -101,9 +109,27 @@ public class KycDetailsActivity extends AppCompatActivity {
             }  else {
                 String id = getIntent().getStringExtra("id");
 
-                startActivity(new Intent(KycDetailsActivity.this, MainActivity.class));
-                Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
-                finish();
+
+                adDialog = new Dialog(KycDetailsActivity.this);
+                adDialog.setContentView(R.layout.kyc_pending_popup_layout);
+                adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                adDialog.show();
+
+                AppCompatButton okBtn=adDialog.findViewById(R.id.okBtn);
+                okBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        System.exit(0);
+                    }
+                });
+
+
+
+
+
+//                startActivity(new Intent(KycDetailsActivity.this, MainActivity.class));
+//                Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
+//                finish();
 
 
 //                ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);

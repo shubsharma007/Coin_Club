@@ -4,6 +4,7 @@ import android.view.ViewDebug;
 
 import com.example.coinclubapp.Response.ClubResponse;
 import com.example.coinclubapp.Response.KycResponse;
+import com.example.coinclubapp.Response.LoginResponse;
 import com.example.coinclubapp.Response.Response;
 
 import retrofit2.Call;
@@ -45,4 +46,10 @@ public interface ApiInterface {
 
     @GET("club-data-get")
     Call<ClubResponse> getClubs();
+
+
+    @FormUrlEncoded
+    @POST("user-login")
+    Call<LoginResponse> UserLogin(@Field("mobile")String mobile,
+                                  @Field("password")String password);
 }
