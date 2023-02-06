@@ -23,7 +23,7 @@ import retrofit2.Callback;
 public class ClubJoiningFormTwoActivity extends AppCompatActivity {
     ActivityClubJoiningFormTwoBinding binding;
     ProgressDialog progress;
-    int IdOfUserCreated=0;
+    int IdOfUserCreated = 0;
 
 
     @Override
@@ -73,46 +73,42 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                     Log.i("USER_ENTERED", city);
                     String occupation = getIntent().getStringExtra("occupation");
                     Log.i("USER_ENTERED", occupation);
-                    String organization = getIntent().getStringExtra("organization");
-                    Log.i("USER_ENTERED", organization);
-                    String amount = binding.amountEt.getText().toString();
-                    Log.i("USER_ENTERED", amount);
+                    String organisation = getIntent().getStringExtra("organization");
+                    Log.i("USER_ENTERED", organisation);
+                    String monthlycontribution = binding.amountEt.getText().toString();
+                    Log.i("USER_ENTERED", monthlycontribution);
                     String income = binding.incomeEt.getText().toString();
                     Log.i("USER_ENTERED", income);
 
-                    Call<Response> call = apiInterface.postItems(mobile, password, name, gender, city, occupation, organization, amount, motive, income);
+                    Call<Result> call = apiInterface.postItems(mobile, password, name, gender, city, occupation, organisation, monthlycontribution, motive, income);
 
-                    call.enqueue(new Callback<Response>() {
+
+                    call.enqueue(new Callback<Result>() {
                         @Override
-                        public void onResponse(Call<Response> call, retrofit2.Response<Response> response) {
+                        public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
                             if (response.isSuccessful()) {
-                                Response resp = response.body();
-                                Result res = resp.getResult();
+                                Result res = response.body();
+
                                 try {
-                                     IdOfUserCreated = res.getId();
-                                    Intent intent = new Intent(ClubJoiningFormTwoActivity.this, KycDetailsActivity.class);
+                                    IdOfUserCreated = res.getId();
+                                    Intent intent = new Intent(ClubJoiningFormTwoActivity.this, MainActivity.class);
                                     progress.dismiss();
                                     intent.putExtra("id", String.valueOf(IdOfUserCreated));
                                     startActivity(intent);
                                     finish();
-                                    }
-                                catch (Exception e)
-                                {
+                                } catch (Exception e) {
                                     Toast.makeText(ClubJoiningFormTwoActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                                 }
-
-                            } else {
+                            }else{
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                             }
                         }
-
                         @Override
-                        public void onFailure(Call<Response> call, Throwable t) {
+                        public void onFailure(Call<Result> call, Throwable t) {
                             Toast.makeText(ClubJoiningFormTwoActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
                         }
                     });
-
-
                 }
             }
         });

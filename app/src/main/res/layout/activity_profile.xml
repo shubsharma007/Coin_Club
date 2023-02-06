@@ -23,13 +23,12 @@
         android:id="@+id/notificationTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:fontFamily="@font/poppins_medium"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="Profile"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/_16ssp"
-        android:textStyle="bold"
+        android:textSize="@dimen/_20ssp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -49,10 +48,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="22dp"
-        android:fontFamily="@font/poppins_medium"
         android:text="Jhon Nike"
         android:textColor="@color/white"
-        android:textSize="@dimen/_18sdp"
+        android:textSize="@dimen/_16sdp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/vpTv"
         app:layout_constraintStart_toEndOf="@+id/dp_img"
@@ -78,7 +76,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/home_bg"
+        android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -91,15 +89,14 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
-                android:paddingBottom="30dp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:orientation="vertical"
+                android:paddingBottom="30dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -116,7 +113,12 @@
                     android:paddingStart="15dp"
                     android:text="Active Clubs"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/hcTv"
@@ -128,7 +130,12 @@
                     android:paddingStart="15dp"
                     android:text="Historical Clubs"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/rneTv"
@@ -140,7 +147,12 @@
                     android:paddingStart="15dp"
                     android:text="Refer and Earn"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/thTv"
@@ -152,7 +164,12 @@
                     android:paddingStart="15dp"
                     android:text="Transaction History"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/mbaTv"
@@ -164,7 +181,12 @@
                     android:paddingStart="15dp"
                     android:text="My (Bank) Accounts"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/cpTv"
@@ -176,7 +198,29 @@
                     android:paddingStart="15dp"
                     android:text="Change Pin"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
+
+                <TextView
+                    android:id="@+id/add_bankDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginVertical="8dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="15dp"
+                    android:text="Add Bank Details"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/ppTv"
@@ -188,7 +232,12 @@
                     android:paddingStart="15dp"
                     android:text="Privacy Policies"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/tncTv"
@@ -200,7 +249,12 @@
                     android:paddingStart="15dp"
                     android:text="Terms And Conditions"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/uKycTv"
@@ -212,7 +266,12 @@
                     android:paddingStart="15dp"
                     android:text="Update Kyc"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#57000000" />
 
                 <TextView
                     android:id="@+id/sTv"
@@ -225,7 +284,7 @@
                     android:paddingStart="15dp"
                     android:text="Settings"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16ssp" />
+                    android:textSize="@dimen/_12ssp" />
             </LinearLayout>
 
 

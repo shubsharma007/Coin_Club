@@ -1,21 +1,29 @@
 package com.example.coinclubapp.result;
 
-import com.google.gson.annotations.SerializedName;
-
 public class Result {
     private String type;
     private String full_name;
     private String city;
     private String gender;
     private String occupation;
-    private String organization;
+    private String password;
+    private String organisation;
     private String deposite;
     private String motive;
     private String income;
-    private String mobile;
+    private String mobileno;
     private String updated_at;
     private String created_at;
+    private String monthlycontribution;
     private int id;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public String getType() {
         return type;
@@ -57,12 +65,12 @@ public class Result {
         this.occupation = occupation;
     }
 
-    public String getOrganization() {
-        return organization;
+    public String getOrganisation() {
+        return organisation;
     }
 
-    public void setOrganization(String organization) {
-        this.organization = organization;
+    public void setOrganisation(String organisation) {
+        this.organisation = organisation;
     }
 
     public String getDeposite() {
@@ -89,12 +97,12 @@ public class Result {
         this.income = income;
     }
 
-    public String getMobile() {
-        return mobile;
+    public String getMobileno() {
+        return mobileno;
     }
 
-    public void setMobile(String mobile) {
-        this.mobile = mobile;
+    public void setMobileno(String mobileno) {
+        this.mobileno = mobileno;
     }
 
     public String getUpdated_at() {

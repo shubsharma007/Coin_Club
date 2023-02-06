@@ -1,22 +1,19 @@
 package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
-import com.example.coinclubapp.Response.LoginResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityLoginBinding;
 import com.example.coinclubapp.result.LoginResult;
+
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,40 +42,88 @@ public class LoginActivity extends AppCompatActivity {
                 binding.edPassword.requestFocus();
             } else {
 
-                String mobile = binding.edMobile.getText().toString();
+                String mobileno = binding.edMobile.getText().toString();
                 String password = binding.edPassword.getText().toString();
                 ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-                Call<LoginResponse> call = apiInterface.UserLogin(mobile, password);
-                call.enqueue(new Callback<LoginResponse>() {
+                Call<LoginResult> call = apiInterface.UserLogin(mobileno, password);
+                call.enqueue(new Callback<LoginResult>() {
                     @Override
-                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                         if (response.isSuccessful()) {
-                            LoginResponse loginResponse = response.body();
+                            LoginResult status = response.body();
+                            if (status.getResponse() != "Error") {
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                startActivity(i);
 
-                            if (loginResponse.getStatus()) {
-
-                               // LoginResult login_result = loginResponse.getLogin_data();
-
-                                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                    Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                    startActivity(i);
-
-                            } else {
-
-                                Toast.makeText(LoginActivity.this, "incorrect phone or password...", Toast.LENGTH_SHORT).show();
                             }
-
                         } else {
-                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this, "Phone Number And Password Incorrect... ", Toast.LENGTH_SHORT).show();
+
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+                    public void onFailure(Call<LoginResult> call, Throwable t) {
                         Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                        Log.e("LOGLOGLOG", t.getMessage());
+//                        Toast.makeText(LoginActivity.this, "Phone Number And Password Incorrect... ", Toast.LENGTH_SHORT).show();
                     }
                 });
+
+                //                call.enqueue(new Callback<LoginResult>() {
+//                    @Override
+//                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
+//                        if (response.isSuccessful()) {
+//                            LoginResult result = response.body();
+//
+//                            if (!result.getStatus().equals("False")) {
+//
+//                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+//                                startActivity(i);
+//                            }
+//
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<LoginResult> call, Throwable t) {
+//                        Toast.makeText(LoginActivity.this, "...error...else...", Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
+//                call.enqueue(new Callback<LoginResponse>() {
+//                    @Override
+//                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+//                        if (response.isSuccessful()) {
+//                            LoginResponse loginResponse = response.body();
+//
+//                            if (loginResponse.getStatus()) {
+//
+//                               // LoginResult login_result = loginResponse.getLogin_data();
+//
+//                                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
+//                                    Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+//                                    startActivity(i);
+//
+//                            } else {
+//
+//                                Toast.makeText(LoginActivity.this, "incorrect phone or password...", Toast.LENGTH_SHORT).show();
+//                            }
+//
+//                        } else {
+//                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<LoginResponse> call, Throwable t) {
+//                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+//
+//                    }
+//                });
 
 
             }

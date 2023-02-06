@@ -9,8 +9,8 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="@dimen/_194sdp"
-        android:layout_height="@dimen/_200sdp"
+        android:layout_width="@dimen/_184sdp"
+        android:layout_height="@dimen/_180sdp"
         android:src="@drawable/avatar"
         android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,13 +21,14 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_15sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Welcome to money\nClub"
+
+        android:text="Welcome to money Club"
         android:textAlignment="textStart"
         android:textColor="@color/mainColour"
         android:textSize="@dimen/_20ssp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
@@ -36,10 +37,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
-        android:layout_marginStart="@dimen/_18sdp"
         android:text="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-        android:textAlignment="textStart"
-        android:gravity="start"
+        android:textAlignment="center"
+        android:paddingHorizontal="@dimen/_15sdp"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="normal"
