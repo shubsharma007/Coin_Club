@@ -1,11 +1,9 @@
 package com.example.coinclubapp.InterFace;
 
-import android.view.ViewDebug;
-
 import com.example.coinclubapp.Response.ClubResponse;
 import com.example.coinclubapp.Response.KycResponse;
-import com.example.coinclubapp.Response.LoginResponse;
-import com.example.coinclubapp.Response.Response;
+import com.example.coinclubapp.result.LoginResult;
+import com.example.coinclubapp.result.Result;
 
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -16,17 +14,17 @@ import retrofit2.http.POST;
 public interface ApiInterface {
 
     @FormUrlEncoded
-    @POST("user-register")
-    Call<Response> postItems(@Field("mobile") String mobile,
-                             @Field("password") String password,
-                             @Field("full_name") String full_name,
-                             @Field("gender") String gender,
-                             @Field("city") String city,
-                             @Field("occupation") String occupation,
-                             @Field("organization") String organization,
-                             @Field("deposite") String deposite,
-                             @Field("motive") String motive,
-                             @Field("income") String income);
+    @POST("regs_list/")
+    Call<Result> postItems(@Field("mobileno") String mobileno,
+                           @Field("password") String password,
+                           @Field("full_name") String full_name,
+                           @Field("gender") String gender,
+                           @Field("city") String city,
+                           @Field("occupation") String occupation,
+                           @Field("organisation") String organisation,
+                           @Field("monthlycontribution") String monthlycontribution,
+                           @Field("motive") String motive,
+                           @Field("income") String income);
 
     @FormUrlEncoded
     @POST("user-update")
@@ -49,7 +47,7 @@ public interface ApiInterface {
 
 
     @FormUrlEncoded
-    @POST("user-login")
-    Call<LoginResponse> UserLogin(@Field("mobile")String mobile,
-                                  @Field("password")String password);
+    @POST("bslogin/")
+    Call<LoginResult> UserLogin(@Field("mobileno") String mobileno,
+                                @Field("password") String password);
 }

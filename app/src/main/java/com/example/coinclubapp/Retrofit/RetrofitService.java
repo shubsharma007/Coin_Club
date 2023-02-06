@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RetrofitService {
     public static Retrofit retrofit=null;
-    public static final String BASE_URL="https://chess-game.progressiveaidata.in/api/";
+    public static final String BASE_URL="https://jobmeet.techpanda.art/";
 
     public static Retrofit getRetrofit() {
 
