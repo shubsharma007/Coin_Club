@@ -1,4 +1,4 @@
-package com.example.sharedPreferences
+package com.example.coinclubapp.SharedPreferences
 
 import android.content.Context
 import android.content.SharedPreferences

@@ -50,12 +50,16 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
                         if (response.isSuccessful()) {
-                            LoginResult status = response.body();
-                            if (status.getResponse() != "Error") {
+
+                            LoginResult loginResult=response.body();
+                            if(loginResult.getStatus().equalsIgnoreCase("true"))
+                            {
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                                 startActivity(i);
-
+                            }
+                            else{
+                                Toast.makeText(LoginActivity.this, "Incorrect Mobile Number Or Password", Toast.LENGTH_SHORT).show();
                             }
                         } else {
 //                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();

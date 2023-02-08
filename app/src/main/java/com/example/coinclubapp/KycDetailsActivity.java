@@ -52,22 +52,21 @@ public class KycDetailsActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
 
-
         binding.checkoutBtn.setOnClickListener(v -> {
             String fullName = binding.fullNameEt.getText().toString().trim();
             String[] arrOfStr = fullName.split(" ");
 
             String mobile = binding.mobileEt.getText().toString();
 
-            String fullAddress = binding.addressEt.getText().toString().trim();
-            String[] arrOfStr2 = fullAddress.split(" ");
+            String address = binding.addressEt.getText().toString().trim();
+            String[] arrOfStr2 = address.split(" ");
 
             String email_id = binding.emailEt.getText().toString();
 
             String adhar_no = binding.adharNumberEt.getText().toString();
             String pan_no = binding.panNumberEt.getText().toString();
-            String license_no = binding.licenseNumberEt.getText().toString();
-            String licenseExpiryDate = binding.licenseExpiryDateEt.getText().toString();
+//            String license_no = binding.licenseNumberEt.getText().toString();
+//            String licenseExpiryDate = binding.licenseExpiryDateEt.getText().toString();
 
             if (binding.fullNameEt.getText().toString().isEmpty()) {
                 binding.fullNameEt.setError("enter your name");
@@ -98,38 +97,59 @@ public class KycDetailsActivity extends AppCompatActivity {
                 binding.panNumberEt.requestFocus();
             } else if (!frontaadhar || !backaadhar) {
                 Toast.makeText(KycDetailsActivity.this, "please upload Aadhar Images", Toast.LENGTH_SHORT).show();
-            }else if(!frontpan){
+            } else if (!frontpan) {
                 Toast.makeText(KycDetailsActivity.this, "please upload Pan Images", Toast.LENGTH_SHORT).show();
             }
-            else if (binding.licenseNumberEt.getText().toString().isEmpty()) {
-                binding.licenseNumberEt.setError("enter license number");
-                binding.licenseNumberEt.requestFocus();
-            } else if (binding.licenseExpiryDateEt.getText().toString().isEmpty()) {
-                Toast.makeText(KycDetailsActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
-            }  else {
-                String id = getIntent().getStringExtra("id");
+//            else if (binding.licenseNumberEt.getText().toString().isEmpty()) {
+//                binding.licenseNumberEt.setError("enter license number");
+//                binding.licenseNumberEt.requestFocus();
+//            }
+//            else if (binding.licenseExpiryDateEt.getText().toString().isEmpty()) {
+//                Toast.makeText(KycDetailsActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
+//            }
+            else {
+
+//                ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+//                Call<KycResponse> call = apiInterface.PostKycItems(id, address, mobile, adhar_no, uriafs.toString(),
+//                        uriabs.toString(), pan_no, uripfs.toString());
+//                call.enqueue(new Callback<KycResponse>() {
+//                    @Override
+//                    public void onResponse(Call<KycResponse> call, Response<KycResponse> response) {
+//                        if (response.isSuccessful()) {
+//                            // KycResponse kycResponse=  response.body();
+//                            Toast.makeText(KycDetailsActivity.this, "Wait 24 Hours", Toast.LENGTH_SHORT).show();
+//                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//                        } else {
+//                            Toast.makeText(KycDetailsActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<KycResponse> call, Throwable t) {
+//                        Toast.makeText(KycDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+//
+
+//                adDialog = new Dialog(KycDetailsActivity.this);
+//                adDialog.setContentView(R.layout.kyc_pending_popup_layout);
+//                adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//                adDialog.show();
+//
+//                AppCompatButton okBtn = adDialog.findViewById(R.id.okBtn);
+//                okBtn.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        System.exit(0);
+//                    }
+//                });
 
 
-                adDialog = new Dialog(KycDetailsActivity.this);
-                adDialog.setContentView(R.layout.kyc_pending_popup_layout);
-                adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-                adDialog.show();
-
-                AppCompatButton okBtn=adDialog.findViewById(R.id.okBtn);
-                okBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        System.exit(0);
-                    }
-                });
+                startActivity(new Intent(KycDetailsActivity.this, MainActivity.class));
+                Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
+                finish();
 
 
-
-
-
-//                startActivity(new Intent(KycDetailsActivity.this, MainActivity.class));
-//                Toast.makeText(KycDetailsActivity.this, "Kyc Successful", Toast.LENGTH_SHORT).show();
-//                finish();
 
 
 //                ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
@@ -183,24 +203,24 @@ public class KycDetailsActivity extends AppCompatActivity {
         });
 
 
-        binding.licenseExpiryDateEt.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Calendar c = Calendar.getInstance();
-                int year = c.get(Calendar.YEAR);
-                int month = c.get(Calendar.MONTH);
-                int day = c.get(Calendar.DAY_OF_MONTH);
-
-                DatePickerDialog datePickerDialog = new DatePickerDialog(KycDetailsActivity.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        String date = dayOfMonth + "-" + (month + 1) + "-" + (year);
-                        binding.licenseExpiryDateEt.setText(date);
-                    }
-                }, year, month, day);
-                datePickerDialog.show();
-            }
-        });
+//        binding.licenseExpiryDateEt.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                final Calendar c = Calendar.getInstance();
+//                int year = c.get(Calendar.YEAR);
+//                int month = c.get(Calendar.MONTH);
+//                int day = c.get(Calendar.DAY_OF_MONTH);
+//
+//                DatePickerDialog datePickerDialog = new DatePickerDialog(KycDetailsActivity.this, new DatePickerDialog.OnDateSetListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+//                        String date = dayOfMonth + "-" + (month + 1) + "-" + (year);
+//                        binding.licenseExpiryDateEt.setText(date);
+//                    }
+//                }, year, month, day);
+//                datePickerDialog.show();
+//            }
+//        });
 
     }
 

@@ -45,7 +45,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_2sdp"
-            android:text="200 Daily Contribution"
+            android:text="Per Member $2000"
             android:textAlignment="textStart"
             android:textColor="@color/black"
             android:textSize="@dimen/_10ssp"
