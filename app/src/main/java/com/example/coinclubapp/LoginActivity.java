@@ -67,8 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailure(Call<LoginResult> call, Throwable t) {
                         Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                        Log.e("LOGLOGLOG", t.getMessage());
-//                        Toast.makeText(LoginActivity.this, "Phone Number And Password Incorrect... ", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
