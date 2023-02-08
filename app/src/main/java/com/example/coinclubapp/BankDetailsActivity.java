@@ -11,15 +11,24 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityBankDetailsBinding;
+import com.example.coinclubapp.result.BankDetailsResult;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BankDetailsActivity extends AppCompatActivity {
 
     ActivityBankDetailsBinding binding;
     private static boolean bankPassbook = false;
-
+    String uriPassBook=null;
     Uri bankPassbookFront;
-    String uriBankPassbook;
+//    String uriBankPassbook=null;
+
+    ApiInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +66,37 @@ public class BankDetailsActivity extends AppCompatActivity {
             } else if(!binding.check.isChecked()){
                 Toast.makeText(BankDetailsActivity.this, "Please Select Checkbox", Toast.LENGTH_SHORT).show();
             } else {
-                Intent i  = new Intent (BankDetailsActivity.this, ProfileActivity.class);
-                startActivity (i);
-                finish ();
+                String holdername=binding.accountHolderNameET.getText().toString();
+                String accountno=binding.accountNumberET.getText().toString();
+                String ifsc=binding.ifscET.getText().toString();
+                String mobileno=binding.registerMobileET.getText().toString();
+
+                apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
+
+                Call<BankDetailsResult> call=apiInterface.postBankDetails(mobileno,ifsc,holdername,accountno,"uriBankPassbook".toString());
+                call.enqueue(new Callback<BankDetailsResult>() {
+                    @Override
+                    public void onResponse(Call<BankDetailsResult> call, Response<BankDetailsResult> response) {
+                        Intent i  = new Intent (BankDetailsActivity.this, MainActivity.class);
+                            startActivity (i);
+                            finish ();
+
+//                        if(response.code()==201)
+//                        {
+//                            Intent i  = new Intent (BankDetailsActivity.this, MainActivity.class);
+//                            startActivity (i);
+//                            finish ();
+//                        }
+//                        else
+//                        {
+//                            Toast.makeText(BankDetailsActivity.this, "no resp", Toast.LENGTH_SHORT).show();
+//                        }
+                    }
+                    @Override
+                    public void onFailure(Call<BankDetailsResult> call, Throwable t) {
+                        Toast.makeText(BankDetailsActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -79,11 +116,13 @@ public class BankDetailsActivity extends AppCompatActivity {
 
         if (resultCode == RESULT_OK && requestCode == 101) {
             binding.BankPassbook.setImageURI(data.getData());
-            bankPassbook = true;
+
             bankPassbookFront = data.getData();
-            uriBankPassbook = getRealPathFromURI(bankPassbookFront);
+            uriPassBook = getRealPathFromURI(bankPassbookFront);
+            bankPassbook = true;
         }
     }
+
 
     private String getRealPathFromURI(Uri contentURI) {
         String result;
@@ -98,4 +137,5 @@ public class BankDetailsActivity extends AppCompatActivity {
         }
         return result;
     }
+
 }

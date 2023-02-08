@@ -2,29 +2,27 @@ package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
-import com.example.coinclubapp.Response.Response;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityClubJoiningFormTwoBinding;
-import com.example.coinclubapp.result.Result;
+import com.example.coinclubapp.result.FormTwoResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ClubJoiningFormTwoActivity extends AppCompatActivity {
     ActivityClubJoiningFormTwoBinding binding;
     ProgressDialog progress;
-    int IdOfUserCreated = 0;
 
+//    SharedPrefManager sharedPrefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +30,7 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
         binding = ActivityClubJoiningFormTwoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+//        sharedPrefManager=new SharedPrefManager(this);
 
         binding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,39 +79,30 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                     String income = binding.incomeEt.getText().toString();
                     Log.i("USER_ENTERED", income);
 
-                    Call<Result> call = apiInterface.postItems(mobile, password, name, gender, city, occupation, organisation, monthlycontribution, motive, income);
+                    Call<FormTwoResult> call = apiInterface.registerNewUser(name, mobile, city, password, gender, occupation, motive, income, monthlycontribution, null, organisation);
 
-
-                    call.enqueue(new Callback<Result>() {
+                    call.enqueue(new Callback<FormTwoResult>() {
                         @Override
-                        public void onResponse(Call<Result> call, retrofit2.Response<Result> response) {
+                        public void onResponse(Call<FormTwoResult> call, Response<FormTwoResult> response) {
                             if (response.isSuccessful()) {
-                                Result res = response.body();
-
-                                try {
-                                    IdOfUserCreated = res.getId();
-                                    Intent intent = new Intent(ClubJoiningFormTwoActivity.this, MainActivity.class);
-                                    progress.dismiss();
-                                    intent.putExtra("id", String.valueOf(IdOfUserCreated));
-                                    startActivity(intent);
-                                    finish();
-                                } catch (Exception e) {
-                                    Toast.makeText(ClubJoiningFormTwoActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
-                                }
-                            }else{
+                                progress.dismiss();
+                                FormTwoResult resultBody = response.body();
+                                Toast.makeText(ClubJoiningFormTwoActivity.this, resultBody.getId().toString(), Toast.LENGTH_SHORT).show();
+                                startActivity(new Intent(ClubJoiningFormTwoActivity.this,MainActivity.class));
+//                                sharedPrefManager.setID(resultBody.getId().toString());
+                            } else {
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, response.code(), Toast.LENGTH_SHORT).show();
                             }
                         }
-                        @Override
-                        public void onFailure(Call<Result> call, Throwable t) {
-                            Toast.makeText(ClubJoiningFormTwoActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
 
+                        @Override
+                        public void onFailure(Call<FormTwoResult> call, Throwable t) {
+                            Toast.makeText(ClubJoiningFormTwoActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     });
+
                 }
             }
         });
-
-
     }
 }

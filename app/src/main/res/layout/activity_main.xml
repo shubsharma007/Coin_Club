@@ -43,28 +43,27 @@
         app:layout_constraintTop_toBottomOf="@+id/textView6">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout2"
+            android:id="@+id/Club_layout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_margin="@dimen/_15sdp"
             android:background="@drawable/home_card_bg"
             android:padding="10dp"
-            android:visibility="visible"
+            android:layout_margin="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/logo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:layout_margin="@dimen/_5sdp"
                 android:src="@drawable/logo_money"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/txtName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
@@ -77,17 +76,17 @@
                 app:layout_constraintTop_toTopOf="@+id/logo" />
 
             <TextView
-                android:id="@+id/textView8"
+                android:id="@+id/txtDesc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:text="200 Daily Contribution"
+                android:text="Per Member $2000"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+                app:layout_constraintStart_toStartOf="@+id/txtName"
+                app:layout_constraintTop_toBottomOf="@+id/txtName" />
 
             <View
                 android:id="@+id/view"
@@ -95,74 +94,232 @@
                 android:layout_height="@dimen/_32sdp"
                 android:layout_marginStart="@dimen/_10sdp"
                 android:background="@color/black"
-                app:layout_constraintBottom_toBottomOf="@+id/textView8"
-                app:layout_constraintStart_toEndOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
+                app:layout_constraintBottom_toBottomOf="@+id/txtDesc"
+                app:layout_constraintStart_toEndOf="@+id/txtDesc"
+                app:layout_constraintTop_toTopOf="@+id/txtName" />
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/txtNextBid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
                 android:text="Next Bid : 10jan 2023"
                 android:textSize="@dimen/_10sdp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/view"
                 app:layout_constraintTop_toTopOf="@+id/view" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txtRound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_5sdp"
-                android:text="Rahul1638"
+                android:text="Round 1 of 10"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toEndOf="@+id/view"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+                app:layout_constraintTop_toBottomOf="@+id/txtNextBid" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <LinearLayout
                 android:id="@+id/appCompatButton2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="5dp"
                 android:layout_marginTop="@dimen/_10sdp"
-                android:layout_marginEnd="5dp"
-                android:background="@drawable/bg_club_formed"
-                android:text="Club Formed"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:layout_marginEnd="@dimen/_30sdp"
+                android:background="@drawable/bg_time"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatButton3"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
+                app:layout_constraintStart_toStartOf="@+id/logo"
+                app:layout_constraintTop_toBottomOf="@+id/txtDesc">
 
-            <androidx.appcompat.widget.AppCompatButton
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_days_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="DAYS"
+                        android:textColor="@color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_days"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="00"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_hour_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="HR"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_hour"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="00"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_minute_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="MIN"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_minute"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="00"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_second_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="SEC"
+                        android:textColor="@android:color/white"
+                        android:textSize="12sp"
+                        android:textStyle="normal" />
+
+                    <TextView
+                        android:id="@+id/tv_second"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="00"
+                        android:textColor="@android:color/white"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/appCompatButton3"
-                android:layout_width="50dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_5sdp"
                 android:background="@drawable/bg_club_formed"
-                android:drawableEnd="@drawable/ic_15_min"
-                android:padding="@dimen/_10sdp"
-                android:textColor="@color/white"
-                android:textStyle="bold"
+                android:paddingStart="@dimen/_8sdp"
+                android:paddingTop="@dimen/_5sdp"
+                android:paddingEnd="@dimen/_8sdp"
+                android:paddingBottom="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatButton2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatButton2" />
+                app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+                app:layout_constraintTop_toTopOf="@+id/appCompatButton2">
+
+
+                <TextView
+                    android:id="@+id/textView15"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_3sdp"
+                    android:text="Total Amount"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/txtAmount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:text="$ 56380"
+                    android:textColor="@color/white"
+                    app:layout_constraintStart_toStartOf="@+id/textView15"
+                    app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:id="@+id/userJoinRecyclerView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/coordinatorLayout"-->
+<!--            tools:listitem="@layout/user_join_club_layout" />-->
 
         <ImageView
             android:layout_width="@dimen/_170sdp"
             android:layout_height="@dimen/_170sdp"
-            android:src="@drawable/img_home"
             android:layout_marginBottom="@dimen/_60sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/coordinatorLayout"
+            android:src="@drawable/img_home"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
@@ -174,8 +331,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                app:fabCradleMargin="10dp"
                 android:background="@color/white"
+                app:fabCradleMargin="10dp"
                 app:fabCradleRoundedCornerRadius="10dp"
                 app:fabCradleVerticalOffset="10dp"
                 app:layout_anchorGravity="center">
@@ -185,8 +342,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
-                    android:backgroundTint="@color/white"
                     android:background="@drawable/transparent_background"
+                    android:backgroundTint="@color/white"
                     app:itemIconTint="#BF01051E"
                     app:itemTextColor="#BF01051E"
                     app:menu="@menu/bottom_nav_menu" />

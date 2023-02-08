@@ -95,7 +95,7 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                 } else if (!binding.rbSalary.isChecked() && !binding.rbHousewife.isChecked() && !binding.rbStudent.isChecked() && !binding.rbSelfEmployed.isChecked()) {
                     Toast.makeText(ClubJoiningFormOneActivity.this, "please enter your occupation", Toast.LENGTH_SHORT).show();
                 } else if (binding.noyoEt.getText().toString().isEmpty()) {
-                    binding.noyoEt.setError("enter organisation name");
+                    binding.noyoEt.setError("enter email address");
                     binding.noyoEt.requestFocus();
                 } else {
                     passIntent = new Intent(ClubJoiningFormOneActivity.this, ClubJoiningFormTwoActivity.class);

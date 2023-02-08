@@ -1,53 +1,96 @@
 package com.example.coinclubapp.Response;
 
-import com.example.coinclubapp.result.KycResult;
-
-import java.util.List;
+import com.example.coinclubapp.result.RegisterUser;
 
 public class KycResponse {
-    private Boolean status;
-    private String status_code;
-    private String message;
-    private KycResult kyc_result;
-    private List<Object> error;
+    private int id;
+    private RegisterUser registeruser;
+    private String address;
+    private String mobile;
+    private String aadharno;
+    private String aadharfrontimg;
+    private String aadharbackimg;
+    private String panno;
+    private String panimg;
+    private boolean is_verified;
 
-    public Boolean getStatus() {
-        return status;
+    public int getId() {
+        return id;
     }
 
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getStatus_code() {
-        return status_code;
+    public RegisterUser getRegisteruser() {
+        return registeruser;
     }
 
-    public void setStatus_code(String status_code) {
-        this.status_code = status_code;
+    public void setRegisteruser(RegisterUser registeruser) {
+        this.registeruser = registeruser;
     }
 
-    public String getMessage() {
-        return message;
+    public String getAddress() {
+        return address;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public KycResult getKyc_result() {
-        return kyc_result;
+    public String getMobile() {
+        return mobile;
     }
 
-    public void setKyc_result(KycResult kyc_result) {
-        this.kyc_result = kyc_result;
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
     }
 
-    public List<Object> getError() {
-        return error;
+    public String getAadharno() {
+        return aadharno;
     }
 
-    public void setError(List<Object> error) {
-        this.error = error;
+    public void setAadharno(String aadharno) {
+        this.aadharno = aadharno;
+    }
+
+    public String getAadharfrontimg() {
+        return aadharfrontimg;
+    }
+
+    public void setAadharfrontimg(String aadharfrontimg) {
+        this.aadharfrontimg = aadharfrontimg;
+    }
+
+    public String getAadharbackimg() {
+        return aadharbackimg;
+    }
+
+    public void setAadharbackimg(String aadharbackimg) {
+        this.aadharbackimg = aadharbackimg;
+    }
+
+    public String getPanno() {
+        return panno;
+    }
+
+    public void setPanno(String panno) {
+        this.panno = panno;
+    }
+
+    public String getPanimg() {
+        return panimg;
+    }
+
+    public void setPanimg(String panimg) {
+        this.panimg = panimg;
+    }
+
+    public boolean isIs_verified() {
+        return is_verified;
+    }
+
+    public void setIs_verified(boolean is_verified) {
+        this.is_verified = is_verified;
     }
 }

@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        binding.uKycTv.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this,UpdateKycActivity.class)));
+        binding.uKycTv.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this,KycDetailsActivity.class)));
 
         binding.addBankDetails.setOnClickListener (v -> {
             Intent i =  new Intent (ProfileActivity.this, BankDetailsActivity.class);

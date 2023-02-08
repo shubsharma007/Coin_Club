@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coinclubapp.Club_Activity;
 import com.example.coinclubapp.R;
-import com.example.coinclubapp.Response.ClubResponse;
 import com.example.coinclubapp.result.ClubResult;
 
 import java.text.SimpleDateFormat;
@@ -25,7 +24,7 @@ import java.util.List;
 
 public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHolder> {
     Context context;
-    ClubResponse clubResponse;
+//    ClubResponse clubResponse;
     List<ClubResult> clubResultList;
     String baseUrlImg="";
 
@@ -34,12 +33,12 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     Handler handler = new Handler();
     Runnable runnable;
 
-    public HotClubAdapter(Context context, ClubResponse clubResponse) {
-        this.context = context;
-        this.clubResponse = clubResponse;
-        clubResultList=clubResponse.getClub();
-        baseUrlImg=clubResponse.getImg() + "/";
-    }
+//    public HotClubAdapter(Context context, ClubResponse clubResponse) {
+//        this.context = context;
+//        this.clubResponse = clubResponse;
+//        clubResultList=clubResponse.getClub();
+//        baseUrlImg=clubResponse.getImg() + "/";
+//    }
 
     @NonNull
     @Override
