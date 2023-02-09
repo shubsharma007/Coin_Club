@@ -84,6 +84,7 @@
             android:textSize="@dimen/_14ssp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+            app:layout_constraintStart_toStartOf="@+id/txtNextBid"
             app:layout_constraintTop_toBottomOf="@+id/txtNextBid" />
 
         <LinearLayout
@@ -99,7 +100,7 @@
             android:paddingBottom="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/appCompatButton3"
-            app:layout_constraintStart_toStartOf="@+id/logo"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtDesc">
 
 
@@ -239,7 +240,7 @@
             android:paddingEnd="@dimen/_8sdp"
             android:paddingBottom="@dimen/_5sdp"
             app:layout_constraintBottom_toBottomOf="@+id/appCompatButton2"
-            app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/appCompatButton2">
 
 
