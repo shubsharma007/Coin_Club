@@ -2,16 +2,21 @@ package com.example.coinclubapp.InterFace;
 
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.result.BankDetailsResult;
+import com.example.coinclubapp.result.ClubResult;
 import com.example.coinclubapp.result.LoginResult;
 import com.example.coinclubapp.result.FormTwoResult;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
@@ -52,18 +57,32 @@ public interface ApiInterface {
     );
 
 
+//    @FormUrlEncoded
+//    @POST("bankdetails/")
+//    Call<BankDetailsResult> postBankDetails(@Field("registerno")String registerno,
+//                                            @Field("IFSCcode") String IFSCcode,
+//                                            @Field("accountname")String accountname,
+//                                            @Field("accountnumber") String accountnumber,
+//                                            @Field("passbookimg") String passbookimg);
 
-    @FormUrlEncoded
+
+    @Multipart
     @POST("bankdetails/")
-    Call<BankDetailsResult> postBankDetails(@Field("registerno")String registerno,
-                                            @Field("IFSCcode") String IFSCcode,
-                                            @Field("accountname")String accountname,
-                                            @Field("accountnumber") String accountnumber,
-                                            @Field("passbookimg") String passbookimg);
+    Call<BankDetailsResult> postBankDetails(
+            @Part("registerno") RequestBody registerno,
+            @Part("IFSCcode") RequestBody IFSCcode,
+            @Part("accountname") RequestBody accountname,
+            @Part("accountnumber") RequestBody accountnumber,
+            @Part MultipartBody.Part passbookimg
+    );
 
-//    @GET("club-data-get")
+
+    //    @GET("club-data-get")
 //    Call<ClubResponse> getClubs();
 
+
+    @GET("club/")
+    Call<List<ClubResult>> getAllClubs();
 
     @GET("userkyc/")
     Call<List<KycResponse>> getKycItem();

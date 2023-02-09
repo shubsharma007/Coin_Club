@@ -23,22 +23,20 @@ import java.util.Date;
 import java.util.List;
 
 public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHolder> {
-    Context context;
-//    ClubResponse clubResponse;
-    List<ClubResult> clubResultList;
-    String baseUrlImg="";
 
-    private String DATE_TIME = "2023-01-31 10:30:00";
-    private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+    Context context;
+    List<ClubResult> clubResultList;
+
+
+    private final String DATE_TIME = "2023-01-31 10:30:00";
+    private final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     Handler handler = new Handler();
     Runnable runnable;
 
-//    public HotClubAdapter(Context context, ClubResponse clubResponse) {
-//        this.context = context;
-//        this.clubResponse = clubResponse;
-//        clubResultList=clubResponse.getClub();
-//        baseUrlImg=clubResponse.getImg() + "/";
-//    }
+    public HotClubAdapter(Context context, List<ClubResult> clubResultList) {
+        this.context = context;
+        this.clubResultList = clubResultList;
+    }
 
     @NonNull
     @Override
@@ -55,13 +53,13 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         ClubResult current=clubResultList.get(position);
         countDownFunc(holder);
 
-        holder.txtName.setText(current.getClub_name());
-        holder.txtDesc.setText("per head : " + current.getMember_contribution()  + " ₹ ");
-        holder.txtRound.setText("round 1 of " + current.getTotal_member());
-        holder.txtAmount.setText(current.getTotal_amount() + "₹");
-        holder.txtNextBid.setText("Next Bid : " + current.getStart_date());
+        holder.txtName.setText(current.getClubname());
+        holder.txtDesc.setText("per head : " + current.getClubcontribution()  + " ₹ ");
+        holder.txtRound.setText("round 1 of " + current.getClubmembers());
+        holder.txtAmount.setText(current.getClubamount() + "₹");
+        holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
         Glide.with(context)
-                .load(baseUrlImg+current.getLogo())
+                .load(current.getClubimage())
                 .centerCrop()
                 .placeholder(R.drawable.logo_money)
                 .into(holder.logo);
