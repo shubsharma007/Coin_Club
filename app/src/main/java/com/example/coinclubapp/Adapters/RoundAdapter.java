@@ -11,8 +11,18 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coinclubapp.R;
+import com.example.coinclubapp.result.RoundsResult;
+
+import java.util.List;
 
 public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHolder> {
+
+    List<RoundsResult> listOfRounds;
+
+    public RoundAdapter(List<RoundsResult> listOfRounds) {
+        this.listOfRounds = listOfRounds;
+    }
+
     @NonNull
     @Override
     public RoundAdapter.RoundViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -24,11 +34,18 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
     @Override
     public void onBindViewHolder(@NonNull RoundAdapter.RoundViewHolder holder, int position) {
 
+        RoundsResult result=listOfRounds.get(position);
+        holder.roundBtn.setText(result.getId().toString());
+
+        holder.nameTv.setText(result.getWinner());
+        holder.amountTv.setText(result.getRoundamount());
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return listOfRounds.size();
     }
 
     public class RoundViewHolder extends RecyclerView.ViewHolder {
