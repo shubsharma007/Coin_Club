@@ -16,32 +16,36 @@ import com.google.android.material.navigation.NavigationBarView;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private long pressedTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding=ActivityMainBinding.inflate(getLayoutInflater());
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),HotClubActivity.class)));
+        binding.fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), HotClubActivity.class)));
 
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
 
         binding.bottomNavView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId())
-            {
+            switch (item.getItemId()) {
                 case R.id.notification:
-                    startActivity(new Intent(getApplicationContext(),NotificationsActivity.class));
+                    startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
                     break;
                 case R.id.profile:
-                    startActivity(new Intent(getApplicationContext(),ProfileActivity.class));
+                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     break;
                 case R.id.money:
-                    startActivity(new Intent(getApplicationContext(),MyBankActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MyBankActivity.class));
                     break;
             }
             return false;
         });
 
     }
+
     @Override
     public void onBackPressed() {
 
