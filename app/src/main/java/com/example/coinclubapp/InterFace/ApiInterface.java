@@ -5,6 +5,7 @@ import com.example.coinclubapp.result.BankDetailsResult;
 import com.example.coinclubapp.result.ClubResult;
 import com.example.coinclubapp.result.LoginResult;
 import com.example.coinclubapp.result.FormTwoResult;
+import com.example.coinclubapp.result.RoundsResult;
 
 import java.util.List;
 
@@ -83,6 +84,9 @@ public interface ApiInterface {
 
     @GET("club/")
     Call<List<ClubResult>> getAllClubs();
+
+    @GET("rounds/")
+    Call<List<RoundsResult>> getAllRounds();
 
     @GET("userkyc/")
     Call<List<KycResponse>> getKycItem();
