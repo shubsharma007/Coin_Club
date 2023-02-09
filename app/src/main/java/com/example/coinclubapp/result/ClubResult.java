@@ -1,104 +1,107 @@
 package com.example.coinclubapp.result;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class ClubResult {
-    private int id;
-    private String logo;
-    private String club_name;
-    private String total_amount;
-    private String total_member;
-    private String member_contribution;
-    private String round_option;
-    private String start_date;
-    private String status;
-    private String updated_at;
-    private String created_at;
+    @SerializedName("id")
+    @Expose
+    private Integer id;
+    @SerializedName("clubname")
+    @Expose
+    private String clubname;
+    @SerializedName("clubimage")
+    @Expose
+    private String clubimage;
+    @SerializedName("clubamount")
+    @Expose
+    private String clubamount;
+    @SerializedName("clubmembers")
+    @Expose
+    private Integer clubmembers;
+    @SerializedName("clubcontribution")
+    @Expose
+    private String clubcontribution;
+    @SerializedName("startdate")
+    @Expose
+    private String startdate;
+    @SerializedName("duration")
+    @Expose
+    private String duration;
+    @SerializedName("is_completed")
+    @Expose
+    private Boolean isCompleted;
 
-
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public String getLogo() {
-        return logo;
+    public String getClubname() {
+        return clubname;
     }
 
-    public void setLogo(String logo) {
-        this.logo = logo;
+    public void setClubname(String clubname) {
+        this.clubname = clubname;
     }
 
-    public String getClub_name() {
-        return club_name;
+    public String getClubimage() {
+        return clubimage;
     }
 
-    public void setClub_name(String club_name) {
-        this.club_name = club_name;
+    public void setClubimage(String clubimage) {
+        this.clubimage = clubimage;
     }
 
-    public String getTotal_amount() {
-        return total_amount;
+    public String getClubamount() {
+        return clubamount;
     }
 
-    public void setTotal_amount(String total_amount) {
-        this.total_amount = total_amount;
+    public void setClubamount(String clubamount) {
+        this.clubamount = clubamount;
     }
 
-    public String getTotal_member() {
-        return total_member;
+    public Integer getClubmembers() {
+        return clubmembers;
     }
 
-    public void setTotal_member(String total_member) {
-        this.total_member = total_member;
+    public void setClubmembers(Integer clubmembers) {
+        this.clubmembers = clubmembers;
     }
 
-    public String getMember_contribution() {
-        return member_contribution;
+    public String getClubcontribution() {
+        return clubcontribution;
     }
 
-    public void setMember_contribution(String member_contribution) {
-        this.member_contribution = member_contribution;
+    public void setClubcontribution(String clubcontribution) {
+        this.clubcontribution = clubcontribution;
     }
 
-    public String getRound_option() {
-        return round_option;
+    public String getStartdate() {
+        return startdate;
     }
 
-    public void setRound_option(String round_option) {
-        this.round_option = round_option;
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
     }
 
-    public String getStart_date() {
-        return start_date;
+    public String getDuration() {
+        return duration;
     }
 
-    public void setStart_date(String start_date) {
-        this.start_date = start_date;
+    public void setDuration(String duration) {
+        this.duration = duration;
     }
 
-    public String getStatus() {
-        return status;
+    public Boolean getIsCompleted() {
+        return isCompleted;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setIsCompleted(Boolean isCompleted) {
+        this.isCompleted = isCompleted;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
-    }
-
-    public String getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
-    }
 }

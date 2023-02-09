@@ -13,6 +13,9 @@ import com.example.coinclubapp.Adapters.HotClubAdapter;
 import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityHotClubBinding;
+import com.example.coinclubapp.result.ClubResult;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +37,25 @@ public class HotClubActivity extends AppCompatActivity {
 
 
         ApiInterface apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
+        Call<List<ClubResult>> call=apiInterface.getAllClubs();
+        call.enqueue(new Callback<List<ClubResult>>() {
+            @Override
+            public void onResponse(Call<List<ClubResult>> call, Response<List<ClubResult>> response) {
+                if(response.isSuccessful())
+                {
+                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,response.body()));
+                }
+                else
+                {
+                    Toast.makeText(HotClubActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<ClubResult>> call, Throwable t) {
+                Toast.makeText(HotClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 //        Call<ClubResponse> call=apiInterface.getClubs();
 //        call.enqueue(new Callback<ClubResponse>() {
 //            @Override
