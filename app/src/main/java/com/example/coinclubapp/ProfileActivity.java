@@ -30,24 +30,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        binding.ppTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this,Privacy_PolicyActivity.class));
-
-            }
-        });
-
-        binding.tncTv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ProfileActivity.this,TermsAndConditionActivity.class));
-
-            }
-        });
-
-        binding.uKycTv.setOnClickListener(v -> startActivity(new Intent(ProfileActivity.this,KycDetailsActivity.class)));
-
         binding.addBankDetails.setOnClickListener (v -> {
             Intent i =  new Intent (ProfileActivity.this, BankDetailsActivity.class);
             startActivity (i);

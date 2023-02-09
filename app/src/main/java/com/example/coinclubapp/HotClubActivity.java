@@ -30,6 +30,12 @@ public class HotClubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHotClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(),SettingActivity.class));
+        });
+
+
         binding.progressBar.setVisibility(View.VISIBLE);
 
         layoutManager = new LinearLayoutManager(HotClubActivity.this, LinearLayoutManager.VERTICAL, false);

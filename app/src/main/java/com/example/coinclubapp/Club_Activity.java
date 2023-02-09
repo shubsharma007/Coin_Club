@@ -10,12 +10,14 @@ import android.widget.LinearLayout;
 
 import com.example.coinclubapp.Adapters.MemberAdapter;
 import com.example.coinclubapp.Adapters.RoundAdapter;
+import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.databinding.ActivityClubBinding;
 
 import com.example.coinclubapp.databinding.ActivityClubBinding;
 
 public class Club_Activity extends AppCompatActivity {
     ActivityClubBinding binding;
+
 
     RecyclerView.LayoutManager layoutManagerM;
     RecyclerView.LayoutManager layoutManagerR;
@@ -25,25 +27,26 @@ public class Club_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
         binding.backBtn.setOnClickListener(v -> {
-            Intent i = new Intent (Club_Activity.this, HotClubActivity.class);
-            startActivity (i);
-            finish ();
+            Intent i = new Intent(Club_Activity.this, HotClubActivity.class);
+            startActivity(i);
+            finish();
         });
 
         binding.recyclerViewMember.setAdapter(new MemberAdapter());
-        layoutManagerM=new LinearLayoutManager(Club_Activity.this,LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerM = new LinearLayoutManager(Club_Activity.this, LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewMember.setLayoutManager(layoutManagerM);
 
-
         binding.recyclerViewRound.setAdapter(new RoundAdapter());
-        layoutManagerR=new LinearLayoutManager(Club_Activity.this,LinearLayoutManager.HORIZONTAL,false);
+        layoutManagerR = new LinearLayoutManager(Club_Activity.this, LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewRound.setLayoutManager(layoutManagerR);
 
-        binding.seeAllMember.setOnClickListener (v -> {
-            Intent i = new Intent (Club_Activity.this, MemberActivity.class);
-            startActivity (i);
+        binding.seeAllMember.setOnClickListener(v -> {
+            Intent i = new Intent(Club_Activity.this, MemberActivity.class);
+            startActivity(i);
         });
     }
 }

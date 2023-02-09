@@ -34,14 +34,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/safedRibbin"
-        android:layout_width="@dimen/_33sdp"
-        android:layout_height="@dimen/_33sdp"
-        android:layout_marginEnd="15dp"
+    <ImageButton
+        android:id="@+id/btnSetting"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
         android:background="@drawable/bg_ic_home"
-        android:drawableStart="@drawable/ic_home"
-        android:paddingStart="15dp"
+        android:src="@drawable/ic_home"
         app:layout_constraintBottom_toBottomOf="@+id/notificationTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/notificationTv" />
