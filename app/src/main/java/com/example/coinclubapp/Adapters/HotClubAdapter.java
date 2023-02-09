@@ -28,7 +28,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     List<ClubResult> clubResultList;
 
 
-    private final String DATE_TIME = "2023-01-31 10:30:00";
+    private final String DATE_TIME = "2023-11-11 10:30:00";
     private final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     Handler handler = new Handler();
     Runnable runnable;
@@ -51,11 +51,11 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     public void onBindViewHolder(@NonNull HotClubAdapter.MyViewHolder holder, int position) {
 
         ClubResult current=clubResultList.get(position);
-        countDownFunc(holder);
+        countDownFunc(holder,current);
 
         holder.txtName.setText(current.getClubname());
         holder.txtDesc.setText("per head : " + current.getClubcontribution()  + " ₹ ");
-        holder.txtRound.setText("round 1 of " + current.getClubmembers());
+        holder.txtRound.setText("round 3 of " + current.getClubmembers());
         holder.txtAmount.setText(current.getClubamount() + "₹");
         holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
         Glide.with(context)
@@ -63,7 +63,6 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
                 .centerCrop()
                 .placeholder(R.drawable.logo_money)
                 .into(holder.logo);
-
 
         holder.Club_layout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +73,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         });
     }
 
-    private void countDownFunc(MyViewHolder holder) {
+    private void countDownFunc(MyViewHolder holder,ClubResult current) {
         runnable = new Runnable() {
             @Override
             public void run() {
@@ -109,7 +108,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView txtName, txtDesc, txtNextBid, txtRound, txtTime, txtAmount;
+        TextView txtName, txtDesc, txtNextBid, txtRound, txtAmount;
         ConstraintLayout Club_layout;
         ImageView logo;
         TextView tv_days, tv_hour, tv_minute, tv_second;

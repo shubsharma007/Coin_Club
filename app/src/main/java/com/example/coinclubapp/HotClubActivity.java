@@ -42,7 +42,7 @@ public class HotClubActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<ClubResult>> call, Response<List<ClubResult>> response) {
                 if(response.isSuccessful())
-                {
+                {binding.progressBar.setVisibility(View.GONE);
                     binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,response.body()));
                 }
                 else
