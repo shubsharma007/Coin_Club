@@ -71,6 +71,8 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Club_Activity.class);
+                intent.putExtra("clubName",current.getClubname());
+                intent.putExtra("countDownTime",finalDate);
                 context.startActivity(intent);
             }
         });

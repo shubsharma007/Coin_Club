@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="@dimen/_70sdp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_8sdp"
     android:orientation="vertical">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/dp_img"
+        android:layout_gravity="center"
         android:layout_width="@dimen/_60sdp"
         android:layout_height="@dimen/_60sdp"
-        android:src="@drawable/img_member" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_member"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"/>
 
     <TextView
         android:id="@+id/nameTv"
+        android:gravity="center"
         android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_5sdp"
         android:textColor="@color/black"
         android:textStyle="bold"
+        android:paddingBottom="3dp"
         android:textSize="@dimen/_9ssp"
         android:text="Eleanor Pena" />
 </LinearLayout>

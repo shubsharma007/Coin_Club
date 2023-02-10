@@ -37,6 +37,9 @@ public interface ApiInterface {
                                         @Field("email") String email
     );
 
+    @GET("regs_list/")
+    Call<List<FormTwoResult>> getAllRegisteredUsers();
+
 
     @FormUrlEncoded
     @POST("bslogin/")

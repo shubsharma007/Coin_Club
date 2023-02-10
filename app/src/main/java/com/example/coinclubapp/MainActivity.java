@@ -1,7 +1,9 @@
 package com.example.coinclubapp;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.example.coinclubapp.databinding.ActivityLoginBinding;
 import com.example.coinclubapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
@@ -25,17 +28,13 @@ public class MainActivity extends AppCompatActivity {
 
         binding.fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), HotClubActivity.class)));
 
-        binding.btnSetting.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-        });
-
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.notification:
                     startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
                     break;
-                case R.id.profile:
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                case R.id.Dashboard:
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                     break;
                 case R.id.money:
                     startActivity(new Intent(getApplicationContext(), MyBankActivity.class));
@@ -44,8 +43,68 @@ public class MainActivity extends AppCompatActivity {
             return false;
         });
 
-    }
+        ActionBarDrawerToggle actionBarDrawerToggle = new ActionBarDrawerToggle(this, binding.drawerLayout, binding.toolbar
+                , 0, 0) {
+            @Override
+            public void onDrawerClosed(View drawerView) {
+                super.onDrawerClosed(drawerView);
+            }
 
+            @Override
+            public void onDrawerOpened(View drawerView) {
+                super.onDrawerOpened(drawerView);
+            }
+        };
+        binding.drawerLayout.addDrawerListener(actionBarDrawerToggle);
+
+        binding.toolbar.setNavigationIcon(R.drawable.ic_menu);
+
+        binding.drawernavigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+
+                    case R.id.nav_Profile:
+                        startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
+                        break;
+                    case R.id.nav_ActiveClubs:
+
+                        break;
+                    case R.id.nav_HistoricalClubs:
+
+                        break;
+                    case R.id.nav_ChangePin:
+
+                        break;
+                    case R.id.nav_AddBankDetails:
+                        startActivity(new Intent(getApplicationContext(),BankDetailsActivity.class));
+                        break;
+                    case R.id.nav_TransactionHistory:
+
+                        break;
+                    case R.id.nav_MyBankAccounts:
+                        startActivity(new Intent(getApplicationContext(),MyBankActivity.class));
+
+                        break;
+                    case R.id.nav_ReferAndEarn:
+
+                        break;
+                    case R.id.nav_Setting:
+                        startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+                        break;
+                    case R.id.nav_logout:
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finishAffinity();
+                        break;
+                }
+
+                return false;
+            }
+        });
+
+    }
     @Override
     public void onBackPressed() {
 

@@ -1,5 +1,6 @@
 package com.example.coinclubapp.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,25 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.coinclubapp.R;
+import com.example.coinclubapp.result.FormTwoResult;
+
+import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberViewHolder> {
+
+    Context context;
+    List<FormTwoResult> resultList;
+
+    public MemberAdapter(Context context, List<FormTwoResult> resultList) {
+        this.context = context;
+        this.resultList = resultList;
+    }
+
+
     @NonNull
     @Override
     public MemberAdapter.MemberViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -22,16 +39,18 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.MemberViewHolder holder, int position) {
-
+        FormTwoResult result=resultList.get(position);
+        Glide.with(context).load(result.getProfileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
+        holder.nameTv.setText(result.getFullName());
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return resultList.size();
     }
 
     public class MemberViewHolder extends RecyclerView.ViewHolder {
-        ImageView dp_img;
+        CircleImageView dp_img;
         TextView nameTv;
         public MemberViewHolder(@NonNull View itemView) {
             super(itemView);
