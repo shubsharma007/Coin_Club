@@ -41,7 +41,9 @@ public class HotClubActivity extends AppCompatActivity {
         layoutManager = new LinearLayoutManager(HotClubActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(layoutManager);
 
-
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
         ApiInterface apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
         Call<List<ClubResult>> call=apiInterface.getAllClubs();
         call.enqueue(new Callback<List<ClubResult>>() {

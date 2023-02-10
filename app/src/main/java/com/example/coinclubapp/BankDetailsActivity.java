@@ -90,10 +90,10 @@ public class BankDetailsActivity extends AppCompatActivity {
                 Toast.makeText(BankDetailsActivity.this, "Please Select Checkbox", Toast.LENGTH_SHORT).show();
             } else {
 
-                String Mobile = binding.accountHolderNameET.getText().toString();
-                String IFScode = binding.accountNumberET.getText().toString();
-                String AccName = binding.ifscET.getText().toString();
-                String AccNumber = binding.registerMobileET.getText().toString();
+                String Mobile = binding.registerMobileET.getText().toString();
+                String IFScode = binding.ifscET.getText().toString();
+                String AccName = binding.accountHolderNameET.getText().toString();
+                String AccNumber = binding.accountNumberET.getText().toString();
 
                 sendDetails(Mobile,IFScode,AccName,AccNumber);
 
@@ -126,40 +126,40 @@ public class BankDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void sendDetails(String Mobile, String IFScode, String AccName, String AccNumber) {
+    private void sendDetails(String Mobile, String ifsccode, String AccName, String AccNumber) {
 
         File file = new File (imagePath);
 
         RequestBody requestFile = RequestBody.create (MediaType.parse ("multipart/form-data"), file);
-        MultipartBody.Part Photo = MultipartBody.Part.createFormData ("passbookimg", file.getName (), requestFile);
+        MultipartBody.Part passbookimg = MultipartBody.Part.createFormData ("passbookimg", file.getName (), requestFile);
 
-        RequestBody accnumber = RequestBody.create (MediaType.parse ("multipart/form-data"), Mobile);
-        RequestBody accname = RequestBody.create (MediaType.parse ("multipart/form-data"), IFScode);
-        RequestBody mobile = RequestBody.create (MediaType.parse ("multipart/form-data"), AccName);
-        RequestBody ifscode = RequestBody.create (MediaType.parse ("multipart/form-data"), AccNumber);
+        RequestBody accountnumber = RequestBody.create (MediaType.parse ("multipart/form-data"), AccNumber);
+        RequestBody accountname = RequestBody.create (MediaType.parse ("multipart/form-data"), AccName);
+        RequestBody registerno = RequestBody.create (MediaType.parse ("multipart/form-data"), Mobile);
+        RequestBody IFSCcode = RequestBody.create (MediaType.parse ("multipart/form-data"), ifsccode);
 
-
-        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<BankDetailsResult> call = apiInterface.postBankDetails(accname,accnumber,mobile,ifscode,Photo);
+        apiInterface=RetrofitService.getRetrofit().create(ApiInterface.class);
+        Call<BankDetailsResult> call=apiInterface.postBankDetails(registerno,IFSCcode,accountname,accountnumber,passbookimg);
         call.enqueue(new Callback<BankDetailsResult>() {
             @Override
             public void onResponse(Call<BankDetailsResult> call, Response<BankDetailsResult> response) {
-//                if (response.isSuccessful()) {
+                int val=response.code();
+                if(val==201)
+                {
                     Toast.makeText(BankDetailsActivity.this, "success", Toast.LENGTH_SHORT).show();
-//                } else {
-//                    Toast.makeText(BankDetailsActivity.this, "fails", Toast.LENGTH_SHORT).show();
-//                }
-//                        Intent i = new Intent(BankDetailsActivity.this, MainActivity.class);
-//                        startActivity(i);
-//                        finish();
-
+                }
+                else
+                {
+                    Toast.makeText(BankDetailsActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
             public void onFailure(Call<BankDetailsResult> call, Throwable t) {
-                Toast.makeText(BankDetailsActivity.this, "failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(BankDetailsActivity.this, "on failure called", Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
 

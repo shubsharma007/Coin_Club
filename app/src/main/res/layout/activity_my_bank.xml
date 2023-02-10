@@ -12,12 +12,12 @@
         android:layout_width="@dimen/_33sdp"
         android:layout_height="@dimen/_33sdp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/bg_ic_home"
         android:drawableStart="@drawable/ic_back"
         android:paddingStart="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView6"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <TextView
         android:id="@+id/textView6"
@@ -26,13 +26,13 @@
         android:layout_marginTop="@dimen/_15sdp"
         android:text="My (Bank) Accounts"
         android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_15ssp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
-        android:id="@+id/btnSetting"
+        android:id="@+id/btn_setting"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
         android:layout_marginEnd="@dimen/_15sdp"
@@ -43,6 +43,7 @@
         app:layout_constraintTop_toTopOf="@+id/textView6" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_18sdp"
@@ -127,10 +128,10 @@
                 android:id="@+id/withdrawal_money"
                 android:layout_width="wrap_content"
                 android:layout_height="55dp"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:background="@color/mainColour"
                 android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_marginEnd="@dimen/_8sdp"
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/add_money"
@@ -174,15 +175,15 @@
             android:id="@+id/transaction_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="10dp"
             android:layout_marginStart="20dp"
+            android:layout_marginTop="10dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="10dp"
-            tools:listitem="@layout/transaction_cardview"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView13" />
+            app:layout_constraintTop_toBottomOf="@+id/textView13"
+            tools:listitem="@layout/transaction_cardview" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

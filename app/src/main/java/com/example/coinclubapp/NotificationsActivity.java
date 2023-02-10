@@ -18,6 +18,10 @@ public class NotificationsActivity extends AppCompatActivity {
         binding=ActivityNotificationsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
+
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new NotificationAdapter());
         binding.btnSetting.setOnClickListener(v -> {
