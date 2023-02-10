@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.coinclubapp.Adapters.TransactionAdapter;
@@ -23,6 +24,10 @@ public class MyBankActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMyBankBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
 
         LayoutManager = new LinearLayoutManager (MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.transactionRecyclerView.setLayoutManager (LayoutManager);

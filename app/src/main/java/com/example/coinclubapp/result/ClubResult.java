@@ -32,6 +32,18 @@ public class ClubResult {
     @Expose
     private Boolean isCompleted;
 
+    public String getNextround() {
+        return nextround;
+    }
+
+    public void setNextround(String nextround) {
+        this.nextround = nextround;
+    }
+
+    @SerializedName("next_round")
+    @Expose
+    private String nextround;
+
     public Integer getId() {
         return id;
     }

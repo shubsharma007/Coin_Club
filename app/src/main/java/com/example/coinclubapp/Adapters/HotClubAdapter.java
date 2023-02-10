@@ -60,7 +60,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         holder.txtDesc.setText("per head : " + current.getClubcontribution() + " ₹ ");
         holder.txtRound.setText("round 3 of " + current.getClubmembers());
         holder.txtAmount.setText(current.getClubamount() + " ₹");
-        holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
+        holder.txtNextBid.setText("Next Bid : " + current.getNextround());
         Glide.with(context)
                 .load(current.getClubimage())
                 .centerCrop()
