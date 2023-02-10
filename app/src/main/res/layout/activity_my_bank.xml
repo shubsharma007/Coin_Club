@@ -94,8 +94,8 @@
 
             <LinearLayout
                 android:id="@+id/add_money"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="30dp"
                 android:background="@color/mainColour"
@@ -119,15 +119,15 @@
                     android:layout_marginStart="5dp"
                     android:text="Add Money"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_9ssp"
                     android:textStyle="bold" />
 
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/withdrawal_money"
-                android:layout_width="wrap_content"
-                android:layout_height="55dp"
+                android:layout_width="140dp"
+                android:layout_height="50dp"
                 android:layout_marginEnd="@dimen/_8sdp"
                 android:background="@color/mainColour"
                 android:gravity="center"
@@ -135,7 +135,6 @@
                 android:paddingStart="@dimen/_5sdp"
                 android:paddingEnd="@dimen/_5sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/add_money"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/add_money"
@@ -152,7 +151,7 @@
                     android:layout_marginStart="5dp"
                     android:text="Withdrawal Money"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/_12ssp"
+                    android:textSize="@dimen/_9ssp"
                     android:textStyle="bold" />
 
             </LinearLayout>

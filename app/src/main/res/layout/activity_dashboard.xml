@@ -7,6 +7,19 @@
     android:background="@color/mainColour"
     tools:context=".DashboardActivity">
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/backBtn"
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_marginStart="@dimen/_9sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:background="@drawable/bg_ic_home"
+        android:drawableEnd="@drawable/ic_back"
+        android:paddingEnd="@dimen/_12sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/clubName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/clubName" />
+
     <TextView
         android:id="@+id/clubName"
         android:layout_width="wrap_content"
