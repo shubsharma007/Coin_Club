@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Coin Club App</string>
     <string name="terms_and_condition">If you pay attention, youll notice that most, if not all, of your favorite websites, have terms and conditions. When launching an online business, it can be hard to understand why you need to spend time and effort creating terms for your users. Also, you might have no clue what to write and how to write it. The good news? You dont need to be a legal expert to create these terms. In this article, youll learn the best practices for creating bulletproof terms and conditions and find examples of how other businesses legally protect themselves. We also put together a free terms and conditions template you may download and use as a starting point when writing your own.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -91,7 +91,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="₹1006746378430"
+                                android:text="₹100430"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 
@@ -126,7 +126,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="₹1006746378430"
+                                android:text="₹78430"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 
@@ -161,7 +161,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:gravity="center"
-                                android:text="₹1006746378430"
+                                android:text="453453"
                                 android:textColor="@color/black"
                                 android:textSize="13sp" />
 

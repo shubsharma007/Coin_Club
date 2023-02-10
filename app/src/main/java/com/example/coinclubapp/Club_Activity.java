@@ -50,6 +50,12 @@ public class Club_Activity extends AppCompatActivity {
         binding = ActivityClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+        if(binding.bidStartIn.getText().equals("Start Bidding"))
+        {
+            binding.bidStartIn.setEnabled(true);
+        }
+        else
+        {
         if (binding.bidStartIn.getText().equals("Start Bidding")) {
             binding.bidStartIn.setEnabled(true);
         } else {
@@ -66,6 +72,12 @@ public class Club_Activity extends AppCompatActivity {
         binding.bidStartIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(binding.bidStartIn.isEnabled())
+                {
+                    Toast.makeText(Club_Activity.this, "button is enabled", Toast.LENGTH_SHORT).show();
+                }
+                else
+                {
                 if (binding.bidStartIn.isEnabled()) {
                     startActivity(new Intent(getApplicationContext(), BidRoomActivity.class));
                 } else {
@@ -153,6 +165,15 @@ public class Club_Activity extends AppCompatActivity {
                         String strMinute = Long.toString(Seconds);
                         String strSecond = Long.toString(Seconds);
 
+                        if(strDay.contains("-") || strHour.contains("-") || strMinute.contains("-") || strSecond.contains("-"))
+                        {
+                            binding.bidStartIn.setText("Start Bidding");
+                            handler=null;
+                            binding.bidStartIn.setEnabled(true);
+
+                        }
+                        else
+                        {
                         if (strDay.contains("-") || strHour.contains("-") || strMinute.contains("-") || strSecond.contains("-")) {
                             binding.bidStartIn.setText("Start Bidding");
                             handler = null;

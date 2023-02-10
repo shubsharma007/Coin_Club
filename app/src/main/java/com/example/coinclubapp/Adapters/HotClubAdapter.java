@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -71,8 +72,11 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, Club_Activity.class);
-                intent.putExtra("clubName",current.getClubname());
-                intent.putExtra("countDownTime",finalDate);
+                intent.putExtra("clubName", current.getClubname());
+                intent.putExtra("countDownTime", finalDate);
+                intent.putExtra("clubAmount", current.getClubamount());
+                intent.putExtra("perHead", current.getClubcontribution());
+                intent.putExtra("nextBid", current.getNextround());
                 context.startActivity(intent);
             }
         });
@@ -99,10 +103,32 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
                         long Minutes = diff / (60 * 1000) % 60;
                         long Seconds = diff / 1000 % 60;
                         //
-                        holder.tv_days.setText(String.format("%02d", Days));
-                        holder.tv_hour.setText(String.format("%02d", Hours));
-                        holder.tv_minute.setText(String.format("%02d", Minutes));
-                        holder.tv_second.setText(String.format("%02d", Seconds));
+
+                        String strDay = Long.toString(Seconds);
+                        String strHour = Long.toString(Seconds);
+                        String strMinute = Long.toString(Seconds);
+                        String strSecond = Long.toString(Seconds);
+
+                        if (strDay.contains("-") || strHour.contains("-") || strMinute.contains("-") || strSecond.contains("-")) {
+                            holder.startBiddingTv.setVisibility(View.VISIBLE);
+                            handler = null;
+                            holder.ll1.setVisibility(View.GONE);
+                            holder.ll2.setVisibility(View.GONE);
+                            holder.ll3.setVisibility(View.GONE);
+                            holder.ll4.setVisibility(View.GONE);
+
+                        } else {
+                            holder.tv_days.setText(String.format("%02d", Days));
+                            holder.tv_hour.setText(String.format("%02d", Hours));
+                            holder.tv_minute.setText(String.format("%02d", Minutes));
+                            holder.tv_second.setText(String.format("%02d", Seconds));
+                            holder.startBiddingTv.setVisibility(View.GONE);
+
+                            holder.ll1.setVisibility(View.VISIBLE);
+                            holder.ll2.setVisibility(View.VISIBLE);
+                            holder.ll3.setVisibility(View.VISIBLE);
+                            holder.ll4.setVisibility(View.VISIBLE);
+                        }
 
 
                     } catch (Exception e) {
@@ -124,7 +150,8 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         TextView txtName, txtDesc, txtNextBid, txtRound, txtAmount;
         ConstraintLayout Club_layout;
         ImageView logo;
-        TextView tv_days, tv_hour, tv_minute, tv_second;
+        TextView tv_days, tv_hour, tv_minute, tv_second, startBiddingTv;
+        LinearLayout ll1, ll2, ll3, ll4;
 
 
         public MyViewHolder(@NonNull View itemView) {
@@ -140,6 +167,11 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
             tv_hour = itemView.findViewById(R.id.tv_hour);
             tv_minute = itemView.findViewById(R.id.tv_minute);
             tv_second = itemView.findViewById(R.id.tv_second);
+            startBiddingTv = itemView.findViewById(R.id.startBiddingTv);
+            ll1 = itemView.findViewById(R.id.ll1);
+            ll2 = itemView.findViewById(R.id.ll2);
+            ll3 = itemView.findViewById(R.id.ll3);
+            ll4 = itemView.findViewById(R.id.ll4);
 
 
         }
