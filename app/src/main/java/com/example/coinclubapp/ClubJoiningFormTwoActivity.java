@@ -87,7 +87,6 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                             if (response.isSuccessful()) {
                                 progress.dismiss();
                                 FormTwoResult resultBody = response.body();
-                                Toast.makeText(ClubJoiningFormTwoActivity.this, resultBody.getId().toString(), Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(ClubJoiningFormTwoActivity.this,MainActivity.class));
 //                                sharedPrefManager.setID(resultBody.getId().toString());
                             } else {

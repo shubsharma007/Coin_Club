@@ -3,6 +3,7 @@ package com.example.coinclubapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.coinclubapp.Adapters.NotificationAdapter;
@@ -16,6 +17,10 @@ public class NotificationsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityNotificationsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        binding.btnSetting.setOnClickListener(v -> {
+            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+        });
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(new NotificationAdapter());

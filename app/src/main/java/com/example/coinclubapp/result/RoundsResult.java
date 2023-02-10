@@ -32,6 +32,16 @@ public class RoundsResult {
     @Expose
     private String isCompleted;
 
+    private String roundno;
+
+    public String getRoundno() {
+        return roundno;
+    }
+
+    public void setRoundno(String roundno) {
+        this.roundno = roundno;
+    }
+
     public Integer getId() {
         return id;
     }
