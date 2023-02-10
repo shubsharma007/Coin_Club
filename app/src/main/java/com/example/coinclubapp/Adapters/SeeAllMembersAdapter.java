@@ -28,7 +28,7 @@ public class SeeAllMembersAdapter extends RecyclerView.Adapter<SeeAllMembersAdap
 
     @NonNull
     @Override
-    public SeeAllMembersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public SeeAllMembersAdapter.SeeAllMembersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater=LayoutInflater.from(parent.getContext());
         View view=inflater.inflate(R.layout.see_all_member_layout,parent,false);
 
@@ -36,7 +36,7 @@ public class SeeAllMembersAdapter extends RecyclerView.Adapter<SeeAllMembersAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SeeAllMembersViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull SeeAllMembersAdapter.SeeAllMembersViewHolder holder, int position) {
         FormTwoResult result=resultList.get(position);
         Glide.with(context).load(result.getProfileimg()).placeholder(R.drawable.avatar).into(holder.imageView);
         holder.nameTv.setText(result.getFullName());
