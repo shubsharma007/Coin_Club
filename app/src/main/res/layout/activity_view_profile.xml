@@ -29,7 +29,7 @@
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="@dimen/_16ssp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -67,7 +67,7 @@
         android:text="Jhon Nike"
         android:textColor="@color/white"
         android:textSize="@dimen/_19ssp"
-        android:textStyle="bold"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="@+id/dp_img"
         app:layout_constraintStart_toStartOf="@+id/dp_img"
         app:layout_constraintTop_toBottomOf="@id/dp_img" />
@@ -75,9 +75,9 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:paddingHorizontal="8dp"
-        android:background="@drawable/home_bg"
         android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/white"
+        android:paddingHorizontal="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,12 +85,12 @@
 
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_marginTop="40dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -174,66 +174,66 @@
                         android:layout_marginTop="16dp"
                         android:background="#1A000000" />
 
-<!--                    <LinearLayout-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:weightSum="10"-->
-<!--                        android:orientation="horizontal">-->
+                    <!--                    <LinearLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:weightSum="10"-->
+                    <!--                        android:orientation="horizontal">-->
 
-<!--                        <LinearLayout-->
-<!--                            android:layout_weight="9"-->
-<!--                            android:layout_width="wrap_content"-->
-<!--                            android:layout_height="wrap_content"-->
-<!--                            android:orientation="vertical">-->
+                    <!--                        <LinearLayout-->
+                    <!--                            android:layout_weight="9"-->
+                    <!--                            android:layout_width="wrap_content"-->
+                    <!--                            android:layout_height="wrap_content"-->
+                    <!--                            android:orientation="vertical">-->
 
-<!--                            <TextView-->
+                    <!--                            <TextView-->
 
-<!--                                android:id="@+id/wnTv"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginStart="8dp"-->
-<!--                                android:layout_marginTop="8dp"-->
-<!--                                android:text="Whatsapp no"-->
-<!--                                android:textColor="#BC000000"-->
-<!--                                android:textSize="@dimen/_13ssp" />-->
+                    <!--                                android:id="@+id/wnTv"-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_marginStart="8dp"-->
+                    <!--                                android:layout_marginTop="8dp"-->
+                    <!--                                android:text="Whatsapp no"-->
+                    <!--                                android:textColor="#BC000000"-->
+                    <!--                                android:textSize="@dimen/_13ssp" />-->
 
-<!--                            <EditText-->
-<!--                                android:id="@+id/wnEt"-->
-<!--                                android:layout_width="wrap_content"-->
-<!--                                android:layout_height="wrap_content"-->
-<!--                                android:layout_marginStart="8dp"-->
-<!--                                android:text="8225055150"-->
-<!--                                android:textColor="@color/black"-->
-<!--                                android:textSize="@dimen/_16ssp" />-->
-<!--                        </LinearLayout>-->
+                    <!--                            <EditText-->
+                    <!--                                android:id="@+id/wnEt"-->
+                    <!--                                android:layout_width="wrap_content"-->
+                    <!--                                android:layout_height="wrap_content"-->
+                    <!--                                android:layout_marginStart="8dp"-->
+                    <!--                                android:text="8225055150"-->
+                    <!--                                android:textColor="@color/black"-->
+                    <!--                                android:textSize="@dimen/_16ssp" />-->
+                    <!--                        </LinearLayout>-->
 
-<!--                        <androidx.appcompat.widget.AppCompatButton-->
-<!--                            android:layout_width="@dimen/_30sdp"-->
-<!--                            android:layout_height="@dimen/_30sdp"-->
-<!--                            android:layout_gravity="center|end"-->
-<!--                            android:background="@drawable/blue_round_bg"-->
-<!--                            android:paddingStart="10dp"-->
-<!--                            android:drawableStart="@drawable/ic_edit_white"-->
-<!--                            />-->
+                    <!--                        <androidx.appcompat.widget.AppCompatButton-->
+                    <!--                            android:layout_width="@dimen/_30sdp"-->
+                    <!--                            android:layout_height="@dimen/_30sdp"-->
+                    <!--                            android:layout_gravity="center|end"-->
+                    <!--                            android:background="@drawable/blue_round_bg"-->
+                    <!--                            android:paddingStart="10dp"-->
+                    <!--                            android:drawableStart="@drawable/ic_edit_white"-->
+                    <!--                            />-->
 
-<!--                    </LinearLayout>-->
+                    <!--                    </LinearLayout>-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                    <!--                    <View-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="@dimen/_1sdp"-->
+                    <!--                        android:layout_marginTop="16dp"-->
+                    <!--                        android:background="#1A000000" />-->
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:weightSum="10"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:weightSum="10">
 
                         <LinearLayout
-                            android:layout_weight="9"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_weight="9"
                             android:orientation="vertical">
 
                             <TextView
@@ -252,10 +252,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
-                                android:text=""
-                                android:maxLength="10"
-                                android:inputType="number"
                                 android:hint="mobile"
+                                android:inputType="number"
+                                android:maxLength="10"
+                                android:text=""
                                 android:textColor="@color/black"
                                 android:textSize="@dimen/_16ssp" />
                         </LinearLayout>
@@ -265,9 +265,8 @@
                             android:layout_height="@dimen/_30sdp"
                             android:layout_gravity="center|end"
                             android:background="@drawable/blue_round_bg"
-                            android:paddingStart="10dp"
                             android:drawableStart="@drawable/ic_edit_white"
-                            />
+                            android:paddingStart="10dp" />
 
                     </LinearLayout>
 
@@ -297,8 +296,6 @@
                         android:textSize="@dimen/_16ssp" />
 
 
-
-
                 </LinearLayout>
 
                 <TextView
@@ -306,12 +303,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="15dp"
+                    android:layout_marginTop="25dp"
                     android:fontFamily="@font/poppins_medium"
                     android:text="Self-Declared Data"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16ssp"
                     android:textStyle="bold"
-                    android:layout_marginTop="25dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/rdLl" />
 
@@ -401,443 +398,440 @@
 
                 </LinearLayout>
 
-<!--                <TextView-->
-<!--                    android:id="@+id/tdTv"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="15dp"-->
-<!--                    android:fontFamily="@font/poppins_medium"-->
-<!--                    android:text="Transactional data"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/_16ssp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_marginTop="25dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/sddLl" />-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/tdTv"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="15dp"-->
+                <!--                    android:fontFamily="@font/poppins_medium"-->
+                <!--                    android:text="Transactional data"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/_16ssp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    android:layout_marginTop="25dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/sddLl" />-->
 
 
-<!--                <LinearLayout-->
-<!--                    android:id="@+id/tdLl"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginHorizontal="18dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:background="@drawable/card_bg_light_white"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:paddingHorizontal="7dp"-->
-<!--                    android:paddingBottom="10dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tdTv">-->
+                <!--                <LinearLayout-->
+                <!--                    android:id="@+id/tdLl"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_marginHorizontal="18dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:background="@drawable/card_bg_light_white"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:paddingHorizontal="7dp"-->
+                <!--                    android:paddingBottom="10dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tdTv">-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tacTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Total active clubs"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tacTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Total active clubs"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tacTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="156"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tacTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="156"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/trccTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Total real clubs closed"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/trccTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="8839039838"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
-
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/abpTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Average bid %"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/abpTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="8839039838"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
-
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tppTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Total penalty paid"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/trccTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Total real clubs closed"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/tppTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/trccTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="8839039838"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/hrTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Has Referred"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/abpTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Average bid %"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/hrTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="None"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/abpTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="8839039838"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/atsfTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Amount transacted so far"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/atsfTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="None"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
-
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/noumcwTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Number of unique members clubbed with"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/noumcwTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="2334"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
 
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tppTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Total penalty paid"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                </LinearLayout>-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tppTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                <TextView-->
-<!--                    android:id="@+id/ldTv"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="15dp"-->
-<!--                    android:fontFamily="@font/poppins_medium"-->
-<!--                    android:text="Leverage data"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/_16ssp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_marginTop="25dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/tdLl" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                <LinearLayout-->
-<!--                    android:layout_marginBottom="60dp"-->
-<!--                    android:id="@+id/ldLl"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginHorizontal="18dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:background="@drawable/card_bg_light_white"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:paddingHorizontal="7dp"-->
-<!--                    android:paddingBottom="10dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/ldTv">-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/hrTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Has Referred"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/hrTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="None"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/matcbpTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Maximum amount that can be picked"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/matcbpTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/atsfTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Amount transacted so far"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/atsfTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="None"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/cmlTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Current monthly liability"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/cmlTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/noumcwTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Number of unique members clubbed with"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tlfaaTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Total liability for all active"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/tlfaaTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/noumcwTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="2334"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
 
+                <!--                </LinearLayout>-->
 
-<!--                </LinearLayout>-->
+                <!--                <TextView-->
+                <!--                    android:id="@+id/ldTv"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="15dp"-->
+                <!--                    android:fontFamily="@font/poppins_medium"-->
+                <!--                    android:text="Leverage data"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/_16ssp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    android:layout_marginTop="25dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/tdLl" />-->
 
-
-<!--                <TextView-->
-<!--                    android:id="@+id/edTv"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="15dp"-->
-<!--                    android:fontFamily="@font/poppins_medium"-->
-<!--                    android:text="Earnings data"-->
-<!--                    android:textColor="@color/black"-->
-<!--                    android:textSize="@dimen/_16ssp"-->
-<!--                    android:textStyle="bold"-->
-<!--                    android:layout_marginTop="25dp"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/ldLl" />-->
-
-
-<!--                <LinearLayout-->
-<!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                    android:layout_marginBottom="@dimen/_20sdp"-->
-<!--                    android:id="@+id/edLl"-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="match_parent"-->
-<!--                    android:layout_marginHorizontal="18dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:background="@drawable/card_bg_light_white"-->
-<!--                    android:orientation="vertical"-->
-<!--                    android:paddingHorizontal="7dp"-->
-<!--                    android:paddingBottom="10dp"-->
-<!--                    app:layout_constraintEnd_toEndOf="parent"-->
-<!--                    app:layout_constraintStart_toStartOf="parent"-->
-<!--                    app:layout_constraintTop_toBottomOf="@id/edTv">-->
+                <!--                <LinearLayout-->
+                <!--                    android:layout_marginBottom="60dp"-->
+                <!--                    android:id="@+id/ldLl"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_marginHorizontal="18dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:background="@drawable/card_bg_light_white"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:paddingHorizontal="7dp"-->
+                <!--                    android:paddingBottom="10dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/ldTv">-->
 
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/iesfTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Interest earned so far"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/matcbpTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Maximum amount that can be picked"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/iesfTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/matcbpTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/npeTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Net penalty earned"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/cmlTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Current monthly liability"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/npeTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/cmlTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/pceTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Partnership commission earned"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tlfaaTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Total liability for all active"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
 
-<!--                    <TextView-->
-<!--                        android:id="@+id/pceTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
-
-<!--                    <View-->
-<!--                        android:layout_width="match_parent"-->
-<!--                        android:layout_height="@dimen/_1sdp"-->
-<!--                        android:layout_marginTop="16dp"-->
-<!--                        android:background="#1A000000" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/rbeTv1"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:layout_marginTop="8dp"-->
-<!--                        android:text="Referral bonus earned"-->
-<!--                        android:textColor="#BC000000"-->
-<!--                        android:textSize="@dimen/_13ssp" />-->
-
-<!--                    <TextView-->
-<!--                        android:id="@+id/rbeTv2"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:layout_marginStart="8dp"-->
-<!--                        android:text="$20"-->
-<!--                        android:textColor="@color/black"-->
-<!--                        android:textSize="@dimen/_16ssp" />-->
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/tlfaaTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
 
 
-<!--                </LinearLayout>-->
+                <!--                </LinearLayout>-->
 
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/edTv"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:layout_marginStart="15dp"-->
+                <!--                    android:fontFamily="@font/poppins_medium"-->
+                <!--                    android:text="Earnings data"-->
+                <!--                    android:textColor="@color/black"-->
+                <!--                    android:textSize="@dimen/_16ssp"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    android:layout_marginTop="25dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/ldLl" />-->
+
+
+                <!--                <LinearLayout-->
+                <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--                    android:layout_marginBottom="@dimen/_20sdp"-->
+                <!--                    android:id="@+id/edLl"-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="match_parent"-->
+                <!--                    android:layout_marginHorizontal="18dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:background="@drawable/card_bg_light_white"-->
+                <!--                    android:orientation="vertical"-->
+                <!--                    android:paddingHorizontal="7dp"-->
+                <!--                    android:paddingBottom="10dp"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/edTv">-->
+
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/iesfTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Interest earned so far"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/iesfTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/npeTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Net penalty earned"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/npeTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/pceTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Partnership commission earned"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/pceTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
+
+                <!--                    <View-->
+                <!--                        android:layout_width="match_parent"-->
+                <!--                        android:layout_height="@dimen/_1sdp"-->
+                <!--                        android:layout_marginTop="16dp"-->
+                <!--                        android:background="#1A000000" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/rbeTv1"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:layout_marginTop="8dp"-->
+                <!--                        android:text="Referral bonus earned"-->
+                <!--                        android:textColor="#BC000000"-->
+                <!--                        android:textSize="@dimen/_13ssp" />-->
+
+                <!--                    <TextView-->
+                <!--                        android:id="@+id/rbeTv2"-->
+                <!--                        android:layout_width="wrap_content"-->
+                <!--                        android:layout_height="wrap_content"-->
+                <!--                        android:layout_marginStart="8dp"-->
+                <!--                        android:text="$20"-->
+                <!--                        android:textColor="@color/black"-->
+                <!--                        android:textSize="@dimen/_16ssp" />-->
+
+
+                <!--                </LinearLayout>-->
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -845,7 +839,6 @@
         </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
