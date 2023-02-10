@@ -25,9 +25,9 @@ public class MyBankActivity extends AppCompatActivity {
         binding=ActivityMyBankBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.btnSetting.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-        });
+//        binding.btnSetting.setOnClickListener(v -> {
+//            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
+//        });
 
         LayoutManager = new LinearLayoutManager (MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.transactionRecyclerView.setLayoutManager (LayoutManager);
@@ -36,7 +36,6 @@ public class MyBankActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged ();
         adapter.getItemCount ();
         binding.transactionRecyclerView.setHasFixedSize (true);
-
         binding.backBtn.setOnClickListener (v -> {
             finish ();
         });

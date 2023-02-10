@@ -30,25 +30,26 @@ public class HotClubActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityHotClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+//        binding.btnSetting.setOnClickListener(v -> {
+//            startActivity(new Intent(getApplicationContext(),SettingActivity.class));
+//        });
+
+
         binding.progressBar.setVisibility(View.VISIBLE);
 
         layoutManager = new LinearLayoutManager(HotClubActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.recyclerView.setLayoutManager(layoutManager);
 
-        binding.btnSetting.setOnClickListener(v -> {
-            startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-        });
-        ApiInterface apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<List<ClubResult>> call=apiInterface.getAllClubs();
+        ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+        Call<List<ClubResult>> call = apiInterface.getAllClubs();
         call.enqueue(new Callback<List<ClubResult>>() {
             @Override
             public void onResponse(Call<List<ClubResult>> call, Response<List<ClubResult>> response) {
-                if(response.isSuccessful())
-                {binding.progressBar.setVisibility(View.GONE);
-                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,response.body()));
-                }
-                else
-                {
+                if (response.isSuccessful()) {
+                    binding.progressBar.setVisibility(View.GONE);
+                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this, response.body()));
+                } else {
                     Toast.makeText(HotClubActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -86,8 +87,8 @@ public class HotClubActivity extends AppCompatActivity {
                 case R.id.notification:
                     startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
                     break;
-                case R.id.profile:
-                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                case R.id.Dashboard:
+                    startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
                     break;
                 case R.id.money:
                     startActivity(new Intent(getApplicationContext(), MyBankActivity.class));

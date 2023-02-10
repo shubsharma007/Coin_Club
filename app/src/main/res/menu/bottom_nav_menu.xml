@@ -21,9 +21,9 @@
         android:title="Notification"/>
 
     <item
-        android:id="@+id/profile"
-        android:icon="@drawable/ic_baseline_profile_24"
-        android:title="Profile" />
+        android:id="@+id/Dashboard"
+        android:icon="@drawable/ic_baseline_leaderboard_24"
+        android:title="Dashboard" />
 </menu>
 
 
