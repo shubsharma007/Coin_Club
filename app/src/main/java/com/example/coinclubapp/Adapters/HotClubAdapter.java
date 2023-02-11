@@ -84,7 +84,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
 
     private void countDownFunc(MyViewHolder holder, String mydate) {
 
-        if (mydate != null) {
+        if (mydate != null && holder!=null) {
             xdate = mydate.replace("T", " ");
             mydate = xdate.replace("Z", "");
             finalDate = mydate;
@@ -111,7 +111,6 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
 
                         if (strDay.contains("-") || strHour.contains("-") || strMinute.contains("-") || strSecond.contains("-")) {
                             holder.startBiddingTv.setVisibility(View.VISIBLE);
-                            handler = null;
                             holder.ll1.setVisibility(View.GONE);
                             holder.ll2.setVisibility(View.GONE);
                             holder.ll3.setVisibility(View.GONE);
