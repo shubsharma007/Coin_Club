@@ -81,7 +81,7 @@ public interface ApiInterface {
     );
 
 //    @Multipart
-//    @POST("")
+//    @POST("userkyc/")
 //    Call<>
 
 
