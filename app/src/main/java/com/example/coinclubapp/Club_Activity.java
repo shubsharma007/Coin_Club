@@ -56,6 +56,9 @@ public class Club_Activity extends AppCompatActivity {
         }
         else
         {
+        if (binding.bidStartIn.getText().equals("Start Bidding")) {
+            binding.bidStartIn.setEnabled(true);
+        } else {
             binding.bidStartIn.setEnabled(false);
         }
         Intent ii = getIntent();
@@ -75,6 +78,9 @@ public class Club_Activity extends AppCompatActivity {
                 }
                 else
                 {
+                if (binding.bidStartIn.isEnabled()) {
+                    startActivity(new Intent(getApplicationContext(), BidRoomActivity.class));
+                } else {
                     Toast.makeText(Club_Activity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -168,6 +174,12 @@ public class Club_Activity extends AppCompatActivity {
                         }
                         else
                         {
+                        if (strDay.contains("-") || strHour.contains("-") || strMinute.contains("-") || strSecond.contains("-")) {
+                            binding.bidStartIn.setText("Start Bidding");
+                            handler = null;
+                            binding.bidStartIn.setEnabled(true);
+
+                        } else {
                             binding.bidStartIn.setText("Bid Starts in " + String.format("%02d", Days) + " days " + String.format("%02d", Hours) + " days " + String.format("%02d", Minutes) + " days " + String.format("%02d", Seconds));
                         }
                     } catch (Exception e) {
