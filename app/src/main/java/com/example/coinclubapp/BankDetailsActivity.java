@@ -14,6 +14,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -127,16 +128,15 @@ public class BankDetailsActivity extends AppCompatActivity {
     }
 
     private void sendDetails(String Mobile, String ifsccode, String AccName, String AccNumber) {
-
         File file = new File (imagePath);
 
         RequestBody requestFile = RequestBody.create (MediaType.parse ("multipart/form-data"), file);
         MultipartBody.Part passbookimg = MultipartBody.Part.createFormData ("passbookimg", file.getName (), requestFile);
 
-        RequestBody accountnumber = RequestBody.create (MediaType.parse ("multipart/form-data"), AccNumber);
-        RequestBody accountname = RequestBody.create (MediaType.parse ("multipart/form-data"), AccName);
-        RequestBody registerno = RequestBody.create (MediaType.parse ("multipart/form-data"), Mobile);
-        RequestBody IFSCcode = RequestBody.create (MediaType.parse ("multipart/form-data"), ifsccode);
+        RequestBody accountnumber = RequestBody.create (MediaType.parse ("text/plain"), AccNumber);
+        RequestBody accountname = RequestBody.create (MediaType.parse ("text/plain"), AccName);
+        RequestBody registerno = RequestBody.create (MediaType.parse ("text/plain"), Mobile);
+        RequestBody IFSCcode = RequestBody.create (MediaType.parse ("text/plain"), ifsccode);
 
         apiInterface=RetrofitService.getRetrofit().create(ApiInterface.class);
         Call<BankDetailsResult> call=apiInterface.postBankDetails(registerno,IFSCcode,accountname,accountnumber,passbookimg);
@@ -148,21 +148,20 @@ public class BankDetailsActivity extends AppCompatActivity {
                 {
                     Toast.makeText(BankDetailsActivity.this, "success", Toast.LENGTH_SHORT).show();
                 }
+                else if(val==208)
+                {
+                    Toast.makeText(BankDetailsActivity.this, "Already Exists", Toast.LENGTH_SHORT).show();
+                }
                 else
                 {
                     Toast.makeText(BankDetailsActivity.this, "failed", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<BankDetailsResult> call, Throwable t) {
-                Toast.makeText(BankDetailsActivity.this, "on failure called", Toast.LENGTH_SHORT).show();
+                Log.e("FAILURE",t.getMessage());
+                Toast.makeText(BankDetailsActivity.this, "Some error occured,Try again after some time", Toast.LENGTH_SHORT).show();
             }
         });
-
     }
-
-
-
-
 }

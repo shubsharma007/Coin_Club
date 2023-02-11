@@ -109,6 +109,9 @@ public class KycDetailsActivity extends AppCompatActivity {
 //            }
             else {
 
+
+
+
 //                ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 //                Call<KycResponse> call = apiInterface.PostKycItems(id, address, mobile, adhar_no, uriafs.toString(),
 //                        uriabs.toString(), pan_no, uripfs.toString());
