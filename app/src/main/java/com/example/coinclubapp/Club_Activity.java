@@ -71,7 +71,7 @@ public class Club_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if(binding.bidStartIn.isEnabled())
                 {
-                    Toast.makeText(Club_Activity.this, "button is enabled", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(Club_Activity.this,BidRoomActivity.class));
                 }
                 else
                 {
