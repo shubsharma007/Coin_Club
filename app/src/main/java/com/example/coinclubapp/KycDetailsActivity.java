@@ -61,6 +61,12 @@ public class KycDetailsActivity extends AppCompatActivity {
         binding = ActivityKycDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        binding.appCompatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         binding.checkoutBtn.setOnClickListener(v -> {
             String fullName = binding.fullNameEt.getText().toString().trim();
@@ -119,16 +125,8 @@ public class KycDetailsActivity extends AppCompatActivity {
 //                Toast.makeText(KycDetailsActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
 //            }
             else {
-//                fullName;
-//                mobile;
-//                address;
-//                email_id;
-//                adhar_no;
-//                pan_no;
-//                uriafs;
-//                uriabs;
-//                uripfs;
-                sendDetails(fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
+                  showPopup();
+//                sendDetails(fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
 
             }
         });
@@ -241,6 +239,13 @@ public class KycDetailsActivity extends AppCompatActivity {
         okBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                startActivity(new Intent(KycDetailsActivity.this,MainActivity.class));
+                finish();
+            }
+        });
+        adDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
                 startActivity(new Intent(KycDetailsActivity.this,MainActivity.class));
                 finish();
             }

@@ -47,9 +47,6 @@ public interface ApiInterface {
                                 @Field("password") String password);
 
 
-
-
-
     @Multipart
     @POST("bankdetails/")
     Call<BankDetailsResult> postBankDetails(
@@ -63,14 +60,14 @@ public interface ApiInterface {
     @Multipart
     @POST("userkyc/")
     Call<KycResponse> postKycItems(@Part("full_name") RequestBody full_name,
-                                @Part("address") RequestBody address,
-                                @Part("mobile") RequestBody mobile,
-                                @Part("email") RequestBody email,
-                                @Part("aadharno") RequestBody aadharno,
-                                @Part("panno") RequestBody panno,
-                                @Part MultipartBody.Part aadharfrontimg,
-                                @Part MultipartBody.Part aadharbackimg,
-                                @Part MultipartBody.Part panimg
+                                   @Part("address") RequestBody address,
+                                   @Part("mobile") RequestBody mobile,
+                                   @Part("email") RequestBody email,
+                                   @Part("aadharno") RequestBody aadharno,
+                                   @Part("panno") RequestBody panno,
+                                   @Part MultipartBody.Part aadharfrontimg,
+                                   @Part MultipartBody.Part aadharbackimg,
+                                   @Part MultipartBody.Part panimg
     );
 
 
