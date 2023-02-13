@@ -78,9 +78,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_HistoricalClubs:
 
                         break;
-                    case R.id.nav_ChangePin:
-
-                        break;
                     case R.id.nav_AddBankDetails:
                         startActivity(new Intent(getApplicationContext(),BankDetailsActivity.class));
                         break;

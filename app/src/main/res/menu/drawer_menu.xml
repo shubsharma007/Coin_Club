@@ -12,10 +12,6 @@
         android:title="Historical Clubs" />
 
     <item
-        android:id="@+id/nav_ChangePin"
-        android:title="Change Pin" />
-
-    <item
         android:id="@+id/nav_AddBankDetails"
         android:title="Add Bank Details" />
 

@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="28dp"
         android:fontFamily="@font/acme"
-        android:text="BId Room"
+        android:text="Bid Room"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
         app:layout_constraintEnd_toEndOf="parent"
