@@ -317,7 +317,7 @@
             android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
             android:background="@drawable/add_money_btn_bg"
-            android:text="Hit Me"
+            android:text="My Bid"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"
