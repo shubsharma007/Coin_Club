@@ -222,6 +222,7 @@
                     <com.google.android.material.bottomnavigation.BottomNavigationView
                         android:id="@+id/bottomNavView"
                         android:layout_width="match_parent"
+                        app:labelVisibilityMode="unlabeled"
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="16dp"
                         android:background="@drawable/transparent_background"
@@ -236,7 +237,7 @@
                     android:id="@+id/fab"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:backgroundTint="#FFD23C"
+                    android:backgroundTint="@color/white"
                     android:contentDescription="@string/app_name"
                     android:src="@drawable/hot_club_btn"
                     app:layout_anchor="@id/bottomAppBar"
