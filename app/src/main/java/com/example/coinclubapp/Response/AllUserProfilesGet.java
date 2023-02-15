@@ -1,9 +1,9 @@
-package com.example.coinclubapp.result;
+package com.example.coinclubapp.Response;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Result {
+public class AllUserProfilesGet {
     @SerializedName("id")
     @Expose
     private Integer id;

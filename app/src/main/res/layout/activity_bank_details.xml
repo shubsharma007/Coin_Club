@@ -76,7 +76,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/account_holderNameET"
+                android:id="@+id/phonePeEt"
                 android:inputType="textPersonName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -119,7 +119,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/account_numberET"
+                android:id="@+id/googlePayEt"
                 android:inputType="phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -162,7 +162,7 @@
             </LinearLayout>
 
             <EditText
-                android:id="@+id/ifscET"
+                android:id="@+id/paytmEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="15dp"
@@ -206,7 +206,7 @@
 
 
             <EditText
-                android:id="@+id/register_mobileET"
+                android:id="@+id/bhimUpiEt"
                 android:inputType="phone"
                 android:maxLength="10"
                 android:layout_width="match_parent"
@@ -253,9 +253,10 @@
                     >
 
                     <ImageView
-                        android:id="@+id/BankPassbook"
-                        android:layout_width="150dp"
-                        android:layout_height="100dp"
+                        android:id="@+id/documentImage"
+                        android:layout_width="130dp"
+                        android:layout_height="130dp"
+                        android:scaleType="fitXY"
                         android:layout_marginHorizontal="20dp"
                         android:layout_marginVertical="10dp"
                         android:src="@drawable/ic_upload" />

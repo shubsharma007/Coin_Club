@@ -3,7 +3,8 @@ package com.example.coinclubapp.result;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class FormTwoResult {
+public class UserRegistrationPostId {
+
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -36,7 +37,7 @@ public class FormTwoResult {
     private String monthlycontribution;
     @SerializedName("profileimg")
     @Expose
-    private String profileimg;
+    private Object profileimg;
     @SerializedName("email")
     @Expose
     private String email;
@@ -127,11 +128,11 @@ public class FormTwoResult {
         this.monthlycontribution = monthlycontribution;
     }
 
-    public String getProfileimg() {
+    public Object getProfileimg() {
         return profileimg;
     }
 
-    public void setProfileimg(String profileimg) {
+    public void setProfileimg(Object profileimg) {
         this.profileimg = profileimg;
     }
 

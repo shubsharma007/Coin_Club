@@ -2,6 +2,7 @@ package com.example.coinclubapp.Adapters;
 
 
 import android.content.Context;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.view.LayoutInflater;
@@ -12,15 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coinclubapp.ClubActivity;
 
+
+import com.example.coinclubapp.ClubActivity;
 import com.example.coinclubapp.R;
-import com.example.coinclubapp.result.ClubResult;
+import com.example.coinclubapp.Response.AllClubsGet;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -30,18 +34,15 @@ import java.util.List;
 public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHolder> {
 
     Context context;
-    List<ClubResult> clubResultList;
+    List<AllClubsGet> clubResultList;
 
-    static String dateTimeToBePassed=null;
+
 
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     Handler handler = new Handler();
     Runnable runnable;
 
-
-
-
-    public HotClubAdapter(Context context, List<ClubResult> clubResultList) {
+    public HotClubAdapter(Context context, List<AllClubsGet> clubResultList) {
         this.context = context;
         this.clubResultList = clubResultList;
     }
@@ -60,7 +61,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
     public void onBindViewHolder(@NonNull HotClubAdapter.MyViewHolder holder, int position) {
 
 
-        ClubResult current = clubResultList.get(position);
+        AllClubsGet current = clubResultList.get(position);
 
 
         try {
@@ -89,9 +90,8 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
                 intent.putExtra("clubAmount", current.getClubamount());
                 intent.putExtra("perHead", current.getClubcontribution());
                 intent.putExtra("nextBid", current.getStartdate());
-                Toast.makeText(context, dateTimeToBePassed, Toast.LENGTH_SHORT).show();
-                intent.putExtra("time",dateTimeToBePassed);
 
+                intent.putExtra("id",String.valueOf(current.getId()));
 
                 context.startActivity(intent);
             }
@@ -112,7 +112,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
 
                 holder.startBiddingTv.setVisibility(View.GONE);
 
-                dateTimeToBePassed=useTime;
+
 
                 holder.ll1.setVisibility(View.VISIBLE);
                 holder.ll2.setVisibility(View.VISIBLE);
@@ -157,8 +157,6 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
                 holder.ll2.setVisibility(View.GONE);
                 holder.ll3.setVisibility(View.GONE);
                 holder.ll4.setVisibility(View.GONE);
-
-                dateTimeToBePassed=null;
 
             }
         }

@@ -4,10 +4,11 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class RetrofitService {
     public static Retrofit retrofit=null;
-    public static final String BASE_URL="https://jobmeet.techpanda.art/api/";
+    public static final String BASE_URL="http://meetjob.techpanda.art/";
 
     public static Retrofit getRetrofit() {
 
@@ -22,6 +23,7 @@ public class RetrofitService {
             retrofit= new Retrofit.Builder()
                     .baseUrl(BASE_URL)
                     .addConverterFactory(GsonConverterFactory.create())
+                    .addConverterFactory(ScalarsConverterFactory.create())
                     .client(okHttpClient)
                     .build();
         }
