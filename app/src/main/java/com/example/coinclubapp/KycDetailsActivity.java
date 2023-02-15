@@ -153,25 +153,6 @@ public class KycDetailsActivity extends AppCompatActivity {
         });
 
 
-//        binding.licenseExpiryDateEt.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                final Calendar c = Calendar.getInstance();
-//                int year = c.get(Calendar.YEAR);
-//                int month = c.get(Calendar.MONTH);
-//                int day = c.get(Calendar.DAY_OF_MONTH);
-//
-//                DatePickerDialog datePickerDialog = new DatePickerDialog(KycDetailsActivity.this, new DatePickerDialog.OnDateSetListener() {
-//                    @Override
-//                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-//                        String date = dayOfMonth + "-" + (month + 1) + "-" + (year);
-//                        binding.licenseExpiryDateEt.setText(date);
-//                    }
-//                }, year, month, day);
-//                datePickerDialog.show();
-//            }
-//        });
-
     }
 
     private void sendDetails(Integer Id,String xName, String xMobile, String xAddress, String xEmail, String xAdharno, String xPanno, String uriafs, String uriabs, String uripfs) {
