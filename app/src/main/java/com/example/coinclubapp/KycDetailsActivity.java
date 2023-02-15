@@ -5,8 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -37,15 +40,15 @@ public class KycDetailsActivity extends AppCompatActivity {
     private static boolean frontaadhar = false;
     private static boolean backaadhar = false;
     private static boolean frontpan = false;
-//    private static boolean backpan = false;
 
     Uri aadharFront;
     Uri aadharBack;
     Uri panFront;
-    Uri panBack;
+
+    Integer Id;
 
     Dialog adDialog;
-    String uriafs, uriabs, uripfs, uripbs;
+    String uriafs, uriabs, uripfs;
 
     ApiInterface apiInterface;
 
@@ -55,6 +58,8 @@ public class KycDetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityKycDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+
 
         binding.appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,16 +117,10 @@ public class KycDetailsActivity extends AppCompatActivity {
             } else if (!frontpan) {
                 Toast.makeText(KycDetailsActivity.this, "please upload Pan Images", Toast.LENGTH_SHORT).show();
             }
-//            else if (binding.licenseNumberEt.getText().toString().isEmpty()) {
-//                binding.licenseNumberEt.setError("enter license number");
-//                binding.licenseNumberEt.requestFocus();
-//            }
-//            else if (binding.licenseExpiryDateEt.getText().toString().isEmpty()) {
-//                Toast.makeText(KycDetailsActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
-//            }
             else {
-                  showPopup();
-//                sendDetails(fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
+
+                Id = sharedPreferences.getInt("Id", 0);
+                sendDetails(Id,fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
 
             }
         });
@@ -175,41 +174,43 @@ public class KycDetailsActivity extends AppCompatActivity {
 
     }
 
-    private void sendDetails(String fullName, String mobile, String address, String email_id, String adhar_no, String pan_no, String uriafs, String uriabs, String uripfs) {
-
-
+    private void sendDetails(Integer Id,String xName, String xMobile, String xAddress, String xEmail, String xAdharno, String xPanno, String uriafs, String uriabs, String uripfs) {
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait....");
+        progressDialog.show();
         File adharF = new File (uriafs);
         File adharB=new File(uriabs);
         File panF=new File(uripfs);
 
-        RequestBody adharFront = RequestBody.create (MediaType.parse ("multipart/form-data"), adharF);
+        RequestBody adharFront = RequestBody.create (MediaType.parse ("image/*"), adharF);
         MultipartBody.Part adharfrontimg = MultipartBody.Part.createFormData ("aadharfrontimg", adharF.getName (), adharFront);
 
-        RequestBody adharBack = RequestBody.create (MediaType.parse ("multipart/form-data"), adharB);
+        RequestBody adharBack = RequestBody.create (MediaType.parse ("image/*"), adharB);
         MultipartBody.Part adharbackimg = MultipartBody.Part.createFormData ("aadharbackimg", adharB.getName (), adharBack);
 
-        RequestBody panFront = RequestBody.create (MediaType.parse ("multipart/form-data"), panF);
+        RequestBody panFront = RequestBody.create (MediaType.parse ("image/*"), panF);
         MultipartBody.Part panfrontimg = MultipartBody.Part.createFormData ("panfrontimg", panF.getName (), panFront);
 
 
-        RequestBody fullname = RequestBody.create (MediaType.parse ("text/plain"), fullName);
-        RequestBody mobilenumber = RequestBody.create (MediaType.parse ("text/plain"), mobile);
-        RequestBody fulladdress = RequestBody.create (MediaType.parse ("text/plain"),address );
-        RequestBody emailid = RequestBody.create (MediaType.parse ("text/plain"), email_id);
-        RequestBody adharnum = RequestBody.create (MediaType.parse ("text/plain"), adhar_no);
-        RequestBody pannum = RequestBody.create (MediaType.parse ("text/plain"), pan_no);
+        RequestBody full_name = RequestBody.create (MediaType.parse ("text/plain"), xName);
+        RequestBody address = RequestBody.create (MediaType.parse ("text/plain"), xAddress);
+        RequestBody mobile = RequestBody.create (MediaType.parse ("text/plain"), xMobile);
+        RequestBody email = RequestBody.create (MediaType.parse ("text/plain"),xEmail);
+        RequestBody aadharno = RequestBody.create (MediaType.parse ("text/plain"), xAdharno);
+        RequestBody panno = RequestBody.create (MediaType.parse ("text/plain"), xPanno);
+        RequestBody registeruser = RequestBody.create (MediaType.parse ("text/plain"),Integer.toString(Id));
 
 
         apiInterface=RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<KycResponse> call=apiInterface.postKycItems(fullname,fulladdress,mobilenumber,emailid,adharnum,pannum,adharfrontimg,adharbackimg,panfrontimg);
+        Call<KycResponse> call=apiInterface.postKycItems(full_name,address,mobile,email,aadharno,panno,registeruser,adharfrontimg,adharbackimg,panfrontimg);
         call.enqueue(new Callback<KycResponse>() {
             @Override
             public void onResponse(Call<KycResponse> call, Response<KycResponse> response) {
                 if(response.isSuccessful())
                 {
+                    progressDialog.dismiss();
 
                     showPopup();
-
                 }
                 else
                 {

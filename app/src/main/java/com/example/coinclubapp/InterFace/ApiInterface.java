@@ -77,6 +77,7 @@ public interface ApiInterface {
                                    @Part("email") RequestBody email,
                                    @Part("aadharno") RequestBody aadharno,
                                    @Part("panno") RequestBody panno,
+                                   @Part("registeruser") RequestBody registeruser,
                                    @Part MultipartBody.Part aadharfrontimg,
                                    @Part MultipartBody.Part aadharbackimg,
                                    @Part MultipartBody.Part panimg
