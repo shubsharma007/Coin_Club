@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.coinclubapp.Adapters.HotClubAdapter;
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityHotClubBinding;
 import com.example.coinclubapp.result.ClubResult;
@@ -38,12 +39,13 @@ public class HotClubActivity extends AppCompatActivity {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<List<ClubResult>> call = apiInterface.getAllClubs();
-        call.enqueue(new Callback<List<ClubResult>>() {
+
+        Call<List<AllClubsGet>> call=apiInterface.getAllClubs();
+        call.enqueue(new Callback<List<AllClubsGet>>() {
             @Override
-            public void onResponse(Call<List<ClubResult>> call, Response<List<ClubResult>> response) {
+            public void onResponse(Call<List<AllClubsGet>> call, Response<List<AllClubsGet>> response) {
                 if (response.isSuccessful()) {
-                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this, response.body()));
+                    binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,response.body()));
                     binding.progressBar.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(HotClubActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
@@ -51,9 +53,8 @@ public class HotClubActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<ClubResult>> call, Throwable t) {
-                Log.i("THROWABLE",t.getMessage());
-                Toast.makeText(HotClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<AllClubsGet>> call, Throwable t) {
+                Toast.makeText(HotClubActivity.this, "Failure,Try Again", Toast.LENGTH_SHORT).show();
             }
         });
 

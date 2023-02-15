@@ -2,18 +2,18 @@ package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
+
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityLoginBinding;
-import com.example.coinclubapp.result.LoginResult;
-
-import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,13 +22,17 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-    Dialog adDialog;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
         binding.goBtn.setOnClickListener(v -> {
             if (binding.edMobile.getText().toString().trim().isEmpty()) {
@@ -44,104 +48,38 @@ public class LoginActivity extends AppCompatActivity {
 
                 String mobileno = binding.edMobile.getText().toString();
                 String password = binding.edPassword.getText().toString();
-                ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-                Call<LoginResult> call = apiInterface.UserLogin(mobileno, password);
-                call.enqueue(new Callback<LoginResult>() {
+
+                Call<UserLoginResponse> call=apiInterface.loginUser(mobileno,password);
+                call.enqueue(new Callback<UserLoginResponse>() {
                     @Override
-                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-                        if (response.isSuccessful()) {
-
-                            LoginResult loginResult=response.body();
-                            if(loginResult.getStatus().equalsIgnoreCase("true"))
-                            {
-                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                startActivity(i);
-                            }
-                            else{
-                                Toast.makeText(LoginActivity.this, "Incorrect Mobile Number Or Password", Toast.LENGTH_SHORT).show();
-                            }
-                        } else {
-//                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                            Toast.makeText(LoginActivity.this, "Phone Number And Password Incorrect... ", Toast.LENGTH_SHORT).show();
-
-                        }
+                    public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
+                       if (response.isSuccessful())
+                       {
+                           if(response.body ().getStatus ().equals ("True")){
+                               SharedPreferences.Editor editor = sharedPreferences.edit();
+                               editor.putInt("Id", response.body ().getId ());
+                               editor.apply();
+                               Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                               Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                               startActivity(i);
+                               finish ();
+                           }else {
+                               Toast.makeText(LoginActivity.this, "Wrong Number Or Password", Toast.LENGTH_SHORT).show();
+                           }
+                       }
                     }
 
                     @Override
-                    public void onFailure(Call<LoginResult> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-
+                    public void onFailure(Call<UserLoginResponse> call, Throwable t) {
+                        Toast.makeText(LoginActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
                     }
                 });
-
-                //                call.enqueue(new Callback<LoginResult>() {
-//                    @Override
-//                    public void onResponse(Call<LoginResult> call, Response<LoginResult> response) {
-//                        if (response.isSuccessful()) {
-//                            LoginResult result = response.body();
-//
-//                            if (!result.getStatus().equals("False")) {
-//
-//                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-//                                startActivity(i);
-//                            }
-//
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<LoginResult> call, Throwable t) {
-//                        Toast.makeText(LoginActivity.this, "...error...else...", Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-//                call.enqueue(new Callback<LoginResponse>() {
-//                    @Override
-//                    public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-//                        if (response.isSuccessful()) {
-//                            LoginResponse loginResponse = response.body();
-//
-//                            if (loginResponse.getStatus()) {
-//
-//                               // LoginResult login_result = loginResponse.getLogin_data();
-//
-//                                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-//                                    Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-//                                    startActivity(i);
-//
-//                            } else {
-//
-//                                Toast.makeText(LoginActivity.this, "incorrect phone or password...", Toast.LENGTH_SHORT).show();
-//                            }
-//
-//                        } else {
-//                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<LoginResponse> call, Throwable t) {
-//                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//
-//                    }
-//                });
-
 
             }
         });
         binding.btnSignUp.setOnClickListener(v -> {
 
-            Intent i = new Intent(LoginActivity.this, ClubJoiningFormOneActivity.class);
-//                String mobile=binding.edMobile.getText().toString();
-//                String pw=binding.edPassword.getText().toString();
-//                Log.i("USER_ENTERED",mobile);
-//                Log.i("USER_ENTERED",pw);
-//                i.putExtra("mobile",mobile);
-//                i.putExtra("password",pw);
-            startActivity(i);
-
+            startActivity(new Intent(LoginActivity.this, ClubJoiningFormOneActivity.class));
         });
     }
 }

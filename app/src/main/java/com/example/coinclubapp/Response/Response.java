@@ -1,14 +1,12 @@
 package com.example.coinclubapp.Response;
 
-import com.example.coinclubapp.result.FormTwoResult;
-
 import java.util.List;
 
 public class Response {
     private boolean status;
     private String status_code;
     private String message;
-    private FormTwoResult result;
+//    private FormTwoResult result;
     private List<Object> error;
 
     public boolean isStatus() {
@@ -35,13 +33,13 @@ public class Response {
         this.message = message;
     }
 
-    public FormTwoResult getResult() {
-        return result;
-    }
-
-    public void setResult(FormTwoResult result) {
-        this.result = result;
-    }
+//    public FormTwoResult getResult() {
+//        return result;
+//    }
+//
+//    public void setResult(FormTwoResult result) {
+//        this.result = result;
+//    }
 
     public List<Object> getError() {
         return error;

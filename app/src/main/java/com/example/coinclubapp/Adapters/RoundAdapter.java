@@ -36,10 +36,8 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
 
         RoundsResult result=listOfRounds.get(position);
         holder.roundBtn.setText(result.getRoundno());
-
         holder.nameTv.setText(result.getWinner());
         holder.amountTv.setText(result.getRoundamount());
-
 
     }
 

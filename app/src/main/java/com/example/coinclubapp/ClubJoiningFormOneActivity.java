@@ -21,8 +21,6 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityClubJoiningFormOneBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        // String mobile=getIntent().getStringExtra("mobile");
-        // binding.mobileNoEt.setText(mobile);
 
         binding.rbSalary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -65,10 +63,6 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                 }
             }
         });
-
-        String name = binding.fullNameEt.getText().toString().trim();
-        String city = binding.cityEt.getText().toString().trim();
-        String organisation = binding.noyoEt.getText().toString().trim();
 
         binding.nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -141,10 +135,6 @@ public class ClubJoiningFormOneActivity extends AppCompatActivity {
                     String password = binding.etPassword.getText().toString();
                     passIntent.putExtra("password",password);
                     Log.i("USER_ENTERED",password);
-//                    String pw = getIntent().getStringExtra("password");
-//                    passIntent.putExtra("password", pw);
-//                    Log.i("USER_ENTERED", pw);
-
 
                     startActivity(passIntent);
                     finish();

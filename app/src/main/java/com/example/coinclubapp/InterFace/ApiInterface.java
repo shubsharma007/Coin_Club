@@ -1,10 +1,11 @@
 package com.example.coinclubapp.InterFace;
 
+import com.example.coinclubapp.Response.AllClubsGet;
+import com.example.coinclubapp.Response.AllUserProfilesGet;
+import com.example.coinclubapp.Response.BankResponsePost;
 import com.example.coinclubapp.Response.KycResponse;
-import com.example.coinclubapp.result.BankDetailsResult;
-import com.example.coinclubapp.result.ClubResult;
-import com.example.coinclubapp.result.LoginResult;
-import com.example.coinclubapp.result.FormTwoResult;
+import com.example.coinclubapp.Response.UserLoginResponse;
+import com.example.coinclubapp.Response.UserRegistrationPost;
 import com.example.coinclubapp.result.RoundsResult;
 
 import java.util.List;
@@ -22,40 +23,51 @@ import retrofit2.http.Path;
 
 public interface ApiInterface {
 
+    // this is for signup
     @FormUrlEncoded
-    @POST("regs_list/")
-    Call<FormTwoResult> registerNewUser(@Field("full_name") String full_name,
-                                        @Field("mobileno") String mobileno,
-                                        @Field("city") String city,
-                                        @Field("password") String password,
-                                        @Field("gender") String gender,
-                                        @Field("occupation") String occupation,
-                                        @Field("motive") String motive,
-                                        @Field("income") String income,
-                                        @Field("monthlycontribution") String monthlycontribution,
-                                        @Field("profileimg") String profileimg,
-                                        @Field("email") String email
-    );
+    @POST("profile/")
+    Call<UserRegistrationPost> registerUser(@Field("full_name") String full_name,
+                                            @Field("mobileno") String mobileno,
+                                            @Field("city") String city,
+                                            @Field("password") String password,
+                                            @Field("gender") String gender,
+                                            @Field("occupation") String occupation,
+                                            @Field("motive") String motive,
+                                            @Field("income") String income,
+                                            @Field("monthlycontribution") String monthlycontribution,
+                                            @Field("email") String email);
 
-    @GET("regs_list/")
-    Call<List<FormTwoResult>> getAllRegisteredUsers();
-
-
+    // this is for login
     @FormUrlEncoded
     @POST("bslogin/")
-    Call<LoginResult> UserLogin(@Field("mobileno") String mobileno,
-                                @Field("password") String password);
+    Call<UserLoginResponse> loginUser(@Field("mobileno") String mobileno,
+                                      @Field("password") String password);
 
 
+    // this is for getting all users
+    @GET("profile/")
+    Call<List<AllUserProfilesGet>> getAllUsers();
+
+    // this is for getting all clubs in hot club activity
+    @GET("club/")
+    Call<List<AllClubsGet>> getAllClubs();
+
+    // this is for getting clubs by id in club activity
+    @GET("club/{id}")
+    Call<AllClubsGet> getClubById(@Path("id") String id);
+
+    //    http://meetjob.techpanda.art/bankaccount
     @Multipart
-    @POST("bankdetails/")
-    Call<BankDetailsResult> postBankDetails(
-            @Part("registerno") RequestBody registerno,
-            @Part("IFSCcode") RequestBody IFSCcode,
-            @Part("accountname") RequestBody accountname,
-            @Part("accountnumber") RequestBody accountnumber,
-            @Part MultipartBody.Part passbookimg
+    @POST("bankaccount/")
+    Call<BankResponsePost> postBankDetails(
+            @Part("registeruser") RequestBody registeruser,
+            @Part("googlepay_number") RequestBody googlepay_number,
+            @Part("paytm_number") RequestBody paytm_number,
+            @Part("phonepe_number") RequestBody phonepe_number,
+            @Part("bhim_upi") RequestBody bhim_upi,
+            @Part MultipartBody.Part document_image
     );
+
 
     @Multipart
     @POST("userkyc/")
@@ -71,9 +83,6 @@ public interface ApiInterface {
     );
 
 
-    @GET("https://meetjob.techpanda.art/club")
-    Call<List<ClubResult>> getAllClubs();
-
     @GET("rounds/")
     Call<List<RoundsResult>> getAllRounds();
 
@@ -82,6 +91,4 @@ public interface ApiInterface {
 
     @GET("userkyc/{id}")
     Call<KycResponse> getKycById(@Path("id") int id);
-
-
 }

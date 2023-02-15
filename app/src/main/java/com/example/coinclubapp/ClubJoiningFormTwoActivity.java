@@ -3,16 +3,18 @@ package com.example.coinclubapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.UserRegistrationPost;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityClubJoiningFormTwoBinding;
-import com.example.coinclubapp.result.FormTwoResult;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,15 +24,16 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
     ActivityClubJoiningFormTwoBinding binding;
     ProgressDialog progress;
 
-//    SharedPrefManager sharedPrefManager;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityClubJoiningFormTwoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
 
-//        sharedPrefManager=new SharedPrefManager(this);
 
         binding.submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,45 +64,48 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                         motive = "saving";
                     }
                     String mobile = getIntent().getStringExtra("mobile");
-                    Log.i("USER_ENTERED", mobile);
+
                     String password = getIntent().getStringExtra("password");
-                    Log.i("USER_ENTERED", password);
+
                     String name = getIntent().getStringExtra("full_name");
-                    Log.i("USER_ENTERED", name);
+
                     String gender = getIntent().getStringExtra("gender");
-                    Log.i("USER_ENTERED", gender);
+
                     String city = getIntent().getStringExtra("city");
-                    Log.i("USER_ENTERED", city);
+
                     String occupation = getIntent().getStringExtra("occupation");
-                    Log.i("USER_ENTERED", occupation);
+
                     String organisation = getIntent().getStringExtra("organization");
-                    Log.i("USER_ENTERED", organisation);
+
                     String monthlycontribution = binding.amountEt.getText().toString();
-                    Log.i("USER_ENTERED", monthlycontribution);
+
                     String income = binding.incomeEt.getText().toString();
-                    Log.i("USER_ENTERED", income);
 
-                    Call<FormTwoResult> call = apiInterface.registerNewUser(name, mobile, city, password, gender, occupation, motive, income, monthlycontribution, null, organisation);
 
-                    call.enqueue(new Callback<FormTwoResult>() {
+                    Call<UserRegistrationPost> call=apiInterface.registerUser(name,mobile,city,password,gender,occupation,motive,income,monthlycontribution,organisation);
+                    call.enqueue(new Callback<UserRegistrationPost>() {
                         @Override
-                        public void onResponse(Call<FormTwoResult> call, Response<FormTwoResult> response) {
-                            if (response.isSuccessful()) {
-                                progress.dismiss();
-                                FormTwoResult resultBody = response.body();
+                        public void onResponse(Call<UserRegistrationPost> call, Response<UserRegistrationPost> response) {
+                            if(response.isSuccessful())
+                            {
+                                Integer Id=response.body().getResult().getId();
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putInt("Id", Id);
+                                editor.apply();
+                                Toast.makeText(ClubJoiningFormTwoActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(ClubJoiningFormTwoActivity.this,MainActivity.class));
-//                                sharedPrefManager.setID(resultBody.getId().toString());
-                            } else {
-                                Toast.makeText(ClubJoiningFormTwoActivity.this, response.code(), Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(ClubJoiningFormTwoActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
                             }
                         }
-
                         @Override
-                        public void onFailure(Call<FormTwoResult> call, Throwable t) {
-                            Toast.makeText(ClubJoiningFormTwoActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        public void onFailure(Call<UserRegistrationPost> call, Throwable t) {
+                            Log.i("ONFAILURE",t.getMessage());
+                            Toast.makeText(ClubJoiningFormTwoActivity.this, "please try again", Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
         });

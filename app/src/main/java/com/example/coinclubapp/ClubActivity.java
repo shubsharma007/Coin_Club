@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -13,11 +14,13 @@ import android.widget.Toast;
 
 import com.example.coinclubapp.Adapters.MemberAdapter;
 import com.example.coinclubapp.Adapters.RoundAdapter;
+import com.example.coinclubapp.Adapters.SeeAllMembersAdapter;
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.AllClubsGet;
+import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityClubBinding;
 
-import com.example.coinclubapp.result.FormTwoResult;
 import com.example.coinclubapp.result.RoundsResult;
 
 import java.text.ParseException;
@@ -36,6 +39,7 @@ public class ClubActivity extends AppCompatActivity {
     RecyclerView.LayoutManager layoutManagerR;
 
     ApiInterface apiInterface;
+    String startDATE, startTIME;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,15 +55,32 @@ public class ClubActivity extends AppCompatActivity {
         binding.nextRoundTv.setText(ii.getStringExtra("nextBid"));
 
 
-        String timepassed = ii.getStringExtra("time");
+        String clubId = ii.getStringExtra("id");
 
+        Call<AllClubsGet> callClubs = apiInterface.getClubById(clubId);
+        callClubs.enqueue(new Callback<AllClubsGet>() {
+            @Override
+            public void onResponse(Call<AllClubsGet> call, Response<AllClubsGet> response) {
+                if (response.isSuccessful()) {
+                    AllClubsGet resp = response.body();
+                    startDATE = resp.getStartdate();
+                    startTIME = resp.getStarttime();
+                    String useTime = startDATE + " " + startTIME;
+                    try {
+                        countDownFunc(useTime);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(ClubActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        try {
-            countDownFunc(timepassed);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
+            @Override
+            public void onFailure(Call<AllClubsGet> call, Throwable t) {
+                Toast.makeText(ClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
 
         binding.bidStartIn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,26 +106,27 @@ public class ClubActivity extends AppCompatActivity {
         layoutManagerR = new LinearLayoutManager(ClubActivity.this, LinearLayoutManager.HORIZONTAL, false);
         binding.recyclerViewRound.setLayoutManager(layoutManagerR);
 
-        Call<List<FormTwoResult>> call1 = apiInterface.getAllRegisteredUsers();
-        call1.enqueue(new Callback<List<FormTwoResult>>() {
+        Call<List<AllUserProfilesGet>> callM = apiInterface.getAllUsers();
+        callM.enqueue(new Callback<List<AllUserProfilesGet>>() {
             @Override
-            public void onResponse(Call<List<FormTwoResult>> call, Response<List<FormTwoResult>> response) {
+            public void onResponse(Call<List<AllUserProfilesGet>> call, Response<List<AllUserProfilesGet>> response) {
                 if (response.isSuccessful()) {
                     binding.recyclerViewMember.setAdapter(new MemberAdapter(ClubActivity.this, response.body()));
                 } else {
-                    Toast.makeText(ClubActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ClubActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
             @Override
-            public void onFailure(Call<List<FormTwoResult>> call, Throwable t) {
-                Toast.makeText(ClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<AllUserProfilesGet>> call, Throwable t) {
+                Toast.makeText(ClubActivity.this, "Try again", Toast.LENGTH_SHORT).show();
             }
         });
 
 
-        Call<List<RoundsResult>> call = apiInterface.getAllRounds();
-        call.enqueue(new Callback<List<RoundsResult>>() {
+        Call<List<RoundsResult>> callR = apiInterface.getAllRounds();
+        callR.enqueue(new Callback<List<RoundsResult>>() {
             @Override
             public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
                 if (response.isSuccessful()) {
@@ -127,62 +149,65 @@ public class ClubActivity extends AppCompatActivity {
 
     private void countDownFunc(String mydate) throws ParseException {
 
-            if (mydate != null) {
-                String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
+        if (mydate != null) {
+            String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-                Handler handler = new Handler();
+            Handler handler = new Handler();
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-                Date event_date = dateFormat.parse(mydate);
-                Date current_date = new Date();
-                if (event_date.getTime() - current_date.getTime() > 0) {
-                    Runnable runnable;
-                    runnable = new Runnable() {
-                        @Override
-                        public void run() {
-                            try {
-                                handler.postDelayed(this, 1000);
-                                SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
-                                Date event_date = dateFormat.parse(mydate);
-                                Date current_date = new Date();
-                                if (!current_date.after(event_date)) {
-                                    long diff = event_date.getTime() - current_date.getTime();
-                                    long Days = diff / (24 * 60 * 60 * 1000);
-                                    long Hours = diff / (60 * 60 * 1000) % 24;
-                                    long Minutes = diff / (60 * 1000) % 60;
-                                    long Seconds = diff / 1000 % 60;
+            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+            Date event_date = dateFormat.parse(mydate);
+            Date current_date = new Date();
+            if (event_date.getTime() - current_date.getTime() > 0) {
+                Runnable runnable;
+                runnable = new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            handler.postDelayed(this, 1000);
+                            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
+                            Date event_date = dateFormat.parse(mydate);
+                            Date current_date = new Date();
+                            if (!current_date.after(event_date)) {
+                                long diff = event_date.getTime() - current_date.getTime();
+                                long Days = diff / (24 * 60 * 60 * 1000);
+                                long Hours = diff / (60 * 60 * 1000) % 24;
+                                long Minutes = diff / (60 * 1000) % 60;
+                                long Seconds = diff / 1000 % 60;
 
-                                    binding.bidStartIn.setText("");
-                                    binding.bidStartIn.setEnabled(false);
-                                    binding.bidStartIn.setText("Bid Starts in " + String.format("%02d", Days) + " days " + String.format("%02d", Hours) + " hours " + String.format("%02d", Minutes) + " minutes " + String.format("%02d", Seconds) + " seconds");
+                                binding.bidStartIn.setText("");
+                                binding.bidStartIn.setEnabled(false);
+                                binding.bidStartIn.setAllCaps(false);
+                                binding.bidStartIn.setText(String.format("%02d", Days) + " days," + String.format("%02d", Hours) + " hrs," + String.format("%02d", Minutes) + " min," + String.format("%02d", Seconds) + " sec left");
 
 
-
-                                } else {
-                                    handler.removeCallbacks(null);
+                            } else {
+                                handler.removeCallbacks(null);
 
 //                                    binding.bidStartIn.setText("Start Bidding");
 //
 //                                    binding.bidStartIn.setEnabled(true);
-                                }
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         }
-                    };
-                    handler.postDelayed(runnable, 0);
-                } else {
+                    }
+                };
+                handler.postDelayed(runnable, 0);
+            } else {
 
-                    binding.bidStartIn.setText("Start Bidding");
-
-                    binding.bidStartIn.setEnabled(true);
-                }
-
-            }
-            else
-            {
                 binding.bidStartIn.setText("Start Bidding");
+
+                binding.bidStartIn.setTextColor(Color.WHITE);
+                binding.bidStartIn.setBackgroundResource(R.drawable.start_bidding_bg);
                 binding.bidStartIn.setEnabled(true);
+            }
+
+        } else {
+            binding.bidStartIn.setText("Start Bidding");
+
+            binding.bidStartIn.setTextColor(Color.WHITE);
+            binding.bidStartIn.setBackgroundResource(R.drawable.start_bidding_bg);
+            binding.bidStartIn.setEnabled(true);
         }
     }
 }
