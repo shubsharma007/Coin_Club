@@ -41,6 +41,8 @@ public class ClubActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     String startDATE, startTIME;
 
+    String bidTime;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +67,7 @@ public class ClubActivity extends AppCompatActivity {
                     AllClubsGet resp = response.body();
                     startDATE = resp.getStartdate();
                     startTIME = resp.getStarttime();
+                    bidTime=resp.getDuration();
                     String useTime = startDATE + " " + startTIME;
                     try {
                         countDownFunc(useTime);
@@ -86,7 +89,9 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (binding.bidStartIn.isEnabled()) {
-                    startActivity(new Intent(ClubActivity.this, BidRoomActivity.class));
+                    Intent i=new Intent(ClubActivity.this,BidRoomActivity.class);
+                    i.putExtra("duration",bidTime);
+                    startActivity(i);
                 } else {
                     Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
                 }
