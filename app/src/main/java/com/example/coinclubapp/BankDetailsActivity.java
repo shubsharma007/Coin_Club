@@ -3,6 +3,7 @@ package com.example.coinclubapp;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,8 +67,8 @@ public class BankDetailsActivity extends AppCompatActivity {
             String phonepe = binding.phonePeEt.getText().toString();
             String googlepay = binding.googlePayEt.getText().toString();
             String bhimupi = binding.bhimUpiEt.getText().toString();
-            Id=sharedPreferences.getInt("Id",0);
-            sendDetails(Id,paytm, phonepe, googlepay, bhimupi);
+            Id = sharedPreferences.getInt("Id", 0);
+            sendDetails(Id, paytm, phonepe, googlepay, bhimupi);
 
         });
     }
@@ -87,9 +88,11 @@ public class BankDetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void sendDetails(Integer Id,String paytm, String phonepe, String googlepay, String bhimupi) {
+    private void sendDetails(Integer Id, String paytm, String phonepe, String googlepay, String bhimupi) {
         File file = new File(imagePath);
-
+        final ProgressDialog progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please Wait....");
+        progressDialog.show();
 //        RequestBody fbody = RequestBody.create(MediaType.parse("image/*"), file);
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part document_image = MultipartBody.Part.createFormData("document_image", file.getName(), requestFile);
@@ -110,8 +113,11 @@ public class BankDetailsActivity extends AppCompatActivity {
             public void onResponse(Call<BankResponsePost> call, Response<BankResponsePost> response) {
 
                 if (response.isSuccessful()) {
-                    Toast.makeText(BankDetailsActivity.this, "success", Toast.LENGTH_SHORT).show();
 
+                    progressDialog.dismiss();
+                    Toast.makeText(BankDetailsActivity.this, "success", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(BankDetailsActivity.this, MainActivity.class));
+                    finish();
                 } else {
 //                    Log.i("fhduifhduf",response.message());
 //                    Log.i("fdsfsdfhsdf",response.errorBody().toString());
