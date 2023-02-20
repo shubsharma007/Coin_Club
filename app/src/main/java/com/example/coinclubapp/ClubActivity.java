@@ -52,8 +52,8 @@ public class ClubActivity extends AppCompatActivity {
         binding.bidStartIn.setEnabled(false);
         Intent ii = getIntent();
         binding.clubName.setText(ii.getStringExtra("clubName"));
-        binding.clubAmountTv.setText(ii.getStringExtra("clubAmount"));
-        binding.perHeadTv.setText(ii.getStringExtra("perHead"));
+        binding.clubAmountTv.setText(ii.getStringExtra("₹" + "clubAmount"));
+        binding.perHeadTv.setText(ii.getStringExtra("₹" + "perHead"));
         binding.nextRoundTv.setText(ii.getStringExtra("nextBid"));
 
 
@@ -67,7 +67,7 @@ public class ClubActivity extends AppCompatActivity {
                     AllClubsGet resp = response.body();
                     startDATE = resp.getStartdate();
                     startTIME = resp.getStarttime();
-                    bidTime=resp.getDuration();
+                    bidTime = resp.getDuration();
                     String useTime = startDATE + " " + startTIME;
                     try {
                         countDownFunc(useTime);
@@ -89,8 +89,8 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (binding.bidStartIn.isEnabled()) {
-                    Intent i=new Intent(ClubActivity.this,BidRoomActivity.class);
-                    i.putExtra("duration",bidTime);
+                    Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
+                    i.putExtra("duration", bidTime);
                     startActivity(i);
                 } else {
                     Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();

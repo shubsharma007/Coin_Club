@@ -2,6 +2,7 @@ package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 
@@ -22,8 +23,6 @@ import retrofit2.Response;
 public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
-
-
 
 
     @Override
@@ -49,24 +48,28 @@ public class LoginActivity extends AppCompatActivity {
                 String mobileno = binding.edMobile.getText().toString();
                 String password = binding.edPassword.getText().toString();
 
-                Call<UserLoginResponse> call=apiInterface.loginUser(mobileno,password);
+                final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this);
+                progressDialog.setMessage("Loading...");
+                progressDialog.show();
+
+                Call<UserLoginResponse> call = apiInterface.loginUser(mobileno, password);
                 call.enqueue(new Callback<UserLoginResponse>() {
                     @Override
                     public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
-                       if (response.isSuccessful())
-                       {
-                           if(response.body ().getStatus ().equals ("True")){
-                               SharedPreferences.Editor editor = sharedPreferences.edit();
-                               editor.putInt("Id", response.body ().getId ());
-                               editor.apply();
-                               Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                               Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                               startActivity(i);
-                               finish ();
-                           }else {
-                               Toast.makeText(LoginActivity.this, "Wrong Number Or Password", Toast.LENGTH_SHORT).show();
-                           }
-                       }
+                        if (response.isSuccessful()) {
+                            progressDialog.dismiss();
+                            if (response.body().getStatus().equals("True")) {
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putInt("Id", response.body().getId());
+                                editor.apply();
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+                                startActivity(i);
+                                finish();
+                            } else {
+                                Toast.makeText(LoginActivity.this, "Wrong Number Or Password", Toast.LENGTH_SHORT).show();
+                            }
+                        }
                     }
 
                     @Override
