@@ -3,9 +3,12 @@ package com.example.coinclubapp.InterFace;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
+import com.example.coinclubapp.Response.CustomerResponse;
+import com.example.coinclubapp.Response.IssueResponse;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
+import com.example.coinclubapp.result.Issue;
 import com.example.coinclubapp.result.RoundsResult;
 
 import java.util.List;
@@ -84,7 +87,7 @@ public interface ApiInterface {
     );
 
 
-    @GET("rounds/")
+    @GET("roundview/")
     Call<List<RoundsResult>> getAllRounds();
 
     @GET("userkyc/")
@@ -92,4 +95,17 @@ public interface ApiInterface {
 
     @GET("userkyc/{id}")
     Call<KycResponse> getKycById(@Path("id") int id);
+
+    @GET("issuemessages/")
+    Call<List<IssueResponse>> getIssue();
+
+    @GET("customercare/")
+    Call<List<CustomerResponse>> getCustomerIssue();
+
+    @FormUrlEncoded
+    @POST("customercare/")
+    Call<Issue> postCustomerIssue(@Field("discription") String discription,
+                                  @Field("issue") String issue);
+
+
 }

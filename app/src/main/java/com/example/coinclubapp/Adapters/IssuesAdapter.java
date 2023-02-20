@@ -13,9 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.coinclubapp.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import pl.droidsonroids.gif.GifImageView;
 
 public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.IssuesViewHolder> {
 
+        Boolean[] mamle;
+
+    public IssuesAdapter(Boolean[] mamle) {
+        this.mamle = mamle;
+    }
 
     @NonNull
     @Override
@@ -28,16 +34,17 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.IssuesView
     @Override
     public void onBindViewHolder(@NonNull IssuesAdapter.IssuesViewHolder holder, int position) {
 
-        holder.tv1.setText("Issue no.- " + String.valueOf(position));
-        if(position%2==0)
+
+        holder.tv1.setText("Issue no.- " + String.valueOf(position+1));
+        if(!mamle[position])
         {
-            holder.image.setImageResource(R.drawable.ic_pending2);
+            holder.image.setImageResource(R.drawable.ic_pending3);
             holder.tv.setText("Pending");
             holder.tv.setTextColor((Color.YELLOW));
         }
         else
         {
-            holder.image.setImageResource(R.drawable.ic_resolved);
+            holder.image.setImageResource(R.drawable.ic_resolved3);
             holder.tv.setText("Resolved");
             holder.tv.setTextColor((Color.GREEN));
         }
@@ -45,12 +52,13 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.IssuesView
 
     @Override
     public int getItemCount() {
-        return 10;
+        return mamle.length;
     }
 
     public class IssuesViewHolder extends RecyclerView.ViewHolder {
         TextView tv, tv1;
-        CircleImageView image;
+//        CircleImageView image;
+        GifImageView image;
 
         public IssuesViewHolder(@NonNull View itemView) {
             super(itemView);
