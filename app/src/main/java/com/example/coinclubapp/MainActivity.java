@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.coinclubapp.Adapters.MyClubsAdapter;
+import com.example.coinclubapp.Notifications.ExampleService;
 import com.example.coinclubapp.databinding.ActivityLoginBinding;
 import com.example.coinclubapp.databinding.ActivityMainBinding;
 import com.google.android.material.navigation.NavigationBarView;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        Intent serviceIntent = new Intent(getApplicationContext(), ExampleService.class);
+        startService(serviceIntent);
 
         binding.recyclerViewClubs.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         binding.recyclerViewClubs.setAdapter(new MyClubsAdapter());
