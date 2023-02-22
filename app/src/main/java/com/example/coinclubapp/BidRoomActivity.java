@@ -64,6 +64,7 @@ public class BidRoomActivity extends AppCompatActivity {
                     String duration = String.valueOf(response.body().getDuration());
 
                     countdownFunc(startDate, startTime, duration);
+//                    Toast.makeText(BidRoomActivity.this, String.valueOf(response.body().getId()), Toast.LENGTH_SHORT).show();
                     //                    Toast.makeText(BidRoomActivity.this, String.valueOf(response.body().getId()), Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i("hlfuidfhsd", response.message());
@@ -112,6 +113,60 @@ public class BidRoomActivity extends AppCompatActivity {
         });
 
     }
+
+    private void countdownFunc(String startDate, String startTime, String duration) {
+        int durationInMin = Integer.parseInt(duration);
+
+        Calendar date = Calendar.getInstance();
+        System.out.println("Current Date and TIme : " + date.getTime());
+        long timeInSecs = date.getTimeInMillis();
+        Date afterAdding10Mins = new Date(timeInSecs + (10 * 60 * 1000));
+        System.out.println("After adding 10 mins : " + afterAdding10Mins.getTime());
+
+        String useTime = startDate + " " + startTime;
+
+
+        new CountDownTimer(50000, 1000) {
+            public void onTick(long millisUntilFinished) {
+
+                binding.startBiddingTv.setVisibility(View.GONE);
+                binding.ll2.setVisibility(View.VISIBLE);
+                binding.ll3.setVisibility(View.VISIBLE);
+                binding.ll4.setVisibility(View.VISIBLE);
+
+                NumberFormat f = new DecimalFormat("00");
+                long hour = (millisUntilFinished / 3600000) % 24;
+                long min = (millisUntilFinished / 60000) % 60;
+                long sec = (millisUntilFinished / 1000) % 60;
+
+                binding.tvHour.setText(f.format(hour));
+                binding.tvMinute.setText(f.format(min));
+                binding.tvSecond.setText(f.format(sec));
+                binding.bidBtn.setEnabled(true);
+            }
+
+            // When the task is over it will print 00:00:00 there
+            public void onFinish() {
+
+                binding.startBiddingTv.setVisibility(View.VISIBLE);
+                binding.ll2.setVisibility(View.GONE);
+                binding.ll3.setVisibility(View.GONE);
+                binding.ll4.setVisibility(View.GONE);
+
+                binding.tvHour.setText("");
+                binding.tvMinute.setText("");
+                binding.tvSecond.setText("");
+
+                binding.clWinner.setVisibility(View.VISIBLE);
+                binding.bidRecyclerView.setVisibility(View.GONE);
+                binding.bidBtn.setVisibility(View.GONE);
+
+                binding.bidBtn.setEnabled(false);
+            }
+        }.start();
+
+    }
+
 
 //    private void countdownFunc(String startDate, String startTime, String duration) throws ParseException {
 //        int durationInMin = Integer.parseInt(duration);

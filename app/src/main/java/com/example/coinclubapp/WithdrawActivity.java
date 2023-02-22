@@ -81,7 +81,6 @@ public class WithdrawActivity extends AppCompatActivity {
         });
 
 
-
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -97,23 +96,20 @@ public class WithdrawActivity extends AppCompatActivity {
                     binding.amountEt.setError("Enter Amount");
                     binding.amountEt.requestFocus();
                 } else {
-                    amount=binding.amountEt.getText().toString();
+                    amount = binding.amountEt.getText().toString();
                     Id = sharedPreferences.getInt("Id", 0);
-                    Call<AddOrWithdrawMoneyResponsePost> call=apiInterface.postWithdrawMoney(Id,amount);
+                    Call<AddOrWithdrawMoneyResponsePost> call = apiInterface.postWithdrawMoney(Id, amount);
                     final ProgressDialog progressDialog = new ProgressDialog(WithdrawActivity.this);
                     progressDialog.setMessage("Please Wait....");
                     progressDialog.show();
                     call.enqueue(new Callback<AddOrWithdrawMoneyResponsePost>() {
                         @Override
                         public void onResponse(Call<AddOrWithdrawMoneyResponsePost> call, Response<AddOrWithdrawMoneyResponsePost> response) {
-                            if(response.isSuccessful())
-                            {
+                            if (response.isSuccessful()) {
                                 progressDialog.dismiss();
                                 showPopup();
 
-                            }
-                            else
-                            {
+                            } else {
                                 Toast.makeText(WithdrawActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -127,6 +123,7 @@ public class WithdrawActivity extends AppCompatActivity {
             }
         });
     }
+
     private void showPopup() {
 
         adDialog.setContentView(R.layout.withdraw_popup);

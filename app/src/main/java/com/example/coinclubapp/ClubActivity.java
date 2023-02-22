@@ -1,9 +1,11 @@
 package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -22,6 +24,11 @@ import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityClubBinding;
 
 import com.example.coinclubapp.result.RoundsResult;
+import com.skydoves.balloon.ArrowOrientation;
+import com.skydoves.balloon.ArrowPositionRules;
+import com.skydoves.balloon.Balloon;
+import com.skydoves.balloon.BalloonAnimation;
+import com.skydoves.balloon.BalloonSizeSpec;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -55,6 +62,9 @@ public class ClubActivity extends AppCompatActivity {
         binding.bidStartIn.setEnabled(false);
         Intent ii = getIntent();
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
+        binding.tooltip.setOnClickListener(v -> {
+
+        });
 
 
         String clubId = ii.getStringExtra("id");

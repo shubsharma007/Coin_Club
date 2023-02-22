@@ -55,7 +55,6 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
-
         <TextView
             android:id="@+id/msgTv"
             android:layout_width="0dp"
@@ -68,7 +67,6 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="@+id/senderTv"
             app:layout_constraintTop_toBottomOf="@+id/senderTv" />
-
 
         <TextView
             android:id="@+id/timeTv"

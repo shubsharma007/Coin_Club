@@ -29,6 +29,7 @@ public class BidNowFragment extends BottomSheetDialogFragment {
                 String amount = binding.bidAmtEt.getText().toString();
                 Toast.makeText(getActivity(),"Your Amount "+amount, Toast.LENGTH_SHORT).show();
 //                startActivity(new Intent(getActivity(), BidRoomActivity.class));
+                binding.bidAmtEt.setText("");
                 this.dismiss();
             }
 

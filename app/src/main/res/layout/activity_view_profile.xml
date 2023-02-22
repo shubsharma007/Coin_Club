@@ -243,7 +243,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="8dp"
                                 android:layout_marginTop="8dp"
-                                android:text="Alternate no"
+                                android:text="Alternate / Whatsapp Number"
                                 android:textColor="#BC000000"
                                 android:textSize="@dimen/_13ssp" />
 
@@ -601,107 +601,108 @@
 
                 <!--                </LinearLayout>-->
 
-                <!--                <TextView-->
-                <!--                    android:id="@+id/ldTv"-->
-                <!--                    android:layout_width="wrap_content"-->
-                <!--                    android:layout_height="wrap_content"-->
-                <!--                    android:layout_marginStart="15dp"-->
-                <!--                    android:fontFamily="@font/poppins_medium"-->
-                <!--                    android:text="Leverage data"-->
-                <!--                    android:textColor="@color/black"-->
-                <!--                    android:textSize="@dimen/_16ssp"-->
-                <!--                    android:textStyle="bold"-->
-                <!--                    android:layout_marginTop="25dp"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/tdLl" />-->
+                                <TextView
+                                    android:id="@+id/ldTv1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="15dp"
+                                    android:fontFamily="@font/poppins_medium"
+                                    android:text="Leverage data"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_16ssp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toBottomOf="@+id/edLl1"
+                                    android:layout_marginTop="25dp"
+                                    app:layout_constraintStart_toStartOf="parent"
+                               />
 
-                <!--                <LinearLayout-->
-                <!--                    android:layout_marginBottom="60dp"-->
-                <!--                    android:id="@+id/ldLl"-->
-                <!--                    android:layout_width="match_parent"-->
-                <!--                    android:layout_height="match_parent"-->
-                <!--                    android:layout_marginHorizontal="18dp"-->
-                <!--                    android:layout_marginTop="15dp"-->
-                <!--                    android:background="@drawable/card_bg_light_white"-->
-                <!--                    android:orientation="vertical"-->
-                <!--                    android:paddingHorizontal="7dp"-->
-                <!--                    android:paddingBottom="10dp"-->
-                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
-                <!--                    app:layout_constraintStart_toStartOf="parent"-->
-                <!--                    app:layout_constraintTop_toBottomOf="@id/ldTv">-->
-
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/matcbpTv1"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:layout_marginTop="8dp"-->
-                <!--                        android:text="Maximum amount that can be picked"-->
-                <!--                        android:textColor="#BC000000"-->
-                <!--                        android:textSize="@dimen/_13ssp" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/matcbpTv2"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:text="$20"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="@dimen/_16ssp" />-->
-
-                <!--                    <View-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="@dimen/_1sdp"-->
-                <!--                        android:layout_marginTop="16dp"-->
-                <!--                        android:background="#1A000000" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/cmlTv1"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:layout_marginTop="8dp"-->
-                <!--                        android:text="Current monthly liability"-->
-                <!--                        android:textColor="#BC000000"-->
-                <!--                        android:textSize="@dimen/_13ssp" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/cmlTv2"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:text="$20"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="@dimen/_16ssp" />-->
-
-                <!--                    <View-->
-                <!--                        android:layout_width="match_parent"-->
-                <!--                        android:layout_height="@dimen/_1sdp"-->
-                <!--                        android:layout_marginTop="16dp"-->
-                <!--                        android:background="#1A000000" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/tlfaaTv1"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:layout_marginTop="8dp"-->
-                <!--                        android:text="Total liability for all active"-->
-                <!--                        android:textColor="#BC000000"-->
-                <!--                        android:textSize="@dimen/_13ssp" />-->
-
-                <!--                    <TextView-->
-                <!--                        android:id="@+id/tlfaaTv2"-->
-                <!--                        android:layout_width="wrap_content"-->
-                <!--                        android:layout_height="wrap_content"-->
-                <!--                        android:layout_marginStart="8dp"-->
-                <!--                        android:text="$20"-->
-                <!--                        android:textColor="@color/black"-->
-                <!--                        android:textSize="@dimen/_16ssp" />-->
+                                <LinearLayout
+                                    android:layout_marginBottom="60dp"
+                                    android:id="@+id/ldLl"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginHorizontal="18dp"
+                                    android:layout_marginTop="15dp"
+                                    android:background="@drawable/card_bg_light_white"
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="7dp"
+                                    android:paddingBottom="10dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@id/ldTv1">
 
 
-                <!--                </LinearLayout>-->
+                                    <TextView
+                                        android:id="@+id/matcbpTv1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="8dp"
+                                        android:text="Maximum amount that can be picked"
+                                        android:textColor="#BC000000"
+                                        android:textSize="@dimen/_13ssp" />
+
+                                    <TextView
+                                        android:id="@+id/matcbpTv2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="$20"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_1sdp"
+                                        android:layout_marginTop="16dp"
+                                        android:background="#1A000000" />
+
+                                    <TextView
+                                        android:id="@+id/cmlTv1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="8dp"
+                                        android:text="Current monthly liability"
+                                        android:textColor="#BC000000"
+                                        android:textSize="@dimen/_13ssp" />
+
+                                    <TextView
+                                        android:id="@+id/cmlTv2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="$20"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_16ssp" />
+
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="@dimen/_1sdp"
+                                        android:layout_marginTop="16dp"
+                                        android:background="#1A000000" />
+
+                                    <TextView
+                                        android:id="@+id/tlfaaTv1"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginTop="8dp"
+                                        android:text="Total liability for all active"
+                                        android:textColor="#BC000000"
+                                        android:textSize="@dimen/_13ssp" />
+
+                                    <TextView
+                                        android:id="@+id/tlfaaTv2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="8dp"
+                                        android:text="$20"
+                                        android:textColor="@color/black"
+                                        android:textSize="@dimen/_16ssp" />
+
+
+                                </LinearLayout>
 
 
                                 <TextView
@@ -719,119 +720,117 @@
                                     app:layout_constraintTop_toBottomOf="@id/rdLl" />
 
 
-                                <LinearLayout
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    android:layout_marginBottom="@dimen/_20sdp"
-                                    android:id="@+id/edLl1"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginHorizontal="18dp"
-                                    android:layout_marginTop="15dp"
-                                    android:background="@drawable/card_bg_light_white"
-                                    android:orientation="vertical"
-                                    android:paddingHorizontal="7dp"
-                                    android:paddingBottom="10dp"
-                                    app:layout_constraintEnd_toEndOf="parent"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@id/edTv1">
+                <LinearLayout
+                    android:id="@+id/edLl1"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="18dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/card_bg_light_white"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="7dp"
+                    android:paddingBottom="10dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/edTv1">
 
 
-                                    <TextView
-                                        android:id="@+id/iesfTv11"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="Interest earned so far"
-                                        android:textColor="#BC000000"
-                                        android:textSize="@dimen/_13ssp" />
+                    <TextView
+                        android:id="@+id/iesfTv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Interest earned so far"
+                        android:textColor="#BC000000"
+                        android:textSize="@dimen/_13ssp" />
 
-                                    <TextView
-                                        android:id="@+id/iesfTv12"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:text="$20"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_16ssp" />
+                    <TextView
+                        android:id="@+id/iesfTv12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="$20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
 
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/_1sdp"
-                                        android:layout_marginTop="16dp"
-                                        android:background="#1A000000" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginTop="16dp"
+                        android:background="#1A000000" />
 
-                                    <TextView
-                                        android:id="@+id/npeTv11"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="Net penalty earned"
-                                        android:textColor="#BC000000"
-                                        android:textSize="@dimen/_13ssp" />
+                    <TextView
+                        android:id="@+id/npeTv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Net penalty earned"
+                        android:textColor="#BC000000"
+                        android:textSize="@dimen/_13ssp" />
 
-                                    <TextView
-                                        android:id="@+id/npeTv12"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:text="$20"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_16ssp" />
+                    <TextView
+                        android:id="@+id/npeTv12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="$20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
 
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/_1sdp"
-                                        android:layout_marginTop="16dp"
-                                        android:background="#1A000000" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginTop="16dp"
+                        android:background="#1A000000" />
 
-                                    <TextView
-                                        android:id="@+id/pceTv11"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="Partnership commission earned"
-                                        android:textColor="#BC000000"
-                                        android:textSize="@dimen/_13ssp" />
+                    <TextView
+                        android:id="@+id/pceTv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Partnership commission earned"
+                        android:textColor="#BC000000"
+                        android:textSize="@dimen/_13ssp" />
 
-                                    <TextView
-                                        android:id="@+id/pceTv12"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:text="$20"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_16ssp" />
+                    <TextView
+                        android:id="@+id/pceTv12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="$20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
 
-                                    <View
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/_1sdp"
-                                        android:layout_marginTop="16dp"
-                                        android:background="#1A000000" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_1sdp"
+                        android:layout_marginTop="16dp"
+                        android:background="#1A000000" />
 
-                                    <TextView
-                                        android:id="@+id/rbeTv11"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:layout_marginTop="8dp"
-                                        android:text="Referral bonus earned"
-                                        android:textColor="#BC000000"
-                                        android:textSize="@dimen/_13ssp" />
+                    <TextView
+                        android:id="@+id/rbeTv11"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="Referral bonus earned"
+                        android:textColor="#BC000000"
+                        android:textSize="@dimen/_13ssp" />
 
-                                    <TextView
-                                        android:id="@+id/rbeTv12"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginStart="8dp"
-                                        android:text="$20"
-                                        android:textColor="@color/black"
-                                        android:textSize="@dimen/_16ssp" />
+                    <TextView
+                        android:id="@+id/rbeTv12"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="$20"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16ssp" />
 
 
-                                </LinearLayout>
+                </LinearLayout>
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>
