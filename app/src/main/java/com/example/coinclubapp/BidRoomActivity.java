@@ -117,7 +117,7 @@ public class BidRoomActivity extends AppCompatActivity {
         System.out.println("Current Date and TIme : " + date.getTime());
         long timeInSecs = date.getTimeInMillis();
         Date afterAdding10Mins = new Date(timeInSecs + (10 * 60 * 1000));
-        System.out.println("After adding 10 mins : " + afterAdding10Mins);
+        System.out.println("After adding 10 mins : " + afterAdding10Mins.getTime());
 
         String useTime = startDate + " " + startTime;
 
