@@ -56,11 +56,11 @@ public class BidRoomActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<RoundsResult> call, Response<RoundsResult> response) {
                 if (response.isSuccessful()) {
-                    String startDate=String.valueOf(response.body().getStartdate());
-                    String startTime=String.valueOf(response.body().getStarttime());
-                    String duration=String.valueOf(response.body().getDuration());
+                    String startDate = String.valueOf(response.body().getStartdate());
+                    String startTime = String.valueOf(response.body().getStarttime());
+                    String duration = String.valueOf(response.body().getDuration());
 
-                    countdownFunc(startDate,startTime,duration);
+                    countdownFunc(startDate, startTime, duration);
 //                    Toast.makeText(BidRoomActivity.this, String.valueOf(response.body().getId()), Toast.LENGTH_SHORT).show();
                 } else {
                     Log.i("hlfuidfhsd", response.message());
@@ -74,7 +74,6 @@ public class BidRoomActivity extends AppCompatActivity {
 
             }
         });
-
 
 
         BidNowFragment bidNowFragment = new BidNowFragment();
@@ -94,6 +93,7 @@ public class BidRoomActivity extends AppCompatActivity {
                             // Used for formatting digit to be in 2 digits only
                             binding.progressbar.setVisibility(View.VISIBLE);
                         }
+
                         // When the task is over it will print 00:00:00 there
                         public void onFinish() {
                             binding.progressbar.setVisibility(View.GONE);
@@ -111,7 +111,7 @@ public class BidRoomActivity extends AppCompatActivity {
     }
 
     private void countdownFunc(String startDate, String startTime, String duration) {
-        int durationInMin=Integer.parseInt(duration);
+        int durationInMin = Integer.parseInt(duration);
 
         Calendar date = Calendar.getInstance();
         System.out.println("Current Date and TIme : " + date.getTime());
@@ -120,7 +120,6 @@ public class BidRoomActivity extends AppCompatActivity {
         System.out.println("After adding 10 mins : " + afterAdding10Mins.getTime());
 
         String useTime = startDate + " " + startTime;
-
 
 
         new CountDownTimer(50000, 1000) {
@@ -141,6 +140,7 @@ public class BidRoomActivity extends AppCompatActivity {
                 binding.tvSecond.setText(f.format(sec));
                 binding.bidBtn.setEnabled(true);
             }
+
             // When the task is over it will print 00:00:00 there
             public void onFinish() {
 
@@ -152,6 +152,10 @@ public class BidRoomActivity extends AppCompatActivity {
                 binding.tvHour.setText("");
                 binding.tvMinute.setText("");
                 binding.tvSecond.setText("");
+
+                binding.clWinner.setVisibility(View.VISIBLE);
+                binding.bidRecyclerView.setVisibility(View.GONE);
+                binding.bidBtn.setVisibility(View.GONE);
 
                 binding.bidBtn.setEnabled(false);
             }
