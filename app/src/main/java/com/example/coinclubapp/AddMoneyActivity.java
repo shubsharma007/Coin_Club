@@ -96,7 +96,7 @@ public class AddMoneyActivity extends AppCompatActivity {
 
     private void showPopup() {
 
-        adDialog.setContentView(R.layout.kyc_pending_popup_layout);
+        adDialog.setContentView(R.layout.add_money_popup);
         adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         adDialog.show();
 

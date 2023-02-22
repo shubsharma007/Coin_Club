@@ -42,12 +42,7 @@ public class WithdrawActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(WithdrawActivity.this);
-        binding.hundred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.amountEt.setText("100");
-            }
-        });
+
 
 
         binding.twohundred.setOnClickListener(new View.OnClickListener() {
@@ -74,14 +69,14 @@ public class WithdrawActivity extends AppCompatActivity {
         binding.twoThousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.withdrawEt.setText("2000");
+                binding.amountEt.setText("2000");
             }
         });
 
         binding.fiveThousand.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                binding.withdrawEt.setText("5000");
+                binding.amountEt.setText("5000");
             }
         });
 
@@ -134,7 +129,7 @@ public class WithdrawActivity extends AppCompatActivity {
     }
     private void showPopup() {
 
-        adDialog.setContentView(R.layout.kyc_pending_popup_layout);
+        adDialog.setContentView(R.layout.withdraw_popup);
         adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         adDialog.show();
 
