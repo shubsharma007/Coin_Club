@@ -44,6 +44,7 @@ public class WithdrawActivity extends AppCompatActivity {
         adDialog = new Dialog(WithdrawActivity.this);
 
 
+
         binding.twohundred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -125,7 +126,7 @@ public class WithdrawActivity extends AppCompatActivity {
 
     private void showPopup() {
 
-        adDialog.setContentView(R.layout.kyc_pending_popup_layout);
+        adDialog.setContentView(R.layout.withdraw_popup);
         adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         adDialog.show();
 
