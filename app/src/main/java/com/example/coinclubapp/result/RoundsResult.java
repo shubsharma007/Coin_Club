@@ -10,37 +10,39 @@ public class RoundsResult {
     @SerializedName("clubname")
     @Expose
     private String clubname;
+    @SerializedName("roundno")
+    @Expose
+    private String roundno;
     @SerializedName("roundname")
     @Expose
     private String roundname;
     @SerializedName("minbid")
     @Expose
-    private String minbid;
+    private Object minbid;
     @SerializedName("maxbid")
     @Expose
-    private String maxbid;
+    private Object maxbid;
     @SerializedName("winner")
     @Expose
-    private String winner;
+    private Object winner;
     @SerializedName("roundamount")
     @Expose
-    private String roundamount;
+    private Object roundamount;
     @SerializedName("status")
     @Expose
-    private String status;
+    private Object status;
+    @SerializedName("startdate")
+    @Expose
+    private Object startdate;
+    @SerializedName("starttime")
+    @Expose
+    private Object starttime;
+    @SerializedName("duration")
+    @Expose
+    private Object duration;
     @SerializedName("is_completed")
     @Expose
-    private String isCompleted;
-
-    private String roundno;
-
-    public String getRoundno() {
-        return roundno;
-    }
-
-    public void setRoundno(String roundno) {
-        this.roundno = roundno;
-    }
+    private Boolean isCompleted;
 
     public Integer getId() {
         return id;
@@ -58,6 +60,14 @@ public class RoundsResult {
         this.clubname = clubname;
     }
 
+    public String getRoundno() {
+        return roundno;
+    }
+
+    public void setRoundno(String roundno) {
+        this.roundno = roundno;
+    }
+
     public String getRoundname() {
         return roundname;
     }
@@ -66,51 +76,75 @@ public class RoundsResult {
         this.roundname = roundname;
     }
 
-    public String getMinbid() {
+    public Object getMinbid() {
         return minbid;
     }
 
-    public void setMinbid(String minbid) {
+    public void setMinbid(Object minbid) {
         this.minbid = minbid;
     }
 
-    public String getMaxbid() {
+    public Object getMaxbid() {
         return maxbid;
     }
 
-    public void setMaxbid(String maxbid) {
+    public void setMaxbid(Object maxbid) {
         this.maxbid = maxbid;
     }
 
-    public String getWinner() {
+    public Object getWinner() {
         return winner;
     }
 
-    public void setWinner(String winner) {
+    public void setWinner(Object winner) {
         this.winner = winner;
     }
 
-    public String getRoundamount() {
+    public Object getRoundamount() {
         return roundamount;
     }
 
-    public void setRoundamount(String roundamount) {
+    public void setRoundamount(Object roundamount) {
         this.roundamount = roundamount;
     }
 
-    public String getStatus() {
+    public Object getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Object status) {
         this.status = status;
     }
 
-    public String getIsCompleted() {
+    public Object getStartdate() {
+        return startdate;
+    }
+
+    public void setStartdate(Object startdate) {
+        this.startdate = startdate;
+    }
+
+    public Object getStarttime() {
+        return starttime;
+    }
+
+    public void setStarttime(Object starttime) {
+        this.starttime = starttime;
+    }
+
+    public Object getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Object duration) {
+        this.duration = duration;
+    }
+
+    public Boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(String isCompleted) {
+    public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 }

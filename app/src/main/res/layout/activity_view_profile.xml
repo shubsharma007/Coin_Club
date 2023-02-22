@@ -371,30 +371,30 @@
                         android:textColor="@color/black"
                         android:textSize="@dimen/_16ssp" />
 
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/_1sdp"
-                        android:layout_marginTop="16dp"
-                        android:background="#1A000000" />
+<!--                    <View-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="@dimen/_1sdp"-->
+<!--                        android:layout_marginTop="16dp"-->
+<!--                        android:background="#1A000000" />-->
 
-                    <TextView
-                        android:id="@+id/onTv1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginTop="8dp"
-                        android:text="Organisation Name"
-                        android:textColor="#BC000000"
-                        android:textSize="@dimen/_13ssp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/onTv1"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:layout_marginTop="8dp"-->
+<!--                        android:text="Organisation Name"-->
+<!--                        android:textColor="#BC000000"-->
+<!--                        android:textSize="@dimen/_13ssp" />-->
 
-                    <TextView
-                        android:id="@+id/onTv2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="8dp"
-                        android:text="Techpanda company"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/_16ssp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/onTv2"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_marginStart="8dp"-->
+<!--                        android:text="Techpanda company"-->
+<!--                        android:textColor="@color/black"-->
+<!--                        android:textSize="@dimen/_16ssp" />-->
 
                 </LinearLayout>
 

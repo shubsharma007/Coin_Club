@@ -68,7 +68,14 @@ public class BankDetailsActivity extends AppCompatActivity {
             String googlepay = binding.googlePayEt.getText().toString();
             String bhimupi = binding.bhimUpiEt.getText().toString();
             Id = sharedPreferences.getInt("Id", 0);
-            sendDetails(Id, paytm, phonepe, googlepay, bhimupi);
+            if(binding.check.isChecked())
+            {
+                sendDetails(Id, paytm, phonepe, googlepay, bhimupi);
+            }
+            else
+            {
+                Toast.makeText(this, "Please check the checkbox", Toast.LENGTH_SHORT).show();
+            }
 
         });
     }
@@ -89,25 +96,37 @@ public class BankDetailsActivity extends AppCompatActivity {
     }
 
     private void sendDetails(Integer Id, String paytm, String phonepe, String googlepay, String bhimupi) {
-        File file = new File(imagePath);
+        File file;
+        Call<BankResponsePost> call;
+        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         final ProgressDialog progressDialog=new ProgressDialog(this);
         progressDialog.setMessage("Please Wait....");
         progressDialog.show();
-//        RequestBody fbody = RequestBody.create(MediaType.parse("image/*"), file);
-        RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part document_image = MultipartBody.Part.createFormData("document_image", file.getName(), requestFile);
+        if(bankPassbook)
+        {
+             file = new File(imagePath);
+            RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
+            MultipartBody.Part document_image = MultipartBody.Part.createFormData("document_image", file.getName(), requestFile);
+            RequestBody registeruser = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(Id));
+            RequestBody googlepay_number = RequestBody.create(MediaType.parse("text/plain"), googlepay);
+            RequestBody paytm_number = RequestBody.create(MediaType.parse("text/plain"), paytm);
+            RequestBody phonepe_number = RequestBody.create(MediaType.parse("text/plain"), phonepe);
+            RequestBody bhim_upi = RequestBody.create(MediaType.parse("text/plain"), bhimupi);
 
+            call = apiInterface.postBankDetails(registeruser, googlepay_number, paytm_number, phonepe_number, bhim_upi, document_image);
 
-//        RequestBody fBody = RequestBody.create(null, someFile);
-//        service.uploadFile(fBody, "some_string_session", true);
-        RequestBody registeruser = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(Id));
-        RequestBody googlepay_number = RequestBody.create(MediaType.parse("text/plain"), googlepay);
-        RequestBody paytm_number = RequestBody.create(MediaType.parse("text/plain"), paytm);
-        RequestBody phonepe_number = RequestBody.create(MediaType.parse("text/plain"), phonepe);
-        RequestBody bhim_upi = RequestBody.create(MediaType.parse("text/plain"), bhimupi);
+        }
+        else
+        {
+            RequestBody registeruser = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(Id));
+            RequestBody googlepay_number = RequestBody.create(MediaType.parse("text/plain"), googlepay);
+            RequestBody paytm_number = RequestBody.create(MediaType.parse("text/plain"), paytm);
+            RequestBody phonepe_number = RequestBody.create(MediaType.parse("text/plain"), phonepe);
+            RequestBody bhim_upi = RequestBody.create(MediaType.parse("text/plain"), bhimupi);
 
-        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<BankResponsePost> call = apiInterface.postBankDetails(registeruser, googlepay_number, paytm_number, phonepe_number, bhim_upi, document_image);
+            call = apiInterface.postBankDetailsWithoutImage(registeruser, googlepay_number, paytm_number, phonepe_number, bhim_upi);
+
+        }
         call.enqueue(new Callback<BankResponsePost>() {
             @Override
             public void onResponse(Call<BankResponsePost> call, Response<BankResponsePost> response) {
@@ -119,7 +138,7 @@ public class BankDetailsActivity extends AppCompatActivity {
                     startActivity(new Intent(BankDetailsActivity.this, MainActivity.class));
                     finish();
                 } else {
-//                    Log.i("fhduifhduf",response.message());
+                    Log.i("fhduifhduf",response.message());
 //                    Log.i("fdsfsdfhsdf",response.errorBody().toString());
 //                    Log.i("fsdfsdufsdf",String.valueOf(response.code()));
 //                    Log.i("fdfklsdjfhsdjkfn",response.raw().toString());
@@ -130,8 +149,7 @@ public class BankDetailsActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<BankResponsePost> call, Throwable t) {
 //                Toast.makeText(BankDetailsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-//                Log.i("fhduifhduf",t.getMessage());
-//                Log.i("fdsfsdfhsdf",t.getCause().toString());
+                Log.i("fhduifhduf",t.getMessage());
                 Toast.makeText(BankDetailsActivity.this, "Error,Try Again After Sometime", Toast.LENGTH_SHORT).show();
             }
         });

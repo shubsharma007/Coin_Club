@@ -24,6 +24,11 @@ public class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.BidsViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull BidsAdapter.BidsViewHolder holder, int position) {
+        if (position == 0) {
+            holder.cl.setBackgroundResource(R.color.red);
+        } else {
+            holder.cl.setBackgroundResource(R.color.white);
+        }
         holder.serialNoTv.setText(String.valueOf(position+1));
     }
 
@@ -34,9 +39,11 @@ public class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.BidsViewHolder
 
     public class BidsViewHolder extends RecyclerView.ViewHolder {
         TextView serialNoTv;
+        TextView cl;
         public BidsViewHolder(@NonNull View itemView) {
             super(itemView);
            serialNoTv=itemView.findViewById(R.id.serialNoTv);
+           cl=itemView.findViewById(R.id.cl);
         }
     }
 }

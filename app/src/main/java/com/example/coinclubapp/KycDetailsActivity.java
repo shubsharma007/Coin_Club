@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -45,7 +46,7 @@ public class KycDetailsActivity extends AppCompatActivity {
     Uri aadharBack;
     Uri panFront;
 
-    Integer Id;
+
 
     Dialog adDialog;
     String uriafs, uriabs, uripfs;
@@ -59,7 +60,8 @@ public class KycDetailsActivity extends AppCompatActivity {
         binding = ActivityKycDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-
+        int Id;
+        Id = sharedPreferences.getInt("Id", 0);
 
         binding.appCompatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +121,6 @@ public class KycDetailsActivity extends AppCompatActivity {
             }
             else {
 
-                Id = sharedPreferences.getInt("Id", 0);
                 sendDetails(Id,fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
 
             }
@@ -201,6 +202,7 @@ public class KycDetailsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<KycResponse> call, Throwable t) {
+                Log.i("hdkfhdfk",t.getMessage());
                 Toast.makeText(KycDetailsActivity.this, "some error occured , please try again", Toast.LENGTH_SHORT).show();
             }
         });

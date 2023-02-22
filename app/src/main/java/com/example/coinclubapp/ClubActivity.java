@@ -25,8 +25,10 @@ import com.example.coinclubapp.result.RoundsResult;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,8 +42,9 @@ public class ClubActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
     String startDATE, startTIME;
-
-    String bidTime;
+     int roundId;
+    String duration;
+    String useTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +54,8 @@ public class ClubActivity extends AppCompatActivity {
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         binding.bidStartIn.setEnabled(false);
         Intent ii = getIntent();
-        binding.clubName.setText(ii.getStringExtra("clubName"));
-        binding.clubAmountTv.setText(ii.getStringExtra("₹" + "clubAmount"));
-        binding.perHeadTv.setText(ii.getStringExtra("₹" + "perHead"));
-        binding.nextRoundTv.setText(ii.getStringExtra("nextBid"));
+        binding.clubName.setText(getIntent().getStringExtra("clubName"));
+
 
 
         String clubId = ii.getStringExtra("id");
@@ -64,16 +65,10 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<AllClubsGet> call, Response<AllClubsGet> response) {
                 if (response.isSuccessful()) {
-                    AllClubsGet resp = response.body();
-                    startDATE = resp.getStartdate();
-                    startTIME = resp.getStarttime();
-                    bidTime = resp.getDuration();
-                    String useTime = startDATE + " " + startTIME;
-                    try {
-                        countDownFunc(useTime);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
+                    binding.clubAmountTv.setText(response.body().getClubamount());
+                    binding.perHeadTv.setText(response.body().getClubcontribution());
+                    binding.nextRoundTv.setText(response.body().getStartdate());
+
                 } else {
                     Toast.makeText(ClubActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                 }
@@ -90,7 +85,10 @@ public class ClubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (binding.bidStartIn.isEnabled()) {
                     Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
-                    i.putExtra("duration", bidTime);
+                    i.putExtra("roundId",roundId);
+                    i.putExtra("duration",duration);
+                    i.putExtra("startDate",startDATE);
+                    i.putExtra("startTime",startTIME);
                     startActivity(i);
                 } else {
                     Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
@@ -135,7 +133,39 @@ public class ClubActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
                 if (response.isSuccessful()) {
-                    binding.recyclerViewRound.setAdapter(new RoundAdapter(response.body()));
+
+                    List<RoundsResult> myRounds=new ArrayList<>();
+                    for(int i=0;i<response.body().size();i++)
+                    {
+                        if(Objects.equals(ii.getStringExtra("clubName"), response.body().get(i).getClubname()))
+                        {
+                            myRounds.add(response.body().get(i));
+                        }
+
+                    }
+                    binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds));
+                    for(int i=0;i<myRounds.size();i++)
+                    {
+                        RoundsResult roundJiskiBidStartHogi=new RoundsResult();
+                        if(!myRounds.get(i).getIsCompleted())
+                        {
+                             roundJiskiBidStartHogi=myRounds.get(i);
+                            startDATE = String.valueOf(roundJiskiBidStartHogi.getStartdate());
+                            startTIME = String.valueOf(roundJiskiBidStartHogi.getStarttime());
+                            useTime = startDATE + " " + startTIME;
+                            duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
+                            roundId=roundJiskiBidStartHogi.getId();
+                            try {
+                                countDownFunc(useTime);
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                            break;
+                        }
+
+
+                    }
+
                 }
             }
 
