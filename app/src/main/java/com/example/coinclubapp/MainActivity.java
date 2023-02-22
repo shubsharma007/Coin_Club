@@ -38,7 +38,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private long pressedTime;
-    private int STORAGE_PERMISSION_CODE = 295;
+    private final int STORAGE_PERMISSION_CODE = 295;
 
     ApiInterface apiInterface;
 
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Storage Permission
         if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
         } else {
             requestStoragePermission();
         }
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<List<AllClubsGet>> call, Response<List<AllClubsGet>> response) {
                 if (response.isSuccessful()) {
 
-                    binding.recyclerViewClubs.setAdapter(new HotClubAdapter(MainActivity.this, response.body()));
+                    binding.recyclerViewClubs.setAdapter(new MyClubsAdapter(MainActivity.this, response.body()));
                     binding.progressBar.setVisibility(View.GONE);
                 } else {
                     Toast.makeText(MainActivity.this, "some error occured", Toast.LENGTH_SHORT).show();

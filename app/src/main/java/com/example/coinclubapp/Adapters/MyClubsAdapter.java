@@ -24,17 +24,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsViewHolder>
-{
-
-    Context context;
-    List<AllClubsGet> clubResultList;
-
-
-
+public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubViewHolder> {
     private String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
     Handler handler = new Handler();
     Runnable runnable;
+
+    Context context;
+    List<AllClubsGet> clubResultList;
 
     public MyClubsAdapter(Context context, List<AllClubsGet> clubResultList) {
         this.context = context;
@@ -43,14 +39,15 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsV
 
     @NonNull
     @Override
-    public MyClubsAdapter.MyClubsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflater=LayoutInflater.from(parent.getContext());
-        View view=inflater.inflate(R.layout.user_join_club_layout,parent,false);
-        return new MyClubsViewHolder(view);
+    public MyClubsAdapter.MyClubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        View view = inflater.inflate(R.layout.hot_club_cardview_layout, parent, false);
+
+        return new MyClubViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyClubsAdapter.MyClubsViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyClubsAdapter.MyClubViewHolder holder, int position) {
         AllClubsGet current = clubResultList.get(position);
 
 
@@ -88,7 +85,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsV
         });
     }
 
-    private void countDownFunc(MyClubsAdapter.MyClubsViewHolder holder, String mydate, String myTime) throws ParseException {
+    private void countDownFunc(MyClubsAdapter.MyClubViewHolder holder, String mydate, String myTime) throws ParseException {
 
 
         String useTime = mydate + " " + myTime;
@@ -152,20 +149,19 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsV
         }
     }
 
+
     @Override
     public int getItemCount() {
         return clubResultList.size();
     }
 
-    public class MyClubsViewHolder extends RecyclerView.ViewHolder {
+    public class MyClubViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtDesc, txtNextBid, txtRound, txtAmount;
         ConstraintLayout Club_layout;
         ImageView logo;
         TextView tv_days, tv_hour, tv_minute, tv_second, startBiddingTv;
         LinearLayout ll1, ll2, ll3, ll4;
-
-
-        public MyClubsViewHolder(@NonNull View itemView) {
+        public MyClubViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtDesc = itemView.findViewById(R.id.txtDesc);
@@ -184,7 +180,5 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubsV
             ll3 = itemView.findViewById(R.id.ll3);
             ll4 = itemView.findViewById(R.id.ll4);
         }
-
     }
-
 }

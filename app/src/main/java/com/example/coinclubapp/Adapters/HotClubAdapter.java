@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
 import androidx.annotation.NonNull;
@@ -31,7 +30,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHolder> {
+public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.HotClubViewHolder> {
 
     Context context;
     List<AllClubsGet> clubResultList;
@@ -49,16 +48,16 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
 
     @NonNull
     @Override
-    public HotClubAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public HotClubViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         View view = inflater.inflate(R.layout.hot_club_cardview_layout, parent, false);
 
-        return new HotClubAdapter.MyViewHolder(view);
+        return new HotClubViewHolder(view);
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull HotClubAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HotClubViewHolder holder, int position) {
 
 
         AllClubsGet current = clubResultList.get(position);
@@ -98,7 +97,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         });
     }
 
-    private void countDownFunc(MyViewHolder holder, String mydate, String myTime) throws ParseException {
+    private void countDownFunc(HotClubViewHolder holder, String mydate, String myTime) throws ParseException {
 
 
         String useTime = mydate + " " + myTime;
@@ -167,7 +166,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         return clubResultList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class HotClubViewHolder extends RecyclerView.ViewHolder {
         TextView txtName, txtDesc, txtNextBid, txtRound, txtAmount;
         ConstraintLayout Club_layout;
         ImageView logo;
@@ -175,7 +174,7 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.MyViewHo
         LinearLayout ll1, ll2, ll3, ll4;
 
 
-        public MyViewHolder(@NonNull View itemView) {
+        public HotClubViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             txtDesc = itemView.findViewById(R.id.txtDesc);

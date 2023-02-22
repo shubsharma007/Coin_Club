@@ -42,7 +42,7 @@ public class ClubActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
     String startDATE, startTIME;
-     int roundId;
+    int roundId;
     String duration;
     String useTime;
 
@@ -55,7 +55,6 @@ public class ClubActivity extends AppCompatActivity {
         binding.bidStartIn.setEnabled(false);
         Intent ii = getIntent();
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
-
 
 
         String clubId = ii.getStringExtra("id");
@@ -85,10 +84,10 @@ public class ClubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (binding.bidStartIn.isEnabled()) {
                     Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
-                    i.putExtra("roundId",roundId);
-                    i.putExtra("duration",duration);
-                    i.putExtra("startDate",startDATE);
-                    i.putExtra("startTime",startTIME);
+                    i.putExtra("roundId", roundId);
+                    i.putExtra("duration", duration);
+                    i.putExtra("startDate", startDATE);
+                    i.putExtra("startTime", startTIME);
                     startActivity(i);
                 } else {
                     Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
@@ -134,36 +133,32 @@ public class ClubActivity extends AppCompatActivity {
             public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
                 if (response.isSuccessful()) {
 
-                    List<RoundsResult> myRounds=new ArrayList<>();
-                    for(int i=0;i<response.body().size();i++)
-                    {
-                        if(Objects.equals(ii.getStringExtra("clubName"), response.body().get(i).getClubname()))
-                        {
+                    List<RoundsResult> myRounds = new ArrayList<>();
+                    for (int i = 0; i < response.body().size(); i++) {
+                        if (Objects.equals(ii.getStringExtra("clubName"), response.body().get(i).getClubname())) {
                             myRounds.add(response.body().get(i));
                         }
 
                     }
-                    binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds));
-                    for(int i=0;i<myRounds.size();i++)
-                    {
-                        RoundsResult roundJiskiBidStartHogi=new RoundsResult();
-                        if(!myRounds.get(i).getIsCompleted())
-                        {
-                             roundJiskiBidStartHogi=myRounds.get(i);
+
+                    for (int i = 0; i < myRounds.size(); i++) {
+                        RoundsResult roundJiskiBidStartHogi = new RoundsResult();
+                        if (!myRounds.get(i).getIsCompleted()) {
+                            roundJiskiBidStartHogi = myRounds.get(i);
                             startDATE = String.valueOf(roundJiskiBidStartHogi.getStartdate());
                             startTIME = String.valueOf(roundJiskiBidStartHogi.getStarttime());
                             useTime = startDATE + " " + startTIME;
                             duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
-                            roundId=roundJiskiBidStartHogi.getId();
+                            roundId = roundJiskiBidStartHogi.getId();
                             try {
                                 countDownFunc(useTime);
                             } catch (ParseException e) {
                                 e.printStackTrace();
+                            } finally {
+                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
+                                break;
                             }
-                            break;
                         }
-
-
                     }
 
                 }
