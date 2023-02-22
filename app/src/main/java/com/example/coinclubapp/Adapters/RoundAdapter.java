@@ -1,5 +1,6 @@
 package com.example.coinclubapp.Adapters;
 
+import android.graphics.Color;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +19,13 @@ import java.util.List;
 public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHolder> {
 
     List<RoundsResult> listOfRounds;
+    int activeRound;
 
-    public RoundAdapter(List<RoundsResult> listOfRounds) {
+    public RoundAdapter(List<RoundsResult> listOfRounds,int activeRound) {
         this.listOfRounds = listOfRounds;
+        this.activeRound=activeRound;
     }
+
 
     @NonNull
     @Override
@@ -33,11 +37,33 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RoundAdapter.RoundViewHolder holder, int position) {
-
         RoundsResult result=listOfRounds.get(position);
+
+        if(position==activeRound)
+        {
+            holder.roundBtn.setBackgroundResource(R.drawable.bg_round_count_dark);
+            holder.roundBtn.setTextColor(Color.WHITE);
+        }
         holder.roundBtn.setText(result.getRoundno());
-        holder.nameTv.setText(String.valueOf(result.getWinner()));
-        holder.amountTv.setText(String.valueOf(result.getRoundamount()));
+
+        if(result.getWinner()==null)
+        {
+            holder.nameTv.setText("");
+        }
+        else
+        {
+            holder.nameTv.setText(String.valueOf(result.getWinner()));
+        }
+        if(result.getRoundamount()==null)
+        {
+            holder.amountTv.setText("");
+        }
+        else
+        {
+            holder.amountTv.setText(String.valueOf(result.getRoundamount()));
+        }
+
+
 
     }
 
