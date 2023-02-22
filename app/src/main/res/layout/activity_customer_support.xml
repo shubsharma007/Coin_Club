@@ -61,7 +61,7 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/card_bg_light_white"
             android:gravity="start"
-            android:hint="enter your issue"
+            android:hint="Enter your issue"
             android:padding="8dp"
             android:textColor="@color/black"
             android:textColorHint="@color/black"
@@ -72,14 +72,39 @@
             app:layout_constraintTop_toBottomOf="@id/tv"
             tools:layout_editor_absoluteX="21dp" />
 
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dp_img"
+            android:layout_width="@dimen/_88sdp"
+            android:layout_height="@dimen/_88sdp"
+            android:src="@drawable/ic_ldki"
+            android:visibility="gone"
+            app:civ_border_width="1px"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etDisc"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/editBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="upload your screenshot"
+             android:visibility="gone"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="10dp"
+            android:background="@drawable/card_bg_light_white"
+            app:layout_constraintStart_toStartOf="@+id/etDisc"
+            app:layout_constraintTop_toBottomOf="@+id/etDisc" />
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/submitBtn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
             android:background="@drawable/curve_blue_bg"
             android:elevation="10dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="@font/poppins_medium"
             android:text="SUBMIT"
             android:textColor="@color/white"
@@ -87,19 +112,19 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/etDisc" />
+            app:layout_constraintTop_toBottomOf="@+id/editBtn" />
 
         <TextView
-            android:layout_marginStart="15dp"
-            app:layout_constraintStart_toStartOf="@id/recyclerview"
             android:id="@+id/previousTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="@dimen/_20sdp"
             android:text="Previous Issues Status"
             android:textColor="@color/black"
             android:textSize="@dimen/_13ssp"
             android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@id/recyclerview"
             app:layout_constraintTop_toBottomOf="@id/submitBtn" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -107,11 +132,11 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:paddingBottom="30dp"
-            tools:listitem="@layout/issues_layout"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/previousTv" />
+            app:layout_constraintTop_toBottomOf="@id/previousTv"
+            tools:listitem="@layout/issues_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -59,7 +59,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <EditText
+            <TextView
                 android:id="@+id/withdrawEt"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
@@ -67,6 +67,7 @@
                 android:layout_marginTop="10dp"
                 android:background="@drawable/add_money_btn_bg"
                 android:hint="Amount"
+                android:gravity="center_vertical"
                 android:paddingStart="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -86,18 +87,6 @@
                     android:layout_height="match_parent"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/hundred"
-                        android:layout_width="100dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginStart="20dp"
-                        android:background="@drawable/home_card_bg"
-                        android:gravity="center"
-                        android:text="₹100"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/_10ssp"
-                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/twohundred"
@@ -138,6 +127,31 @@
                         android:textSize="@dimen/_10ssp"
                         android:textStyle="bold" />
 
+                    <TextView
+                        android:id="@+id/twoThousand"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/home_card_bg"
+                        android:gravity="center"
+                        android:text="₹2000"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/fiveThousand"
+                        android:layout_width="100dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="20dp"
+                        android:background="@drawable/home_card_bg"
+                        android:gravity="center"
+                        android:text="₹5000"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/_10ssp"
+                        android:textStyle="bold" />
+
 
 
                 </LinearLayout>
@@ -151,7 +165,7 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:background="@drawable/add_money_btn_bg"
-                android:text="Submit Request"
+                android:text="Withdraw"
                 android:textAllCaps="false"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

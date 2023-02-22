@@ -16,12 +16,6 @@ ActivityWithdrawBinding binding;
         binding=ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.hundred.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                binding.withdrawEt.setText("100");
-            }
-        });
 
         binding.twohundred.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +37,22 @@ ActivityWithdrawBinding binding;
                 binding.withdrawEt.setText("1000");
             }
         });
+
+        binding.twoThousand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.withdrawEt.setText("2000");
+            }
+        });
+
+        binding.fiveThousand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.withdrawEt.setText("5000");
+            }
+        });
+
+
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override

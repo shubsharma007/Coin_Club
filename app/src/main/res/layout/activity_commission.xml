@@ -106,7 +106,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wt. Average Transfer Time"
+                    android:text="Amount transacted so for"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9ssp" />
@@ -114,7 +114,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10h 15m"
+                    android:text="₹10,3783"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp" />
             </LinearLayout>
@@ -135,7 +135,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Wt. Average Transfer Time"
+                    android:text="Real clubs closed"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_9ssp" />
@@ -143,7 +143,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="10h 15m"
+                    android:text="204"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_12ssp" />
             </LinearLayout>

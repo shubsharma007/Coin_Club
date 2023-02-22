@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
-            android:text="Your Kyc Request Has Been Submitted \n please wait for 24 hours...."
+            android:text="your Issue has been submitted to our team\nplease wait for 24 hours"
             android:textColor="#323D94"
             android:textAlignment="center"
             android:textSize="@dimen/_14ssp"

@@ -11,5 +11,6 @@
     <color name="mainColour">#323D94</color>
     <color name="hint_colour">#CC323D94</color>
     <color name="broun">#BA8C34</color>
+    <color name="PopUpBackground">#DADEFF</color>
 
 </resources>
