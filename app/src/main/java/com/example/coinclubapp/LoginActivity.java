@@ -60,7 +60,8 @@ public class LoginActivity extends AppCompatActivity {
                             progressDialog.dismiss();
                             if (response.body().getStatus().equals("True")) {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putInt("Id", response.body().getId());
+                                Integer loginId=response.body().getId();
+                                editor.putInt("Id", loginId);
                                 editor.apply();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();

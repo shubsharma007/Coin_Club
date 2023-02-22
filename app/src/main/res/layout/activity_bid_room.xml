@@ -56,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:text="Rahul1638"
+                android:text="Savitri"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_13ssp"
@@ -69,7 +69,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_2sdp"
-                android:text="200 Daily Contribution"
+                android:text="per head : 1000₹"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
@@ -92,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_5sdp"
-                android:text="Next Bid : 10jan 2023"
+                android:text="Next Bid : 2023-02-21"
 
                 android:textSize="@dimen/_10sdp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -103,7 +103,7 @@
                 android:id="@+id/txtRound"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Round 1 of 10"
+                android:text="Round 1 of 7"
                 android:textAlignment="textStart"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14ssp"
@@ -145,7 +145,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_4sdp"
                     android:gravity="center"
-                    android:text="$ 56380"
+                    android:text="$ 20000"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="@+id/textView15"
                     app:layout_constraintStart_toStartOf="@+id/textView15"
@@ -169,39 +169,53 @@
             app:layout_constraintTop_toBottomOf="@+id/Club_layout">
 
 
+            <TextView
+                android:id="@+id/startBiddingTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Time Over..."
+                android:textColor="@color/white"
+                android:textSize="@dimen/_15ssp"
+                android:textStyle="bold"
+                android:visibility="gone" />
+
+<!--            <LinearLayout-->
+<!--                android:id="@+id/ll1"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:layout_marginEnd="5dp"-->
+<!--                android:layout_weight="1"-->
+<!--                android:orientation="vertical">-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_days_title"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="DAYS"-->
+<!--                    android:textColor="@color/white"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="normal" />-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/tv_days"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_gravity="center"-->
+<!--                    android:layout_weight="1"-->
+<!--                    android:text="00"-->
+<!--                    android:textColor="@android:color/white"-->
+<!--                    android:textSize="14sp"-->
+<!--                    android:textStyle="bold" />-->
+
+
+<!--            </LinearLayout>-->
+
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_weight="1"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tv_days_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="DAYS"
-                    android:textColor="@color/white"
-                    android:textSize="12sp"
-                    android:textStyle="normal" />
-
-                <TextView
-                    android:id="@+id/tv_days"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="00"
-                    android:textColor="@android:color/white"
-                    android:textSize="14sp"
-                    android:textStyle="bold" />
-
-
-            </LinearLayout>
-
-            <LinearLayout
+                android:id="@+id/ll2"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
@@ -235,6 +249,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll3"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
@@ -268,6 +283,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/ll4"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginEnd="5dp"
@@ -300,6 +316,17 @@
             </LinearLayout>
         </LinearLayout>
 
+        <ProgressBar
+            android:visibility="gone"
+            android:id="@+id/progressbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/bidRecyclerView"
             android:layout_width="match_parent"
@@ -313,11 +340,11 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/bidBtn"
             android:layout_width="0dp"
-            android:textAllCaps="false"
-            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/add_money_btn_bg"
             android:text="My Bid"
+            android:textAllCaps="false"
             android:textColor="@color/black"
             android:textSize="13sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -182,6 +182,19 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            android:progressTint="@color/mainColour"
+                            android:layout_width="wrap_content"
+                            android:visibility="gone"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            />
+
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/recyclerViewClubs"
                             android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import com.example.coinclubapp.Response.BankResponsePost;
 import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssueResponse;
 import com.example.coinclubapp.Response.KycResponse;
+import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
 import com.example.coinclubapp.result.Issue;
@@ -71,6 +72,17 @@ public interface ApiInterface {
             @Part MultipartBody.Part document_image
     );
 
+    //    http://meetjob.techpanda.art/bankaccount
+    @Multipart
+    @POST("bankaccount/")
+    Call<BankResponsePost> postBankDetailsWithoutImage(
+            @Part("registeruser") RequestBody registeruser,
+            @Part("googlepay_number") RequestBody googlepay_number,
+            @Part("paytm_number") RequestBody paytm_number,
+            @Part("phonepe_number") RequestBody phonepe_number,
+            @Part("bhim_upi") RequestBody bhim_upi
+    );
+
 
     @Multipart
     @POST("userkyc/")
@@ -90,6 +102,9 @@ public interface ApiInterface {
     @GET("roundview/")
     Call<List<RoundsResult>> getAllRounds();
 
+    @GET("roundview/{id}")
+    Call<RoundsResult> getRoundsById(@Path("id")int id);
+
     @GET("userkyc/")
     Call<List<KycResponse>> getKycItem();
 
@@ -107,5 +122,12 @@ public interface ApiInterface {
     Call<Issue> postCustomerIssue(@Field("discription") String discription,
                                   @Field("issue") String issue);
 
+    @GET("profile/{id}")
+    Call<ProfileResponse> getProfileItemById(@Path("id") int id);
 
+
+//    @Multipart
+//    @PATCH("profile/{id}")
+//    Call<PatchProfileResponse> patchProfileById(@Path("id") int id,
+//                                                @Part MultipartBody.Part profileimg);
 }
