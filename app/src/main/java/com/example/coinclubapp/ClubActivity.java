@@ -84,7 +84,8 @@ public class ClubActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (binding.bidStartIn.isEnabled()) {
                     Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
-                    i.putExtra("roundId", roundId);
+                    //jhkfhkjsdfsdjkf yogesh
+                    i.putExtra("roundId", 5);
                     i.putExtra("duration", duration);
                     i.putExtra("startDate", startDATE);
                     i.putExtra("startTime", startTIME);
@@ -155,7 +156,7 @@ public class ClubActivity extends AppCompatActivity {
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             } finally {
-                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
+                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, 5));
                                 break;
                             }
                         }
