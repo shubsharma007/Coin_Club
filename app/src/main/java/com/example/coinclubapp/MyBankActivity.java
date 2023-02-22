@@ -5,11 +5,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
 import com.example.coinclubapp.Adapters.TransactionAdapter;
+import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityMyBankBinding;
 import com.example.coinclubapp.databinding.ActivityProfileBinding;
 
@@ -18,6 +22,9 @@ public class MyBankActivity extends AppCompatActivity {
     ActivityMyBankBinding binding;
     RecyclerView.LayoutManager LayoutManager;
     TransactionAdapter adapter;
+    ApiInterface apiInterface;
+    int Id;
+
 
     @SuppressLint("NotifyDataSetChanged")
     @Override
@@ -25,6 +32,12 @@ public class MyBankActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding=ActivityMyBankBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        Id = sharedPreferences.getInt("Id", 0);
+
 
 
         LayoutManager = new LinearLayoutManager (MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
