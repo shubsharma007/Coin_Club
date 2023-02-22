@@ -1,8 +1,14 @@
 package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Dialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -32,6 +38,8 @@ public class CustomerSupportActivity extends AppCompatActivity {
     ActivityCustomerSupportBinding binding;
     String issueSelected;
     ApiInterface apiInterface;
+    Dialog adDialog;
+
     Boolean[] mamle;
     String[] issues = {"Please select any Issue",
             "Having trouble in adding money",
@@ -48,6 +56,9 @@ public class CustomerSupportActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityCustomerSupportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        adDialog = new Dialog(CustomerSupportActivity.this);
+
 
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         Call<List<IssueResponse>> call = apiInterface.getIssue();
@@ -144,8 +155,10 @@ public class CustomerSupportActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<Issue> call, Response<Issue> response) {
                             if (response.isSuccessful()) {
-                                Toast.makeText(CustomerSupportActivity.this, "your Issue has been submitted to our team ," +
-                                        " please wait for 24 hours", Toast.LENGTH_SHORT).show();
+
+                                showPopup();
+//                                Toast.makeText(CustomerSupportActivity.this, "your Issue has been submitted to our team ," +
+//                                        " please wait for 24 hours", Toast.LENGTH_SHORT).show();
                                 Log.i("ISSUESELECTED", issueSelected);
                             } else {
                                 Toast.makeText(CustomerSupportActivity.this, response.message(), Toast.LENGTH_SHORT).show();
@@ -161,4 +174,29 @@ public class CustomerSupportActivity extends AppCompatActivity {
             }
         });
     }
+
+
+    private void showPopup() {
+
+        adDialog.setContentView(R.layout.issue_popup);
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        adDialog.show();
+
+        AppCompatButton okBtn = adDialog.findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
+        adDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
+            }
+        });
+    }
+
 }

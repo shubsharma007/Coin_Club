@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="@dimen/_26sdp"
-    android:backgroundTint="#DADEFF"
+    android:backgroundTint="@color/PopUpBackground"
     android:elevation="@dimen/_15sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout

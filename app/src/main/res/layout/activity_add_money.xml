@@ -40,8 +40,10 @@
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationTv">
+        app:layout_constraintTop_toBottomOf="@+id/notificationTv"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
@@ -53,8 +55,8 @@
 
             <ImageView
                 android:id="@+id/imageView4"
-                android:layout_width="120dp"
-                android:layout_height="120dp"
+                android:layout_width="wrap_content"
+                android:layout_height="250dp"
                 android:src="@drawable/qr_img"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -67,28 +69,35 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="15dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageView4">
 
                 <TextView
                     android:id="@+id/textView5"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Acc Holder Name :-"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="10dp"
+                    android:text="Account Name"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <TextView
                     android:id="@+id/name_tv"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
+                    android:background="@drawable/edittext_round_corner_white_bg"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingVertical="5dp"
+                    android:paddingStart="10dp"
                     android:text="Shubham"
+                    android:gravity="start"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
 
 
             </LinearLayout>
@@ -100,28 +109,34 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
                 <TextView
                     android:id="@+id/tv1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Acc Number :-"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="10dp"
+                    android:text="Account Number"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <TextView
                     android:id="@+id/account_number"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="7487484884984"
-                    android:textStyle="bold"
+                    android:background="@drawable/edittext_round_corner_white_bg"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="64648474739473348"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -132,28 +147,34 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll2">
 
                 <TextView
                     android:id="@+id/tv2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="IFSC Code :-"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="10dp"
+                    android:text="IFSC Code"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <TextView
                     android:id="@+id/ifsCode"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="GFDJF43784"
-                    android:textStyle="bold"
+                    android:background="@drawable/edittext_round_corner_white_bg"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="FYHD73873"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
@@ -164,58 +185,67 @@
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="5dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll3">
 
                 <TextView
                     android:id="@+id/tv3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Upi Id :-"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingHorizontal="10dp"
+                    android:text="UPI Id"
+                    android:textAlignment="textStart"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp" />
 
                 <TextView
                     android:id="@+id/upi_id"
-                    android:textStyle="bold"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:text="shubham@ybl"
+                    android:background="@drawable/edittext_round_corner_white_bg"
+                    android:fontFamily="@font/poppins_medium"
+                    android:paddingStart="10dp"
+                    android:paddingVertical="5dp"
+                    android:text="Shubham@ybl"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="@dimen/_13ssp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
 
             <EditText
                 android:id="@+id/amountEt"
-                android:layout_width="150dp"
-                android:layout_height="30dp"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/home_card_bg"
+                android:gravity="center"
                 android:hint="Enter Amount"
                 android:inputType="number"
-                android:gravity="center"
                 android:paddingHorizontal="8dp"
                 android:textColor="@color/black"
                 android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/ll4"
+                app:layout_constraintStart_toStartOf="@+id/ll4"
                 app:layout_constraintTop_toBottomOf="@+id/ll4" />
 
             <TextView
                 android:id="@+id/textView22"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="Select Your Receipt"
+                android:fontFamily="@font/poppins_medium"
+                android:paddingHorizontal="10dp"
+                android:text="Select Your receipt"
+                android:textAlignment="textStart"
                 android:textColor="@color/black"
-                android:textSize="13sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:textSize="@dimen/_13ssp"
+                app:layout_constraintEnd_toEndOf="@+id/amountEt"
+                app:layout_constraintStart_toStartOf="@+id/amountEt"
                 app:layout_constraintTop_toBottomOf="@+id/amountEt" />
 
             <ImageView
@@ -234,19 +264,18 @@
                 android:id="@+id/submitBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:background="@drawable/edittext_round_corner_blue_bg"
                 android:clickable="false"
                 android:text="S u b m i t"
-                android:textStyle=""
-                android:textSize="16sp"
-                android:textColor="@color/white"
                 android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle=""
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/textView22"
+                app:layout_constraintStart_toStartOf="@+id/textView22"
                 app:layout_constraintTop_toBottomOf="@+id/uploadImage" />
 
 

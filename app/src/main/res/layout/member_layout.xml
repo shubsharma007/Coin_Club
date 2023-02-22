@@ -1,31 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="@dimen/_70sdp"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/_4sdp"
     android:orientation="vertical">
 
     <ImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/dp_img"
-        android:layout_gravity="center"
         android:layout_width="@dimen/_55sdp"
         android:layout_height="@dimen/_55sdp"
+        android:layout_gravity="center"
         android:scaleType="centerCrop"
         android:src="@drawable/img_member"
+        app:civ_border_color="#FF000000"
         app:civ_border_width="2dp"
-        app:civ_border_color="#FF000000"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:visibility="gone"
+        android:id="@+id/winner_batch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/winner_gift"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:layout_width="12dp"
+        android:layout_height="12dp"
+        android:background="@drawable/offline_user"
+        app:layout_constraintBottom_toBottomOf="@+id/dp_img"
+        app:layout_constraintEnd_toEndOf="@+id/dp_img" />
 
     <TextView
         android:id="@+id/nameTv"
-        android:gravity="center"
-        android:layout_gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_1sdp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:paddingBottom="3dp"
+        android:text="Eleanor Pena"
+        android:textColor="@color/black"
         android:textSize="@dimen/_9ssp"
-        android:text="Eleanor Pena" />
-</LinearLayout>
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/dp_img"
+        app:layout_constraintStart_toStartOf="@+id/dp_img"
+        app:layout_constraintTop_toBottomOf="@+id/dp_img" />
+</androidx.constraintlayout.widget.ConstraintLayout>

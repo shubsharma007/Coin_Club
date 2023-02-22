@@ -38,6 +38,7 @@ public class WithdrawActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(WithdrawActivity.this);
@@ -47,6 +48,7 @@ public class WithdrawActivity extends AppCompatActivity {
                 binding.amountEt.setText("100");
             }
         });
+
 
         binding.twohundred.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,6 +70,22 @@ public class WithdrawActivity extends AppCompatActivity {
                 binding.amountEt.setText("1000");
             }
         });
+
+        binding.twoThousand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.withdrawEt.setText("2000");
+            }
+        });
+
+        binding.fiveThousand.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.withdrawEt.setText("5000");
+            }
+        });
+
+
 
         binding.backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
