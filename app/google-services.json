@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "851701297823",
+    "project_id": "coin-club-app",
+    "storage_bucket": "coin-club-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851701297823:android:b6280af906d19f0c1728aa",
+        "android_client_info": {
+          "package_name": "com.example.coinclubapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851701297823-m52i6frkttp9864o4p2p476ubde5e22j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD-nRwSlvjDRsWgHhOHXF3CtghUQdpmudo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851701297823-m52i6frkttp9864o4p2p476ubde5e22j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

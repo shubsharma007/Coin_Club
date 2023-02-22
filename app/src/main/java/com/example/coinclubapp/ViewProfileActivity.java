@@ -48,8 +48,8 @@ public class ViewProfileActivity extends AppCompatActivity {
                     binding.anEt.setText(response.body().getAlternateno());
                     binding.nameTv.setText(response.body().getFullName());
                     binding.msTv2.setText(response.body().getCreateAt());
-                    binding.cityTv2.setText(response.body().getCity());
-                    binding.occupationTv2.setText(response.body().getOccupation());
+//                    binding.cityTv2.setText(response.body().getCity());
+//                    binding.occupationTv2.setText(response.body().getOccupation());
 
                 } else {
                     Toast.makeText(ViewProfileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
