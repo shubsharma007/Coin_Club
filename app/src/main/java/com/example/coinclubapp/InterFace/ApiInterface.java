@@ -1,5 +1,6 @@
 package com.example.coinclubapp.InterFace;
 
+import com.example.coinclubapp.Response.AddOrWithdrawMoneyResponsePost;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
@@ -98,12 +99,27 @@ public interface ApiInterface {
                                    @Part MultipartBody.Part panimg
     );
 
+    @Multipart
+    @POST("wallet/")
+    Call<AddOrWithdrawMoneyResponsePost> postAddMoney(@Part MultipartBody.Part aadharfrontimg,
+                                                      @Part("totalamount") RequestBody totalamount,
+                                                      @Part("userwallet") RequestBody userwallet
+    );
+
+    @FormUrlEncoded
+    @POST("wallet/")
+    Call<AddOrWithdrawMoneyResponsePost> postWithdrawMoney(@Field("userwallet")int userwallet,
+                                                           @Field("walletwithdraw")String walletwithdraw);
+
+    @GET("wallet/")
+    Call<AddOrWithdrawMoneyResponsePost> getWalletDetails();
+
 
     @GET("roundview/")
     Call<List<RoundsResult>> getAllRounds();
 
     @GET("roundview/{id}")
-    Call<RoundsResult> getRoundsById(@Path("id")int id);
+    Call<RoundsResult> getRoundsById(@Path("id") int id);
 
     @GET("userkyc/")
     Call<List<KycResponse>> getKycItem();

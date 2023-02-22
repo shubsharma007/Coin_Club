@@ -141,6 +141,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_TransactionHistory:
 
                         break;
+                    case R.id.nav_commission:
+                        startActivity(new Intent(getApplicationContext(),CommissionActivity.class));
+                        break;
 
                     case R.id.nav_ReferAndEarn:
                         Intent shareIntent = new Intent(Intent.ACTION_SEND);
