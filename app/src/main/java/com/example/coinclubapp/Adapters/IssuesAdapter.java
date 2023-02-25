@@ -40,7 +40,7 @@ public class IssuesAdapter extends RecyclerView.Adapter<IssuesAdapter.IssuesView
         {
             holder.image.setImageResource(R.drawable.ic_pending3);
             holder.tv.setText("Pending");
-            holder.tv.setTextColor((Color.YELLOW));
+            holder.tv.setTextColor((Color.RED));
         }
         else
         {

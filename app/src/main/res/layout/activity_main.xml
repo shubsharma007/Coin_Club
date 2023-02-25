@@ -33,6 +33,18 @@
                 app:subtitleTextColor="#FFFFFF"
                 app:titleTextColor="#FFFEFE" />
 
+            <ImageButton
+                android:background="@drawable/transparent_background"
+                android:id="@+id/notificationBtn"
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                app:layout_constraintTop_toTopOf="@id/toolbar"
+                app:layout_constraintBottom_toBottomOf="@id/toolbar"
+                app:layout_constraintEnd_toEndOf="@id/toolbar"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:src="@drawable/ic_baseline_notifications_none_24"
+                />
+
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/container"

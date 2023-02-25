@@ -13,6 +13,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
@@ -83,13 +84,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        binding.notificationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this,NotificationsActivity.class));
+            }
+        });
 
         binding.fab.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(), HotClubActivity.class)));
 
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.notification:
-                    startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
+                case R.id.settings:
+                    startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                     break;
                 case R.id.Dashboard:
                     startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
@@ -154,9 +161,6 @@ public class MainActivity extends AppCompatActivity {
                         shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
                         startActivity(Intent.createChooser(shareIntent, "choose one"));
                         break;
-                    case R.id.nav_Setting:
-                        startActivity(new Intent(getApplicationContext(), SettingActivity.class));
-                        break;
                     case R.id.nav_logout:
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                         startActivity(intent);
@@ -194,6 +198,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

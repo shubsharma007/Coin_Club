@@ -3,11 +3,11 @@ package com.example.coinclubapp.Response;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class IssueResponse {
+public class IssuesForSpinnerResponseGet {
     @SerializedName("id")
     @Expose
     private Integer id;
-    @SerializedName("Issue")
+    @SerializedName("issue")
     @Expose
     private String issue;
 

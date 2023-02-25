@@ -16,6 +16,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -136,14 +137,16 @@ public class AddMoneyActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     showPopup();
-
+                    Log.i("hnukdjfnhsd",response.message());
                 } else {
+                    Log.i("hnukdjfnhsd",response.message());
                     Toast.makeText(AddMoneyActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<AddOrWithdrawMoneyResponsePost> call, Throwable t) {
+                Log.i("uhfikdhsdjkf",t.getMessage() + t.getCause().getMessage() + t.getLocalizedMessage());
                 Toast.makeText(AddMoneyActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });

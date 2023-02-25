@@ -6,7 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
+import android.text.format.Formatter;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -94,6 +97,7 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
                                 startActivity(new Intent(ClubJoiningFormTwoActivity.this, MainActivity.class));
                             } else {
+                                Log.i("ELSE", response.message());
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -101,6 +105,7 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<UserRegistrationPost> call, Throwable t) {
                             Log.i("ONFAILURE", t.getMessage());
+                            Log.i("ONFAILURE",t.getCause().getMessage());
                             Toast.makeText(ClubJoiningFormTwoActivity.this, "please try again", Toast.LENGTH_SHORT).show();
                         }
                     });

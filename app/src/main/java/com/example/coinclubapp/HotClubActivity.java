@@ -35,17 +35,16 @@ public class HotClubActivity extends AppCompatActivity {
 
 
         binding.progressBar.setVisibility(View.VISIBLE);
-
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
+        // to get all hot clubs worldwide
         Call<List<AllClubsGet>> call=apiInterface.getAllClubs();
         call.enqueue(new Callback<List<AllClubsGet>>() {
             @Override
             public void onResponse(Call<List<AllClubsGet>> call, Response<List<AllClubsGet>> response) {
                 if (response.isSuccessful()) {
-
                     binding.recyclerView.setAdapter(new HotClubAdapter(HotClubActivity.this,response.body()));
                     binding.progressBar.setVisibility(View.GONE);
                 } else {
@@ -61,8 +60,8 @@ public class HotClubActivity extends AppCompatActivity {
 
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
-                case R.id.notification:
-                    startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
+                case R.id.settings:
+                    startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                     break;
                 case R.id.Dashboard:
                     startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
