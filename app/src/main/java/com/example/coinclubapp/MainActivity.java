@@ -32,6 +32,7 @@ import com.pusher.pushnotifications.PushNotifications;
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.BuildConfig;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

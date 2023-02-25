@@ -4,17 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.coinclubapp.Adapters.Average_round_Adapter;
+import com.example.coinclubapp.Adapters.Average_time_Adapter;
 import com.example.coinclubapp.Adapters.MemberAdapter;
+import com.example.coinclubapp.Adapters.NotificationAdapter;
 import com.example.coinclubapp.Adapters.RoundAdapter;
 import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.InterFace.ApiInterface;
@@ -45,9 +52,12 @@ public class ClubActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
     String startDATE, startTIME;
+    Average_round_Adapter average_round_adapter;
+    Average_time_Adapter average_time_adapter;
     int roundId;
     String duration;
     String useTime;
+    Dialog adDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +68,17 @@ public class ClubActivity extends AppCompatActivity {
         binding.bidStartIn.setEnabled(false);
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
 
+        adDialog = new Dialog(ClubActivity.this);
+        average_round_adapter = new Average_round_Adapter ();
+        average_time_adapter = new Average_time_Adapter ();
+
+        binding.info2Btn.setOnClickListener (v -> {
+            showPopup ();
+        });
+
+        binding.infoBtn.setOnClickListener (v -> {
+            showPopup2 ();
+        });
 
         String clubId = getIntent().getStringExtra("id");
 
@@ -183,6 +204,32 @@ public class ClubActivity extends AppCompatActivity {
             Intent i = new Intent(ClubActivity.this, MemberActivity.class);
             startActivity(i);
         });
+    }
+
+    private void showPopup2() {
+        adDialog.setContentView(R.layout.average_round_time_popup);
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable (Color.TRANSPARENT));
+        adDialog.show();
+
+        RecyclerView rv = adDialog.findViewById (R.id.rv);
+        TextView tv = adDialog.findViewById (R.id.textView6);
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(average_time_adapter);
+    }
+
+    private void showPopup() {
+        adDialog.setContentView(R.layout.club_activity_info_popup);
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable (Color.TRANSPARENT));
+        adDialog.show();
+
+        RecyclerView rv = adDialog.findViewById (R.id.rv);
+        TextView tv = adDialog.findViewById (R.id.textView6);
+
+        rv.setLayoutManager(new LinearLayoutManager(this));
+        rv.setAdapter(average_round_adapter);
+
+
     }
 
     private void countDownFunc(String mydate) throws ParseException {

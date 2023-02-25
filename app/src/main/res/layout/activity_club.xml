@@ -28,7 +28,6 @@
         android:text="Club Name"
         android:textColor="@color/white"
         android:textSize="@dimen/_20ssp"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -197,19 +196,21 @@
             tools:listitem="@layout/round_layout" />
 
         <LinearLayout
-            android:id="@+id/linearLayout4"
+            android:id="@+id/info_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
             android:background="@drawable/bg_club_amount"
             android:elevation="@dimen/_4sdp"
             android:gravity="center"
+            android:clickable="true"
             android:orientation="vertical"
             android:padding="@dimen/_12sdp"
-            app:layout_constraintEnd_toStartOf="@+id/linearR"
+            app:layout_constraintEnd_toStartOf="@+id/info2_btn"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewRound">
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewRound"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -227,10 +228,13 @@
                 android:text="Wt. average \ntransfer time"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_12ssp" />
+
         </LinearLayout>
 
+
+
         <LinearLayout
-            android:id="@+id/linearR"
+            android:id="@+id/info2_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_3sdp"
@@ -239,10 +243,12 @@
             android:gravity="center"
             android:orientation="vertical"
             android:padding="@dimen/_12sdp"
+            android:clickable="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerViewRound">
+            app:layout_constraintStart_toEndOf="@+id/info_btn"
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewRound"
+            android:focusable="true">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -273,7 +279,7 @@
 
             app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/linearR">
+            app:layout_constraintTop_toBottomOf="@+id/info2_btn">
 
             <TextView
                 android:id="@+id/textView17"
