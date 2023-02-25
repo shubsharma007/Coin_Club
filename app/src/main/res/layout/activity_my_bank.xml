@@ -7,14 +7,13 @@
     android:background="@color/mainColour"
     tools:context=".MyBankActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="@dimen/_33sdp"
-        android:layout_height="@dimen/_33sdp"
+        android:layout_width="@dimen/_27sdp"
+        android:layout_height="@dimen/_27sdp"
         android:layout_marginStart="20dp"
         android:background="@drawable/bg_ic_home"
-        android:drawableStart="@drawable/ic_back"
-        android:paddingStart="15dp"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@+id/clubName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/clubName" />
@@ -46,12 +45,12 @@
         android:id="@+id/constraintLayout5"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_18sdp"
+        android:layout_marginTop="56dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubName">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout2"
