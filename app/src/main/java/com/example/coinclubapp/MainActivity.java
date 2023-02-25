@@ -97,6 +97,9 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.settings:
+                    Intent intent=new Intent(getApplicationContext(),SettingActivity.class);
+
+                    intent.putExtra("password","fsdf");
                     startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                     break;
                 case R.id.Dashboard:
@@ -134,21 +137,17 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_Profile:
                         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         break;
-                    case R.id.nav_ActiveClubs:
-
+                    case R.id.nav_clubHistory:
+                        startActivity(new Intent(getApplicationContext(),ClubHistoryActivity.class));
                         break;
-                    case R.id.nav_HistoricalClubs:
 
-                        break;
                     case R.id.nav_AddBankDetails:
                         startActivity(new Intent(getApplicationContext(), BankDetailsActivity.class));
                         break;
-                    case R.id.nav_MyBankAccounts:
+                    case R.id.nav_customerSupport:
                         startActivity(new Intent(getApplicationContext(), CustomerSupportActivity.class));
                         break;
-                    case R.id.nav_TransactionHistory:
 
-                        break;
                     case R.id.nav_commission:
                         startActivity(new Intent(getApplicationContext(),CommissionActivity.class));
                         break;

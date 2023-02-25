@@ -2,12 +2,18 @@ package com.example.coinclubapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.FragmentManager;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -69,6 +75,7 @@ public class BidRoomActivity extends AppCompatActivity {
     int maxAmt;
     int maxId;
 
+    Dialog adDialog;
     Call<ProfileResponse> call;
 
     @Override
@@ -78,13 +85,18 @@ public class BidRoomActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         bidNowFragment = new BidNowFragment();
         linearLayoutManager = new LinearLayoutManager(this);
-        maxBidderAmount=new ArrayList<>();
-        maxBidderId=new ArrayList<>();
+        maxBidderAmount = new ArrayList<>();
+        maxBidderId = new ArrayList<>();
+        adDialog = new Dialog(BidRoomActivity.this);
 
         binding.bidRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         listBidders = new ArrayList<>();
 
+
+        binding.payBtn.setOnClickListener(v -> {
+            showPopup();
+        });
 
         fragmentManager = getSupportFragmentManager();
 
@@ -128,6 +140,7 @@ public class BidRoomActivity extends AppCompatActivity {
             bundle.putInt("Id", Id);
             bundle.putString("clubName", clubName);
             bundle.putString("roundName", roundName);
+            bundle.putInt("roundId",currentRoundId);
             bidNowFragment.setArguments(bundle);
             bidNowFragment.show(getSupportFragmentManager(), bidNowFragment.getTag());
         });
@@ -154,35 +167,32 @@ public class BidRoomActivity extends AppCompatActivity {
                 maxBidderId.clear();
                 maxBidderAmount.clear();
                 for (DataSnapshot shot : snapshot.getChildren()) {
-                    bidders=shot.getValue(Bidders.class);
+                    bidders = shot.getValue(Bidders.class);
                     listBidders.add(bidders);
                     maxBidderId.add(bidders.getId());
                     maxBidderAmount.add(bidders.getBiddingAmount());
                     int maxAmt = maxBidderAmount.get(0);
-                    int maxId=maxBidderId.get(0);
+                    int maxId = maxBidderId.get(0);
 
                     for (int i = 0; i < maxBidderAmount.size(); i++) {
                         if (maxBidderAmount.get(i) > maxAmt) {
                             maxAmt = maxBidderAmount.get(i);
-                            maxId=maxBidderId.get(i);
+                            maxId = maxBidderId.get(i);
                         }
                     }
-                    Call<ProfileResponse>  call=apiInterface.getProfileItemById(maxId);
+                    Call<ProfileResponse> call = apiInterface.getProfileItemById(maxId);
                     int finalMaxAmt = maxAmt;
                     call.enqueue(new Callback<ProfileResponse>() {
                         @Override
                         public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                            if(response.isSuccessful())
-                            {
+                            if (response.isSuccessful()) {
                                 response.body().getFullName();
                                 response.body().getProfileimg();
                                 binding.senderTv.setText(response.body().getFullName());
                                 binding.msgTv.setText("Pay ₹ " + String.valueOf(finalMaxAmt));
-                                Glide.with(getApplicationContext()).load("http://meetjob.techpanda.art"+response.body().getProfileimg()).placeholder(R.drawable.avatar).into(binding.dpImg);
-                            }
-                            else
-                            {
-                                Log.i("uhkdfukjsdfnsdkf",response.message());
+                                Glide.with(getApplicationContext()).load("http://meetjob.techpanda.art" + response.body().getProfileimg()).placeholder(R.drawable.avatar).into(binding.dpImg);
+                            } else {
+                                Log.i("uhkdfukjsdfnsdkf", response.message());
                             }
                         }
 
@@ -203,6 +213,29 @@ public class BidRoomActivity extends AppCompatActivity {
         });
     }
 
+    private void showPopup() {
+
+        adDialog.setContentView(R.layout.winner_pay_popup);
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        adDialog.show();
+
+        AppCompatButton mainPayBtn = adDialog.findViewById(R.id.mainPayBtn);
+        mainPayBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(BidRoomActivity.this, MainActivity.class));
+                Toast.makeText(BidRoomActivity.this, "Your Request Has Been Submitted", Toast.LENGTH_SHORT).show();
+                finish();
+            }
+        });
+        adDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                startActivity(new Intent(BidRoomActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+    }
 
 
     @Override
@@ -264,6 +297,7 @@ public class BidRoomActivity extends AppCompatActivity {
 
                             }
 
+                            binding.bidBtn.setEnabled(false);
 
                             binding.startBiddingTv.setVisibility(View.VISIBLE);
                             binding.ll2.setVisibility(View.GONE);

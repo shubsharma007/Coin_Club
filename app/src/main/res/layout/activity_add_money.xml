@@ -7,14 +7,13 @@
     android:background="@color/mainColour"
     tools:context=".AddMoneyActivity">
 
-    <androidx.appcompat.widget.AppCompatButton
+    <ImageButton
         android:id="@+id/backBtn"
-        android:layout_width="@dimen/_33sdp"
-        android:layout_height="@dimen/_33sdp"
-        android:layout_marginStart="15dp"
+        android:layout_width="@dimen/_27sdp"
+        android:layout_height="@dimen/_27sdp"
+        android:layout_marginStart="20dp"
         android:background="@drawable/bg_ic_home"
-        android:drawableStart="@drawable/ic_back"
-        android:paddingStart="15dp"
+        android:src="@drawable/ic_back"
         app:layout_constraintBottom_toBottomOf="@+id/notificationTv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/notificationTv" />
@@ -23,11 +22,11 @@
         android:id="@+id/notificationTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="Add Money"
         android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/_20ssp"
+        android:textSize="@dimen/_15ssp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,13 +35,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="56dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/notificationTv"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout

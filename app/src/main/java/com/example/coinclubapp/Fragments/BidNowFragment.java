@@ -17,6 +17,7 @@ import com.example.coinclubapp.R;
 import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.FragmentBidNowBinding;
+import com.example.coinclubapp.result.RoundsResult;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -34,6 +35,11 @@ public class BidNowFragment extends BottomSheetDialogFragment {
 
     ApiInterface apiInterface;
     String roundName, clubName;
+    int roundId;
+
+    int val;
+    int responsemax;
+    int responsemin;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,6 +49,7 @@ public class BidNowFragment extends BottomSheetDialogFragment {
         int Id = this.getArguments().getInt("Id");
         roundName = this.getArguments().getString("roundName");
         clubName = this.getArguments().getString("clubName");
+        roundId=this.getArguments().getInt("roundId");
 
         binding.myBidButton.setOnClickListener(v -> {
             if (binding.bidAmtEt.getText().toString().trim().isEmpty()) {
@@ -50,11 +57,46 @@ public class BidNowFragment extends BottomSheetDialogFragment {
                 binding.bidAmtEt.requestFocus();
             } else {
                 String amount = binding.bidAmtEt.getText().toString();
-                Toast.makeText(getActivity(), "Your Amount " + amount, Toast.LENGTH_SHORT).show();
 
-                bid(amount, Id);
-                binding.bidAmtEt.setText("");
-                this.dismiss();
+
+                Call<RoundsResult> call=apiInterface.getRoundsById(roundId);
+                call.enqueue(new Callback<RoundsResult>() {
+                    @Override
+                    public void onResponse(Call<RoundsResult> call, Response<RoundsResult> response) {
+                        if(response.isSuccessful())
+                        {
+                             val=Integer.parseInt(amount);
+                             responsemax=Integer.parseInt(String.valueOf(response.body().getMaxbid()));
+                             responsemin=Integer.parseInt(String.valueOf(response.body().getMinbid()));
+                            if(val>responsemax)
+                            {
+                                Toast.makeText(getContext(), "Max amount for bidding is different today, try again", Toast.LENGTH_SHORT).show();
+                            }
+                            else if (val<responsemin)
+                            {
+                                Toast.makeText(getContext(), "enter amount more than ₹ "+ responsemin, Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                bid(amount, Id);
+                                binding.bidAmtEt.setText("");
+                                BidNowFragment.this.dismiss();
+                            }
+
+                        }
+                        else
+                        {
+                            Toast.makeText(getContext(), "Some Error Occured , Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<RoundsResult> call, Throwable t) {
+                        Toast.makeText(getContext(), "Some Failure Occured , Try Again", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
             }
 
         });
@@ -70,24 +112,18 @@ public class BidNowFragment extends BottomSheetDialogFragment {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
                 if (response.isSuccessful()) {
-// yogesh change change
                     DatabaseReference myReference = FirebaseDatabase.getInstance().getReference(clubName);
                     String myKey = String.valueOf(response.body().getMobileno());
-
                     Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
                     myReference.child(roundName).child(myKey).setValue(bidders);
-
                 } else {
                     Log.i("sdfjsifnsd", response.message());
                 }
             }
-
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                 Log.i("hduifnhsdfi", t.getMessage());
             }
         });
-
-
     }
 }
