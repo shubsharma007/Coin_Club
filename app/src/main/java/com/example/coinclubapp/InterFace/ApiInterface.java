@@ -145,9 +145,14 @@ public interface ApiInterface {
     Call<ProfileResponse> getProfileItemById(@Path("id") int id);
 
     @FormUrlEncoded
+    @PATCH("profile/{id}")
+    Call<ProfileResponse> changePasswordPatch(@Path("id") int id
+            , @Field("password") String password);
+
+    @FormUrlEncoded
     @PATCH("roundview/{id}/")
     Call<RoundCompletedPatchResponse> setRoundCompletedPatchById(@Path("id") int id,
-                            @Field("is_completed") Boolean b);
+                                                                 @Field("is_completed") Boolean b);
 
 
 //    @Multipart
