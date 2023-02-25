@@ -4,8 +4,67 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mainColour"
     tools:context=".ClubHistoryActivity">
 
 
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="@dimen/_27sdp"
+        android:layout_height="@dimen/_27sdp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bg_ic_home"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/notificationTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notificationTv" />
+
+    <TextView
+        android:id="@+id/notificationTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:text="Club History"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="56dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+<!--        <androidx.recyclerview.widget.RecyclerView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:id="@+id/recyclerView"/>-->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textColor="@color/mainColour"
+            android:textSize="@dimen/_20ssp"
+            android:gravity="center"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="No Data Available\n Right Now"
+            />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
