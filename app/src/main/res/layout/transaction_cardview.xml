@@ -16,8 +16,8 @@
 
         <ImageView
             android:id="@+id/imageView5"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="78dp"
+            android:layout_height="78dp"
             android:layout_marginStart="10dp"
             android:scaleType="centerCrop"
             android:src="@drawable/avatar"
@@ -39,15 +39,27 @@
             app:layout_constraintTop_toTopOf="@+id/imageView5" />
 
         <TextView
-            android:id="@+id/tv_transaction_id"
+            android:id="@+id/staticTransactionId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Transaction Id: 123456789"
+            android:text="Transaction Id : "
             android:textColor="#9A000000"
-            android:textSize="13sp"
+            android:textSize="9sp"
             android:layout_marginTop="10dp"
             app:layout_constraintStart_toStartOf="@+id/tv_name"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <TextView
+            android:id="@+id/tv_transaction_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123456789"
+            android:textColor="#9A000000"
+            android:textSize="13sp"
+            android:layout_marginStart="1dp"
+            app:layout_constraintBottom_toBottomOf="@+id/staticTransactionId"
+            app:layout_constraintStart_toEndOf="@+id/staticTransactionId"
+            app:layout_constraintTop_toTopOf="@+id/staticTransactionId" />
 
         <TextView
             android:id="@+id/tv_money"

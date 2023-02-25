@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.coinclubapp.R;
 import com.example.coinclubapp.result.RoundsResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
@@ -39,7 +41,9 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
     public void onBindViewHolder(@NonNull RoundAdapter.RoundViewHolder holder, int position) {
         RoundsResult result=listOfRounds.get(position);
 
-        if(position==activeRound)
+
+
+        if(result.getId()==activeRound)
         {
             holder.roundBtn.setBackgroundResource(R.drawable.bg_round_count_dark);
             holder.roundBtn.setTextColor(Color.WHITE);

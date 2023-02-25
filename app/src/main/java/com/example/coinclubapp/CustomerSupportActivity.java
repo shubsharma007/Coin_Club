@@ -14,21 +14,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.coinclubapp.Adapters.IssuesAdapter;
 import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.Response.CustomerResponse;
-import com.example.coinclubapp.Response.IssueResponse;
+import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityCustomerSupportBinding;
 import com.example.coinclubapp.result.Issue;
 
-import java.util.Collections;
 import java.util.List;
-
-import javax.xml.validation.Validator;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,41 +36,30 @@ public class CustomerSupportActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     Dialog adDialog;
 
+    // this is to check ki issue resolve hue he k nhi
     Boolean[] mamle;
-    String[] issues = {"Please select any Issue",
-            "Having trouble in adding money",
-            "Withdraw money issues",
-            "Club joining issues",
-            "Missed a round of current club",
-            "Not recieving round notification",
-            "Contact to our customer support team",
-            "Want to raise a comaplaint ticket",
-            "other issues"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityCustomerSupportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(CustomerSupportActivity.this);
 
 
-        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<List<IssueResponse>> call = apiInterface.getIssue();
-        call.enqueue(new Callback<List<IssueResponse>>() {
+        Call<List<IssuesForSpinnerResponseGet>> call = apiInterface.getAllIssuesForSpinner();
+        call.enqueue(new Callback<List<IssuesForSpinnerResponseGet>>() {
             @Override
-            public void onResponse(Call<List<IssueResponse>> call, Response<List<IssueResponse>> response) {
+            public void onResponse(Call<List<IssuesForSpinnerResponseGet>> call, Response<List<IssuesForSpinnerResponseGet>> response) {
                 if (response.isSuccessful()) {
-                    List<IssueResponse> issueResponses = response.body();
-//                    issueResponses.get(0);
+                    List<IssuesForSpinnerResponseGet> issueResponses = response.body();
                     String tamp = "Please select any Issue,,,";
-
                     for (int i = 0; i < issueResponses.size(); i++) {
 
                         tamp = tamp.concat(response.body().get(i).getIssue() + ",,,");
-
-//                        Log.i("jdiogjoifdjgijd",response.body().get(i).getIssue());
+                        Log.i("jdiogjoifdjgijd",response.body().get(i).getIssue());
+                        Log.i("jdiogjoifdjgijd",tamp);
                     }
                     String[] strArray = tamp.split(",,,");
                     Log.i("yogesh bhai", tamp);
@@ -98,12 +83,12 @@ public class CustomerSupportActivity extends AppCompatActivity {
                     });
 
                 }
+
             }
 
             @Override
-            public void onFailure(Call<List<IssueResponse>> call, Throwable t) {
-                Log.e("hfdouhfidjfiodjoiufjdf", t.getMessage());
-                Toast.makeText(CustomerSupportActivity.this, "Failure...", Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<List<IssuesForSpinnerResponseGet>> call, Throwable t) {
+                Log.i("nhfuilsdnf", t.getMessage());
             }
         });
 

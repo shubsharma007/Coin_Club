@@ -15,15 +15,17 @@
         android:id="@+id/placeholder"
         android:title="" />
 
-    <item
-        android:id="@+id/notification"
-        android:icon="@drawable/ic_baseline_notifications_24"
-        android:title="Notification"/>
 
     <item
         android:id="@+id/Dashboard"
         android:icon="@drawable/ic_baseline_leaderboard_24"
         android:title="Dashboard" />
+
+
+    <item
+        android:id="@+id/settings"
+        android:icon="@drawable/ic_baseline_settings_24"
+        android:title="settings"/>
 </menu>
 
 

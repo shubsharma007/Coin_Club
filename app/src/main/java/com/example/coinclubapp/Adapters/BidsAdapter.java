@@ -12,10 +12,20 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.R;
 
+import java.util.List;
+
 public class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.BidsViewHolder> {
-    public BidsAdapter() {
+    List<Bidders> biddersList;
+
+    public BidsAdapter(List<Bidders> biddersList) {
+        if(biddersList!=null)
+        {
+            this.biddersList = biddersList;
+        }
+
     }
 
     @NonNull
@@ -33,21 +43,22 @@ public class BidsAdapter extends RecyclerView.Adapter<BidsAdapter.BidsViewHolder
         } else {
             holder.cl.setBackgroundResource(R.color.white);
         }
-        holder.serialNoTv.setText(String.valueOf(position+1));
+
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return biddersList.size();
     }
 
     public class BidsViewHolder extends RecyclerView.ViewHolder {
-        TextView serialNoTv;
         ConstraintLayout cl;
+        TextView senderTv,amountTv;
         public BidsViewHolder(@NonNull View itemView) {
             super(itemView);
-           serialNoTv=itemView.findViewById(R.id.serialNoTv);
            cl=itemView.findViewById(R.id.cl);
+           senderTv=itemView.findViewById(R.id.senderTv);
+           amountTv=itemView.findViewById(R.id.amountEt);
         }
     }
 }

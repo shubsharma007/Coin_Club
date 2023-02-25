@@ -1,34 +1,30 @@
 package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
-
 import com.example.coinclubapp.Adapters.MemberAdapter;
 import com.example.coinclubapp.Adapters.RoundAdapter;
-import com.example.coinclubapp.Adapters.SeeAllMembersAdapter;
+import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityClubBinding;
-
 import com.example.coinclubapp.result.RoundsResult;
-import com.skydoves.balloon.ArrowOrientation;
-import com.skydoves.balloon.ArrowPositionRules;
-import com.skydoves.balloon.Balloon;
-import com.skydoves.balloon.BalloonAnimation;
-import com.skydoves.balloon.BalloonSizeSpec;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -60,14 +56,10 @@ public class ClubActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         binding.bidStartIn.setEnabled(false);
-        Intent ii = getIntent();
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
-        binding.tooltip.setOnClickListener(v -> {
-
-        });
 
 
-        String clubId = ii.getStringExtra("id");
+        String clubId = getIntent().getStringExtra("id");
 
         Call<AllClubsGet> callClubs = apiInterface.getClubById(clubId);
         callClubs.enqueue(new Callback<AllClubsGet>() {
@@ -95,10 +87,11 @@ public class ClubActivity extends AppCompatActivity {
                 if (binding.bidStartIn.isEnabled()) {
                     Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
                     //jhkfhkjsdfsdjkf yogesh
-                    i.putExtra("roundId", 5);
+                    i.putExtra("roundId", roundId);
                     i.putExtra("duration", duration);
                     i.putExtra("startDate", startDATE);
                     i.putExtra("startTime", startTIME);
+
                     startActivity(i);
                 } else {
                     Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
@@ -146,7 +139,7 @@ public class ClubActivity extends AppCompatActivity {
 
                     List<RoundsResult> myRounds = new ArrayList<>();
                     for (int i = 0; i < response.body().size(); i++) {
-                        if (Objects.equals(ii.getStringExtra("clubName"), response.body().get(i).getClubname())) {
+                        if (Objects.equals(getIntent().getStringExtra("clubName"), response.body().get(i).getClubname())) {
                             myRounds.add(response.body().get(i));
                         }
 
@@ -161,12 +154,16 @@ public class ClubActivity extends AppCompatActivity {
                             useTime = startDATE + " " + startTIME;
                             duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
                             roundId = roundJiskiBidStartHogi.getId();
+
+
+                            Log.i("jkndfjdnfidf round id", String.valueOf(roundId));
+
                             try {
                                 countDownFunc(useTime);
                             } catch (ParseException e) {
                                 e.printStackTrace();
                             } finally {
-                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, 5));
+                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
                                 break;
                             }
                         }
@@ -224,9 +221,9 @@ public class ClubActivity extends AppCompatActivity {
                             } else {
                                 handler.removeCallbacks(null);
 
-//                                    binding.bidStartIn.setText("Start Bidding");
-//
-//                                    binding.bidStartIn.setEnabled(true);
+                                binding.bidStartIn.setText("Start Bidding");
+
+                                binding.bidStartIn.setEnabled(true);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

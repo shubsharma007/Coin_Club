@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -49,8 +50,6 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
     @Override
     public void onBindViewHolder(@NonNull MyClubsAdapter.MyClubViewHolder holder, int position) {
         AllClubsGet current = clubResultList.get(position);
-
-
         try {
             countDownFunc(holder, current.getStartdate(), current.getStarttime());
         } catch (ParseException e) {
@@ -64,7 +63,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
         holder.txtAmount.setText(current.getClubamount() + " ₹");
         holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
         Glide.with(context)
-                .load(current.getClubimage())
+                .load("http://meetjob.techpanda.art"+current.getClubimage())
                 .centerCrop()
                 .placeholder(R.drawable.logo_money)
                 .into(holder.logo);
@@ -79,7 +78,6 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
                 intent.putExtra("nextBid", current.getStartdate());
                 intent.putExtra("number",current.getClubmembers());
                 intent.putExtra("id",String.valueOf(current.getId()));
-
                 context.startActivity(intent);
             }
         });

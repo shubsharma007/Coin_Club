@@ -5,9 +5,10 @@ import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
 import com.example.coinclubapp.Response.CustomerResponse;
-import com.example.coinclubapp.Response.IssueResponse;
+import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.ProfileResponse;
+import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
 import com.example.coinclubapp.result.Issue;
@@ -22,6 +23,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
+import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
@@ -100,18 +102,18 @@ public interface ApiInterface {
     );
 
     @Multipart
-    @POST("wallet/")
+    @POST("wallet")
     Call<AddOrWithdrawMoneyResponsePost> postAddMoney(@Part MultipartBody.Part aadharfrontimg,
                                                       @Part("totalamount") RequestBody totalamount,
                                                       @Part("userwallet") RequestBody userwallet
     );
 
     @FormUrlEncoded
-    @POST("wallet/")
-    Call<AddOrWithdrawMoneyResponsePost> postWithdrawMoney(@Field("userwallet")int userwallet,
-                                                           @Field("walletwithdraw")String walletwithdraw);
+    @POST("wallet")
+    Call<AddOrWithdrawMoneyResponsePost> postWithdrawMoney(@Field("userwallet") int userwallet,
+                                                           @Field("walletwithdraw") String walletwithdraw);
 
-    @GET("wallet/")
+    @GET("wallet")
     Call<AddOrWithdrawMoneyResponsePost> getWalletDetails();
 
 
@@ -128,7 +130,8 @@ public interface ApiInterface {
     Call<KycResponse> getKycById(@Path("id") int id);
 
     @GET("issuemessages/")
-    Call<List<IssueResponse>> getIssue();
+    Call<List<IssuesForSpinnerResponseGet>> getAllIssuesForSpinner();
+
 
     @GET("customercare/")
     Call<List<CustomerResponse>> getCustomerIssue();
@@ -140,6 +143,11 @@ public interface ApiInterface {
 
     @GET("profile/{id}")
     Call<ProfileResponse> getProfileItemById(@Path("id") int id);
+
+    @FormUrlEncoded
+    @PATCH("roundview/{id}/")
+    Call<RoundCompletedPatchResponse> setRoundCompletedPatchById(@Path("id") int id,
+                            @Field("is_completed") Boolean b);
 
 
 //    @Multipart

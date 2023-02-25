@@ -42,7 +42,7 @@ public class MyBankActivity extends AppCompatActivity {
 
         LayoutManager = new LinearLayoutManager (MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.transactionRecyclerView.setLayoutManager (LayoutManager);
-        adapter = new TransactionAdapter (MyBankActivity.this, null );
+        adapter = new TransactionAdapter (MyBankActivity.this );
         binding.transactionRecyclerView.setAdapter (adapter);
         adapter.notifyDataSetChanged ();
         adapter.getItemCount ();

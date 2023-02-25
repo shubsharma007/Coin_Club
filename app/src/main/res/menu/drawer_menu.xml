@@ -26,9 +26,6 @@
         android:id="@+id/nav_commission"
         android:title="Your Commissions" />
     <item
-        android:id="@+id/nav_Setting"
-        android:title="Settings" />
-    <item
         android:id="@+id/nav_MyBankAccounts"
         android:title="Customer Support" />
     <item

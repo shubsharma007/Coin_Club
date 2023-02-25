@@ -7,8 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 
+import android.text.format.Formatter;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
@@ -32,6 +35,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
         ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+
+
+
 
         binding.goBtn.setOnClickListener(v -> {
             if (binding.edMobile.getText().toString().trim().isEmpty()) {
@@ -65,6 +71,10 @@ public class LoginActivity extends AppCompatActivity {
                                 editor.apply();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
+
+                                WifiManager wifiManager=(WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+                                Log.i("IP_ADDRESS", Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress()));
+
                                 startActivity(i);
                                 finish();
                             } else {
