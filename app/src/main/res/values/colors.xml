@@ -11,6 +11,8 @@
     <color name="mainColour">#323D94</color>
     <color name="hint_colour">#CC323D94</color>
     <color name="broun">#BA8C34</color>
+    <color name="blood_color">#FF0000</color>
     <color name="PopUpBackground">#DADEFF</color>
+    <color name="transparent">#00FFFFFF</color>
 
 </resources>

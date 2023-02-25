@@ -6,17 +6,27 @@
     android:layout_height="match_parent"
     android:background="@color/mainColour"
     tools:context=".CustomerSupportActivity">
+    <ImageButton
+        android:id="@+id/backBtn"
+        android:layout_width="@dimen/_27sdp"
+        android:layout_height="@dimen/_27sdp"
+        android:layout_marginStart="20dp"
+        android:background="@drawable/bg_ic_home"
+        android:src="@drawable/ic_back"
+        app:layout_constraintBottom_toBottomOf="@+id/notificationTv"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/notificationTv" />
 
     <TextView
-        android:id="@+id/clubName"
+        android:id="@+id/notificationTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:fontFamily="@font/acme"
+        android:layout_marginTop="@dimen/_15sdp"
         android:text="Customer Support"
+        android:textAlignment="center"
         android:textColor="@color/white"
-        android:textSize="@dimen/_17sdp"
-        android:textStyle="bold"
+        android:textSize="@dimen/_15ssp"
+        android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,12 +34,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="56dp"
         android:background="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/clubName">
+        app:layout_constraintTop_toTopOf="parent">
 
         <Spinner
             android:id="@+id/spinner"

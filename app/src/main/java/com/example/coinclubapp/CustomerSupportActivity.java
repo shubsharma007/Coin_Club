@@ -47,6 +47,10 @@ public class CustomerSupportActivity extends AppCompatActivity {
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(CustomerSupportActivity.this);
 
+        binding.backBtn.setOnClickListener(v -> {
+            finish();
+        });
+
 
         Call<List<IssuesForSpinnerResponseGet>> call = apiInterface.getAllIssuesForSpinner();
         call.enqueue(new Callback<List<IssuesForSpinnerResponseGet>>() {
@@ -58,8 +62,8 @@ public class CustomerSupportActivity extends AppCompatActivity {
                     for (int i = 0; i < issueResponses.size(); i++) {
 
                         tamp = tamp.concat(response.body().get(i).getIssue() + ",,,");
-                        Log.i("jdiogjoifdjgijd",response.body().get(i).getIssue());
-                        Log.i("jdiogjoifdjgijd",tamp);
+                        Log.i("jdiogjoifdjgijd", response.body().get(i).getIssue());
+                        Log.i("jdiogjoifdjgijd", tamp);
                     }
                     String[] strArray = tamp.split(",,,");
                     Log.i("yogesh bhai", tamp);
