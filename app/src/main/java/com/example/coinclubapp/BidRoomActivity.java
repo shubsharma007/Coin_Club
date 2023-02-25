@@ -140,6 +140,7 @@ public class BidRoomActivity extends AppCompatActivity {
             bundle.putInt("Id", Id);
             bundle.putString("clubName", clubName);
             bundle.putString("roundName", roundName);
+            bundle.putInt("roundId",currentRoundId);
             bidNowFragment.setArguments(bundle);
             bidNowFragment.show(getSupportFragmentManager(), bidNowFragment.getTag());
         });
@@ -296,6 +297,7 @@ public class BidRoomActivity extends AppCompatActivity {
 
                             }
 
+                            binding.bidBtn.setEnabled(false);
 
                             binding.startBiddingTv.setVisibility(View.VISIBLE);
                             binding.ll2.setVisibility(View.GONE);

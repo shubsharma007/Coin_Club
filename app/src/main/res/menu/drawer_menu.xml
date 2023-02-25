@@ -5,20 +5,13 @@
         android:id="@+id/nav_Profile"
         android:title="Profile" />
     <item
-        android:id="@+id/nav_ActiveClubs"
-        android:title="Active Clubs" />
-
-    <item
-        android:id="@+id/nav_HistoricalClubs"
-        android:title="Historical Clubs" />
+        android:id="@+id/nav_clubHistory"
+        android:title="Club History" />
 
     <item
         android:id="@+id/nav_AddBankDetails"
         android:title="Add Bank Details" />
 
-    <item
-        android:id="@+id/nav_TransactionHistory"
-        android:title="Transaction History" />
     <item
         android:id="@+id/nav_ReferAndEarn"
         android:title="Refer and Earn" />
@@ -26,7 +19,7 @@
         android:id="@+id/nav_commission"
         android:title="Your Commissions" />
     <item
-        android:id="@+id/nav_MyBankAccounts"
+        android:id="@+id/nav_customerSupport"
         android:title="Customer Support" />
     <item
         android:id="@+id/nav_logout"
