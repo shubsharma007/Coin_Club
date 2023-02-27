@@ -147,7 +147,7 @@ public class BidRoomActivity extends AppCompatActivity {
 
         FirebaseRecyclerOptions<Bidders> options =
                 new FirebaseRecyclerOptions.Builder<Bidders>()
-                        .setQuery(FirebaseDatabase.getInstance().getReference("hello").child("hello round 1").orderByChild("biddingAmount"), Bidders.class)
+                        .setQuery(FirebaseDatabase.getInstance().getReference("Club1").child("Club1 round 1").orderByChild("biddingAmount"), Bidders.class)
                         .build();
 // yogesh change change
 
@@ -157,7 +157,7 @@ public class BidRoomActivity extends AppCompatActivity {
 
         binding.bidRecyclerView.setAdapter(myAdapter);
 
-        DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference("hello").child("hello round 1");
+        DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference("Club1").child("Club1 round 1");
 
         myBidders.addValueEventListener(new ValueEventListener() {
 

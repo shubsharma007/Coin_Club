@@ -112,10 +112,10 @@ public class BidNowFragment extends BottomSheetDialogFragment {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
                 if (response.isSuccessful()) {
-                    DatabaseReference myReference = FirebaseDatabase.getInstance().getReference(clubName);
+                    DatabaseReference myReference = FirebaseDatabase.getInstance().getReference("Club1");
                     String myKey = String.valueOf(response.body().getMobileno());
                     Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
-                    myReference.child(roundName).child(myKey).setValue(bidders);
+                    myReference.child("Club1 round 1").child(myKey).setValue(bidders);
                 } else {
                     Log.i("sdfjsifnsd", response.message());
                 }
