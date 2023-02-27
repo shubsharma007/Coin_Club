@@ -78,6 +78,8 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
                 intent.putExtra("nextBid", current.getStartdate());
                 intent.putExtra("number",current.getClubmembers());
                 intent.putExtra("id",String.valueOf(current.getId()));
+                intent.putExtra("fromWhere","myclubactivity");
+
                 context.startActivity(intent);
             }
         });
@@ -128,6 +130,11 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
 //                                dateTimeToBePassed=holder.tv_days.getText().toString()+holder.tv_hour.getText().toString() + holder.tv_minute.getText().toString() + holder.tv_second.getText().toString();
 
                             } else {
+                                holder.startBiddingTv.setVisibility(View.VISIBLE);
+                                holder.ll1.setVisibility(View.GONE);
+                                holder.ll2.setVisibility(View.GONE);
+                                holder.ll3.setVisibility(View.GONE);
+                                holder.ll4.setVisibility(View.GONE);
                                 handler.removeCallbacks(runnable);
                             }
                         } catch (Exception e) {

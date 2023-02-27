@@ -58,6 +58,7 @@ public class ClubActivity extends AppCompatActivity {
     String duration;
     String useTime;
     Dialog adDialog;
+    String fromWhere;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,17 +68,17 @@ public class ClubActivity extends AppCompatActivity {
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         binding.bidStartIn.setEnabled(false);
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
-
+        fromWhere = getIntent().getStringExtra("fromWhere");
         adDialog = new Dialog(ClubActivity.this);
-        average_round_adapter = new Average_round_Adapter ();
-        average_time_adapter = new Average_time_Adapter ();
+        average_round_adapter = new Average_round_Adapter();
+        average_time_adapter = new Average_time_Adapter();
 
-        binding.info2Btn.setOnClickListener (v -> {
-            showPopup ();
+        binding.info2Btn.setOnClickListener(v -> {
+            showPopup();
         });
 
-        binding.infoBtn.setOnClickListener (v -> {
-            showPopup2 ();
+        binding.infoBtn.setOnClickListener(v -> {
+            showPopup2();
         });
 
         String clubId = getIntent().getStringExtra("id");
@@ -179,14 +180,22 @@ public class ClubActivity extends AppCompatActivity {
 
                             Log.i("jkndfjdnfidf round id", String.valueOf(roundId));
 
-                            try {
-                                countDownFunc(useTime);
-                            } catch (ParseException e) {
-                                e.printStackTrace();
-                            } finally {
+                            if (fromWhere.equalsIgnoreCase("hotclubactivity")) {
+                                binding.bidStartIn.setEnabled(false);
+                                binding.bidStartIn.setVisibility(View.GONE);
                                 binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
-                                break;
+
+                            } else {
+                                try {
+                                    countDownFunc(useTime);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
+                                    break;
+                                }
                             }
+
                         }
                     }
 
@@ -208,11 +217,11 @@ public class ClubActivity extends AppCompatActivity {
 
     private void showPopup2() {
         adDialog.setContentView(R.layout.average_round_time_popup);
-        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable (Color.TRANSPARENT));
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         adDialog.show();
 
-        RecyclerView rv = adDialog.findViewById (R.id.rv);
-        TextView tv = adDialog.findViewById (R.id.textView6);
+        RecyclerView rv = adDialog.findViewById(R.id.rv);
+        TextView tv = adDialog.findViewById(R.id.textView6);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(average_time_adapter);
@@ -220,11 +229,11 @@ public class ClubActivity extends AppCompatActivity {
 
     private void showPopup() {
         adDialog.setContentView(R.layout.club_activity_info_popup);
-        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable (Color.TRANSPARENT));
+        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         adDialog.show();
 
-        RecyclerView rv = adDialog.findViewById (R.id.rv);
-        TextView tv = adDialog.findViewById (R.id.textView6);
+        RecyclerView rv = adDialog.findViewById(R.id.rv);
+        TextView tv = adDialog.findViewById(R.id.textView6);
 
         rv.setLayoutManager(new LinearLayoutManager(this));
         rv.setAdapter(average_round_adapter);
@@ -266,11 +275,11 @@ public class ClubActivity extends AppCompatActivity {
 
 
                             } else {
-                                handler.removeCallbacks(null);
-
                                 binding.bidStartIn.setText("Start Bidding");
-
+                                binding.bidStartIn.setTextColor(Color.WHITE);
+                                binding.bidStartIn.setBackgroundResource(R.drawable.start_bidding_bg);
                                 binding.bidStartIn.setEnabled(true);
+                                handler.removeCallbacks(null);
                             }
                         } catch (Exception e) {
                             e.printStackTrace();

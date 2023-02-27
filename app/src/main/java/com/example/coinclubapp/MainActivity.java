@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
         FirebaseMessaging.getInstance().subscribeToTopic("song");
+//        FirebaseMessaging.getInstance().getToken();
 
         //Storage Permission
         if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
