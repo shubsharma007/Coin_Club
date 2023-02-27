@@ -1,5 +1,7 @@
 package com.example.coinclubapp;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AlertDialog;
@@ -9,10 +11,15 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,8 +33,12 @@ import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityMainBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.navigation.NavigationView;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.pusher.pushnotifications.PushNotifications;
 
 import java.util.List;
@@ -37,6 +48,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+@SuppressLint("MissingPermission")
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private long pressedTime;
@@ -44,12 +56,15 @@ public class MainActivity extends AppCompatActivity {
 
     ApiInterface apiInterface;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("song");
 
         //Storage Permission
         if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
@@ -60,9 +75,6 @@ public class MainActivity extends AppCompatActivity {
 
         PushNotifications.start(getApplicationContext(), "53566661-977b-4140-b02f-cfbdb4b591a0");
         PushNotifications.addDeviceInterest("hello");
-
-//        Intent serviceIntent = new Intent(getApplicationContext(), ExampleService.class);
-//        startService(serviceIntent);
 
         binding.recyclerViewClubs.setLayoutManager(new LinearLayoutManager(MainActivity.this));
         binding.progressBar.setVisibility(View.VISIBLE);
@@ -88,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
         binding.notificationBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this,NotificationsActivity.class));
+                startActivity(new Intent(MainActivity.this, NotificationsActivity.class));
             }
         });
 
@@ -97,9 +109,9 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavView.setOnItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.settings:
-                    Intent intent=new Intent(getApplicationContext(),SettingActivity.class);
+                    Intent intent = new Intent(getApplicationContext(), SettingActivity.class);
 
-                    intent.putExtra("password","fsdf");
+                    intent.putExtra("password", "fsdf");
                     startActivity(new Intent(getApplicationContext(), SettingActivity.class));
                     break;
                 case R.id.Dashboard:
@@ -138,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(getApplicationContext(), ViewProfileActivity.class));
                         break;
                     case R.id.nav_clubHistory:
-                        startActivity(new Intent(getApplicationContext(),ClubHistoryActivity.class));
+                        startActivity(new Intent(getApplicationContext(), ClubHistoryActivity.class));
                         break;
 
                     case R.id.nav_AddBankDetails:
@@ -149,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.nav_commission:
-                        startActivity(new Intent(getApplicationContext(),CommissionActivity.class));
+                        startActivity(new Intent(getApplicationContext(), CommissionActivity.class));
                         break;
 
                     case R.id.nav_ReferAndEarn:
@@ -198,7 +210,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 
     @Override
