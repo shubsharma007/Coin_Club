@@ -202,10 +202,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_column="1"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+                                android:background="@color/mainColour"
                                 android:gravity="center"
                                 android:text="Commission(%)"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_8ssp"
                                 android:textStyle="bold" />
 
@@ -467,10 +467,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_column="1"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+                                android:background="@color/mainColour"
                                 android:gravity="center"
                                 android:text="Commission(%)"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_8ssp"
                                 android:textStyle="bold" />
 
@@ -732,10 +732,10 @@
                                 android:layout_height="match_parent"
                                 android:layout_column="1"
                                 android:layout_margin="1dp"
-                                android:background="#FFFFFF"
+                                android:background="@color/mainColour"
                                 android:gravity="center"
                                 android:text="Commission(%)"
-                                android:textColor="@color/black"
+                                android:textColor="@color/white"
                                 android:textSize="@dimen/_8ssp"
                                 android:textStyle="bold" />
 

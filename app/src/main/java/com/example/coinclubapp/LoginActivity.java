@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 startActivity(i);
                                 finish();
                             } else {
-                                Toast.makeText(LoginActivity.this, "Wrong Number Or Password", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LoginActivity.this, "You are not authorized by the admin", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }

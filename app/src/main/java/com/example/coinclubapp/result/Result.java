@@ -31,6 +31,9 @@ public class Result {
     @SerializedName("income")
     @Expose
     private String income;
+    @SerializedName("wallet_amount")
+    @Expose
+    private String walletAmount;
     @SerializedName("monthlycontribution")
     @Expose
     private String monthlycontribution;
@@ -43,6 +46,9 @@ public class Result {
     @SerializedName("alternateno")
     @Expose
     private String alternateno;
+    @SerializedName("token")
+    @Expose
+    private String token;
     @SerializedName("create_at")
     @Expose
     private String createAt;
@@ -119,6 +125,14 @@ public class Result {
         this.income = income;
     }
 
+    public String getWalletAmount() {
+        return walletAmount;
+    }
+
+    public void setWalletAmount(String walletAmount) {
+        this.walletAmount = walletAmount;
+    }
+
     public String getMonthlycontribution() {
         return monthlycontribution;
     }
@@ -151,6 +165,14 @@ public class Result {
         this.alternateno = alternateno;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
     public String getCreateAt() {
         return createAt;
     }
@@ -158,4 +180,5 @@ public class Result {
     public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
+
 }

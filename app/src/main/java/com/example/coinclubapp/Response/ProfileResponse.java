@@ -4,7 +4,6 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class ProfileResponse {
-
     @SerializedName("id")
     @Expose
     private Integer id;
@@ -32,6 +31,9 @@ public class ProfileResponse {
     @SerializedName("income")
     @Expose
     private String income;
+    @SerializedName("wallet_amount")
+    @Expose
+    private String walletAmount;
     @SerializedName("monthlycontribution")
     @Expose
     private String monthlycontribution;
@@ -118,6 +120,14 @@ public class ProfileResponse {
 
     public void setIncome(String income) {
         this.income = income;
+    }
+
+    public String getWalletAmount() {
+        return walletAmount;
+    }
+
+    public void setWalletAmount(String walletAmount) {
+        this.walletAmount = walletAmount;
     }
 
     public String getMonthlycontribution() {

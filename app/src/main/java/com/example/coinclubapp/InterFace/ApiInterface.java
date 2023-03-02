@@ -1,16 +1,21 @@
 package com.example.coinclubapp.InterFace;
 
+import com.example.coinclubapp.Response.AddMoneyResponse;
 import com.example.coinclubapp.Response.AddOrWithdrawMoneyResponsePost;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
+import com.example.coinclubapp.Response.ClubInviteResponse;
+import com.example.coinclubapp.Response.ClubUserResponse;
 import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
+import com.example.coinclubapp.Response.UserClubResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
+import com.example.coinclubapp.Response.WithdrawMoneyResponse;
 import com.example.coinclubapp.result.Issue;
 import com.example.coinclubapp.result.RoundsResult;
 
@@ -41,6 +46,8 @@ public interface ApiInterface {
                                             @Field("occupation") String occupation,
                                             @Field("motive") String motive,
                                             @Field("income") String income,
+                                            @Field("token") String token,
+                                            @Field("uid") String uid,
                                             @Field("monthlycontribution") String monthlycontribution,
                                             @Field("email") String email);
 
@@ -61,7 +68,7 @@ public interface ApiInterface {
 
     // this is for getting clubs by id in club activity
     @GET("club/{id}")
-    Call<AllClubsGet> getClubById(@Path("id") String id);
+    Call<AllClubsGet> getClubById(@Path("id") int id);
 
     //    http://meetjob.techpanda.art/bankaccount
     @Multipart
@@ -102,16 +109,18 @@ public interface ApiInterface {
     );
 
     @Multipart
-    @POST("wallet")
-    Call<AddOrWithdrawMoneyResponsePost> postAddMoney(@Part MultipartBody.Part aadharfrontimg,
-                                                      @Part("totalamount") RequestBody totalamount,
-                                                      @Part("userwallet") RequestBody userwallet
+    @POST("addmoney/")
+    Call<AddMoneyResponse> addMoneyPost(
+            @Part MultipartBody.Part walletimg,
+            @Part("walletamount") RequestBody walletamount,
+            @Part("userwallet") RequestBody userwallet
     );
 
     @FormUrlEncoded
-    @POST("wallet")
-    Call<AddOrWithdrawMoneyResponsePost> postWithdrawMoney(@Field("userwallet") int userwallet,
-                                                           @Field("walletwithdraw") String walletwithdraw);
+    @POST("withdrawmoney/")
+    Call<WithdrawMoneyResponse> withdrawMoneyPost(@Field("userwallet") int userwallet,
+                                                  @Field("withdrawamount") String withdrawamount);
+
 
     @GET("wallet")
     Call<AddOrWithdrawMoneyResponsePost> getWalletDetails();
@@ -141,11 +150,11 @@ public interface ApiInterface {
     Call<Issue> postCustomerIssue(@Field("discription") String discription,
                                   @Field("issue") String issue);
 
-    @GET("profile/{id}")
+    @GET("profile/{id}/")
     Call<ProfileResponse> getProfileItemById(@Path("id") int id);
 
     @FormUrlEncoded
-    @PATCH("profile/{id}")
+    @PATCH("profile/{id}/")
     Call<ProfileResponse> changePasswordPatch(@Path("id") int id
             , @Field("password") String password);
 
@@ -153,6 +162,21 @@ public interface ApiInterface {
     @PATCH("roundview/{id}/")
     Call<RoundCompletedPatchResponse> setRoundCompletedPatchById(@Path("id") int id,
                                                                  @Field("is_completed") Boolean b);
+
+
+    // getting users by club id
+    @GET("clubuser/{id}")
+    Call<List<ClubUserResponse>> getUsersByClubId(@Path("id") int id);
+
+    // getting clubs by user id
+    @GET("userclub/{id}")
+    Call<List<UserClubResponse>> getClubsByUserId(@Path("id") int id);
+
+    @FormUrlEncoded
+    @POST("clubinvite/")
+    Call<ClubInviteResponse> joinClub(@Field("clubname") int clubname,
+                                      @Field("inviteto") int inviteto,
+                                      @Field("is_join") boolean is_join);
 
 
 //    @Multipart

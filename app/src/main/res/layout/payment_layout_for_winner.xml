@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="3dp"
+    app:cardCornerRadius="9dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clWinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:paddingVertical="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/dp_img"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_marginStart="10dp"
+            android:src="@drawable/ic_ldki"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/senderTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="Rahul Vishwakarma"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/msgTv"
+            app:layout_constraintStart_toEndOf="@id/dp_img"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <TextView
+            android:id="@+id/msgTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="Amount  ₹2000"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/payBtn"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="@+id/senderTv"
+            app:layout_constraintTop_toBottomOf="@+id/senderTv" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/payBtn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/bg_green"
+            android:gravity="center"
+            android:text="Recieved"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

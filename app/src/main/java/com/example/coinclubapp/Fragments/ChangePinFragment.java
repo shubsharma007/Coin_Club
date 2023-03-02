@@ -61,27 +61,29 @@ public class ChangePinFragment extends BottomSheetDialogFragment {
                                 Intent intent = new Intent(getActivity(), MainActivity.class);
                                 startActivity(intent);
 
-//                                Call<ProfileResponse> callPw=apiInterface.changePasswordPatch(Id,binding.newPinET.getText().toString());
-//                                callPw.enqueue(new Callback<ProfileResponse>() {
-//                                    @Override
-//                                    public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-//                                        if (response.isSuccessful())
-//                                        {
-//                                            Toast.makeText(getActivity(), "Your Password Has Been Changed Successfully...", Toast.LENGTH_SHORT).show();
-//                                            Intent intent = new Intent(getActivity(), MainActivity.class);
-//                                            startActivity(intent);
-//                                        }
-//                                        else
-//                                        {
-//                                            Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
-//                                        }
-//                                    }
-//
-//                                    @Override
-//                                    public void onFailure(Call<ProfileResponse> call, Throwable t) {
-//                                        Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
-//                                    }
-//                                });
+                                Call<ProfileResponse> callPw=apiInterface.changePasswordPatch(Id,binding.newPinET.getText().toString().trim());
+                                callPw.enqueue(new Callback<ProfileResponse>() {
+                                    @Override
+                                    public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                                        if (response.isSuccessful())
+                                        {
+                                            Toast.makeText(getActivity(), "Your Password Has Been Changed Successfully...", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(getActivity(), MainActivity.class);
+                                            startActivity(intent);
+                                        }
+                                            else
+                                        {
+                                                                                        Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                                        Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+
+                                    }
+                                });
 
                             }
                         } else {

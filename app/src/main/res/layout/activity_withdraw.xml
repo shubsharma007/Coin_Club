@@ -213,7 +213,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_10ssp"
-                android:text="2.Working Days - Monday to Saturday"
+                android:text="2.Working Days - Everyday"
                 />
 
             <TextView
