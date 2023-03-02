@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mainColour"
+    tools:context=".WinnerLoserActivity">
+
+    <TextView
+        android:id="@+id/chalHatt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="28dp"
+        android:fontFamily="@font/acme"
+        android:text="Winner Panel"
+        android:textColor="@color/white"
+        android:textSize="@dimen/_20ssp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chalHatt">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/PopUpBackground"
+            android:elevation="@dimen/_15sdp"
+            app:cardCornerRadius="@dimen/_26sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="@dimen/_28sdp">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/dp_img"
+                    android:layout_width="@dimen/_35ssp"
+                    android:layout_height="@dimen/_35ssp"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:src="@drawable/avatar"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+
+                    />
+
+                <LinearLayout
+                    android:id="@+id/ll1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dp_img">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Winner:-"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/winnerName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Shubham Sharma"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll1">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Winner ID:-"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/winnerId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll2">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Club Name:-"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/clubName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Techpanda Club"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll3">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Round No:-"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/roundNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/ll4">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Winning Amount:-"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_9ssp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="68000 ₹"
+                        android:id="@+id/winnerAmount"
+                        android:textAlignment="center"
+                        android:textColor="@color/mainColour"
+                        android:textSize="@dimen/_14ssp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/payBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_16sdp"
+                    android:layout_marginBottom="@dimen/_16sdp"
+                    android:background="@drawable/bg_green"
+                    android:paddingHorizontal="@dimen/_40sdp"
+                    android:text="Pay"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textStyle="bold"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/ll5"
+                    app:layout_constraintStart_toStartOf="@+id/ll5"
+                    app:layout_constraintTop_toBottomOf="@id/ll5" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            tools:listitem="@layout/payment_layout_for_winner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,33 +32,30 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Bidders, MyAdapter.MyView
     ApiInterface apiInterface;
     Context context;
 
-    public MyAdapter(@NonNull FirebaseRecyclerOptions<Bidders> options,Context context) {
+    public MyAdapter(@NonNull FirebaseRecyclerOptions<Bidders> options, Context context) {
         super(options);
-        apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
-        this.context=context;
+        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+        this.context = context;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull MyViewHolder holder, int position, @NonNull Bidders model) {
         holder.senderTv.setText(model.getName());
         holder.amountTv.setText(String.valueOf(model.getBiddingAmount()));
-        Call<ProfileResponse> call=apiInterface.getProfileItemById(model.getId());
+        Call<ProfileResponse> call = apiInterface.getProfileItemById(model.getId());
         call.enqueue(new Callback<ProfileResponse>() {
             @Override
             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                if(response.isSuccessful())
-                {
-                    Glide.with(context).load("https://jobmeet.techpanda.art"+response.body().getProfileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
-                }
-                else
-                {
+                if (response.isSuccessful()) {
+                    Glide.with(context).load("https://jobmeet.techpanda.art" + response.body().getProfileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
+                } else {
                     Toast.makeText(context, "Profile images not available", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                Log.i("dfnsdkjfsnf",t.getMessage());
+                Log.i("dfnsdkjfsnf", t.getMessage());
                 Toast.makeText(context, "profile pictures are unavailable due to server failure", Toast.LENGTH_SHORT).show();
             }
         });
@@ -89,7 +86,7 @@ public class MyAdapter extends FirebaseRecyclerAdapter<Bidders, MyAdapter.MyView
             cl = itemView.findViewById(R.id.cl);
             senderTv = itemView.findViewById(R.id.senderTv);
             amountTv = itemView.findViewById(R.id.amountTextView);
-            dp_img=itemView.findViewById(R.id.dp_img);
+            dp_img = itemView.findViewById(R.id.dp_img);
         }
     }
 }

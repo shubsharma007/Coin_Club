@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.AddMoneyResponse;
 import com.example.coinclubapp.Response.AddOrWithdrawMoneyResponsePost;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityAddMoneyBinding;
@@ -46,6 +48,7 @@ public class AddMoneyActivity extends AppCompatActivity {
     ApiInterface apiInterface;
     Dialog adDialog;
     boolean imageUploaded = false;
+    ClipboardManager cm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,36 @@ public class AddMoneyActivity extends AppCompatActivity {
         binding = ActivityAddMoneyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+
+        binding.accountNumber.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                cm = (ClipboardManager) AddMoneyActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(binding.accountNumber.getText());
+                Toast.makeText(AddMoneyActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        binding.ifsCode.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                cm = (ClipboardManager) AddMoneyActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(binding.ifsCode.getText());
+                Toast.makeText(AddMoneyActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+
+        binding.upiId.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                cm = (ClipboardManager) AddMoneyActivity.this.getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(binding.upiId.getText());
+                Toast.makeText(AddMoneyActivity.this, "Copied to clipboard", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
@@ -130,26 +163,28 @@ public class AddMoneyActivity extends AppCompatActivity {
         RequestBody totalamount = RequestBody.create(MediaType.parse("text/plain"), amount);
         RequestBody userwallet = RequestBody.create(MediaType.parse("text/plain"), Integer.toString(Id));
 
-        Call<AddOrWithdrawMoneyResponsePost> call = apiInterface.postAddMoney(part, totalamount, userwallet);
-        call.enqueue(new Callback<AddOrWithdrawMoneyResponsePost>() {
+        Call<AddMoneyResponse> call = apiInterface.addMoneyPost(part, totalamount, userwallet);
+        call.enqueue(new Callback<AddMoneyResponse>() {
             @Override
-            public void onResponse(Call<AddOrWithdrawMoneyResponsePost> call, Response<AddOrWithdrawMoneyResponsePost> response) {
+            public void onResponse(Call<AddMoneyResponse> call, Response<AddMoneyResponse> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     showPopup();
-                    Log.i("hnukdjfnhsd",response.message());
+                    Log.i("hnukdjfnhsd", response.message());
                 } else {
-                    Log.i("hnukdjfnhsd",response.message());
+                    Log.i("hnukdjfnhsd", response.message());
                     Toast.makeText(AddMoneyActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<AddOrWithdrawMoneyResponsePost> call, Throwable t) {
-                Log.i("uhfikdhsdjkf",t.getMessage() + t.getCause().getMessage() + t.getLocalizedMessage());
+            public void onFailure(Call<AddMoneyResponse> call, Throwable t) {
+                Log.i("uhfikdhsdjkf", t.getMessage() + t.getCause().getMessage() + t.getLocalizedMessage());
                 Toast.makeText(AddMoneyActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
     }
 
 

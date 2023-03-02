@@ -19,6 +19,7 @@ import com.bumptech.glide.Glide;
 import com.example.coinclubapp.ClubActivity;
 import com.example.coinclubapp.R;
 import com.example.coinclubapp.Response.AllClubsGet;
+import com.example.coinclubapp.result.Userclub;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,11 +32,11 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
     Runnable runnable;
 
     Context context;
-    List<AllClubsGet> clubResultList;
+    List<Userclub> userclubs;
 
-    public MyClubsAdapter(Context context, List<AllClubsGet> clubResultList) {
+    public MyClubsAdapter(Context context, List<Userclub> userclubs) {
         this.context = context;
-        this.clubResultList = clubResultList;
+        this.userclubs = userclubs;
     }
 
     @NonNull
@@ -49,7 +50,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
 
     @Override
     public void onBindViewHolder(@NonNull MyClubsAdapter.MyClubViewHolder holder, int position) {
-        AllClubsGet current = clubResultList.get(position);
+        Userclub current = userclubs.get(position);
         try {
             countDownFunc(holder, current.getStartdate(), current.getStarttime());
         } catch (ParseException e) {
@@ -77,7 +78,9 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
                 intent.putExtra("perHead", current.getClubcontribution());
                 intent.putExtra("nextBid", current.getStartdate());
                 intent.putExtra("number",current.getClubmembers());
-                intent.putExtra("id",String.valueOf(current.getId()));
+                intent.putExtra("id",String.valueOf(current.getClubid()));
+                intent.putExtra("fromWhere","myclubactivity");
+
                 context.startActivity(intent);
             }
         });
@@ -128,6 +131,11 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
 //                                dateTimeToBePassed=holder.tv_days.getText().toString()+holder.tv_hour.getText().toString() + holder.tv_minute.getText().toString() + holder.tv_second.getText().toString();
 
                             } else {
+                                holder.startBiddingTv.setVisibility(View.VISIBLE);
+                                holder.ll1.setVisibility(View.GONE);
+                                holder.ll2.setVisibility(View.GONE);
+                                holder.ll3.setVisibility(View.GONE);
+                                holder.ll4.setVisibility(View.GONE);
                                 handler.removeCallbacks(runnable);
                             }
                         } catch (Exception e) {
@@ -150,7 +158,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
 
     @Override
     public int getItemCount() {
-        return clubResultList.size();
+        return userclubs.size();
     }
 
     public class MyClubViewHolder extends RecyclerView.ViewHolder {

@@ -11,29 +11,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.R;
-import com.example.coinclubapp.Response.AllUserProfilesGet;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
+import com.example.coinclubapp.result.Clubuser;
 
 import java.util.List;
 
 public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberViewHolder> {
 
     Context context;
-    List<AllUserProfilesGet> resultList;
+    List<Clubuser> clubUsers;
 
-    public MemberAdapter(Context context, List<AllUserProfilesGet> resultList) {
+    public MemberAdapter(Context context, List<Clubuser> clubUsers) {
         this.context = context;
-        this.resultList = resultList;
-
-//        DatabaseReference reference= FirebaseDatabase.getInstance().getReference("CopyRight");
-//        reference.setValue("Yogesh gurjar");
-//        reference.setValue("Shajapur");
-
+        this.clubUsers = clubUsers;
     }
-
 
     @NonNull
     @Override
@@ -45,11 +36,9 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.MemberViewHolder holder, int position) {
-        AllUserProfilesGet result=resultList.get(position);
-        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getProfileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
-        holder.nameTv.setText(result.getFullName());
-
-
+        Clubuser result=clubUsers.get(position);
+        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
+        holder.nameTv.setText(result.getUser());
 
         if(position==0)
         {
@@ -72,7 +61,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
 
     @Override
     public int getItemCount() {
-        return resultList.size();
+        return clubUsers.size();
     }
 
     public class MemberViewHolder extends RecyclerView.ViewHolder {

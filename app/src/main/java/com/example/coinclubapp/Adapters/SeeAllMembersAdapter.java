@@ -13,15 +13,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.coinclubapp.R;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
+import com.example.coinclubapp.result.Clubuser;
 
 import java.util.List;
 
 public class SeeAllMembersAdapter extends RecyclerView.Adapter<SeeAllMembersAdapter.SeeAllMembersViewHolder> {
 
-    List<AllUserProfilesGet> resultList;
+    List<Clubuser> resultList;
     Context context;
 
-    public SeeAllMembersAdapter(Context context,List<AllUserProfilesGet> resultList) {
+    public SeeAllMembersAdapter(Context context,List<Clubuser> resultList) {
         this.resultList = resultList;
         this.context=context;
     }
@@ -37,11 +38,11 @@ public class SeeAllMembersAdapter extends RecyclerView.Adapter<SeeAllMembersAdap
 
     @Override
     public void onBindViewHolder(@NonNull SeeAllMembersAdapter.SeeAllMembersViewHolder holder, int position) {
-        AllUserProfilesGet result=resultList.get(position);
-        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getProfileimg()).placeholder(R.drawable.avatar).into(holder.imageView);
-        holder.nameTv.setText(result.getFullName());
-        holder.cityTv.setText(result.getCity());
-        holder.occupationTv.setText(result.getOccupation());
+        Clubuser result=resultList.get(position);
+        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.imageView);
+        holder.nameTv.setText(result.getUser());
+        holder.cityTv.setText(result.getUsercity());
+        holder.occupationTv.setText(result.getUseroccupation());
     }
 
     @Override
