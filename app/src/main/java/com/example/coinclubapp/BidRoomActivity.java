@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.util.Log;
 
@@ -61,8 +63,9 @@ public class BidRoomActivity extends AppCompatActivity {
     Runnable runnable;
     BidNowFragment bidNowFragment;
     FragmentManager fragmentManager;
-    ApiInterface apiInterface ;
+    ApiInterface apiInterface;
     String roundName, clubName, roundNumber, name, RName, RNumber;
+    static boolean respDone = false;
 
     LinearLayoutManager linearLayoutManager;
     MyAdapter myAdapter;
@@ -77,6 +80,8 @@ public class BidRoomActivity extends AppCompatActivity {
     int winnerId;
 
     Intent winnerLoserIntent;
+
+    int clubId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,13 +103,16 @@ public class BidRoomActivity extends AppCompatActivity {
 
         listBidders = new ArrayList<>();
 
-        name =getIntent().getStringExtra("ClubName");
+        name = getIntent().getStringExtra("ClubName");
         RName = getIntent().getStringExtra("RName");
         RNumber = getIntent().getStringExtra("RNumber");
+        clubId = getIntent().getIntExtra("clubId", 0);
 
         fragmentManager = getSupportFragmentManager();
 
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
         int Id = sharedPreferences.getInt("Id", 0);
 
         currentRoundId = getIntent().getIntExtra("roundId", 0);
@@ -192,8 +200,16 @@ public class BidRoomActivity extends AppCompatActivity {
                                 response.body().getProfileimg();
                                 winnerName = response.body().getFullName();
                                 winnerAmount = "Pay ₹ " + finalMaxAmt;
-                                winnerImage = "http://meetjob.techpanda.art" + response.body().getProfileimg();
+                                winnerImage = (String) response.body().getProfileimg();
                                 winnerId = response.body().getId();
+
+                                respDone = true;
+////////////////////////////
+                                ////////////////
+                                //
+                                //
+
+
                             } else {
                                 Log.i("uhkdfukjsdfnsdkf", response.message());
                             }
@@ -293,6 +309,8 @@ public class BidRoomActivity extends AppCompatActivity {
                             binding.tvSecond.setText(String.format("%02d", Seconds));
 
                         } else {
+//                            setRoundCompleted();
+
 //                            for (int i = 0; i < listBidders.size(); i++) {
 //                                Log.i("ukujndfsdf", listBidders.get(i).getName() + listBidders.get(i).getBiddingAmount() + listBidders.get(i).getId());
 //                            }
@@ -305,6 +323,7 @@ public class BidRoomActivity extends AppCompatActivity {
                             binding.ll4.setVisibility(View.GONE);
                             binding.bidBtn.setEnabled(false);
 
+
                             binding.bidRecyclerView.setVisibility(View.GONE);
                             winnerLoserIntent.putExtra("clubName", clubName);
                             winnerLoserIntent.putExtra("roundNumber", roundNumber);
@@ -312,8 +331,25 @@ public class BidRoomActivity extends AppCompatActivity {
                             winnerLoserIntent.putExtra("winnerAmount", winnerAmount);
                             winnerLoserIntent.putExtra("winnerImage", winnerImage);
                             winnerLoserIntent.putExtra("winnerId", winnerId);
+                            winnerLoserIntent.putExtra("roundId", currentRoundId);
+
+                            SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("clubName", clubName);
+                            editor.putString("roundNumber", roundNumber);
+                            editor.putString("winnerName", winnerName);
+                            editor.putString("winnerAmount", winnerAmount);
+                            editor.putString("winnerImage", winnerImage);
+                            editor.putInt("winnerId", winnerId);
+                            editor.putInt("currentRoundId", currentRoundId);
+                            editor.apply();
+
+                            final ProgressDialog progressDialog = new ProgressDialog(BidRoomActivity.this);
+                            progressDialog.setMessage("Loading...");
+                            progressDialog.show();
                             startActivity(winnerLoserIntent);
                             finish();
+
                             handler.removeCallbacks(runnable);
                         }
 
@@ -339,11 +375,14 @@ public class BidRoomActivity extends AppCompatActivity {
             winnerLoserIntent.putExtra("winnerAmount", winnerAmount);
             winnerLoserIntent.putExtra("winnerImage", winnerImage);
             winnerLoserIntent.putExtra("winnerId", winnerId);
+            winnerLoserIntent.putExtra("roundId", currentRoundId);
+
+
             Log.i("CURRENTTIME", String.valueOf(current_date.getTime()));
             Log.i("AFTERADDING", String.valueOf(afterAddingMins.getTime()));
+
             startActivity(winnerLoserIntent);
             finish();
-
 
             // api call where we have to pass round id and patch it with is_completed=true
 //            setRoundCompleted();

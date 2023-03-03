@@ -80,8 +80,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-        String clubname="", totalamount="", totalmember="", perhead="", clubimage="";
-        int clubid=0,userid=0;
+        String clubname = "", totalamount = "", totalmember = "", perhead = "", clubimage = "";
+        int clubid = 0, userid = 0;
 
         // additional data in notification
         if (getIntent() != null && getIntent().hasExtra("invite")) {
@@ -91,29 +91,22 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("all keys", "key is " + key + ", value is " + getIntent().getExtras().get(key));
                 if (key.equals("clubname")) {
                     clubname = (String) getIntent().getExtras().get(key);
-                }
-               else if (key.equals("totalamount")) {
+                } else if (key.equals("totalamount")) {
                     totalamount = (String) getIntent().getExtras().get(key);
 
-                }
-              else  if (key.equals("totalmember")) {
+                } else if (key.equals("totalmember")) {
                     totalmember = (String) getIntent().getExtras().get(key);
 
-                }
-              else  if (key.equals("perhead")) {
-                    perhead = (String) getIntent().getExtras().get(key);
+                } else if (key.equals("perhead")) {
 
-                }
-              else  if (key.equals("clubimage")) {
+                    perhead = String.format("%.3f", Double.valueOf((String) getIntent().getExtras().get(key)));
+
+                } else if (key.equals("clubimage")) {
                     clubimage = (String) getIntent().getExtras().get(key);
-                }
-              else if(key.equals("clubid"))
-                {
-                    clubid=Integer.parseInt((String) getIntent().getExtras().get(key));
-                }
-              else if(key.equals("userid"))
-                {
-                    userid=Integer.parseInt((String) getIntent().getExtras().get(key));
+                } else if (key.equals("clubid")) {
+                    clubid = Integer.parseInt((String) getIntent().getExtras().get(key));
+                } else if (key.equals("userid")) {
+                    userid = Integer.parseInt((String) getIntent().getExtras().get(key));
                 }
             }
 
@@ -121,11 +114,11 @@ public class MainActivity extends AppCompatActivity {
             adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
             adDialog.show();
 
-            TextView cn=adDialog.findViewById(R.id.clubNameTv);
-            TextView tm=adDialog.findViewById(R.id.totalMemberTv);
-            TextView ta=adDialog.findViewById(R.id.totalAmountTv);
-            TextView ph=adDialog.findViewById(R.id.perHeadTv);
-            ImageView clubImg=adDialog.findViewById(R.id.clubimage);
+            TextView cn = adDialog.findViewById(R.id.clubNameTv);
+            TextView tm = adDialog.findViewById(R.id.totalMemberTv);
+            TextView ta = adDialog.findViewById(R.id.totalAmountTv);
+            TextView ph = adDialog.findViewById(R.id.perHeadTv);
+            ImageView clubImg = adDialog.findViewById(R.id.clubimage);
 
             cn.setText(clubname);
             tm.setText(totalmember);
@@ -142,23 +135,23 @@ public class MainActivity extends AppCompatActivity {
             acceptBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Call<ClubInviteResponse> joinclubCall=apiInterface.joinClub(finalClubid, finalUserid,true);
+                    Call<ClubInviteResponse> joinclubCall = apiInterface.joinClub(finalClubid, finalUserid, true);
                     joinclubCall.enqueue(new Callback<ClubInviteResponse>() {
                         @Override
                         public void onResponse(Call<ClubInviteResponse> call, Response<ClubInviteResponse> response) {
-                            if(response.isSuccessful())
-                            {
-                                startActivity(new Intent(MainActivity.this,MainActivity.class));
+                            if (response.isSuccessful()) {
+                                startActivity(new Intent(MainActivity.this, MainActivity.class));
                                 finish();
-                            }
-                            else
-                            {
+                            } else {
+                                Log.d("ERROR", response.code() + "    " + response.errorBody().toString());
                                 Toast.makeText(MainActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                             }
                         }
 
                         @Override
                         public void onFailure(Call<ClubInviteResponse> call, Throwable t) {
+                            Log.d("ERROR", t.getMessage());
+
                             Toast.makeText(MainActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                         }
                     });
@@ -181,7 +174,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
-
 
         Id = sharedPreferences.getInt("Id", 0);
         //FirebaseMessaging.getInstance().subscribeToTopic("song");

@@ -20,7 +20,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:visibility="visible"
+        android:visibility="gone"
         android:id="@+id/winner_batch"
         android:layout_width="12dp"
         android:layout_height="12dp"

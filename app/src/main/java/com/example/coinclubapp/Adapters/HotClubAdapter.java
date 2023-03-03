@@ -68,8 +68,8 @@ public class HotClubAdapter extends RecyclerView.Adapter<HotClubAdapter.HotClubV
 
 
         holder.txtName.setText(current.getClubname());
-        holder.txtDesc.setText("per head : " + current.getClubcontribution() + " ₹ ");
-        holder.txtRound.setText("round 1 of " + current.getClubmembers());
+        holder.txtDesc.setText("per head : " + String.format("%.3f", Double.valueOf(current.getClubcontribution())) + " ₹ ");
+        holder.txtRound.setText("members " + current.getClubmembers());
         holder.txtAmount.setText(current.getClubamount() + " ₹");
         holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
         Glide.with(context)

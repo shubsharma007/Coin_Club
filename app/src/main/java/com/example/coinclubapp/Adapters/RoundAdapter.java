@@ -28,7 +28,6 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
         this.activeRound=activeRound;
     }
 
-
     @NonNull
     @Override
     public RoundAdapter.RoundViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -41,8 +40,6 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
     public void onBindViewHolder(@NonNull RoundAdapter.RoundViewHolder holder, int position) {
         RoundsResult result=listOfRounds.get(position);
 
-
-
         if(result.getId()==activeRound)
         {
             holder.roundBtn.setBackgroundResource(R.drawable.bg_round_count_dark);
@@ -50,15 +47,9 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
         }
         holder.roundBtn.setText(result.getRoundno());
 
-        if(result.getWinner()==null)
-        {
-            holder.nameTv.setText("");
-        }
-        else
-        {
-            holder.nameTv.setText(String.valueOf(result.getWinner()));
-        }
-        if(result.getRoundamount()==null)
+        result.getWinner().toString();
+        holder.nameTv.setText(String.valueOf(result.getWinner()));
+        if(result.getWinner().equals("0"))
         {
             holder.amountTv.setText("");
         }
@@ -66,8 +57,14 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
         {
             holder.amountTv.setText(String.valueOf(result.getRoundamount()));
         }
-
-
+        if(result.getWinner().equals("0"))
+        {
+            holder.nameTv.setText("");
+        }
+        else
+        {
+            holder.nameTv.setText(result.getWinner().toString());
+        }
 
     }
 
