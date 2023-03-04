@@ -15,6 +15,7 @@ import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
 import com.example.coinclubapp.Response.UserClubResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
+import com.example.coinclubapp.Response.WinnerPatchToRound;
 import com.example.coinclubapp.Response.WithdrawMoneyResponse;
 import com.example.coinclubapp.result.Issue;
 import com.example.coinclubapp.result.RoundsResult;
@@ -177,6 +178,12 @@ public interface ApiInterface {
     Call<ClubInviteResponse> joinClub(@Field("clubname") int clubname,
                                       @Field("inviteto") int inviteto,
                                       @Field("is_join") boolean is_join);
+
+//
+//    @FormUrlEncoded
+//    @PATCH("roundview/{id}/")
+//    Call<WinnerPatchToRound> patchWinner(@Path("id") int id,
+//    @Field("winner") String winner);
 
 
 //    @Multipart

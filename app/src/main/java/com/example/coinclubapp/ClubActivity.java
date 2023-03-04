@@ -42,8 +42,8 @@ import retrofit2.Response;
 public class ClubActivity extends AppCompatActivity {
     ActivityClubBinding binding;
 
-    RecyclerView.LayoutManager layoutManagerM;
-    RecyclerView.LayoutManager layoutManagerR;
+    RecyclerView.LayoutManager layoutManagerMembers;
+    RecyclerView.LayoutManager layoutManagerRounds;
     List<Clubuser> clubusers;
     ApiInterface apiInterface;
     String startDATE, startTIME, clubName, roundName, RNumber;
@@ -61,8 +61,8 @@ public class ClubActivity extends AppCompatActivity {
         binding = ActivityClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-        String clubId = getIntent().getStringExtra("id");
-clubusers=new ArrayList<>();
+        int clubId = getIntent().getIntExtra("clubId", 0);
+        clubusers = new ArrayList<>();
         binding.bidStartIn.setEnabled(false);
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
         fromWhere = getIntent().getStringExtra("fromWhere");
@@ -83,14 +83,14 @@ clubusers=new ArrayList<>();
         });
 
 
-        Call<AllClubsGet> callClubs = apiInterface.getClubById(Integer.parseInt(clubId));
+        Call<AllClubsGet> callClubs = apiInterface.getClubById(clubId);
         callClubs.enqueue(new Callback<AllClubsGet>() {
             @Override
             public void onResponse(Call<AllClubsGet> call, Response<AllClubsGet> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
-                    binding.clubAmountTv.setText(response.body().getClubamount());
-                    binding.perHeadTv.setText(response.body().getClubcontribution());
+                    binding.clubAmountTv.setText(response.body().getClubamount() + " ₹");
+                    binding.perHeadTv.setText(response.body().getClubcontribution() + " ₹");
                     binding.nextRoundTv.setText(response.body().getStartdate());
 
                 } else {
@@ -117,6 +117,7 @@ clubusers=new ArrayList<>();
                     i.putExtra("ClubName", clubName);
                     i.putExtra("RName", roundName);
                     i.putExtra("RNumber", RNumber);
+                    i.putExtra("clubId", clubId);
 
                     startActivity(i);
                 } else {
@@ -131,20 +132,19 @@ clubusers=new ArrayList<>();
             finish();
         });
 
-        layoutManagerM = new LinearLayoutManager(ClubActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        binding.recyclerViewMember.setLayoutManager(layoutManagerM);
+        layoutManagerMembers = new LinearLayoutManager(ClubActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerViewMember.setLayoutManager(layoutManagerMembers);
 
 
-        layoutManagerR = new LinearLayoutManager(ClubActivity.this, LinearLayoutManager.HORIZONTAL, false);
-        binding.recyclerViewRound.setLayoutManager(layoutManagerR);
+        layoutManagerRounds = new LinearLayoutManager(ClubActivity.this, LinearLayoutManager.HORIZONTAL, false);
+        binding.recyclerViewRound.setLayoutManager(layoutManagerRounds);
 
-
-        Call<List<ClubUserResponse>>call=apiInterface.getUsersByClubId(Integer.parseInt(clubId));
+        Call<List<ClubUserResponse>> call = apiInterface.getUsersByClubId(clubId);
         call.enqueue(new Callback<List<ClubUserResponse>>() {
             @Override
             public void onResponse(Call<List<ClubUserResponse>> call, Response<List<ClubUserResponse>> response) {
                 if (response.isSuccessful()) {
-                     clubusers=response.body().get(0).getClubuser();
+                    clubusers = response.body().get(0).getClubuser();
                     binding.recyclerViewMember.setAdapter(new MemberAdapter(ClubActivity.this, clubusers));
                 } else {
                     Toast.makeText(ClubActivity.this, "Some Error Occured While Getting Members", Toast.LENGTH_SHORT).show();
@@ -158,30 +158,32 @@ clubusers=new ArrayList<>();
         });
 
 
-        Call<List<RoundsResult>> callR = apiInterface.getAllRounds();
-        callR.enqueue(new Callback<List<RoundsResult>>() {
+        Call<List<RoundsResult>> callRounds = apiInterface.getAllRounds();
+        callRounds.enqueue(new Callback<List<RoundsResult>>() {
             @Override
             public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
                     List<RoundsResult> myRounds = new ArrayList<>();
+                    RoundsResult roundJiskiBidStartHogi = new RoundsResult();
+
+                    // to get list of all rounds of this club
                     for (int i = 0; i < response.body().size(); i++) {
                         if (Objects.equals(getIntent().getStringExtra("clubName"), response.body().get(i).getClubname())) {
                             myRounds.add(response.body().get(i));
                         }
-
                     }
 
-                    for (int i = 0; i < myRounds.size(); i++) {
-                        RoundsResult roundJiskiBidStartHogi = new RoundsResult();
-                        if (!myRounds.get(i).getIsCompleted()) {
-                            roundJiskiBidStartHogi = myRounds.get(i);
+                    // jiski bid start hogi uska id uthana he all rounds me se
+                    for (int ii = 0; ii < myRounds.size(); ii++) {
+                        if (!myRounds.get(ii).getIsCompleted()) {
+                            roundJiskiBidStartHogi = myRounds.get(ii);
                             startDATE = String.valueOf(roundJiskiBidStartHogi.getStartdate());
                             startTIME = String.valueOf(roundJiskiBidStartHogi.getStarttime());
                             useTime = startDATE + " " + startTIME;
                             duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
                             roundId = roundJiskiBidStartHogi.getId();
-                            clubName =roundJiskiBidStartHogi.getClubname();
+                            clubName = roundJiskiBidStartHogi.getClubname();
                             roundName = roundJiskiBidStartHogi.getRoundname();
                             RNumber = roundJiskiBidStartHogi.getRoundno();
 
@@ -190,18 +192,16 @@ clubusers=new ArrayList<>();
                             if (fromWhere.equalsIgnoreCase("hotclubactivity")) {
                                 binding.bidStartIn.setEnabled(false);
                                 binding.bidStartIn.setVisibility(View.GONE);
-                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
-
                             } else {
                                 try {
                                     countDownFunc(useTime);
                                 } catch (ParseException e) {
                                     e.printStackTrace();
-                                } finally {
-                                    binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
-                                    break;
                                 }
                             }
+
+                            binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
+                            break;
 
                         }
                     }
@@ -218,7 +218,7 @@ clubusers=new ArrayList<>();
 
         binding.seeAllMember.setOnClickListener(v -> {
             Intent i = new Intent(ClubActivity.this, MemberActivity.class);
-            i.putExtra("clubId",clubId);
+            i.putExtra("clubId", clubId);
             startActivity(i);
         });
     }

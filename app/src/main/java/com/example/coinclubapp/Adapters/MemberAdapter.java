@@ -39,15 +39,15 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
         Clubuser result=clubUsers.get(position);
         Glide.with(context).load("https://jobmeet.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
         holder.nameTv.setText(result.getUser());
-
-        if(position==0)
-        {
-            holder.winner_batch.setVisibility(View.VISIBLE);
-        }
-        else
-        {
-            holder.winner_batch.setVisibility(View.GONE);
-        }
+//
+//        if(position==0)
+//        {
+//            holder.winner_batch.setVisibility(View.VISIBLE);
+//        }
+//        else
+//        {
+//            holder.winner_batch.setVisibility(View.GONE);
+//        }
 
 //        if(result.getGender().equalsIgnoreCase("male"))
 //        {

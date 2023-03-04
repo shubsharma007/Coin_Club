@@ -24,10 +24,10 @@ public class RoundsResult {
     private Object maxbid;
     @SerializedName("winner")
     @Expose
-    private Object winner;
+    private String winner;
     @SerializedName("roundamount")
     @Expose
-    private Object roundamount;
+    private String roundamount;
     @SerializedName("status")
     @Expose
     private Object status;
@@ -43,6 +43,9 @@ public class RoundsResult {
     @SerializedName("is_completed")
     @Expose
     private Boolean isCompleted;
+    @SerializedName("Payment_status")
+    @Expose
+    private Boolean paymentStatus;
 
     public Integer getId() {
         return id;
@@ -92,19 +95,19 @@ public class RoundsResult {
         this.maxbid = maxbid;
     }
 
-    public Object getWinner() {
+    public String getWinner() {
         return winner;
     }
 
-    public void setWinner(Object winner) {
+    public void setWinner(String winner) {
         this.winner = winner;
     }
 
-    public Object getRoundamount() {
+    public String getRoundamount() {
         return roundamount;
     }
 
-    public void setRoundamount(Object roundamount) {
+    public void setRoundamount(String roundamount) {
         this.roundamount = roundamount;
     }
 
@@ -146,5 +149,13 @@ public class RoundsResult {
 
     public void setIsCompleted(Boolean isCompleted) {
         this.isCompleted = isCompleted;
+    }
+
+    public Boolean getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(Boolean paymentStatus) {
+        this.paymentStatus = paymentStatus;
     }
 }

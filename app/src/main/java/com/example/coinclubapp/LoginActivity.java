@@ -34,6 +34,7 @@ public class LoginActivity extends AppCompatActivity {
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+
         ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
 
@@ -64,7 +65,8 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
                         if (response.isSuccessful()) {
                             progressDialog.dismiss();
-                            if (response.body().getStatus().equals("True")) {
+
+                            if (response.body().getStatus().equalsIgnoreCase("True")) {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 Integer loginId=response.body().getId();
                                 editor.putInt("Id", loginId);
@@ -77,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 startActivity(i);
                                 finish();
-                            } else {
+                            } else if(response.body().getStatus().equalsIgnoreCase("false")) {
                                 Toast.makeText(LoginActivity.this, "You are not authorized by the admin", Toast.LENGTH_SHORT).show();
                             }
                         }

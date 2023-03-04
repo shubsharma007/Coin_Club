@@ -44,6 +44,7 @@ public class WithdrawActivity extends AppCompatActivity {
     Date oldDate;
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
     String wallet = null;
+    static int twoWithdrawal=0;
 
 
     @Override
@@ -52,8 +53,12 @@ public class WithdrawActivity extends AppCompatActivity {
         binding = ActivityWithdrawBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+//
+//        SharedPreferences.Editor editor = sharedPreferences.edit();
+//        editor.putInt("Id", loginId);
+//        editor.apply();
+//
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(WithdrawActivity.this);
         Id = sharedPreferences.getInt("Id", 0);
@@ -177,6 +182,9 @@ public class WithdrawActivity extends AppCompatActivity {
                             });
                         } else {
                             progressDialog.dismiss();
+
+//                            preferences.edit().remove("text").commit();
+
                             Toast.makeText(WithdrawActivity.this, "can't request more than one withdrawal in a single working day", Toast.LENGTH_SHORT).show();
                         }
 

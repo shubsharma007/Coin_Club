@@ -59,12 +59,13 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
 
 
         holder.txtName.setText(current.getClubname());
-        holder.txtDesc.setText("per head : " + current.getClubcontribution() + " ₹ ");
-        holder.txtRound.setText("round 1 of " + current.getClubmembers());
+
+        holder.txtDesc.setText("per head : " + String.format("%.3f", Double.valueOf(current.getClubcontribution())) + " ₹ ");
+        holder.txtRound.setText("members " + current.getClubmembers());
         holder.txtAmount.setText(current.getClubamount() + " ₹");
         holder.txtNextBid.setText("Next Bid : " + current.getStartdate());
         Glide.with(context)
-                .load("http://meetjob.techpanda.art"+current.getClubimage())
+                .load("http://meetjob.techpanda.art" + current.getClubimage())
                 .centerCrop()
                 .placeholder(R.drawable.logo_money)
                 .into(holder.logo);
@@ -77,9 +78,9 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
                 intent.putExtra("clubAmount", current.getClubamount());
                 intent.putExtra("perHead", current.getClubcontribution());
                 intent.putExtra("nextBid", current.getStartdate());
-                intent.putExtra("number",current.getClubmembers());
-                intent.putExtra("id",String.valueOf(current.getClubid()));
-                intent.putExtra("fromWhere","myclubactivity");
+                intent.putExtra("number", current.getClubmembers());
+                intent.putExtra("clubId", current.getClubid());
+                intent.putExtra("fromWhere", "myclubactivity");
 
                 context.startActivity(intent);
             }
@@ -99,7 +100,6 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
             if (event_date.getTime() - current_date.getTime() > 0) {
 
                 holder.startBiddingTv.setVisibility(View.GONE);
-
 
 
                 holder.ll1.setVisibility(View.VISIBLE);
@@ -167,6 +167,7 @@ public class MyClubsAdapter extends RecyclerView.Adapter<MyClubsAdapter.MyClubVi
         ImageView logo;
         TextView tv_days, tv_hour, tv_minute, tv_second, startBiddingTv;
         LinearLayout ll1, ll2, ll3, ll4;
+
         public MyClubViewHolder(@NonNull View itemView) {
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);

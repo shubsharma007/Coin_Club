@@ -68,7 +68,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_5sdp"
             android:text="Next Bid : 10jan 2023"
-
+            android:visibility="gone"
             android:textSize="@dimen/_10sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view"
