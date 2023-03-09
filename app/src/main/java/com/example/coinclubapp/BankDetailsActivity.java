@@ -62,7 +62,6 @@ public class BankDetailsActivity extends AppCompatActivity {
 
         binding.submitBtn.setOnClickListener(v -> {
 
-
             String paytm = binding.paytmEt.getText().toString();
             String phonepe = binding.phonePeEt.getText().toString();
             String googlepay = binding.googlePayEt.getText().toString();

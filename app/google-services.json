@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "851701297823",
+    "firebase_url": "https://coin-club-app-default-rtdb.firebaseio.com",
     "project_id": "coin-club-app",
     "storage_bucket": "coin-club-app.appspot.com"
   },
@@ -13,6 +14,14 @@
         }
       },
       "oauth_client": [
+        {
+          "client_id": "851701297823-2lsl74vg42vo42ekfa9tc1hhvpj6r5ld.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.coinclubapp",
+            "certificate_hash": "b0f3651f32c531e700ad34e66a9d11f1dd7de641"
+          }
+        },
         {
           "client_id": "851701297823-m52i6frkttp9864o4p2p476ubde5e22j.apps.googleusercontent.com",
           "client_type": 3

@@ -10,11 +10,16 @@ import com.example.coinclubapp.Response.ClubUserResponse;
 import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
+import com.example.coinclubapp.Response.ListToGetIdOfRecord;
+import com.example.coinclubapp.Response.PaidUnpaidListResponse;
+import com.example.coinclubapp.Response.PatchProfileResponse;
+import com.example.coinclubapp.Response.PayRecord;
 import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
 import com.example.coinclubapp.Response.UserClubResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
+import com.example.coinclubapp.Response.WinnerLoserTableCreate;
 import com.example.coinclubapp.Response.WinnerPatchToRound;
 import com.example.coinclubapp.Response.WithdrawMoneyResponse;
 import com.example.coinclubapp.result.Issue;
@@ -179,15 +184,27 @@ public interface ApiInterface {
                                       @Field("inviteto") int inviteto,
                                       @Field("is_join") boolean is_join);
 
-//
-//    @FormUrlEncoded
-//    @PATCH("roundview/{id}/")
-//    Call<WinnerPatchToRound> patchWinner(@Path("id") int id,
-//    @Field("winner") String winner);
+    @FormUrlEncoded
+    @PATCH("roundview/{id}/")
+    Call<WinnerPatchToRound> patchWinner(@Path("id") int id, @Field("winner") String winner, @Field("roundamount") String roundamount);
 
+    @GET("filterround/{roundId}")
+    Call<List<WinnerLoserTableCreate>> createWinnerLoserTable(@Path("roundId") int roundId);
 
-//    @Multipart
-//    @PATCH("profile/{id}")
-//    Call<PatchProfileResponse> patchProfileById(@Path("id") int id,
-//                                                @Part MultipartBody.Part profileimg);
+    @GET("filterpaymentround/{roundId}")
+    Call<List<PaidUnpaidListResponse>> paidUnpaidList(@Path("roundId") int roundId);
+
+    @Multipart
+    @PATCH("profile/{id}/")
+    Call<PatchProfileResponse> patchProfileById(@Path("id") int id,
+                                                @Part MultipartBody.Part profileimg);
+
+    @GET("payrecord")
+    Call<List<ListToGetIdOfRecord>> getRecordIdOfLoser();
+
+    @FormUrlEncoded
+    @PATCH("payrecord/{roundId}/")
+    Call<PayRecord> patchpayment(@Path("roundId") int roundId,
+                                 @Field("is_paid") Boolean is_paid,
+                                 @Field("payamount") String payamount);
 }
