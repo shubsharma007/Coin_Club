@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
 import com.example.coinclubapp.BidRoomActivity;
 import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.InterFace.ApiInterface;
@@ -20,9 +22,14 @@ import com.example.coinclubapp.databinding.FragmentBidNowBinding;
 import com.example.coinclubapp.result.RoundsResult;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import retrofit2.Call;
@@ -40,6 +47,12 @@ public class BidNowFragment extends BottomSheetDialogFragment {
     int val;
     int responsemax;
     int responsemin;
+//    int lastBidAmt;
+    int maxAmt;
+    DatabaseReference myBidders;
+
+    Bidders bidders;
+    List<Integer> maxBidderAmount;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,17 +64,42 @@ public class BidNowFragment extends BottomSheetDialogFragment {
         clubName = this.getArguments().getString("clubName");
         roundId = this.getArguments().getInt("roundId");
 
-        Log.d("ashdghsagsd", "onCreateView: "+roundName);
+        maxBidderAmount = new ArrayList<>();
 
+//        lastBidAmt = this.getArguments().getInt("lastBidAmt");
+
+        SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(roundName, true);
+        editor.apply();
+
+        Log.d("ashdghsagsd", "onCreateView: " + roundName);
 
         binding.myBidButton.setOnClickListener(v -> {
             if (binding.bidAmtEt.getText().toString().trim().isEmpty()) {
                 Toast.makeText(getActivity(), "Please enter your amount...", Toast.LENGTH_SHORT).show();
                 binding.bidAmtEt.requestFocus();
             } else {
+                myBidders = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
+                myBidders.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        for (DataSnapshot shot : snapshot.getChildren()) {
+                            bidders = shot.getValue(Bidders.class);
+                            maxBidderAmount.add(bidders.getBiddingAmount());
+                            maxAmt = maxBidderAmount.get(0);
+                            for (int i = 0; i < maxBidderAmount.size(); i++) {
+                                if (maxBidderAmount.get(i) > maxAmt) {
+                                    maxAmt = maxBidderAmount.get(i);
+                                }
+                            }
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {}
+                });
                 String amount = binding.bidAmtEt.getText().toString();
-
-
                 Call<RoundsResult> call = apiInterface.getRoundsById(roundId);
                 call.enqueue(new Callback<RoundsResult>() {
                     @Override
@@ -71,9 +109,11 @@ public class BidNowFragment extends BottomSheetDialogFragment {
                             responsemax = Integer.parseInt(String.valueOf(response.body().getMaxbid()));
                             responsemin = Integer.parseInt(String.valueOf(response.body().getMinbid()));
                             if (val > responsemax) {
-                                Toast.makeText(getContext(), "Max amount for bidding is different today, try again", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext(), "Max amount for bidding is " + responsemax + ", try again", Toast.LENGTH_SHORT).show();
                             } else if (val < responsemin) {
                                 Toast.makeText(getContext(), "enter amount more than ₹ " + responsemin, Toast.LENGTH_SHORT).show();
+                            } else if (val <= maxAmt) {
+                                Toast.makeText(getContext(), "amount should be greater than the latest bid amount", Toast.LENGTH_SHORT).show();
                             } else {
                                 bid(amount, Id);
                                 binding.bidAmtEt.setText("");
@@ -111,7 +151,7 @@ public class BidNowFragment extends BottomSheetDialogFragment {
                     DatabaseReference myReference = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
                     String myKey = String.valueOf(response.body().getMobileno());
                     Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
-                    Log.i("TAG",response.body().getId()+ "  " + response.body().getFullName() + "  " + amount);
+                    Log.i("TAG", response.body().getId() + "  " + response.body().getFullName() + "  " + amount);
                     myReference.child(myKey).setValue(bidders);
                 } else {
                     Log.i("sdfjsifnsd", response.message());

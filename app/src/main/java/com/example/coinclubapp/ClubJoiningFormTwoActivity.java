@@ -38,7 +38,6 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
     ActivityClubJoiningFormTwoBinding binding;
     ProgressDialog progress;
     String regToken = null;
-
     FirebaseAuth auth;
 
     @Override
@@ -122,7 +121,7 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                                             editor.putInt("Id", Id);
                                             editor.apply();
                                             Toast.makeText(ClubJoiningFormTwoActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
-                                            startActivity(new Intent(ClubJoiningFormTwoActivity.this, MainActivity.class));
+                                            startActivity(new Intent(ClubJoiningFormTwoActivity.this, LoginActivity.class));
                                         } else {
                                             progress.dismiss();
                                             Log.i("ELSE", response.message());
@@ -146,8 +145,6 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                             Toast.makeText(ClubJoiningFormTwoActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
-
-
                 }
             }
         });

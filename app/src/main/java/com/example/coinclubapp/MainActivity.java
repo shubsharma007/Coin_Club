@@ -83,6 +83,21 @@ public class MainActivity extends AppCompatActivity {
         String clubname = "", totalamount = "", totalmember = "", perhead = "", clubimage = "";
         int clubid = 0, userid = 0;
 
+        //Storage Permission
+        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+
+        } else {
+            requestStoragePermission();
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
+                == PackageManager.PERMISSION_GRANTED) {
+        } else {
+//            requestPermission();
+        }
+
+
+
         // additional data in notification
         if (getIntent() != null && getIntent().hasExtra("invite")) {
             adDialog = new Dialog(MainActivity.this);
@@ -177,20 +192,13 @@ public class MainActivity extends AppCompatActivity {
 
         Id = sharedPreferences.getInt("Id", 0);
         //FirebaseMessaging.getInstance().subscribeToTopic("song");
-//        FirebaseMessaging.getInstance().getToken();
+        FirebaseMessaging.getInstance().getToken().addOnSuccessListener(new OnSuccessListener<String>() {
+            @Override
+            public void onSuccess(String s) {
+                Log.d("dghsdghsddhhd", "onSuccess: "+s);
+            }
+        });
 
-        //Storage Permission
-        if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
-        } else {
-            requestStoragePermission();
-        }
-
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
-                == PackageManager.PERMISSION_GRANTED) {
-        } else {
-//            requestPermission();
-        }
 
 //        PushNotifications.start(getApplicationContext(), "53566661-977b-4140-b02f-cfbdb4b591a0");
 //        PushNotifications.addDeviceInterest("hello");
@@ -297,7 +305,11 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_logout:
                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        SharedPreferences.Editor editor=sharedPreferences.edit();
+                        editor.clear();
+                        editor.apply();
                         startActivity(intent);
+                        finish();
                         finishAffinity();
                         break;
                 }
@@ -311,7 +323,6 @@ public class MainActivity extends AppCompatActivity {
     //Storage Permission Code...
     private void requestStoragePermission() {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-
             new AlertDialog.Builder(this)
                     .setTitle("Permission Needed")
                     .setMessage("This permission is needed")

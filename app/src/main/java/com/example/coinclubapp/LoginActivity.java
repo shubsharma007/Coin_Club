@@ -27,7 +27,6 @@ public class LoginActivity extends AppCompatActivity {
 
     ActivityLoginBinding binding;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +35,6 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
 
         ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
-
-
-
 
         binding.goBtn.setOnClickListener(v -> {
             if (binding.edMobile.getText().toString().trim().isEmpty()) {
@@ -65,36 +61,39 @@ public class LoginActivity extends AppCompatActivity {
                     public void onResponse(Call<UserLoginResponse> call, Response<UserLoginResponse> response) {
                         if (response.isSuccessful()) {
                             progressDialog.dismiss();
-
-                            if (response.body().getStatus().equalsIgnoreCase("True")) {
+                            String status = response.body().getStatus();
+                            if (status.equalsIgnoreCase("True")) {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                                Integer loginId=response.body().getId();
+                                Integer loginId = response.body().getId();
                                 editor.putInt("Id", loginId);
+                                editor.putString("number",mobileno);
                                 editor.apply();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
 
-                                WifiManager wifiManager=(WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
+                                WifiManager wifiManager = (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
                                 Log.i("IP_ADDRESS", Formatter.formatIpAddress(wifiManager.getConnectionInfo().getIpAddress()));
 
                                 startActivity(i);
                                 finish();
-                            } else if(response.body().getStatus().equalsIgnoreCase("false")) {
+                            } else if (status.equalsIgnoreCase("false")) {
+                                progressDialog.dismiss();
                                 Toast.makeText(LoginActivity.this, "You are not authorized by the admin", Toast.LENGTH_SHORT).show();
                             }
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
-
                     @Override
                     public void onFailure(Call<UserLoginResponse> call, Throwable t) {
-                        Toast.makeText(LoginActivity.this, "Please Try Again", Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 });
-
             }
         });
         binding.btnSignUp.setOnClickListener(v -> {
-
             startActivity(new Intent(LoginActivity.this, ClubJoiningFormOneActivity.class));
         });
     }

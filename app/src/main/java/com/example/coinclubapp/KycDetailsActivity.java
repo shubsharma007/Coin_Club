@@ -46,13 +46,10 @@ public class KycDetailsActivity extends AppCompatActivity {
     Uri aadharBack;
     Uri panFront;
 
-
-
     Dialog adDialog;
     String uriafs, uriabs, uripfs;
 
     ApiInterface apiInterface;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

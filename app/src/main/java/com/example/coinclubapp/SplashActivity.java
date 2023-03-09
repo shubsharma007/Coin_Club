@@ -2,7 +2,9 @@ package com.example.coinclubapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -16,9 +18,18 @@ ActivitySplashBinding binding;
         binding=ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+
         Handler handler = new Handler();
         handler.postDelayed(() -> {
-            startActivity(new Intent(this, SliderActivity.class));
+            if(sharedPreferences.getAll().containsKey("number") && sharedPreferences.getAll().containsKey("Id"))
+            {
+                startActivity(new Intent(this, MainActivity.class));
+            }
+            else
+            {
+                startActivity(new Intent(this, LoginActivity.class));
+            }
         }, 2500);
     }
 }

@@ -62,10 +62,8 @@ public class BidRoomActivity extends AppCompatActivity {
     Handler handler = new Handler();
     Runnable runnable;
     BidNowFragment bidNowFragment;
-    FragmentManager fragmentManager;
     ApiInterface apiInterface;
     String roundName, clubName, roundNumber, name, RName, RNumber;
-    static boolean respDone = false;
 
     LinearLayoutManager linearLayoutManager;
     MyAdapter myAdapter;
@@ -73,8 +71,9 @@ public class BidRoomActivity extends AppCompatActivity {
     List<Bidders> listBidders;
     List<Integer> maxBidderAmount;
     List<Integer> maxBidderId;
-
+    DatabaseReference myBidders;
     Dialog adDialog;
+    int maxAmt;
 
     String winnerName, winnerAmount, winnerImage;
     int winnerId;
@@ -103,21 +102,20 @@ public class BidRoomActivity extends AppCompatActivity {
 
         listBidders = new ArrayList<>();
 
+
         name = getIntent().getStringExtra("ClubName");
         RName = getIntent().getStringExtra("RName");
         RNumber = getIntent().getStringExtra("RNumber");
         clubId = getIntent().getIntExtra("clubId", 0);
-
-        fragmentManager = getSupportFragmentManager();
-
-        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        int Id = sharedPreferences.getInt("Id", 0);
-
         currentRoundId = getIntent().getIntExtra("roundId", 0);
 
+
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        int Id = sharedPreferences.getInt("Id", 0);
+
+
         Call<RoundsResult> call = apiInterface.getRoundsById(currentRoundId);
+
         call.enqueue(new Callback<RoundsResult>() {
             @Override
             public void onResponse(Call<RoundsResult> call, Response<RoundsResult> response) {
@@ -125,10 +123,6 @@ public class BidRoomActivity extends AppCompatActivity {
                     String startDate = String.valueOf(response.body().getStartdate());
                     String startTime = String.valueOf(response.body().getStarttime());
                     String duration = String.valueOf(response.body().getDuration());
-                    roundName = response.body().getRoundname();
-                    clubName = response.body().getClubname();
-                    roundNumber = response.body().getRoundno();
-
                     try {
                         countdownFunc(startDate, startTime, duration);
                     } catch (ParseException e) {
@@ -144,14 +138,35 @@ public class BidRoomActivity extends AppCompatActivity {
                 Log.i("bjhbfdjhf", t.getMessage());
             }
         });
+
         binding.txtName.setText(name);
 
         binding.bidBtn.setOnClickListener(v -> {
+
+            myBidders = FirebaseDatabase.getInstance().getReference().child(name).child(RName);
+            myBidders.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    for (DataSnapshot shot : snapshot.getChildren()) {
+                        bidders = shot.getValue(Bidders.class);
+                        maxBidderAmount.add(bidders.getBiddingAmount());
+                        maxAmt = maxBidderAmount.get(0);
+                        for (int i = 0; i < maxBidderAmount.size(); i++) {
+                            if (maxBidderAmount.get(i) > maxAmt) {
+                                maxAmt = maxBidderAmount.get(i);
+                            }
+                        }
+                    }
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {}
+            });
             Bundle bundle = new Bundle();
             bundle.putInt("Id", Id);
             bundle.putString("clubName", name);
-            bundle.putString("roundName", roundName);
+            bundle.putString("roundName", RName);
             bundle.putInt("roundId", currentRoundId);
+//            bundle.putInt("lastBidAmt",maxAmt);
             bidNowFragment.setArguments(bundle);
             bidNowFragment.show(getSupportFragmentManager(), bidNowFragment.getTag());
         });
@@ -159,101 +174,8 @@ public class BidRoomActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Bidders> options = new FirebaseRecyclerOptions.Builder<Bidders>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child(name).child(RName).orderByChild("biddingAmount"), Bidders.class)
                 .build();
-// yogesh change change
-
         myAdapter = new MyAdapter(options, BidRoomActivity.this);
-
-        Log.i("fefddffd", roundName + clubName);
-
         binding.bidRecyclerView.setAdapter(myAdapter);
-
-        DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference().child(name).child(RName);
-
-        myBidders.addValueEventListener(new ValueEventListener() {
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listBidders.clear();
-                maxBidderId.clear();
-                maxBidderAmount.clear();
-                for (DataSnapshot shot : snapshot.getChildren()) {
-                    bidders = shot.getValue(Bidders.class);
-                    listBidders.add(bidders);
-                    maxBidderId.add(bidders.getId());
-                    maxBidderAmount.add(bidders.getBiddingAmount());
-                    int maxAmt = maxBidderAmount.get(0);
-                    int maxId = maxBidderId.get(0);
-
-                    for (int i = 0; i < maxBidderAmount.size(); i++) {
-                        if (maxBidderAmount.get(i) > maxAmt) {
-                            maxAmt = maxBidderAmount.get(i);
-                            maxId = maxBidderId.get(i);
-                        }
-                    }
-                    Call<ProfileResponse> call = apiInterface.getProfileItemById(maxId);
-                    int finalMaxAmt = maxAmt;
-                    call.enqueue(new Callback<ProfileResponse>() {
-                        @Override
-                        public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
-                            if (response.isSuccessful()) {
-                                response.body().getFullName();
-                                response.body().getProfileimg();
-                                winnerName = response.body().getFullName();
-                                winnerAmount = "Pay ₹ " + finalMaxAmt;
-                                winnerImage = (String) response.body().getProfileimg();
-                                winnerId = response.body().getId();
-
-                                respDone = true;
-////////////////////////////
-                                ////////////////
-                                //
-                                //
-
-
-                            } else {
-                                Log.i("uhkdfukjsdfnsdkf", response.message());
-                            }
-                        }
-
-                        @Override
-                        public void onFailure(Call<ProfileResponse> call, Throwable t) {
-                            Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }
-
-    private void showPopup() {
-
-        adDialog.setContentView(R.layout.winner_pay_popup);
-        adDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        adDialog.show();
-
-        AppCompatButton mainPayBtn = adDialog.findViewById(R.id.mainPayBtn);
-        mainPayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(BidRoomActivity.this, MainActivity.class));
-                Toast.makeText(BidRoomActivity.this, "Your Request Has Been Submitted", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        });
-        adDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
-            @Override
-            public void onCancel(DialogInterface dialog) {
-                startActivity(new Intent(BidRoomActivity.this, MainActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override
@@ -302,7 +224,6 @@ public class BidRoomActivity extends AppCompatActivity {
 
                             binding.bidRecyclerView.setVisibility(View.VISIBLE);
 
-                            Log.i("TIMETIME", String.format("%02d", Hours) + String.format("%02d", Minutes) + String.format("%02d", Seconds) + String.format("%02d", Seconds));
 
                             binding.tvHour.setText(String.format("%02d", Hours));
                             binding.tvMinute.setText(String.format("%02d", Minutes));
@@ -311,9 +232,6 @@ public class BidRoomActivity extends AppCompatActivity {
                         } else {
 //                            setRoundCompleted();
 
-//                            for (int i = 0; i < listBidders.size(); i++) {
-//                                Log.i("ukujndfsdf", listBidders.get(i).getName() + listBidders.get(i).getBiddingAmount() + listBidders.get(i).getId());
-//                            }
 
                             binding.bidBtn.setEnabled(false);
 
@@ -325,28 +243,17 @@ public class BidRoomActivity extends AppCompatActivity {
 
 
                             binding.bidRecyclerView.setVisibility(View.GONE);
-                            winnerLoserIntent.putExtra("clubName", clubName);
-                            winnerLoserIntent.putExtra("roundNumber", roundNumber);
-                            winnerLoserIntent.putExtra("winnerName", winnerName);
-                            winnerLoserIntent.putExtra("winnerAmount", winnerAmount);
-                            winnerLoserIntent.putExtra("winnerImage", winnerImage);
-                            winnerLoserIntent.putExtra("winnerId", winnerId);
+
+
+                            winnerLoserIntent.putExtra("ClubName", name);
+                            winnerLoserIntent.putExtra("RNumber", RNumber);
+                            winnerLoserIntent.putExtra("clubId", clubId);
+                            winnerLoserIntent.putExtra("RName", RName);
                             winnerLoserIntent.putExtra("roundId", currentRoundId);
 
-                            SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putString("clubName", clubName);
-                            editor.putString("roundNumber", roundNumber);
-                            editor.putString("winnerName", winnerName);
-                            editor.putString("winnerAmount", winnerAmount);
-                            editor.putString("winnerImage", winnerImage);
-                            editor.putInt("winnerId", winnerId);
-                            editor.putInt("currentRoundId", currentRoundId);
-                            editor.apply();
+                            Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);
 
-                            final ProgressDialog progressDialog = new ProgressDialog(BidRoomActivity.this);
-                            progressDialog.setMessage("Loading...");
-                            progressDialog.show();
+
                             startActivity(winnerLoserIntent);
                             finish();
 
@@ -369,17 +276,14 @@ public class BidRoomActivity extends AppCompatActivity {
 
             binding.bidRecyclerView.setVisibility(View.GONE);
 
-            winnerLoserIntent.putExtra("clubName", clubName);
-            winnerLoserIntent.putExtra("roundNumber", roundNumber);
-            winnerLoserIntent.putExtra("winnerName", winnerName);
-            winnerLoserIntent.putExtra("winnerAmount", winnerAmount);
-            winnerLoserIntent.putExtra("winnerImage", winnerImage);
-            winnerLoserIntent.putExtra("winnerId", winnerId);
+            winnerLoserIntent.putExtra("ClubName", name);
+            winnerLoserIntent.putExtra("RNumber", RNumber);
+            winnerLoserIntent.putExtra("clubId", clubId);
+            winnerLoserIntent.putExtra("RName", RName);
             winnerLoserIntent.putExtra("roundId", currentRoundId);
 
+            Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);
 
-            Log.i("CURRENTTIME", String.valueOf(current_date.getTime()));
-            Log.i("AFTERADDING", String.valueOf(afterAddingMins.getTime()));
 
             startActivity(winnerLoserIntent);
             finish();
@@ -387,31 +291,29 @@ public class BidRoomActivity extends AppCompatActivity {
             // api call where we have to pass round id and patch it with is_completed=true
 //            setRoundCompleted();
         }
-
-
     }
 
-    private void setRoundCompleted() {
-
-        Call<RoundCompletedPatchResponse> call = apiInterface.setRoundCompletedPatchById(currentRoundId, true);
-        call.enqueue(new Callback<RoundCompletedPatchResponse>() {
-            @Override
-            public void onResponse(Call<RoundCompletedPatchResponse> call, Response<RoundCompletedPatchResponse> response) {
-                if (response.isSuccessful()) {
-                    Log.i("SUCCESS", response.message());
-                    Log.i("PATCH RESPONSE", response.body().getMsg());
-                } else {
-                    Toast.makeText(BidRoomActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
-                    Log.i("jhdfjsdfsd", response.message());
-                }
-            }
-
-            @Override
-            public void onFailure(Call<RoundCompletedPatchResponse> call, Throwable t) {
-                Toast.makeText(BidRoomActivity.this, "Some technical failure occured", Toast.LENGTH_SHORT).show();
-                Log.i("dfjsdbfjiksdfn", t.getMessage());
-            }
-        });
-    }
+//    private void setRoundCompleted() {
+//
+//        Call<RoundCompletedPatchResponse> call = apiInterface.setRoundCompletedPatchById(currentRoundId, true);
+//        call.enqueue(new Callback<RoundCompletedPatchResponse>() {
+//            @Override
+//            public void onResponse(Call<RoundCompletedPatchResponse> call, Response<RoundCompletedPatchResponse> response) {
+//                if (response.isSuccessful()) {
+//                    Log.i("SUCCESS", response.message());
+//                    Log.i("PATCH RESPONSE", response.body().getMsg());
+//                } else {
+//                    Toast.makeText(BidRoomActivity.this, "some error occured", Toast.LENGTH_SHORT).show();
+//                    Log.i("jhdfjsdfsd", response.message());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<RoundCompletedPatchResponse> call, Throwable t) {
+//                Toast.makeText(BidRoomActivity.this, "Some technical failure occured", Toast.LENGTH_SHORT).show();
+//                Log.i("dfjsdbfjiksdfn", t.getMessage());
+//            }
+//        });
+//    }
 
 }

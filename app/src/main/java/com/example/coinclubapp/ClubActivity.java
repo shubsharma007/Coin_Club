@@ -104,27 +104,6 @@ public class ClubActivity extends AppCompatActivity {
             }
         });
 
-        binding.bidStartIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (binding.bidStartIn.isEnabled()) {
-                    Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
-                    //jhkfhkjsdfsdjkf yogesh
-                    i.putExtra("roundId", roundId);
-                    i.putExtra("duration", duration);
-                    i.putExtra("startDate", startDATE);
-                    i.putExtra("startTime", startTIME);
-                    i.putExtra("ClubName", clubName);
-                    i.putExtra("RName", roundName);
-                    i.putExtra("RNumber", RNumber);
-                    i.putExtra("clubId", clubId);
-
-                    startActivity(i);
-                } else {
-                    Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
         binding.backBtn.setOnClickListener(v -> {
             Intent i = new Intent(ClubActivity.this, MainActivity.class);
@@ -199,17 +178,12 @@ public class ClubActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             }
-
-                            binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId));
+                            binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId,clubId,ClubActivity.this));
                             break;
-
                         }
                     }
-
                 }
             }
-
-
             @Override
             public void onFailure(Call<List<RoundsResult>> call, Throwable t) {
                 Toast.makeText(ClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -221,6 +195,33 @@ public class ClubActivity extends AppCompatActivity {
             i.putExtra("clubId", clubId);
             startActivity(i);
         });
+
+
+        binding.bidStartIn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (binding.bidStartIn.isEnabled()) {
+                    Intent i = new Intent(ClubActivity.this, BidRoomActivity.class);
+                    //jhkfhkjsdfsdjkf yogesh
+                    i.putExtra("roundId", roundId);
+                    i.putExtra("duration", duration);
+                    i.putExtra("startDate", startDATE);
+                    i.putExtra("startTime", startTIME);
+                    i.putExtra("ClubName", clubName);
+                    i.putExtra("RName", roundName);
+                    i.putExtra("RNumber", RNumber);
+                    i.putExtra("clubId", clubId);
+
+                    startActivity(i);
+                } else {
+                    Toast.makeText(ClubActivity.this, "Button Is Disabled", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
     }
 
     private void showPopup2() {
