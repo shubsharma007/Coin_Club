@@ -54,7 +54,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
     String winnerName, winnerAmount, winnerImage, clubName, roundNumber;
     int winnerId, Id, roundId, maxAmt, maxId;
     ApiInterface apiInterface;
-    Dialog adDialog;
+    Dialog adDialog, alreadyPaidDialog;
 
     Bidders bidders;
     List<Bidders> listBidders;
@@ -62,6 +62,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
     List<Integer> maxBidderId;
     int currentRoundId;
     String walletAmount;
+    int recordId;
 
 
     @Override
@@ -70,6 +71,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
         binding = ActivityWinnerLoserBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         adDialog = new Dialog(WinnerLoserActivity.this);
+        alreadyPaidDialog = new Dialog(WinnerLoserActivity.this);
 
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
@@ -99,7 +101,6 @@ public class WinnerLoserActivity extends AppCompatActivity {
 
         currentRoundId = getIntent().getIntExtra("roundId", 0);
         Log.d("CURRENTROUNDID", String.valueOf(currentRoundId));
-
 
         DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
         myBidders.addValueEventListener(new ValueEventListener() {
@@ -225,101 +226,129 @@ public class WinnerLoserActivity extends AppCompatActivity {
 
 
                             } else {
-                                progressDialog.dismiss();
 
-                                binding.cardView.setVisibility(View.VISIBLE);
-                                binding.recyclerView.setVisibility(View.GONE);
+                                // to get record id of loser
+                                Call<List<ListToGetIdOfRecord>> callLoser = apiInterface.getRecordIdOfLoser();
+                                callLoser.enqueue(new Callback<List<ListToGetIdOfRecord>>() {
+                                    @Override
+                                    public void onResponse(Call<List<ListToGetIdOfRecord>> call, Response<List<ListToGetIdOfRecord>> response) {
+                                        if (response.isSuccessful()) {
+                                            recordId = 0;
+                                            List<ListToGetIdOfRecord> allList = response.body();
+                                            for (ListToGetIdOfRecord my : allList) {
+                                                if (Id == my.getLooser()) {
+                                                    Log.d("loserId",String.valueOf(Id));
+                                                    Log.d("getMyLoser",String.valueOf(my.getLooser()));
+                                                    recordId = my.getId();
+                                                }
+                                            }
+                                            Call<ListToGetIdOfRecord> listToGetIdOfRecordCall = apiInterface.getAllRecordsAndCompare(recordId);
+                                            listToGetIdOfRecordCall.enqueue(new Callback<ListToGetIdOfRecord>() {
+                                                @Override
+                                                public void onResponse(Call<ListToGetIdOfRecord> call, Response<ListToGetIdOfRecord> response) {
+                                                    if (response.isSuccessful()) {
+                                                        Log.d("resp",String.valueOf(recordId));
+                                                        if (response.body().getIsPaid()) {
+                                                            progressDialog.dismiss();
+                                                            showPaidPopup();
+                                                            // paid he
+
+                                                        } else {
+                                                            progressDialog.dismiss();
+                                                            binding.cardView.setVisibility(View.VISIBLE);
+                                                            binding.recyclerView.setVisibility(View.GONE);
+                                                            // unpaid he
+
+                                                        }
+                                                    } else {
+                                                        Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                                        Log.d("ERROR", response.message() + "3");
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<ListToGetIdOfRecord> call, Throwable t) {
+                                                    Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Log.d("ERROR", t.getMessage() +"4");
+                                                }
+                                            });
+                                        } else {
+                                            Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                            Log.d("ERROR", response.message() + "1");
+
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<List<ListToGetIdOfRecord>> call, Throwable t) {
+                                        Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                        Log.d("ERROR", t.getMessage()+" 2 ");
+                                    }
+                                });
+                                Log.d("recordId",String.valueOf(recordId));
+
                                 binding.payBtn.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
                                         progressDialog.show();
-                                        Call<ProfileResponse> myProfile=apiInterface.getProfileItemById(Id);
+
+                                        Call<ProfileResponse> myProfile = apiInterface.getProfileItemById(Id);
                                         myProfile.enqueue(new Callback<ProfileResponse>() {
                                             @Override
                                             public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
                                                 if (response.isSuccessful()) {
                                                     progressDialog.dismiss();
-                                                   int myWalletAmount=Integer.parseInt(response.body().getWalletAmount());
+                                                    int myWalletAmount = Integer.parseInt(response.body().getWalletAmount());
 
-                                                    int amountToBePaid=Integer.parseInt(winnerAmount);
-                                                    Log.d("ERROR",String.valueOf(amountToBePaid)+ "    " + myWalletAmount);
+                                                    int amountToBePaid = Integer.parseInt(winnerAmount);
+                                                    Log.d("ERROR", String.valueOf(amountToBePaid) + "    " + myWalletAmount);
                                                     if (myWalletAmount < amountToBePaid) {
                                                         showPopup();
                                                     } else {
 
-                                                        // to get record id of loser
-                                                        Call<List<ListToGetIdOfRecord>> callLoser=apiInterface.getRecordIdOfLoser();
-                                                        callLoser.enqueue(new Callback<List<ListToGetIdOfRecord>>() {
+                                                        // we have record id , now apn record id se check krenge k is paid true he kya
+                                                        // agr false he to payment send krne ka btaenge
+                                                        // agar true he to next round ka wait krne ka bolenge
+
+                                                        Call<PayRecord> payRecordCall = apiInterface.patchpayment(recordId, true, winnerAmount);
+                                                        payRecordCall.enqueue(new Callback<PayRecord>() {
                                                             @Override
-                                                            public void onResponse(Call<List<ListToGetIdOfRecord>> call, Response<List<ListToGetIdOfRecord>> response) {
+                                                            public void onResponse(Call<PayRecord> call, Response<PayRecord> response) {
                                                                 if (response.isSuccessful()) {
-                                                                    int recordId = 0;
-                                                                    List<ListToGetIdOfRecord> allList=response.body();
-                                                                    for(ListToGetIdOfRecord my:allList)
-                                                                    {
-                                                                        if(Id==my.getLooser())
-                                                                        {
-                                                                            recordId=my.getId();
-
-                                                                        }
-                                                                    }
-
-                                                                    Call<PayRecord> payRecordCall = apiInterface.patchpayment(recordId, true, winnerAmount);
-                                                                    payRecordCall.enqueue(new Callback<PayRecord>() {
-                                                                        @Override
-                                                                        public void onResponse(Call<PayRecord> call, Response<PayRecord> response) {
-                                                                            if (response.isSuccessful()) {
-                                                                                Toast.makeText(WinnerLoserActivity.this, "payment Successful", Toast.LENGTH_SHORT).show();
-                                                                                startActivity(new Intent(WinnerLoserActivity.this, MainActivity.class));
-                                                                                finish();
-                                                                            } else {
-                                                                                Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                                                                Log.d("ERROR",response.message()+response.code());
-                                                                            }
-                                                                        }
-                                                                        @Override
-                                                                        public void onFailure(Call<PayRecord> call, Throwable t) {
-                                                                            Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                            Log.d("ERROR",t.getMessage());
-                                                                        }
-                                                                    });
-
+                                                                    Toast.makeText(WinnerLoserActivity.this, "payment Successful", Toast.LENGTH_SHORT).show();
                                                                     startActivity(new Intent(WinnerLoserActivity.this, MainActivity.class));
                                                                     finish();
                                                                 } else {
                                                                     Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                                                    Log.d("ERROR",response.message()+response.code());
+                                                                    Log.d("ERROR", response.message() + response.code());
                                                                 }
                                                             }
 
                                                             @Override
-                                                            public void onFailure(Call<List<ListToGetIdOfRecord>> call, Throwable t) {
+                                                            public void onFailure(Call<PayRecord> call, Throwable t) {
                                                                 Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                Log.d("ERROR",t.getMessage());
+                                                                Log.d("ERROR", t.getMessage());
                                                             }
                                                         });
+
 
                                                     }
 
                                                 } else {
                                                     Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                                    Log.d("ERROR",response.message()+response.code() + response.errorBody().toString());
+                                                    Log.d("ERROR", response.message() + response.code() + response.errorBody().toString());
                                                 }
                                             }
 
                                             @Override
                                             public void onFailure(Call<ProfileResponse> call, Throwable t) {
                                                 Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                                Log.d("ERROR",t.getMessage());
+                                                Log.d("ERROR", t.getMessage());
                                             }
                                         });
-
-
                                     }
                                 });
-
                             }
-
 
                         } else {
                             Log.i("uhkdfukjsdfnsdkf", response.message());
@@ -335,6 +364,28 @@ public class WinnerLoserActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void showPaidPopup() {
+        alreadyPaidDialog.setContentView(R.layout.already_paid_please_wait_popup_layout);
+        alreadyPaidDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        alreadyPaidDialog.show();
+
+        AppCompatButton okBtn = alreadyPaidDialog.findViewById(R.id.okBtn);
+        okBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(WinnerLoserActivity.this, MainActivity.class));
+                finish();
+            }
+        });
+        alreadyPaidDialog.setOnCancelListener(new DialogInterface.OnCancelListener() {
+            @Override
+            public void onCancel(DialogInterface dialog) {
+                startActivity(new Intent(WinnerLoserActivity.this, MainActivity.class));
+                finish();
             }
         });
 

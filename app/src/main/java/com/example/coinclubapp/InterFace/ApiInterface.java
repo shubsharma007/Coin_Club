@@ -202,6 +202,9 @@ public interface ApiInterface {
     @GET("payrecord")
     Call<List<ListToGetIdOfRecord>> getRecordIdOfLoser();
 
+    @GET("payrecord/{recordId}/")
+    Call<ListToGetIdOfRecord> getAllRecordsAndCompare(@Path("recordId")int recordId);
+
     @FormUrlEncoded
     @PATCH("payrecord/{roundId}/")
     Call<PayRecord> patchpayment(@Path("roundId") int roundId,

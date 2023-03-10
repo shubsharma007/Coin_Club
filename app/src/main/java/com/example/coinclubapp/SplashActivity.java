@@ -25,10 +25,12 @@ ActivitySplashBinding binding;
             if(sharedPreferences.getAll().containsKey("number") && sharedPreferences.getAll().containsKey("Id"))
             {
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
             }
             else
             {
                 startActivity(new Intent(this, LoginActivity.class));
+                finish();
             }
         }, 2500);
     }
