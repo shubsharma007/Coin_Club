@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/_10sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/Club_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/home_card_bg"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="@dimen/_5sdp"
+            android:src="@drawable/logo_money"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txtName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Rahul1638"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/logo"
+            app:layout_constraintTop_toTopOf="@+id/logo" />
+
+        <TextView
+            android:id="@+id/txtDesc"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:text="Per Member $2000"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            app:layout_constraintStart_toStartOf="@+id/txtName"
+            app:layout_constraintTop_toBottomOf="@+id/txtName" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:background="@color/black"
+
+            app:layout_constraintBottom_toBottomOf="@+id/txtDesc"
+            app:layout_constraintStart_toEndOf="@+id/txtDesc"
+            app:layout_constraintTop_toTopOf="@+id/txtName" />
+
+        <TextView
+            android:id="@+id/txtNextBid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:text="Next Bid : 10jan 2023"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toTopOf="@+id/view" />
+
+        <TextView
+            android:id="@+id/txtRound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Round 1 of 10"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+            app:layout_constraintTop_toBottomOf="@+id/txtNextBid" />
+
+        <LinearLayout
+            android:id="@+id/appCompatButton2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_30sdp"
+            android:background="@drawable/bg_club_formed"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/appCompatButton3"
+            app:layout_constraintStart_toStartOf="@+id/logo"
+            app:layout_constraintTop_toBottomOf="@+id/txtDesc">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
+                android:fontFamily="@font/poppins_medium"
+                android:text="Club End..."
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/appCompatButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_club_formed"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_5sdp"
+            android:paddingEnd="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_5sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/appCompatButton2"
+            app:layout_constraintEnd_toEndOf="@+id/txtNextBid"
+            app:layout_constraintTop_toTopOf="@+id/appCompatButton2">
+
+
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_3sdp"
+                android:text="Total Amount"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:text="$ 56380"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="@+id/textView15"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

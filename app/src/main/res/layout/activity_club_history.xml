@@ -44,26 +44,37 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-<!--        <androidx.recyclerview.widget.RecyclerView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:id="@+id/recyclerView"/>-->
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:id="@+id/recyclerView"/>-->
 
         <TextView
+            android:id="@+id/TV_NDARN"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:gravity="center"
+            android:text="No Data Available\n Right Now"
             android:textColor="@color/mainColour"
             android:textSize="@dimen/_20ssp"
-            android:gravity="center"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:fontFamily="@font/poppins_medium"
-            android:text="No Data Available\n Right Now"
-            />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/clubContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/club_history_layout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
