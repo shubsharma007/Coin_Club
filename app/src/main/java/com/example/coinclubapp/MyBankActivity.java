@@ -18,15 +18,17 @@ import android.widget.Toast;
 import com.example.coinclubapp.Adapters.TransactionAdapter;
 import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.Response.ProfileResponse;
+import com.example.coinclubapp.Response.TransactionHistory;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityMyBankBinding;
-import com.example.coinclubapp.databinding.ActivityProfileBinding;
+import com.example.coinclubapp.result.Transc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.http.GET;
-import retrofit2.http.Path;
 
 public class MyBankActivity extends AppCompatActivity {
 
@@ -58,13 +60,42 @@ public class MyBankActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<ProfileResponse> call, @NonNull Response<ProfileResponse> response) {
                 if (response.isSuccessful()) {
-                    LayoutManager = new LinearLayoutManager(MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
-                    binding.transactionRecyclerView.setLayoutManager(LayoutManager);
-                    adapter = new TransactionAdapter(MyBankActivity.this);
-                    binding.transactionRecyclerView.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
-                    adapter.getItemCount();
-                    binding.transactionRecyclerView.setHasFixedSize(true);
+
+                    Call <List<TransactionHistory>> historyCall=apiInterface.getAllTransactionsHistory(Id);
+
+                    historyCall.enqueue(new Callback<List<TransactionHistory>>() {
+                        @Override
+                        public void onResponse(Call<List<TransactionHistory>> call, Response<List<TransactionHistory>> response) {
+                            if(response.isSuccessful())
+                            {
+                                TransactionHistory history=response.body().get(0);
+                                List<Transc> transcsList=history.getTransc();
+
+                                //                                allRecords.add();
+
+                                binding.transactionRecyclerView.setVisibility(View.VISIBLE);
+                                binding.noDataAvailableTv.setVisibility(View.GONE);
+                                LayoutManager = new LinearLayoutManager(MyBankActivity.this, LinearLayoutManager.VERTICAL, false);
+                                binding.transactionRecyclerView.setLayoutManager(LayoutManager);
+                                adapter = new TransactionAdapter(MyBankActivity.this,transcsList);
+                                binding.transactionRecyclerView.setAdapter(adapter);
+                                adapter.notifyDataSetChanged();
+                                adapter.getItemCount();
+                                binding.transactionRecyclerView.setHasFixedSize(true);
+                            }
+                            else
+                            {
+                                binding.transactionRecyclerView.setVisibility(View.GONE);
+                                binding.noDataAvailableTv.setVisibility(View.VISIBLE);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<List<TransactionHistory>> call, Throwable t) {
+                            binding.transactionRecyclerView.setVisibility(View.GONE);
+                            binding.noDataAvailableTv.setVisibility(View.VISIBLE);
+                        }
+                    });
 
                     walletAmount=response.body().getWalletAmount();
                     binding.walletAmountTv.setText(walletAmount + " ₹");

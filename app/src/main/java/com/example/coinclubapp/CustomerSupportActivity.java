@@ -1,5 +1,6 @@
 package com.example.coinclubapp;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,9 +8,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,17 +28,26 @@ import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityCustomerSupportBinding;
 import com.example.coinclubapp.result.Issue;
 
+import java.io.File;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.Part;
 
 public class CustomerSupportActivity extends AppCompatActivity {
     ActivityCustomerSupportBinding binding;
     String issueSelected;
     ApiInterface apiInterface;
     Dialog adDialog;
+
+    private static boolean issueImageBoolean = false;
+    Uri issueImageUri;
+    String issueImageString;
 
     // this is to check ki issue resolve hue he k nhi
     Boolean[] mamle;
@@ -46,6 +59,15 @@ public class CustomerSupportActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         adDialog = new Dialog(CustomerSupportActivity.this);
+
+        binding.issueImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent imgIntent1 = new Intent(Intent.ACTION_PICK);
+                imgIntent1.setData(MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(imgIntent1, 101);
+            }
+        });
 
         binding.backBtn.setOnClickListener(v -> {
             finish();
@@ -96,7 +118,6 @@ public class CustomerSupportActivity extends AppCompatActivity {
             }
         });
 
-
         Call<List<CustomerResponse>> call2 = apiInterface.getCustomerIssue();
         call2.enqueue(new Callback<List<CustomerResponse>>() {
             @Override
@@ -132,24 +153,33 @@ public class CustomerSupportActivity extends AppCompatActivity {
                 String disc = binding.etDisc.getText().toString();
                 String spinner = binding.spinner.getSelectedItem().toString();
 
-
                 if (binding.etDisc.getText().toString().isEmpty()) {
                     binding.etDisc.setError("Please Type Your Issue's");
                     binding.etDisc.requestFocus();
+                } else if (!issueImageBoolean) {
+                    Toast.makeText(CustomerSupportActivity.this, "Please Upload Screenshot", Toast.LENGTH_SHORT).show();
                 } else if (binding.spinner.getSelectedItem().equals("Please select any Issue")) {
                     Toast.makeText(CustomerSupportActivity.this, "Please Select Your Issue", Toast.LENGTH_SHORT).show();
                 } else {
-                    Call<Issue> call3 = apiInterface.postCustomerIssue(disc, spinner);
-                    call3.enqueue(new Callback<Issue>() {
+
+                    File file = new File (issueImageString);
+                    RequestBody rb = RequestBody.create (MediaType.parse ("image/*"), file);
+                    MultipartBody.Part issueimg = MultipartBody.Part.createFormData ("issueimg", file.getName (), rb);
+
+                    RequestBody discription = RequestBody.create (MediaType.parse ("text/plain"), disc);
+                    RequestBody issue = RequestBody.create (MediaType.parse ("text/plain"), spinner);
+
+                    Call<Issue> myIssue=apiInterface.postCustomerIssuesWithSs(discription,issue,issueimg);
+                    myIssue.enqueue(new Callback<Issue>() {
                         @Override
                         public void onResponse(Call<Issue> call, Response<Issue> response) {
-                            if (response.isSuccessful()) {
-
+                            if(response.isSuccessful())
+                            {
                                 showPopup();
-//                                Toast.makeText(CustomerSupportActivity.this, "your Issue has been submitted to our team ," +
-//                                        " please wait for 24 hours", Toast.LENGTH_SHORT).show();
                                 Log.i("ISSUESELECTED", issueSelected);
-                            } else {
+                            }
+                            else
+                            {
                                 Toast.makeText(CustomerSupportActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -157,11 +187,60 @@ public class CustomerSupportActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<Issue> call, Throwable t) {
                             Toast.makeText(CustomerSupportActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+
                         }
                     });
+
+
+
+
+
+//                    Call<Issue> call3 = apiInterface.postCustomerIssue(disc, spinner);
+//                    call3.enqueue(new Callback<Issue>() {
+//                        @Override
+//                        public void onResponse(Call<Issue> call, Response<Issue> response) {
+//                            if (response.isSuccessful()) {
+//                                showPopup();
+//                                Log.i("ISSUESELECTED", issueSelected);
+//                            } else {
+//                                Toast.makeText(CustomerSupportActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+//                            }
+//                        }
+//
+//                        @Override
+//                        public void onFailure(Call<Issue> call, Throwable t) {
+//                            Toast.makeText(CustomerSupportActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+//                        }
+//                    });
                 }
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK && requestCode == 101) {
+            binding.issueImage.setImageURI(data.getData());
+            issueImageBoolean = true;
+            issueImageUri = data.getData();
+            issueImageString = getRealPathFromURI(issueImageUri);
+        }
+    }
+
+    private String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) { // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
     }
 
 

@@ -11,11 +11,13 @@ import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.ListToGetIdOfRecord;
+import com.example.coinclubapp.Response.NotificationListModel;
 import com.example.coinclubapp.Response.PaidUnpaidListResponse;
 import com.example.coinclubapp.Response.PatchProfileResponse;
 import com.example.coinclubapp.Response.PayRecord;
 import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
+import com.example.coinclubapp.Response.TransactionHistory;
 import com.example.coinclubapp.Response.UserClubResponse;
 import com.example.coinclubapp.Response.UserLoginResponse;
 import com.example.coinclubapp.Response.UserRegistrationPost;
@@ -151,10 +153,18 @@ public interface ApiInterface {
     @GET("customercare/")
     Call<List<CustomerResponse>> getCustomerIssue();
 
+    @Multipart
+    @POST("customercare/")
+    Call<Issue> postCustomerIssuesWithSs(@Part("discription") RequestBody discription,
+                                         @Part("issue") RequestBody issue,
+                                         @Part MultipartBody.Part issueimg
+    );
+
     @FormUrlEncoded
     @POST("customercare/")
     Call<Issue> postCustomerIssue(@Field("discription") String discription,
                                   @Field("issue") String issue);
+
 
     @GET("profile/{id}/")
     Call<ProfileResponse> getProfileItemById(@Path("id") int id);
@@ -167,7 +177,8 @@ public interface ApiInterface {
     @FormUrlEncoded
     @PATCH("roundview/{id}/")
     Call<RoundCompletedPatchResponse> setRoundCompletedPatchById(@Path("id") int id,
-                                                                 @Field("is_completed") Boolean b);
+                                                                 @Field("is_completed") Boolean is_completed,
+                                                                 @Field("Payment_status") Boolean Payment_status);
 
 
     // getting users by club id
@@ -203,11 +214,30 @@ public interface ApiInterface {
     Call<List<ListToGetIdOfRecord>> getRecordIdOfLoser();
 
     @GET("payrecord/{recordId}/")
-    Call<ListToGetIdOfRecord> getAllRecordsAndCompare(@Path("recordId")int recordId);
+    Call<ListToGetIdOfRecord> getAllRecordsAndCompare(@Path("recordId") int recordId);
 
     @FormUrlEncoded
     @PATCH("payrecord/{roundId}/")
     Call<PayRecord> patchpayment(@Path("roundId") int roundId,
                                  @Field("is_paid") Boolean is_paid,
-                                 @Field("payamount") String payamount);
+                                 @Field("payamount") String payamount,
+                                 @Field("payment_time") String payment_time
+    );
+
+    @GET("notificationlist/")
+    Call<List<NotificationListModel>> getAllNotifications();
+
+    @GET("filtertransection/{id}")
+    Call<List<TransactionHistory>> getAllTransactionsHistory(@Path("id") int id);
+
+    @FormUrlEncoded
+    @PATCH("profile/{id}/")
+    Call<ProfileResponse> changeToken(@Path("id") int id
+            , @Field("token") String token);
+
+    @FormUrlEncoded
+    @PATCH("profile/{id}/")
+    Call<ProfileResponse> changeWalletAmount(@Path("id") int id
+            , @Field("wallet_amount") String wallet_amount
+    );
 }

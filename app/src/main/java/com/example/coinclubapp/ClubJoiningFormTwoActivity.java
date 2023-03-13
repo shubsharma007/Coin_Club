@@ -124,7 +124,7 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                                             startActivity(new Intent(ClubJoiningFormTwoActivity.this, LoginActivity.class));
                                         } else {
                                             progress.dismiss();
-                                            Log.i("ELSE", response.message());
+                                            Log.i("ELSE", response.message() + response.code() + response.errorBody().toString());
                                             Toast.makeText(ClubJoiningFormTwoActivity.this, "Some error occured", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -139,9 +139,12 @@ public class ClubJoiningFormTwoActivity extends AppCompatActivity {
                                     }
                                 });
                             } else {
+                                Log.d("hkdjfsdf1",task.getException().toString());
                                 Toast.makeText(ClubJoiningFormTwoActivity.this, "Some Error Occured While Generating Token", Toast.LENGTH_SHORT).show();
                             }
                         } else {
+                            progress.dismiss();
+                            Log.d("hkdjfsdf",task.getException().toString());
                             Toast.makeText(ClubJoiningFormTwoActivity.this, task.getException().toString(), Toast.LENGTH_SHORT).show();
                         }
                     });

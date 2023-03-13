@@ -25,6 +25,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -53,6 +54,10 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.pusher.pushnotifications.PushNotifications;
 
+
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.BuildConfig;
@@ -68,10 +73,10 @@ import retrofit2.http.Path;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     private long pressedTime;
-    private final int STORAGE_PERMISSION_CODE = 295;
     int Id;
     ApiInterface apiInterface;
     Dialog adDialog;
+    String regToken;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,19 +96,34 @@ public class MainActivity extends AppCompatActivity {
             String clubname = "", totalamount = "", totalmember = "", perhead = "", clubimage = "";
             int clubid = 0, userid = 0;
 
-            //Storage Permission
-            if (ContextCompat.checkSelfPermission(MainActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
 
-            } else {
-                requestStoragePermission();
-            }
 
-            if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.READ_CONTACTS)
-                    == PackageManager.PERMISSION_GRANTED) {
-            } else {
-//            requestPermission();
-            }
+            FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                if (task.isSuccessful()) {
+                    regToken = task.getResult();
+                    Log.i("REGISTRATION_TOKEN", regToken);
 
+                    Call<ProfileResponse> callToken=apiInterface.changeToken(Id,regToken);
+                    callToken.enqueue(new Callback<ProfileResponse>() {
+                        @Override
+                        public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                            if(response.isSuccessful())
+                            {
+                                Log.d("TokenSuccess","successful");
+                            }
+                            else
+                            {
+                                Log.d("not successful",response.message());
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                            Log.d("TokenFailure",t.getMessage());
+                        }
+                    });
+                }
+            });
 
 
             // additional data in notification
@@ -221,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                 public void onResponse(Call<List<UserClubResponse>> call, Response<List<UserClubResponse>> response) {
                     if (response.isSuccessful()) {
                         UserClubResponse resp = response.body().get(0);
-
+                        binding.totalSubscriptionTv.setText(resp.getTotal_subscription()+ "₹");
                         binding.recyclerViewClubs.setAdapter(new MyClubsAdapter(MainActivity.this, resp.getUserclub()));
                         binding.progressBar.setVisibility(View.GONE);
                     } else {
@@ -328,45 +348,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    //Storage Permission Code...
-    private void requestStoragePermission() {
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.READ_EXTERNAL_STORAGE)) {
-            new AlertDialog.Builder(this)
-                    .setTitle("Permission Needed")
-                    .setMessage("This permission is needed")
-                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-
-                        }
-                    }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    }).create().show();
-
-        } else {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
-        }
-
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == STORAGE_PERMISSION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                Toast.makeText(this, "permission Granted...", Toast.LENGTH_SHORT).show();
-            } else {
-//                Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
-            }
-        }
-
-    }
 
     @Override
     public void onBackPressed() {

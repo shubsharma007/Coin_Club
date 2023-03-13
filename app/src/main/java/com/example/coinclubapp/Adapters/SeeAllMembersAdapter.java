@@ -1,6 +1,7 @@
 package com.example.coinclubapp.Adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +40,9 @@ public class SeeAllMembersAdapter extends RecyclerView.Adapter<SeeAllMembersAdap
     @Override
     public void onBindViewHolder(@NonNull SeeAllMembersAdapter.SeeAllMembersViewHolder holder, int position) {
         Clubuser result=resultList.get(position);
-        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.imageView);
+        Glide.with(context).load("http://meetjob.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.imageView);
+        Log.d("imageimageimage",result.getUserprofileimg());
+
         holder.nameTv.setText(result.getUser());
         holder.cityTv.setText(result.getUsercity());
         holder.occupationTv.setText(result.getUseroccupation());

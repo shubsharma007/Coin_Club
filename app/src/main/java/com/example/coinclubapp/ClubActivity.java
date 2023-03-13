@@ -9,6 +9,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -31,6 +32,7 @@ import com.example.coinclubapp.result.RoundsResult;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -54,6 +56,8 @@ public class ClubActivity extends AppCompatActivity {
     String useTime;
     Dialog adDialog;
     String fromWhere;
+    List<Boolean> isAllRoundsCompleted;
+    String clubAmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +67,7 @@ public class ClubActivity extends AppCompatActivity {
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
         int clubId = getIntent().getIntExtra("clubId", 0);
         clubusers = new ArrayList<>();
+        isAllRoundsCompleted = new ArrayList<>();
         binding.bidStartIn.setEnabled(false);
         binding.clubName.setText(getIntent().getStringExtra("clubName"));
         fromWhere = getIntent().getStringExtra("fromWhere");
@@ -92,6 +97,7 @@ public class ClubActivity extends AppCompatActivity {
                     binding.clubAmountTv.setText(response.body().getClubamount() + " ₹");
                     binding.perHeadTv.setText(response.body().getClubcontribution() + " ₹");
                     binding.nextRoundTv.setText(response.body().getStartdate());
+                    clubAmount=response.body().getClubamount();
 
                 } else {
                     Toast.makeText(ClubActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
@@ -143,6 +149,8 @@ public class ClubActivity extends AppCompatActivity {
             public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
                 if (response.isSuccessful()) {
                     progressDialog.dismiss();
+
+
                     List<RoundsResult> myRounds = new ArrayList<>();
                     RoundsResult roundJiskiBidStartHogi = new RoundsResult();
 
@@ -153,37 +161,59 @@ public class ClubActivity extends AppCompatActivity {
                         }
                     }
 
-                    // jiski bid start hogi uska id uthana he all rounds me se
-                    for (int ii = 0; ii < myRounds.size(); ii++) {
-                        if (!myRounds.get(ii).getIsCompleted()) {
-                            roundJiskiBidStartHogi = myRounds.get(ii);
-                            startDATE = String.valueOf(roundJiskiBidStartHogi.getStartdate());
-                            startTIME = String.valueOf(roundJiskiBidStartHogi.getStarttime());
-                            useTime = startDATE + " " + startTIME;
-                            duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
-                            roundId = roundJiskiBidStartHogi.getId();
-                            clubName = roundJiskiBidStartHogi.getClubname();
-                            roundName = roundJiskiBidStartHogi.getRoundname();
-                            RNumber = roundJiskiBidStartHogi.getRoundno();
-
-                            Log.i("jkndfjdnfidf round id", String.valueOf(roundId));
-
-                            if (fromWhere.equalsIgnoreCase("hotclubactivity")) {
-                                binding.bidStartIn.setEnabled(false);
-                                binding.bidStartIn.setVisibility(View.GONE);
-                            } else {
-                                try {
-                                    countDownFunc(useTime);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                            binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId,clubId,ClubActivity.this));
-                            break;
-                        }
+                    for (RoundsResult res : myRounds) {
+                        isAllRoundsCompleted.add(res.getIsCompleted());
                     }
+
+//                    boolean allFinished = true;
+//                    for (Boolean s : isAllRoundsCompleted) {
+//                        if (!s) {
+//                            allFinished = false;
+//                            break;
+//                        }
+//                    }
+
+//                    if(!allFinished)
+//                    {
+//                        binding.bidStartIn.setEnabled(false);
+//                        binding.bidStartIn.setText("All Rounds Are Finished");
+//                    }
+//                    else
+//                    {
+                        // jiski bid start hogi uska id uthana he all rounds me se
+                        for (int ii = 0; ii < myRounds.size(); ii++) {
+                            if (!myRounds.get(ii).getIsCompleted()) {
+                                roundJiskiBidStartHogi = myRounds.get(ii);
+                                startDATE = String.valueOf(roundJiskiBidStartHogi.getStartdate());
+                                startTIME = String.valueOf(roundJiskiBidStartHogi.getStarttime());
+                                useTime = startDATE + " " + startTIME;
+                                duration = String.valueOf(roundJiskiBidStartHogi.getDuration());
+                                roundId = roundJiskiBidStartHogi.getId();
+                                clubName = roundJiskiBidStartHogi.getClubname();
+                                roundName = roundJiskiBidStartHogi.getRoundname();
+                                RNumber = roundJiskiBidStartHogi.getRoundno();
+
+                                Log.i("jkndfjdnfidf round id", String.valueOf(roundId));
+
+                                if (fromWhere.equalsIgnoreCase("hotclubactivity")) {
+                                    binding.bidStartIn.setEnabled(false);
+                                    binding.bidStartIn.setVisibility(View.GONE);
+                                } else {
+                                    try {
+                                        countDownFunc(useTime);
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                                binding.recyclerViewRound.setAdapter(new RoundAdapter(myRounds, roundId, clubId, ClubActivity.this));
+                                break;
+                            }
+                        }
+//                    }
+
                 }
             }
+
             @Override
             public void onFailure(Call<List<RoundsResult>> call, Throwable t) {
                 Toast.makeText(ClubActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -211,6 +241,7 @@ public class ClubActivity extends AppCompatActivity {
                     i.putExtra("RName", roundName);
                     i.putExtra("RNumber", RNumber);
                     i.putExtra("clubId", clubId);
+                    i.putExtra("clubAmount",clubAmount);
 
                     startActivity(i);
                 } else {
@@ -218,8 +249,6 @@ public class ClubActivity extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
     }

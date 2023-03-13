@@ -36,6 +36,7 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
     Context context;
     List<RoundsResult> listOfRounds;
     int activeRound, clubId;
+    Boolean allRoundsFinished;
 
     ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
 
@@ -43,8 +44,8 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
         this.context = context;
         this.listOfRounds = listOfRounds;
         this.activeRound = activeRound;
-        clubId = clubId;
-
+        this.clubId = clubId;
+//        this.allRoundsFinished=allRoundsFinished;
     }
 
     @NonNull
@@ -57,6 +58,8 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
 
     @Override
     public void onBindViewHolder(@NonNull RoundAdapter.RoundViewHolder holder, int position) {
+
+        Log.d("fsdjkfnsdfjks",String.valueOf(activeRound));
         RoundsResult result = listOfRounds.get(position);
 
         if (result.getId() == activeRound) {

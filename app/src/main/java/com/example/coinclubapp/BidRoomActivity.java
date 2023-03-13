@@ -29,10 +29,13 @@ import com.example.coinclubapp.Adapters.MyAdapter;
 import com.example.coinclubapp.BiddingModel.Bidders;
 import com.example.coinclubapp.Fragments.BidNowFragment;
 import com.example.coinclubapp.InterFace.ApiInterface;
+import com.example.coinclubapp.Response.ClubUserResponse;
+import com.example.coinclubapp.Response.ListToGetIdOfRecord;
 import com.example.coinclubapp.Response.ProfileResponse;
 import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
 import com.example.coinclubapp.databinding.ActivityBidRoomBinding;
+import com.example.coinclubapp.result.Clubuser;
 import com.example.coinclubapp.result.RoundsResult;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DataSnapshot;
@@ -47,12 +50,16 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 public class BidRoomActivity extends AppCompatActivity {
     ActivityBidRoomBinding binding;
@@ -64,14 +71,17 @@ public class BidRoomActivity extends AppCompatActivity {
     BidNowFragment bidNowFragment;
     ApiInterface apiInterface;
     String roundName, clubName, roundNumber, name, RName, RNumber;
-
+    String minAmount;
     LinearLayoutManager linearLayoutManager;
     MyAdapter myAdapter;
     Bidders bidders;
     List<Bidders> listBidders;
     List<Integer> maxBidderAmount;
     List<Integer> maxBidderId;
+    List<Integer> membersId;
+    List<Integer> winnersId;
     DatabaseReference myBidders;
+    int lastMemberId;
     Dialog adDialog;
     int maxAmt;
 
@@ -82,6 +92,10 @@ public class BidRoomActivity extends AppCompatActivity {
 
     int clubId;
 
+    String clubAmount;
+
+    List<ClubUserResponse> allUsersList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -90,10 +104,53 @@ public class BidRoomActivity extends AppCompatActivity {
         bidNowFragment = new BidNowFragment();
         linearLayoutManager = new LinearLayoutManager(this);
         maxBidderAmount = new ArrayList<>();
+        membersId = new ArrayList<>();
+        winnersId =new ArrayList<>();
         maxBidderId = new ArrayList<>();
         adDialog = new Dialog(BidRoomActivity.this);
         winnerLoserIntent = new Intent(BidRoomActivity.this, WinnerLoserActivity.class);
         apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
+        int Id = sharedPreferences.getInt("Id", 0);
+
+        name = getIntent().getStringExtra("ClubName");
+        RName = getIntent().getStringExtra("RName");
+        RNumber = getIntent().getStringExtra("RNumber");
+        clubId = getIntent().getIntExtra("clubId", 0);
+        currentRoundId = getIntent().getIntExtra("roundId", 0);
+        clubAmount=getIntent().getStringExtra("clubAmount");
+
+        Call<List<ListToGetIdOfRecord>> previousWinners = apiInterface.getRecordIdOfLoser();
+        previousWinners.enqueue(new Callback<List<ListToGetIdOfRecord>>() {
+            @Override
+            public void onResponse(Call<List<ListToGetIdOfRecord>> call, Response<List<ListToGetIdOfRecord>> response) {
+                if (response.isSuccessful()) {
+                    binding.bidBtn.setEnabled(true);
+                    winnerId = 0;
+                    List<ListToGetIdOfRecord> allList = response.body();
+                    for (ListToGetIdOfRecord my : allList) {
+                        if (Id == my.getWinner()) {
+                            Log.d("loserId", String.valueOf(Id));
+                            Log.d("getMyLoser", String.valueOf(my.getLooser()));
+                            winnerId = my.getWinner();
+                        }
+                    }
+
+                } else {
+                    binding.bidBtn.setEnabled(false);
+                    Toast.makeText(BidRoomActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                    Log.d("ERROR", response.message() + response.code());
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<List<ListToGetIdOfRecord>> call, Throwable t) {
+                Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.d("ERROR", t.getMessage());
+                binding.bidBtn.setEnabled(false);
+            }
+        });
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(BidRoomActivity.this);
         layoutManager.setReverseLayout(true);
@@ -101,17 +158,6 @@ public class BidRoomActivity extends AppCompatActivity {
         binding.bidRecyclerView.setLayoutManager(layoutManager);
 
         listBidders = new ArrayList<>();
-
-
-        name = getIntent().getStringExtra("ClubName");
-        RName = getIntent().getStringExtra("RName");
-        RNumber = getIntent().getStringExtra("RNumber");
-        clubId = getIntent().getIntExtra("clubId", 0);
-        currentRoundId = getIntent().getIntExtra("roundId", 0);
-
-
-        SharedPreferences sharedPreferences = getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
-        int Id = sharedPreferences.getInt("Id", 0);
 
 
         Call<RoundsResult> call = apiInterface.getRoundsById(currentRoundId);
@@ -123,6 +169,7 @@ public class BidRoomActivity extends AppCompatActivity {
                     String startDate = String.valueOf(response.body().getStartdate());
                     String startTime = String.valueOf(response.body().getStarttime());
                     String duration = String.valueOf(response.body().getDuration());
+                    minAmount = String.valueOf(response.body().getMinbid());
                     try {
                         countdownFunc(startDate, startTime, duration);
                     } catch (ParseException e) {
@@ -142,33 +189,206 @@ public class BidRoomActivity extends AppCompatActivity {
         binding.txtName.setText(name);
 
         binding.bidBtn.setOnClickListener(v -> {
+            Log.d("MYID", String.valueOf(Id));
+            Log.d("WINNERID", String.valueOf(winnerId));
 
-            myBidders = FirebaseDatabase.getInstance().getReference().child(name).child(RName);
-            myBidders.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    for (DataSnapshot shot : snapshot.getChildren()) {
-                        bidders = shot.getValue(Bidders.class);
-                        maxBidderAmount.add(bidders.getBiddingAmount());
-                        maxAmt = maxBidderAmount.get(0);
-                        for (int i = 0; i < maxBidderAmount.size(); i++) {
-                            if (maxBidderAmount.get(i) > maxAmt) {
-                                maxAmt = maxBidderAmount.get(i);
+            if (Id == winnerId) {
+                Call<List<ClubUserResponse>> allMyUsers = apiInterface.getUsersByClubId(clubId);
+                allMyUsers.enqueue(new Callback<List<ClubUserResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<ClubUserResponse>> call, Response<List<ClubUserResponse>> response) {
+                        if(response.isSuccessful())
+                        {
+                            ClubUserResponse singleUnit = response.body().get(0);
+                            List<Clubuser> clubUsers = singleUnit.getClubuser();
+                            membersId.clear();
+                            Log.d("respaara1", "respaara1");
+                            for (Clubuser singleUser : clubUsers) {
+                                membersId.add(singleUser.getUserid());
                             }
+                            // apne paas saare members ki list he membersId me
+                            winnersId.clear();
+                            Call<List<RoundsResult>> myRoundResultsCall = apiInterface.getAllRounds();
+                            myRoundResultsCall.enqueue(new Callback<List<RoundsResult>>() {
+                                @Override
+                                public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
+                                    if(response.isSuccessful())
+                                    {
+                                        Log.d("respaara", "respaara");
+                                        List<RoundsResult> allRounds = response.body();
+                                        List<RoundsResult> sortedRounds = new ArrayList<>();
+                                        Log.d("fsdnfsdjkf",name);
+                                        for (RoundsResult rr : allRounds) {
+                                            if (rr.getClubname().equals(name)) {
+                                                sortedRounds.add(rr);
+                                            }
+                                        }
+                                        Log.d("sortedRounds",sortedRounds.toString());
+                                        //membersId he apne paas
+                                        // ab chahiye winners id;
+                                        for (RoundsResult singleRound : sortedRounds) {
+                                            if (singleRound.getWinner().equals("0")) {
+                                            }
+                                            else
+                                            {
+                                                winnersId.add(Integer.valueOf(singleRound.getWinner()));
+                                            }
+                                        }
+                                        // membersId and winnersId he apne paas
+                                        Log.d("WinnersIdset", winnersId.toString());
+                                        Log.d("membersIdset", membersId.toString());
+                                        List<Integer> differences = new ArrayList<>(membersId);
+                                        differences.removeAll(winnersId);
+                                        Log.d("differences",differences.toString());
+
+                                        if (differences.size() == 1) {
+//                                            DatabaseReference myReference = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
+//                                            String myKey = String.valueOf(response.body().getMobileno());
+//                                            Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
+//                                            Log.i("TAG", response.body().getId() + "  " + response.body().getFullName() + "  " + amount);
+//                                            myReference.child(myKey).setValue(bidders);
+                                            lastMemberId = differences.get(0);
+                                            bid(minAmount, lastMemberId);
+//                                            bundle.putString("minAmount", minAmount);
+//                                            bundle.putBoolean("lastUser", true);
+//                                            bundle.putInt("lastMemberId",lastMemberId);
+                                        }
+                                    }
+                                    else
+                                    {
+                                        Toast.makeText(BidRoomActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                        Log.i("jhdfjsdfsd", response.message());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<RoundsResult>> call, Throwable t) {
+                                    Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Log.i("dfjsdbfjiksdfn", t.getMessage());
+                                }
+                            });
+
+                        }
+                        else
+                        {
+                            Toast.makeText(BidRoomActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                            Log.i("jhdfjsdfsd", response.message());
                         }
                     }
-                }
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {}
-            });
-            Bundle bundle = new Bundle();
-            bundle.putInt("Id", Id);
-            bundle.putString("clubName", name);
-            bundle.putString("roundName", RName);
-            bundle.putInt("roundId", currentRoundId);
-//            bundle.putInt("lastBidAmt",maxAmt);
-            bidNowFragment.setArguments(bundle);
-            bidNowFragment.show(getSupportFragmentManager(), bidNowFragment.getTag());
+
+                    @Override
+                    public void onFailure(Call<List<ClubUserResponse>> call, Throwable t) {
+                        Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("dfjsdbfjiksdfn", t.getMessage());
+                    }
+                });
+                Toast.makeText(BidRoomActivity.this, "you cannot bid", Toast.LENGTH_SHORT).show();
+            } else {
+                // agr ek hi user bacha he to true pass kro
+                // agr or bche he to false pass kro
+                Call<List<ClubUserResponse>> allUsers = apiInterface.getUsersByClubId(clubId);
+                allUsers.enqueue(new Callback<List<ClubUserResponse>>() {
+                    @Override
+                    public void onResponse(Call<List<ClubUserResponse>> call, Response<List<ClubUserResponse>> response) {
+                        if (response.isSuccessful()) {
+                            ClubUserResponse singleUnit = response.body().get(0);
+                            List<Clubuser> clubUsers = singleUnit.getClubuser();
+                            membersId.clear();
+                            Log.d("respaara1", "respaara1");
+                            for (Clubuser singleUser : clubUsers) {
+                                membersId.add(singleUser.getUserid());
+                            }
+                            // apne paas saare members ki list he membersId me
+                            winnersId.clear();
+                            Call<List<RoundsResult>> roundWinnersCall = apiInterface.getAllRounds();
+                            roundWinnersCall.enqueue(new Callback<List<RoundsResult>>() {
+                                @Override
+                                public void onResponse(Call<List<RoundsResult>> call, Response<List<RoundsResult>> response) {
+                                    if (response.isSuccessful()) {
+                                        Log.d("respaara", "respaara");
+                                        List<RoundsResult> allRounds = response.body();
+                                        List<RoundsResult> sortedRounds = new ArrayList<>();
+                                        Log.d("fsdnfsdjkf",name);
+                                        for (RoundsResult rr : allRounds) {
+                                            if (rr.getClubname().equals(name)) {
+                                                sortedRounds.add(rr);
+                                            }
+                                        }
+                                        Log.d("sortedRounds",sortedRounds.toString());
+                                        //membersId he apne paas
+                                        // ab chahiye winners id;
+                                        for (RoundsResult singleRound : sortedRounds) {
+                                            if (singleRound.getWinner().equals("0")) {
+                                            }
+                                            else
+                                            {
+                                                winnersId.add(Integer.valueOf(singleRound.getWinner()));
+                                            }
+                                        }
+                                        // membersId and winnersId he apne paas
+                                        Log.d("WinnersIdset", winnersId.toString());
+                                        Log.d("membersIdset", membersId.toString());
+                                        List<Integer> differences = new ArrayList<>(membersId);
+                                        differences.removeAll(winnersId);
+                                        Log.d("differences",differences.toString());
+
+                                        Bundle bundle = new Bundle();
+                                        bundle.putInt("Id", Id);
+                                        bundle.putString("clubName", name);
+                                        bundle.putString("roundName", RName);
+                                        bundle.putInt("roundId", currentRoundId);
+
+                                        if (differences.size() == 1) {
+
+//                                            DatabaseReference myReference = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
+//                                            String myKey = String.valueOf(response.body().getMobileno());
+//                                            Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
+//                                            Log.i("TAG", response.body().getId() + "  " + response.body().getFullName() + "  " + amount);
+//                                            myReference.child(myKey).setValue(bidders);
+
+                                            lastMemberId = differences.get(0);
+                                            bid(minAmount, lastMemberId);
+
+//                                            bundle.putString("minAmount", minAmount);
+//                                            bundle.putBoolean("lastUser", true);
+//                                            bundle.putInt("lastMemberId",lastMemberId);
+                                        } else {
+                                            bundle.putBoolean("lastUser", false);
+                                        }
+                                        bidNowFragment.setArguments(bundle);
+                                        bidNowFragment.show(getSupportFragmentManager(), bidNowFragment.getTag());
+
+                                    } else {
+                                        Toast.makeText(BidRoomActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                                        Log.i("jhdfjsdfsd", response.message());
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<List<RoundsResult>> call, Throwable t) {
+                                    Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Log.i("dfjsdbfjiksdfn", t.getMessage());
+                                }
+                            });
+
+
+                        } else {
+                            Toast.makeText(BidRoomActivity.this, response.message(), Toast.LENGTH_SHORT).show();
+                            Log.i("jhdfjsdfsd", response.message());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<ClubUserResponse>> call, Throwable t) {
+                        Toast.makeText(BidRoomActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.i("dfjsdbfjiksdfn", t.getMessage());
+                    }
+                });
+
+            }
+            // agar me purane round me winner tha to agle round me meri id purane
+            // winners ki id se compare hogi and match hogi
+            // to me agle round me bidding nhi kr skta
         });
 
         FirebaseRecyclerOptions<Bidders> options = new FirebaseRecyclerOptions.Builder<Bidders>()
@@ -190,7 +410,8 @@ public class BidRoomActivity extends AppCompatActivity {
         myAdapter.stopListening();
     }
 
-    private void countdownFunc(String startDate, String startTime, String duration) throws ParseException {
+    private void countdownFunc(String startDate, String startTime, String duration) throws
+            ParseException {
         int durationInMin = Integer.parseInt(duration);
         String useTime = startDate + " " + startTime;
         SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
@@ -250,6 +471,7 @@ public class BidRoomActivity extends AppCompatActivity {
                             winnerLoserIntent.putExtra("clubId", clubId);
                             winnerLoserIntent.putExtra("RName", RName);
                             winnerLoserIntent.putExtra("roundId", currentRoundId);
+                            winnerLoserIntent.putExtra("clubAmount",clubAmount);
 
                             Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);
 
@@ -281,6 +503,8 @@ public class BidRoomActivity extends AppCompatActivity {
             winnerLoserIntent.putExtra("clubId", clubId);
             winnerLoserIntent.putExtra("RName", RName);
             winnerLoserIntent.putExtra("roundId", currentRoundId);
+            winnerLoserIntent.putExtra("clubAmount",clubAmount);
+
 
             Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);
 
@@ -293,7 +517,7 @@ public class BidRoomActivity extends AppCompatActivity {
         }
     }
 
-//    private void setRoundCompleted() {
+    //    private void setRoundCompleted() {
 //
 //        Call<RoundCompletedPatchResponse> call = apiInterface.setRoundCompletedPatchById(currentRoundId, true);
 //        call.enqueue(new Callback<RoundCompletedPatchResponse>() {
@@ -315,5 +539,30 @@ public class BidRoomActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+    private void bid(String amtamt, int Id) {
+
+        Integer amount = Integer.parseInt(amtamt);
+        Call<ProfileResponse> call = apiInterface.getProfileItemById(Id);
+        call.enqueue(new Callback<ProfileResponse>() {
+            @Override
+            public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
+                if (response.isSuccessful()) {
+
+                    DatabaseReference myReference = FirebaseDatabase.getInstance().getReference().child(name).child(RName);
+                    String myKey = String.valueOf(response.body().getMobileno());
+                    Bidders bidders = new Bidders(response.body().getId(), response.body().getFullName(), amount);
+                    Log.i("TAG", response.body().getId() + "  " + response.body().getFullName() + "  " + amount);
+                    myReference.child(myKey).setValue(bidders);
+                } else {
+                    Log.i("sdfjsifnsd", response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ProfileResponse> call, Throwable t) {
+                Log.i("hduifnhsdfi", t.getMessage());
+            }
+        });
+    }
 
 }
