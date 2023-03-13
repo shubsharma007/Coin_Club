@@ -20,16 +20,27 @@ import com.example.coinclubapp.R;
 import com.example.coinclubapp.result.Userclub;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClubHistoryAdapter extends RecyclerView.Adapter<ClubHistoryAdapter.MyClubHistoryViewHolder> {
 
     Context context;
     List<Userclub> userclubs;
+    List<Userclub> myUserClubs;
 
     public ClubHistoryAdapter(Context context, List<Userclub> userclubs) {
         this.context = context;
         this.userclubs = userclubs;
+        myUserClubs=new ArrayList<>();
+
+        for(Userclub my:userclubs)
+        {
+            if(my.getIsCompleted())
+            {
+                myUserClubs.add(my);
+            }
+        }
     }
 
     @NonNull
@@ -42,8 +53,7 @@ public class ClubHistoryAdapter extends RecyclerView.Adapter<ClubHistoryAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ClubHistoryAdapter.MyClubHistoryViewHolder holder, int position) {
-        Userclub current = userclubs.get(position);
-
+        Userclub current = myUserClubs.get(position);
 
         holder.txtName.setText(current.getClubname());
 
@@ -67,8 +77,6 @@ public class ClubHistoryAdapter extends RecyclerView.Adapter<ClubHistoryAdapter.
                 intent.putExtra("nextBid", current.getStartdate());
                 intent.putExtra("number", current.getClubmembers());
                 intent.putExtra("clubId", current.getClubid());
-                intent.putExtra("fromWhere", "myclubactivity");
-
                 context.startActivity(intent);
             }
         });
@@ -76,8 +84,7 @@ public class ClubHistoryAdapter extends RecyclerView.Adapter<ClubHistoryAdapter.
 
     @Override
     public int getItemCount() {
-        return userclubs.size();
-
+        return myUserClubs.size();
     }
 
     public static class MyClubHistoryViewHolder extends RecyclerView.ViewHolder {

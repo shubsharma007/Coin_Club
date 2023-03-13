@@ -45,16 +45,13 @@ public class LoginActivity extends AppCompatActivity {
 
         //Storage Permission
         if (ContextCompat.checkSelfPermission(LoginActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-
+            Log.d("PERMISSION","READ EXTERNAL STORAGE GRANTED");
         } else {
             requestStoragePermission();
         }
 
-        if(ContextCompat.checkSelfPermission(LoginActivity.this,Manifest.permission.POST_NOTIFICATIONS)==PackageManager.PERMISSION_GRANTED)
-        {
-        }
-        else
-        {
+        if (ContextCompat.checkSelfPermission(LoginActivity.this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_GRANTED) {
+        } else {
             requestNotificationPermission();
 
         }
@@ -97,7 +94,7 @@ public class LoginActivity extends AppCompatActivity {
                                 SharedPreferences.Editor editor = sharedPreferences.edit();
                                 Integer loginId = response.body().getId();
                                 editor.putInt("Id", loginId);
-                                editor.putString("number",mobileno);
+                                editor.putString("number", mobileno);
                                 editor.apply();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 Toast.makeText(LoginActivity.this, "Welcome", Toast.LENGTH_SHORT).show();
@@ -116,16 +113,14 @@ public class LoginActivity extends AppCompatActivity {
                             Toast.makeText(LoginActivity.this, response.message(), Toast.LENGTH_SHORT).show();
                         }
                     }
+
                     @Override
                     public void onFailure(Call<UserLoginResponse> call, Throwable t) {
                         progressDialog.dismiss();
-                        if(t.getMessage().equalsIgnoreCase("not found"))
-                        {
-                            String notFound="Invalid Credentials";
+                        if (t.getMessage().equalsIgnoreCase("not found")) {
+                            String notFound = "Invalid Credentials";
                             Toast.makeText(LoginActivity.this, notFound, Toast.LENGTH_SHORT).show();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(LoginActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -169,10 +164,10 @@ public class LoginActivity extends AppCompatActivity {
                     .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+                            ActivityCompat.requestPermissions(LoginActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
 
                         }
-                    }).setNegativeButton("Cancle", new DialogInterface.OnClickListener() {
+                    }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             dialog.dismiss();
@@ -180,7 +175,7 @@ public class LoginActivity extends AppCompatActivity {
                     }).create().show();
 
         } else {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, STORAGE_PERMISSION_CODE);
         }
 
     }
@@ -197,14 +192,11 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(this, "Permission Denied...", Toast.LENGTH_SHORT).show();
             }
         }
-        else if(requestCode==100)
-        {
-            if(grantResults.length>0&&grantResults[0]==PackageManager.PERMISSION_GRANTED)
-            {
+
+        if (requestCode == 100) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
-            }
-            else
-            {
+            } else {
 
             }
         }

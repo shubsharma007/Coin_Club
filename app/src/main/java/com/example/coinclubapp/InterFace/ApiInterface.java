@@ -5,6 +5,7 @@ import com.example.coinclubapp.Response.AddOrWithdrawMoneyResponsePost;
 import com.example.coinclubapp.Response.AllClubsGet;
 import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
+import com.example.coinclubapp.Response.ClubCompletedPatchResponse;
 import com.example.coinclubapp.Response.ClubInviteResponse;
 import com.example.coinclubapp.Response.ClubUserResponse;
 import com.example.coinclubapp.Response.CommissionClubCloseResponse;
@@ -14,6 +15,7 @@ import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
 import com.example.coinclubapp.Response.ListToGetIdOfRecord;
+import com.example.coinclubapp.Response.NotPaidResponse;
 import com.example.coinclubapp.Response.NotificationListModel;
 import com.example.coinclubapp.Response.PaidUnpaidListResponse;
 import com.example.coinclubapp.Response.PatchProfileResponse;
@@ -107,7 +109,7 @@ public interface ApiInterface {
 
     @Multipart
     @POST("userkyc/")
-    Call<KycResponse> postKycItems(@Part("full_name") RequestBody full_name,
+    Call<KycResponse> postKycItems(@Part("fullname") RequestBody fullname,
                                    @Part("address") RequestBody address,
                                    @Part("mobile") RequestBody mobile,
                                    @Part("email") RequestBody email,
@@ -202,6 +204,11 @@ public interface ApiInterface {
     @PATCH("roundview/{id}/")
     Call<WinnerPatchToRound> patchWinner(@Path("id") int id, @Field("winner") String winner, @Field("roundamount") String roundamount);
 
+    @FormUrlEncoded
+    @PATCH("club/{id}")
+    Call<ClubCompletedPatchResponse> clubCompletedPatch(@Path("id") int id, @Field("is_completed") Boolean is_completed);
+
+
     @GET("filterround/{roundId}")
     Call<List<WinnerLoserTableCreate>> createWinnerLoserTable(@Path("roundId") int roundId);
 
@@ -243,6 +250,10 @@ public interface ApiInterface {
     Call<ProfileResponse> changeWalletAmount(@Path("id") int id
             , @Field("wallet_amount") String wallet_amount
     );
+
+    @GET("paymentremainder/{id}")
+    Call<NotPaidResponse> notPaid(@Path("id") int id);
+
 
     @GET("avgtransfer/")
     Call<List<CommissionTimeResponse>> getCommissionTime();

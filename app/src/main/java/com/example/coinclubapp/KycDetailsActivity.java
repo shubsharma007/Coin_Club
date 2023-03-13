@@ -118,8 +118,7 @@ public class KycDetailsActivity extends AppCompatActivity {
             }
             else {
 
-                sendDetails(Id,fullName,mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
-
+                sendDetails(Id,binding.fullNameEt.getText().toString(),mobile,address,email_id,adhar_no,pan_no,uriafs,uriabs,uripfs);
             }
         });
 
@@ -171,7 +170,7 @@ public class KycDetailsActivity extends AppCompatActivity {
         MultipartBody.Part panfrontimg = MultipartBody.Part.createFormData ("panfrontimg", panF.getName (), panFront);
 
 
-        RequestBody full_name = RequestBody.create (MediaType.parse ("text/plain"), xName);
+        RequestBody fullname = RequestBody.create (MediaType.parse ("text/plain"), xName);
         RequestBody address = RequestBody.create (MediaType.parse ("text/plain"), xAddress);
         RequestBody mobile = RequestBody.create (MediaType.parse ("text/plain"), xMobile);
         RequestBody email = RequestBody.create (MediaType.parse ("text/plain"),xEmail);
@@ -181,7 +180,7 @@ public class KycDetailsActivity extends AppCompatActivity {
 
 
         apiInterface=RetrofitService.getRetrofit().create(ApiInterface.class);
-        Call<KycResponse> call=apiInterface.postKycItems(full_name,address,mobile,email,aadharno,panno,registeruser,adharfrontimg,adharbackimg,panfrontimg);
+        Call<KycResponse> call=apiInterface.postKycItems(fullname,address,mobile,email,aadharno,panno,registeruser,adharfrontimg,adharbackimg,panfrontimg);
         call.enqueue(new Callback<KycResponse>() {
             @Override
             public void onResponse(Call<KycResponse> call, Response<KycResponse> response) {

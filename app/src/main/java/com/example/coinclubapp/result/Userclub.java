@@ -36,7 +36,7 @@ public class Userclub {
     private String duration;
     @SerializedName("is_completed")
     @Expose
-    private String isCompleted;
+    private boolean isCompleted;
 
     public String getClub() {
         return club;
@@ -118,11 +118,11 @@ public class Userclub {
         this.duration = duration;
     }
 
-    public String getIsCompleted() {
+    public boolean getIsCompleted() {
         return isCompleted;
     }
 
-    public void setIsCompleted(String isCompleted) {
+    public void setIsCompleted(boolean isCompleted) {
         this.isCompleted = isCompleted;
     }
 }

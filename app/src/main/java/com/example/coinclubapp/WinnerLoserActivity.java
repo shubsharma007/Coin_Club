@@ -66,7 +66,10 @@ public class WinnerLoserActivity extends AppCompatActivity {
     int currentRoundId;
     String walletAmount;
     int recordId;
-String clubAmount;
+    String clubAmount;
+    int clubMembers;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,9 +106,12 @@ String clubAmount;
         currentRoundId = getIntent().getIntExtra("roundId", 0);
         Log.d("CURRENTROUNDID", String.valueOf(currentRoundId));
 
+        clubMembers = Integer.parseInt(getIntent().getStringExtra("clubMembers"));
+        Log.d("CLUBMEMBERS", String.valueOf(clubMembers));
+
         roundId = currentRoundId;
 
-        clubAmount=getIntent().getStringExtra("clubAmount");
+        clubAmount = getIntent().getStringExtra("clubAmount");
 
         DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
         myBidders.addValueEventListener(new ValueEventListener() {
@@ -142,7 +148,7 @@ String clubAmount;
                             response.body().getFullName();
                             response.body().getProfileimg();
                             winnerName = response.body().getFullName();
-                            winnerAmount = String.valueOf(Integer.parseInt(clubAmount)-finalMaxAmt);
+                            winnerAmount = String.valueOf(Integer.parseInt(clubAmount) - finalMaxAmt);
                             winnerImage = (String) response.body().getProfileimg();
                             winnerId = response.body().getId();
 
@@ -183,7 +189,9 @@ String clubAmount;
                                                                 if (response.isSuccessful()) {
                                                                     progressDialog.dismiss();
                                                                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(WinnerLoserActivity.this));
-                                                                    binding.recyclerView.setAdapter(new LosersAdapter(response.body(), WinnerLoserActivity.this,currentRoundId));
+                                                                    int rNo = Integer.parseInt(roundNumber);
+
+                                                                    binding.recyclerView.setAdapter(new LosersAdapter(response.body(), WinnerLoserActivity.this, currentRoundId, rNo, clubMembers, clubId,Id));
                                                                 } else {
                                                                     Toast.makeText(WinnerLoserActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                                                                     Log.d("ERROR", String.valueOf(response.code()) + response.body() + response.errorBody().toString());

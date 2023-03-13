@@ -69,6 +69,7 @@
             android:layout_marginStart="@dimen/_5sdp"
             android:text="Next Bid : 10jan 2023"
             android:textSize="@dimen/_10sdp"
+            android:alpha="0"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/view"
             app:layout_constraintTop_toTopOf="@+id/view" />
@@ -106,7 +107,7 @@
                 android:layout_height="match_parent"
                 android:layout_margin="5dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text="Club End..."
+                android:text="Club Ended..."
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="16sp"

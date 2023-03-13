@@ -79,7 +79,7 @@ public class RoundAdapter extends RecyclerView.Adapter<RoundAdapter.RoundViewHol
                 @Override
                 public void onResponse(Call<ProfileResponse> call, Response<ProfileResponse> response) {
                     if (response.isSuccessful()) {
-                        holder.amountTv.setText(String.valueOf(result.getRoundamount()));
+                        holder.amountTv.setText(String.valueOf(result.getRoundamount()+ " ₹"));
                         holder.nameTv.setText(response.body().getFullName());
                     } else {
                         Log.d("ERROR", response.message());

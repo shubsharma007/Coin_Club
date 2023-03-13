@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
             android:text="See All"
+            android:visibility="gone"
             android:textColor="@color/black"
             android:textSize="@dimen/_14ssp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -76,12 +77,14 @@
             android:layout_marginStart="@dimen/_15sdp"
             android:orientation="horizontal"
             android:layout_marginEnd="2dp"
+            android:background="#E8FDF6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView16"
             tools:listitem="@layout/member_layout" />
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -186,7 +189,7 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewRound"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_69sdp"
+            android:layout_height="@dimen/_76sdp"
             android:layout_marginStart="@dimen/_15sdp"
             android:layout_marginTop="@dimen/_1sdp"
             android:orientation="horizontal"
@@ -204,6 +207,7 @@
             android:elevation="@dimen/_4sdp"
             android:gravity="center"
             android:clickable="true"
+            android:visibility="gone"
             android:orientation="vertical"
             android:padding="@dimen/_12sdp"
             app:layout_constraintEnd_toStartOf="@+id/info2_btn"
@@ -234,6 +238,7 @@
 
 
         <LinearLayout
+            android:visibility="gone"
             android:id="@+id/info2_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -268,73 +273,17 @@
                 android:textSize="@dimen/_12ssp" />
         </LinearLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewRoundResult"
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:layout_marginStart="@dimen/_15sdp"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/bg_white_corner"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/linearLayout3"
             app:layout_constraintStart_toStartOf="@+id/linearLayout3"
-            app:layout_constraintTop_toBottomOf="@+id/info2_btn">
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Club Started On "
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/nextRoundTv"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/nextRoundTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="10jan 2023 08:30"
-                android:textColor="@color/black"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-
-                app:layout_constraintStart_toEndOf="@+id/textView17"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/bidStartIn"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_20sdp"
-            android:layout_marginBottom="40dp"
-            android:background="@drawable/add_money_btn_bg"
-            android:enabled="false"
-            android:text="Bid start in 5h 10m 30s"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
-            app:layout_constraintVertical_bias="0.0" />
-
-
-        <!--                <ImageButton-->
-        <!--                    android:layout_width="wrap_content"-->
-        <!--                    android:layout_height="wrap_content"-->
-        <!--                    android:layout_marginTop="@dimen/_10sdp"-->
-        <!--                    android:layout_marginBottom="@dimen/_20sdp"-->
-        <!--                    android:background="@drawable/bg_login_btn"-->
-        <!--                    android:padding="@dimen/_10sdp"-->
-        <!--                    android:src="@drawable/ic_message"-->
-        <!--                    app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--                    app:layout_constraintEnd_toEndOf="@+id/bidStartIn"-->
-        <!--                    app:layout_constraintTop_toBottomOf="@+id/bidStartIn" />-->
+            app:layout_constraintTop_toBottomOf="@+id/info2_btn" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
