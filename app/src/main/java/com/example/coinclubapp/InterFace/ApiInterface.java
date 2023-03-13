@@ -7,6 +7,9 @@ import com.example.coinclubapp.Response.AllUserProfilesGet;
 import com.example.coinclubapp.Response.BankResponsePost;
 import com.example.coinclubapp.Response.ClubInviteResponse;
 import com.example.coinclubapp.Response.ClubUserResponse;
+import com.example.coinclubapp.Response.CommissionClubCloseResponse;
+import com.example.coinclubapp.Response.CommissionSoFarResponse;
+import com.example.coinclubapp.Response.CommissionTimeResponse;
 import com.example.coinclubapp.Response.CustomerResponse;
 import com.example.coinclubapp.Response.IssuesForSpinnerResponseGet;
 import com.example.coinclubapp.Response.KycResponse;
@@ -240,4 +243,13 @@ public interface ApiInterface {
     Call<ProfileResponse> changeWalletAmount(@Path("id") int id
             , @Field("wallet_amount") String wallet_amount
     );
+
+    @GET("avgtransfer/")
+    Call<List<CommissionTimeResponse>> getCommissionTime();
+
+    @GET("amounttransfer/")
+    Call<List<CommissionSoFarResponse>> getCommissionSoFor();
+
+    @GET("clubclosed/")
+    Call<List<CommissionClubCloseResponse>> getCommissionClubClose();
 }
