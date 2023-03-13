@@ -83,7 +83,12 @@ public class ViewProfileActivity extends AppCompatActivity {
             }
         });
 
-
+        binding.saveBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Call<>
+            }
+        });
 
 
         binding.editBtn.setOnClickListener(v -> {
@@ -112,26 +117,23 @@ public class ViewProfileActivity extends AppCompatActivity {
             RequestBody requestFile = RequestBody.create(MediaType.parse("image/*"), file);
             MultipartBody.Part profileimg = MultipartBody.Part.createFormData("document_image", file.getName(), requestFile);
 
-            Call<PatchProfileResponse> callPatchDp= apiInterface.patchProfileById(Id,profileimg);
+            Call<PatchProfileResponse> callPatchDp = apiInterface.patchProfileById(Id, profileimg);
             callPatchDp.enqueue(new Callback<PatchProfileResponse>() {
                 @Override
                 public void onResponse(Call<PatchProfileResponse> call, Response<PatchProfileResponse> response) {
-                    if(response.isSuccessful())
-                    {
-                        Log.d("ERROR",response.body().getMsg());
+                    if (response.isSuccessful()) {
+                        Log.d("ERROR", response.body().getMsg());
                         Toast.makeText(ViewProfileActivity.this, "profile picture updated", Toast.LENGTH_SHORT).show();
-                    }
-                    else
-                    {
+                    } else {
                         Toast.makeText(ViewProfileActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                        Log.d("ERROR",response.body() + response.message() +response.code());
+                        Log.d("ERROR", response.body() + response.message() + response.code());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<PatchProfileResponse> call, Throwable t) {
                     Toast.makeText(ViewProfileActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                    Log.d("ERROR",t.getMessage());
+                    Log.d("ERROR", t.getMessage());
                 }
             });
             imageLeAaeFromGallery = false;

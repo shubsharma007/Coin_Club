@@ -21,10 +21,13 @@ import com.example.coinclubapp.InterFace.ApiInterface;
 import com.example.coinclubapp.KycDetailsActivity;
 import com.example.coinclubapp.MainActivity;
 import com.example.coinclubapp.R;
+import com.example.coinclubapp.Response.ClubCompletedPatchResponse;
 import com.example.coinclubapp.Response.ListToGetIdOfRecord;
+import com.example.coinclubapp.Response.NotPaidResponse;
 import com.example.coinclubapp.Response.PaidUnpaidListResponse;
 import com.example.coinclubapp.Response.RoundCompletedPatchResponse;
 import com.example.coinclubapp.Retrofit.RetrofitService;
+import com.example.coinclubapp.result.Id;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -43,27 +46,31 @@ public class LosersAdapter extends RecyclerView.Adapter<LosersAdapter.LosersView
     List<Boolean> toShowDialog;
     int roundId;
     ApiInterface apiInterface;
+    int rNo;
+    int clubMembers;
+    int clubId;
+    int Id;
 
-    public LosersAdapter(List<PaidUnpaidListResponse> listOfPaidUnpaid,Context context,int roundId) {
+    public LosersAdapter(List<PaidUnpaidListResponse> listOfPaidUnpaid, Context context, int roundId, int rNo, int clubMembers, int clubId,int Id) {
         this.listOfPaidUnpaid = listOfPaidUnpaid;
-        this.context=context;
-        this.roundId=roundId;
-        toShowDialog=new ArrayList<>();
-        apiInterface= RetrofitService.getRetrofit().create(ApiInterface.class);
-        for(PaidUnpaidListResponse single: listOfPaidUnpaid)
-        {
+        this.context = context;
+        this.roundId = roundId;
+        this.Id=Id;
+        this.rNo = rNo;
+        this.clubId=clubId;
+        this.clubMembers = clubMembers;
+        toShowDialog = new ArrayList<>();
+        apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);
+        for (PaidUnpaidListResponse single : listOfPaidUnpaid) {
             if (!single.getIsPaid()) {
-               toShowDialog.add(false);
-            }
-            else
-            {
+                toShowDialog.add(false);
+            } else {
                 toShowDialog.add(true);
             }
         }
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-            if(toShowDialog.isEmpty() || toShowDialog.stream().allMatch(toShowDialog.get(0)::equals))
-            {
+            if (toShowDialog.isEmpty() || toShowDialog.stream().allMatch(toShowDialog.get(0)::equals)) {
                 // show ad dialog in this condition
                 showPopup1(context);
             }
@@ -82,18 +89,16 @@ public class LosersAdapter extends RecyclerView.Adapter<LosersAdapter.LosersView
     @Override
     public void onBindViewHolder(@NonNull LosersAdapter.LosersViewHolder holder, int position) {
 
-        PaidUnpaidListResponse singleUnit=listOfPaidUnpaid.get(position);
+        PaidUnpaidListResponse singleUnit = listOfPaidUnpaid.get(position);
         holder.senderTv.setText(singleUnit.getLooser().getFullName());
 
         singleUnit.getLooser().getFullName();
-        holder.msgTv.setText("Amount  ₹"+ singleUnit.getRoundpayment().getRoundamount());
+        holder.msgTv.setText("Amount  ₹" + singleUnit.getRoundpayment().getRoundamount());
 
         if (!singleUnit.getIsPaid()) {
             holder.payBtn.setBackgroundResource(R.drawable.bg_red);
             holder.payBtn.setText("Pending");
-        }
-        else
-        {
+        } else {
             holder.payBtn.setBackgroundResource(R.drawable.bg_green);
             holder.payBtn.setText("Recieved");
         }
@@ -112,13 +117,14 @@ public class LosersAdapter extends RecyclerView.Adapter<LosersAdapter.LosersView
     }
 
     public class LosersViewHolder extends RecyclerView.ViewHolder {
-        TextView senderTv,msgTv;
+        TextView senderTv, msgTv;
         AppCompatButton payBtn;
+
         public LosersViewHolder(@NonNull View itemView) {
             super(itemView);
-            payBtn=itemView.findViewById(R.id.payBtn);
-            senderTv=itemView.findViewById(R.id.senderTv);
-            msgTv=itemView.findViewById(R.id.msgTv);
+            payBtn = itemView.findViewById(R.id.payBtn);
+            senderTv = itemView.findViewById(R.id.senderTv);
+            msgTv = itemView.findViewById(R.id.msgTv);
         }
     }
 
@@ -134,14 +140,30 @@ public class LosersAdapter extends RecyclerView.Adapter<LosersAdapter.LosersView
             @Override
             public void onClick(View v) {
                 adDialog1.dismiss();
-                    showPopup2(context);
+                showPopup2(context);
             }
         });
-        AppCompatButton noBtn=adDialog1.findViewById(R.id.noBtn);
+        AppCompatButton noBtn = adDialog1.findViewById(R.id.noBtn);
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                adDialog1.dismiss();
+
+                Call<NotPaidResponse> notPaidCall= apiInterface.notPaid(Id);
+                notPaidCall.enqueue(new Callback<NotPaidResponse>() {
+                    @Override
+                    public void onResponse(Call<NotPaidResponse> call, Response<NotPaidResponse> response) {
+                        if (response.isSuccessful()) {
+                            adDialog1.dismiss();
+                        } else {
+                            Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<NotPaidResponse> call, Throwable t) {
+                        Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
     }
@@ -158,29 +180,73 @@ public class LosersAdapter extends RecyclerView.Adapter<LosersAdapter.LosersView
             @Override
             public void onClick(View v) {
 
-                Call<RoundCompletedPatchResponse> call=apiInterface.setRoundCompletedPatchById(roundId,true,true);
-                call.enqueue(new Callback<RoundCompletedPatchResponse>() {
-                    @Override
-                    public void onResponse(Call<RoundCompletedPatchResponse> call, Response<RoundCompletedPatchResponse> response) {
-                        if(response.isSuccessful())
-                        {
-                            adDialog2.dismiss();
-                            context.startActivity(new Intent(context,MainActivity.class));
+                // clubId se club ko khatam kro agar ye last round he to
+                // and phir is round ko finish kro
+                // agar ye round last round he to club iscompleted true kr do
+                // nito sirf round is completed true kro
+
+                if (rNo == clubMembers) {
+
+                    Call<ClubCompletedPatchResponse> callClubCompleted= apiInterface.clubCompletedPatch(clubId,true);
+                    callClubCompleted.enqueue(new Callback<ClubCompletedPatchResponse>() {
+                        @Override
+                        public void onResponse(Call<ClubCompletedPatchResponse> call, Response<ClubCompletedPatchResponse> response) {
+                            if (response.isSuccessful()) {
+
+                                Call<RoundCompletedPatchResponse> endRound = apiInterface.setRoundCompletedPatchById(roundId, true, true);
+                                endRound.enqueue(new Callback<RoundCompletedPatchResponse>() {
+                                    @Override
+                                    public void onResponse(Call<RoundCompletedPatchResponse> call, Response<RoundCompletedPatchResponse> response) {
+                                        if (response.isSuccessful()) {
+                                            adDialog2.dismiss();
+                                            context.startActivity(new Intent(context, MainActivity.class));
+                                        } else {
+                                            Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<RoundCompletedPatchResponse> call, Throwable t) {
+                                        Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+
+
+                            } else {
+                                Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                            }
                         }
-                        else
-                        {
+
+                        @Override
+                        public void onFailure(Call<ClubCompletedPatchResponse> call, Throwable t) {
                             Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
                         }
-                    }
-                    @Override
-                    public void onFailure(Call<RoundCompletedPatchResponse> call, Throwable t) {
-                        Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
-                    }
-                });
+                    });
 
+                } else {
+                    Call<RoundCompletedPatchResponse> call = apiInterface.setRoundCompletedPatchById(roundId, true, true);
+                    call.enqueue(new Callback<RoundCompletedPatchResponse>() {
+                        @Override
+                        public void onResponse(Call<RoundCompletedPatchResponse> call, Response<RoundCompletedPatchResponse> response) {
+                            if (response.isSuccessful()) {
+
+
+                                adDialog2.dismiss();
+                                context.startActivity(new Intent(context, MainActivity.class));
+                            } else {
+                                Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<RoundCompletedPatchResponse> call, Throwable t) {
+                            Toast.makeText(context, "Try Again", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
             }
         });
-        AppCompatButton noBtn=adDialog2.findViewById(R.id.noBtn);
+        AppCompatButton noBtn = adDialog2.findViewById(R.id.noBtn);
         noBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

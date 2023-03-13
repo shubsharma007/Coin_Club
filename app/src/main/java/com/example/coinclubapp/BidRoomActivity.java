@@ -84,7 +84,7 @@ public class BidRoomActivity extends AppCompatActivity {
     int lastMemberId;
     Dialog adDialog;
     int maxAmt;
-
+    String clubMembers;
     String winnerName, winnerAmount, winnerImage;
     int winnerId;
 
@@ -119,6 +119,7 @@ public class BidRoomActivity extends AppCompatActivity {
         clubId = getIntent().getIntExtra("clubId", 0);
         currentRoundId = getIntent().getIntExtra("roundId", 0);
         clubAmount=getIntent().getStringExtra("clubAmount");
+        clubMembers=getIntent().getStringExtra("clubMembers");
 
         Call<List<ListToGetIdOfRecord>> previousWinners = apiInterface.getRecordIdOfLoser();
         previousWinners.enqueue(new Callback<List<ListToGetIdOfRecord>>() {
@@ -472,6 +473,7 @@ public class BidRoomActivity extends AppCompatActivity {
                             winnerLoserIntent.putExtra("RName", RName);
                             winnerLoserIntent.putExtra("roundId", currentRoundId);
                             winnerLoserIntent.putExtra("clubAmount",clubAmount);
+                            winnerLoserIntent.putExtra("clubMembers",clubMembers);
 
                             Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);
 
@@ -504,6 +506,7 @@ public class BidRoomActivity extends AppCompatActivity {
             winnerLoserIntent.putExtra("RName", RName);
             winnerLoserIntent.putExtra("roundId", currentRoundId);
             winnerLoserIntent.putExtra("clubAmount",clubAmount);
+            winnerLoserIntent.putExtra("clubMembers",clubMembers);
 
 
             Log.i("hsfnsdfksdn", name + RNumber + name + clubId + RName);

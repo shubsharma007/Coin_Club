@@ -46,7 +46,12 @@ public class NotificationsActivity extends AppCompatActivity {
                 if(response.isSuccessful())
                 {
                     binding.noDataAvailableTv.setVisibility(View.GONE);
-                    binding.recyclerView.setLayoutManager(new LinearLayoutManager(NotificationsActivity.this));
+
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(NotificationsActivity.this);
+                    layoutManager.setReverseLayout(true);
+                    layoutManager.setStackFromEnd(true);
+                    binding.recyclerView.setLayoutManager(layoutManager);
+
                     List<NotificationListModel> myNotifications=new ArrayList<>();
                     List<NotificationListModel> allNotifications=response.body();
                     for(NotificationListModel temp:allNotifications)

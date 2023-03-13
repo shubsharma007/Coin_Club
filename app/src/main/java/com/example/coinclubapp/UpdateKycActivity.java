@@ -73,7 +73,6 @@ public class UpdateKycActivity extends AppCompatActivity {
         });
 
 
-
         binding.licenseExpiryDateEt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -142,18 +141,16 @@ public class UpdateKycActivity extends AppCompatActivity {
                     binding.panNumberEt.requestFocus();
                 } else if (!frontaadhar || !backaadhar) {
                     Toast.makeText(UpdateKycActivity.this, "please upload Aadhar Images", Toast.LENGTH_SHORT).show();
-                }else if(!frontpan){
+                } else if (!frontpan) {
                     Toast.makeText(UpdateKycActivity.this, "please upload Pan Images", Toast.LENGTH_SHORT).show();
-                }
-                    else if (binding.licenseNumberEt.getText().toString().isEmpty()) {
+                } else if (binding.licenseNumberEt.getText().toString().isEmpty()) {
                     binding.licenseNumberEt.setError("enter license number");
                     binding.licenseNumberEt.requestFocus();
                 } else if (binding.licenseExpiryDateEt.getText().toString().isEmpty()) {
                     Toast.makeText(UpdateKycActivity.this, "enter expiry date", Toast.LENGTH_SHORT).show();
-                } else if(!binding.check.isChecked())
-                {
+                } else if (!binding.check.isChecked()) {
                     Toast.makeText(UpdateKycActivity.this, "please check the checkbox", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     String id = getIntent().getStringExtra("id");
 
                     ApiInterface apiInterface = RetrofitService.getRetrofit().create(ApiInterface.class);

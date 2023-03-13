@@ -58,6 +58,7 @@ public class ClubActivity extends AppCompatActivity {
     String fromWhere;
     List<Boolean> isAllRoundsCompleted;
     String clubAmount;
+    String clubMembers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,7 +99,7 @@ public class ClubActivity extends AppCompatActivity {
                     binding.perHeadTv.setText(response.body().getClubcontribution() + " ₹");
                     binding.nextRoundTv.setText(response.body().getStartdate());
                     clubAmount=response.body().getClubamount();
-
+                    clubMembers=response.body().getClubmembers();
                 } else {
                     Toast.makeText(ClubActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                 }
@@ -242,6 +243,7 @@ public class ClubActivity extends AppCompatActivity {
                     i.putExtra("RNumber", RNumber);
                     i.putExtra("clubId", clubId);
                     i.putExtra("clubAmount",clubAmount);
+                    i.putExtra("clubMembers",clubMembers);
 
                     startActivity(i);
                 } else {
