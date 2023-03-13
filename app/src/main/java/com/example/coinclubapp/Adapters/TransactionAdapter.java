@@ -2,21 +2,29 @@ package com.example.coinclubapp.Adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.location.Geocoder;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.coinclubapp.R;
+import com.example.coinclubapp.result.Transc;
+
+import java.util.List;
 
 public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.ViewHolder>{
 
     Context context;
-    public TransactionAdapter(Context context){
+    List<Transc> transcList;
+    public TransactionAdapter(Context context, List<Transc> transcList){
         this.context = context;
+        this.transcList=transcList;
     }
 
     @NonNull
@@ -29,38 +37,45 @@ public class TransactionAdapter extends RecyclerView.Adapter<TransactionAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull TransactionAdapter.ViewHolder holder, int position) {
-        if(position%2==0)
+        Transc singleUnit=transcList.get(position);
+        if(singleUnit.getCategory().equalsIgnoreCase("transection_to"))
         {
-            holder.tv_status_money.setText("Recieved");
-            holder.tv_status_money.setTextColor(Color.parseColor("#3CD9A0"));
+            holder.imageView5.setImageResource(R.drawable.ic_already_paid);
+            holder.statusTv.setText("Paid");
+            holder.transactionIdTv.setText(String.valueOf(singleUnit.getId()));
+            holder.nameTv.setText("to " + singleUnit.getWinner());
+            holder.amountTv.setText(singleUnit.getPayamount() + " ₹");
+            holder.statusTv.setTextColor(Color.parseColor("#3CD9A0"));
         }
-        else if(position%3==0)
+        else if(singleUnit.getCategory().equalsIgnoreCase("transection_by"))
         {
-            holder.tv_status_money.setText("Failed");
-            holder.tv_status_money.setTextColor(Color.parseColor("#FF0000"));
+            holder.imageView5.setImageResource(R.drawable.rupee);
+
+            holder.statusTv.setText("Recieved");
+            holder.transactionIdTv.setText(String.valueOf(singleUnit.getId()));
+            holder.nameTv.setText("from " + singleUnit.getLooser());
+            holder.amountTv.setText(singleUnit.getPayamount() + " ₹");
+            holder.statusTv.setTextColor(Color.parseColor("#FF0000"));
+//            aya he
         }
-        else if(position%5==0)
-        {
-            holder.tv_status_money.setText("Paid");
-            holder.tv_status_money.setTextColor(Color.parseColor("#FF9A1A"));
-        }
-        else
-        {
-            holder.tv_status_money.setTextColor(Color.parseColor("#1A7FFF"));
-            holder.tv_status_money.setText("Pending");
-        }
+
     }
 
     @Override
     public int getItemCount() {
-        return 15;
+        return transcList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tv_status_money;
+        TextView nameTv,transactionIdTv,amountTv,statusTv;
+        ImageView imageView5;
         public ViewHolder(@NonNull View itemView) {
             super (itemView);
-            tv_status_money=itemView.findViewById(R.id.tv_status_money);
+            nameTv=itemView.findViewById(R.id.nameTv);
+            transactionIdTv=itemView.findViewById(R.id.transactionIdTv);
+            amountTv=itemView.findViewById(R.id.amountTv);
+            statusTv=itemView.findViewById(R.id.statusTv);
+            imageView5=itemView.findViewById(R.id.imageView5);
         }
     }
 }

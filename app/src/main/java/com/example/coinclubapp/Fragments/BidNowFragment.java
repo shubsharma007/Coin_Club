@@ -47,12 +47,13 @@ public class BidNowFragment extends BottomSheetDialogFragment {
     int val;
     int responsemax;
     int responsemin;
-//    int lastBidAmt;
+    //    int lastBidAmt;
     int maxAmt;
     DatabaseReference myBidders;
 
     Bidders bidders;
     List<Integer> maxBidderAmount;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,9 +65,10 @@ public class BidNowFragment extends BottomSheetDialogFragment {
         clubName = this.getArguments().getString("clubName");
         roundId = this.getArguments().getInt("roundId");
 
+
         maxBidderAmount = new ArrayList<>();
 
-//        lastBidAmt = this.getArguments().getInt("lastBidAmt");
+//          lastBidAmt = this.getArguments().getInt("lastBidAmt");
 
         SharedPreferences sharedPreferences = requireActivity().getSharedPreferences("my_preferences", Context.MODE_PRIVATE);
 
@@ -96,8 +98,10 @@ public class BidNowFragment extends BottomSheetDialogFragment {
                             }
                         }
                     }
+
                     @Override
-                    public void onCancelled(@NonNull DatabaseError error) {}
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
                 });
                 String amount = binding.bidAmtEt.getText().toString();
                 Call<RoundsResult> call = apiInterface.getRoundsById(roundId);
@@ -135,6 +139,7 @@ public class BidNowFragment extends BottomSheetDialogFragment {
             }
 
         });
+
 
         return binding.getRoot();
     }

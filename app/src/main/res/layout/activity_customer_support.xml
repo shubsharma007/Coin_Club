@@ -82,6 +82,29 @@
             app:layout_constraintTop_toBottomOf="@id/tv"
             tools:layout_editor_absoluteX="21dp" />
 
+        <ImageView
+            android:id="@+id/issueImage"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/card_bg_light_white"
+            android:paddingHorizontal="10dp"
+            android:src="@drawable/upload_img"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="@+id/etDisc"
+            app:layout_constraintTop_toBottomOf="@+id/etDisc" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:paddingHorizontal="10dp"
+            android:textColor="@color/black"
+            android:text="Upload Your Screenshot..."
+            app:layout_constraintStart_toStartOf="@+id/issueImage"
+            app:layout_constraintTop_toBottomOf="@+id/issueImage" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/dp_img"
             android:layout_width="@dimen/_88sdp"
@@ -92,7 +115,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etDisc"
-
             />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -100,7 +122,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="upload your screenshot"
-             android:visibility="gone"
+            android:visibility="gone"
             android:layout_marginTop="5dp"
             android:paddingHorizontal="10dp"
             android:background="@drawable/card_bg_light_white"
@@ -122,7 +144,7 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editBtn" />
+            app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
         <TextView
             android:id="@+id/previousTv"

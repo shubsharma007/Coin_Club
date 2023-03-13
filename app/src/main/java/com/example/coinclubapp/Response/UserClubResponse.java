@@ -47,6 +47,16 @@ public class UserClubResponse {
     @Expose
     private String usercreateAt;
 
+    private String total_subscription;
+
+    public String getTotal_subscription() {
+        return total_subscription;
+    }
+
+    public void setTotal_subscription(String total_subscription) {
+        this.total_subscription = total_subscription;
+    }
+
     public String getUser() {
         return user;
     }

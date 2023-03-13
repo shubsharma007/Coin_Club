@@ -14,6 +14,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -37,7 +38,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -63,8 +66,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
     int currentRoundId;
     String walletAmount;
     int recordId;
-
-
+String clubAmount;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +86,6 @@ public class WinnerLoserActivity extends AppCompatActivity {
         maxBidderAmount = new ArrayList<>();
         maxBidderId = new ArrayList<>();
 
-
         Id = sharedPreferences.getInt("Id", 0);
 
         String clubName = getIntent().getStringExtra("ClubName");
@@ -101,6 +102,10 @@ public class WinnerLoserActivity extends AppCompatActivity {
 
         currentRoundId = getIntent().getIntExtra("roundId", 0);
         Log.d("CURRENTROUNDID", String.valueOf(currentRoundId));
+
+        roundId = currentRoundId;
+
+        clubAmount=getIntent().getStringExtra("clubAmount");
 
         DatabaseReference myBidders = FirebaseDatabase.getInstance().getReference().child(clubName).child(roundName);
         myBidders.addValueEventListener(new ValueEventListener() {
@@ -137,7 +142,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
                             response.body().getFullName();
                             response.body().getProfileimg();
                             winnerName = response.body().getFullName();
-                            winnerAmount = String.valueOf(finalMaxAmt);
+                            winnerAmount = String.valueOf(Integer.parseInt(clubAmount)-finalMaxAmt);
                             winnerImage = (String) response.body().getProfileimg();
                             winnerId = response.body().getId();
 
@@ -158,6 +163,8 @@ public class WinnerLoserActivity extends AppCompatActivity {
 //                            editor.putInt("winnerId", winnerId);
 //                            editor.putInt("currentRoundId", currentRoundId);
 //                            editor.apply();
+
+
                             if (Id == winnerId) {
                                 Call<WinnerPatchToRound> callPatchWinner = apiInterface.patchWinner(currentRoundId, String.valueOf(winnerId), winnerAmount);
                                 callPatchWinner.enqueue(new Callback<WinnerPatchToRound>() {
@@ -176,7 +183,7 @@ public class WinnerLoserActivity extends AppCompatActivity {
                                                                 if (response.isSuccessful()) {
                                                                     progressDialog.dismiss();
                                                                     binding.recyclerView.setLayoutManager(new LinearLayoutManager(WinnerLoserActivity.this));
-                                                                    binding.recyclerView.setAdapter(new LosersAdapter(response.body(), WinnerLoserActivity.this));
+                                                                    binding.recyclerView.setAdapter(new LosersAdapter(response.body(), WinnerLoserActivity.this,currentRoundId));
                                                                 } else {
                                                                     Toast.makeText(WinnerLoserActivity.this, "Some Error Occured", Toast.LENGTH_SHORT).show();
                                                                     Log.d("ERROR", String.valueOf(response.code()) + response.body() + response.errorBody().toString());
@@ -234,20 +241,28 @@ public class WinnerLoserActivity extends AppCompatActivity {
                                     public void onResponse(Call<List<ListToGetIdOfRecord>> call, Response<List<ListToGetIdOfRecord>> response) {
                                         if (response.isSuccessful()) {
                                             recordId = 0;
+
                                             List<ListToGetIdOfRecord> allList = response.body();
+                                            Log.d("hdujkfhnsdkjf", "jkdnfsdjkf");
                                             for (ListToGetIdOfRecord my : allList) {
-                                                if (Id == my.getLooser()) {
-                                                    Log.d("loserId",String.valueOf(Id));
-                                                    Log.d("getMyLoser",String.valueOf(my.getLooser()));
+                                                Log.d("loserId", String.valueOf(Id));
+                                                Log.d("roundId", String.valueOf(roundId));
+                                                if (Id == my.getLooser() && roundId == my.getRoundpayment()) {
+
+                                                    Log.d("paymentRecordMeLoserId", String.valueOf(my.getLooser()));
+                                                    Log.d("paymentRecordMeRoundId", String.valueOf(my.getRoundpayment()));
                                                     recordId = my.getId();
                                                 }
                                             }
+
+                                            Log.d("recordIdBahar", String.valueOf(recordId));
+
                                             Call<ListToGetIdOfRecord> listToGetIdOfRecordCall = apiInterface.getAllRecordsAndCompare(recordId);
                                             listToGetIdOfRecordCall.enqueue(new Callback<ListToGetIdOfRecord>() {
                                                 @Override
                                                 public void onResponse(Call<ListToGetIdOfRecord> call, Response<ListToGetIdOfRecord> response) {
                                                     if (response.isSuccessful()) {
-                                                        Log.d("resp",String.valueOf(recordId));
+                                                        Log.d("resp", String.valueOf(recordId));
                                                         if (response.body().getIsPaid()) {
                                                             progressDialog.dismiss();
                                                             showPaidPopup();
@@ -261,31 +276,35 @@ public class WinnerLoserActivity extends AppCompatActivity {
 
                                                         }
                                                     } else {
+                                                        progressDialog.dismiss();
                                                         Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                                        Log.d("ERROR", response.message() + "3");
+                                                        Log.d("ERROR", response.message() + "hjkfsdkfhnsdf" + response.errorBody().toString());
                                                     }
                                                 }
 
                                                 @Override
                                                 public void onFailure(Call<ListToGetIdOfRecord> call, Throwable t) {
+                                                    progressDialog.dismiss();
                                                     Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                                    Log.d("ERROR", t.getMessage() +"4");
+                                                    Log.d("ERROR", t.getMessage() + "4");
                                                 }
                                             });
                                         } else {
+                                            progressDialog.dismiss();
                                             Toast.makeText(WinnerLoserActivity.this, response.message(), Toast.LENGTH_SHORT).show();
-                                            Log.d("ERROR", response.message() + "1");
+                                            Log.d("ERROR", response.message() + "12211");
 
                                         }
                                     }
 
                                     @Override
                                     public void onFailure(Call<List<ListToGetIdOfRecord>> call, Throwable t) {
+                                        progressDialog.dismiss();
                                         Toast.makeText(WinnerLoserActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-                                        Log.d("ERROR", t.getMessage()+" 2 ");
+                                        Log.d("ERROR", t.getMessage() + " 2 ");
                                     }
                                 });
-                                Log.d("recordId",String.valueOf(recordId));
+                                Log.d("recordId", String.valueOf(recordId));
 
                                 binding.payBtn.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -310,7 +329,10 @@ public class WinnerLoserActivity extends AppCompatActivity {
                                                         // agr false he to payment send krne ka btaenge
                                                         // agar true he to next round ka wait krne ka bolenge
 
-                                                        Call<PayRecord> payRecordCall = apiInterface.patchpayment(recordId, true, winnerAmount);
+                                                        Date date = new Date();
+                                                        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                                                        String payment_time = formatter.format(date);
+                                                        Call<PayRecord> payRecordCall = apiInterface.patchpayment(recordId, true, winnerAmount, payment_time);
                                                         payRecordCall.enqueue(new Callback<PayRecord>() {
                                                             @Override
                                                             public void onResponse(Call<PayRecord> call, Response<PayRecord> response) {

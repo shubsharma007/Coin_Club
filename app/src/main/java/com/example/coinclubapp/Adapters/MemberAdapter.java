@@ -37,7 +37,7 @@ public class MemberAdapter extends RecyclerView.Adapter<MemberAdapter.MemberView
     @Override
     public void onBindViewHolder(@NonNull MemberAdapter.MemberViewHolder holder, int position) {
         Clubuser result=clubUsers.get(position);
-        Glide.with(context).load("https://jobmeet.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
+        Glide.with(context).load("http://meetjob.techpanda.art"+result.getUserprofileimg()).placeholder(R.drawable.avatar).into(holder.dp_img);
         holder.nameTv.setText(result.getUser());
 //
 //        if(position==0)
