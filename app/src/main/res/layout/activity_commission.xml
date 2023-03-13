@@ -66,7 +66,7 @@
             app:layout_constraintTop_toBottomOf="@+id/formula">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
@@ -94,7 +94,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
@@ -122,7 +122,7 @@
 
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginStart="5dp"
@@ -167,796 +167,195 @@
                     android:id="@+id/cv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:cardElevation="10dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent">
 
-                    <TableLayout
+                    <!--                    <TableLayout-->
+                    <!--                        android:layout_width="match_parent"-->
+                    <!--                        android:layout_height="wrap_content"-->
+                    <!--                        android:gravity="center"-->
+                    <!--                        android:stretchColumns="-0,1">-->
+
+                    <!--                        <TableRow-->
+                    <!--                            android:layout_width="fill_parent"-->
+                    <!--                            android:layout_height="0dp"-->
+                    <!--                            android:layout_margin="1dp"-->
+                    <!--                            android:layout_weight="1"-->
+                    <!--                            android:background="#000000">-->
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:stretchColumns="-0,1">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
 
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:layout_weight="1"
-                            android:background="#000000">
+                            android:background="@drawable/tv_border"
+                            android:gravity="center"
+                            android:text=" Wt avg transfer time (Hrs)  "
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" Wt avg transfer time (Hrs)  "
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="@color/mainColour"
-                                android:gravity="center"
-                                android:text="Commission(%)"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_8ssp"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:layout_weight="1"
-                            android:background="#000000">
+                            android:background="@color/mainColour"
+                            android:gravity="center"
+                            android:text="Commission(%)"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
 
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                    </TableLayout>
-
+                    <!--                        </TableRow>-->
+                    <!--                    </TableLayout>-->
                 </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/firstRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cv1"
+                    tools:listitem="@layout/rv_commission_tt_layout" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:cardElevation="10dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cv1">
+                    app:layout_constraintTop_toBottomOf="@+id/firstRv">
 
-                    <TableLayout
-                        android:layout_width="wrap_content"
+<!--                    <TableLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:stretchColumns="-0,1">-->
+
+<!--                        <TableRow-->
+<!--                            android:layout_width="fill_parent"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:layout_margin="1dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#000000">-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:stretchColumns="-0,1">
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="1dp"
+                            android:background="@drawable/tv_border"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            android:text="Amount transacted so far(₹)"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp"
+                            android:textStyle="bold" />
 
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:layout_weight="1"
-                            android:background="#000000">
+                            android:background="@color/mainColour"
+                            android:gravity="center"
+                            android:text="Commission(%)"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="Amount transacted so far(₹)"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="@color/mainColour"
-                                android:gravity="center"
-                                android:text="Commission(%)"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_8ssp"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                    </TableLayout>
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/secondRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/cv2"
+                    tools:listitem="@layout/rv_commission_tt_layout" />
+
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/cv3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    app:cardElevation="10dp"
+                    app:cardElevation="0dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/cv2">
+                    app:layout_constraintTop_toBottomOf="@+id/secondRv">
 
-                    <TableLayout
-                        android:layout_width="wrap_content"
+<!--                    <TableLayout-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:gravity="center"-->
+<!--                        android:stretchColumns="-0,1">-->
+
+<!--                        <TableRow-->
+<!--                            android:layout_width="fill_parent"-->
+<!--                            android:layout_height="0dp"-->
+<!--                            android:layout_margin="1dp"-->
+<!--                            android:layout_weight="1"-->
+<!--                            android:background="#000000">-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
-                        android:stretchColumns="-0,1">
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
+                        android:orientation="horizontal"
+                        android:weightSum="2">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_margin="1dp"
                             android:layout_weight="1"
-                            android:background="#000000">
+                            android:background="@drawable/tv_border"
+                            android:gravity="center"
+                            android:text="Real clubs closed"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_9ssp"
+                            android:textStyle="bold" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="         Real clubs closed          "
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_9ssp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="@color/mainColour"
-                                android:gravity="center"
-                                android:text="Commission(%)"
-                                android:textColor="@color/white"
-                                android:textSize="@dimen/_8ssp"
-                                android:textStyle="bold" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
                             android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                        <TableRow
-                            android:layout_width="fill_parent"
-                            android:layout_height="0dp"
-                            android:layout_margin="1dp"
-                            android:layout_weight="1"
-                            android:background="#000000">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_column="0"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text=" 0-1"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:layout_column="1"
-                                android:layout_margin="1dp"
-                                android:background="#FFFFFF"
-                                android:gravity="center"
-                                android:text="0.5"
-                                android:textColor="@color/black"
-                                android:textSize="@dimen/_10ssp" />
-                        </TableRow>
-
-                    </TableLayout>
-
+                            android:background="@color/mainColour"
+                            android:gravity="center"
+                            android:text="Commission(%)"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_8ssp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </androidx.cardview.widget.CardView>
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/thirdRv"
+                    android:layout_width="match_parent"
+                    android:layout_height="155dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cv3"
+                    tools:listitem="@layout/rv_commission_tt_layout" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
