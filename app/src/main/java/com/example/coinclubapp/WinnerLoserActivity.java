@@ -353,7 +353,6 @@ String clubAmount;
                                                             }
                                                         });
 
-
                                                     }
 
                                                 } else {
