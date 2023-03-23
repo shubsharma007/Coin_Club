@@ -121,6 +121,9 @@ public class BidRoomActivity extends AppCompatActivity {
         clubAmount=getIntent().getStringExtra("clubAmount");
         clubMembers=getIntent().getStringExtra("clubMembers");
 
+        binding.txtName.setText(name);
+
+
         Call<List<ListToGetIdOfRecord>> previousWinners = apiInterface.getRecordIdOfLoser();
         previousWinners.enqueue(new Callback<List<ListToGetIdOfRecord>>() {
             @Override
